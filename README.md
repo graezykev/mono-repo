@@ -493,3 +493,80 @@ npm run dev
 ```
 
 # Watch dev
+
+```js
+// tab.tsx
+import React, { useState } from 'react';
+
+type TabProps = {
+  label: string;
+  children: React.ReactNode;
+};
+
+type TabsProps = {
+  children: React.ReactElement<TabProps>[];
+};
+
+export const Tab: React.FC<TabProps> = ({ label, children }) => {
+  return <div>{children}</div>;
+};
+
+export const Tabs: React.FC<TabsProps> = ({ children }) => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <div>
+      <div className="flex cursor-pointer border-b">
+        {children.map((tab, index) => (
+          <div
+            key={index}
+            className={`p-4 ${activeTab === index ? 'border-b-2 border-blue-500' : ''}`}
+            onClick={() => setActiveTab(index)}
+          >
+            {tab.props.label}
+          </div>
+        ))}
+      </div>
+      <div className="p-4">
+        {React.Children.map(children, (child, index) => {
+          if (index === activeTab) return child;
+          return null;
+        })}
+      </div>
+    </div>
+  );
+};
+```
+
+```js
+// main.tsx
+import { Tabs, Tab } from 'ui-component-web';
+
+    <h2>My Tabs Component</h2>
+
+    <Tabs>
+      <Tab label="Tab 1">
+        <div>Content of Tab 1</div>
+      </Tab>
+      <Tab label="Tab 2">
+        <div>Content of Tab 2</div>
+      </Tab>
+      <Tab label="Tab 3">
+        <div>Content of Tab 3</div>
+      </Tab>
+    </Tabs>
+```
+
+`vite.config.ts`:
+
+```js
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+// import path from 'path';
+
+export default defineConfig({
+  plugins: [
+    react()
+  ]
+});
+```
