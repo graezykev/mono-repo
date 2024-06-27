@@ -593,5 +593,7 @@ npm start
   - module resolve alias
     - turbo
     - webpack
+- tsconfig.json
+  - path
 
 ## Testing
