@@ -6,7 +6,7 @@
 npm install -g pnpm
 ```
 
-## Init Repo
+## Init Mono Repo
 
 ```sh
 mkdir mono-repo && \
@@ -17,8 +17,9 @@ pnpm init
 
 ```sh
 mkdir lib-web-ui && \
-mkdir application-next-js-1 && \
-mkdir application-create-react-app-1
+mkdir demo-lib-web-ui && \
+mkdir app-next-js-1 && \
+mkdir app-create-react-app-1
 ```
 
 ```sh
@@ -28,8 +29,9 @@ touch pnpm-workspace.yaml
 ```yaml
 packages:
   - "lib-web-ui"
-  - "application-next-js-*"
-  - "application-create-react-app-*"
+  - "demo-lib-web-ui"
+  - "app-next-js-*"
+  - "app-create-react-app-*"
 ```
 
 ## Add Common Dependencies
@@ -37,7 +39,7 @@ packages:
 ```sh
 # add the dependencies to the workspace root
 
-pnpm add react react-dom -w
+pnpm add react react-dom next -w
 
 pnpm add -D typescript -w
 
@@ -55,12 +57,12 @@ pnpm add -D tailwindcss postcss autoprefixer -w
 ```diff
   "dependencies": {
     ...
-+   "ui-component-web": "workspace:*"
++   "lib-web-ui": "workspace:*"
   },
 ```
 
 ```sh
-# link `ui-component-web` to pnpm-lock.yaml
+# link `lib-web-ui` to pnpm-lock.yaml
 pnpm install
 ```
 
@@ -223,14 +225,15 @@ npm run build
 # check the output of `dist` folder
 ```
 
-## Demo Application
+## Demo Folder
 
 ```sh
+touch index.html && \
+touch index.tsx && \
+touch index.css && \
 mkdir demo && \
-mkdir demo/src && \
-touch demo/src/index.html && \
-touch demo/src/index.css && \
-touch demo/src/main.tsx
+mkdir demo/button && \
+touch demo/button/index.tsx && \
 ```
 
 `index.html`:
@@ -247,33 +250,33 @@ touch demo/src/main.tsx
 
 <body>
   <div id="app"></div>
-  <script type="module" src="/src/main.tsx"></script>
+  <script type="module" src="index.tsx"></script>
 </body>
 
 </html>
 ```
 
 ```ts
-// main.tsx
+// index.tsx
 
-import React from 'react';
+import React from 'react'
 import { createRoot } from 'react-dom/client'
 
-import { Button } from 'ui-component-web'; // Import the Button component from the library
+import ButtonDemo from './demo/button'
 
-import './index.css';
+import './index.css' // Import Demo Page styles
 
-import 'ui-component-web/dist/style.css'; // Import styles from the library
+// TODO: avoid duplicate import
+import './src/index.css' // Import styles from the library
 
 const container = document.getElementById('app') || document.body
 const root = createRoot(container)
 
 const App = () => (
-  <div className="p-4">
-    <h1 className="text-2xl font-bold mb-4">Component Library Demo</h1>
-    <Button onClick={()=>alert('click')}>Click Me</Button>
+  <div>
+    <ButtonDemo />
   </div>
-);
+)
 
 root.render(<App />)
 ```
@@ -282,6 +285,21 @@ root.render(<App />)
 /* index.css */
 html {
   background-color: aquamarine;
+}
+```
+
+```js
+// demo/button/index.tsx
+
+import { Button } from '../../src' // Import the Button component from the library // TODO: tsconfig -> path
+
+export default () => {
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Button Library Demo</h1>
+      <Button onClick={()=>alert('click')}>Click Me</Button>
+    </div>
+  )
 }
 ```
 
@@ -307,6 +325,85 @@ export default defineConfig({
 
 ```sh
 npm run dev
+```
+
+## Separate Demo Project
+
+```js
+// tab.tsx
+import React, { useState } from 'react';
+
+type TabProps = {
+  label: string;
+  children: React.ReactNode;
+};
+
+type TabsProps = {
+  children: React.ReactElement<TabProps>[];
+};
+
+export const Tab: React.FC<TabProps> = ({ label, children }) => {
+  return <div>{children}</div>;
+};
+
+export const Tabs: React.FC<TabsProps> = ({ children }) => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <div>
+      <div className="flex cursor-pointer border-b">
+        {children.map((tab, index) => (
+          <div
+            key={index}
+            className={`p-4 ${activeTab === index ? 'border-b-2 border-blue-500' : ''}`}
+            onClick={() => setActiveTab(index)}
+          >
+            {tab.props.label}
+          </div>
+        ))}
+      </div>
+      <div className="p-4">
+        {React.Children.map(children, (child, index) => {
+          if (index === activeTab) return child;
+          return null;
+        })}
+      </div>
+    </div>
+  );
+};
+```
+
+```js
+// index.tsx
+import { Tabs, Tab } from 'lib-web-ui';
+
+    <h2>My Tabs Component</h2>
+
+    <Tabs>
+      <Tab label="Tab 1">
+        <div>Content of Tab 1</div>
+      </Tab>
+      <Tab label="Tab 2">
+        <div>Content of Tab 2</div>
+      </Tab>
+      <Tab label="Tab 3">
+        <div>Content of Tab 3</div>
+      </Tab>
+    </Tabs>
+```
+
+`vite.config.ts`:
+
+```js
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+// import path from 'path';
+
+export default defineConfig({
+  plugins: [
+    react()
+  ]
+});
 ```
 
 ## Generate TypeScript Declarations
@@ -391,35 +488,23 @@ npm run build
 npm publish
 ```
 
-## Import Lib in CRA Projects
+## Import Lib in CRA Project
 
 > CRA: create-react-app <https://create-react-app.dev/>
 
-`pnpm-workspace.yaml`:
-
-```diff
-packages:
-  ...
-+ - "application-create-react-app"
-```
-
 ```sh
-pnpm install
-```
-
-```sh
-npx create-react-app application-create-react-app && \
-cd application-create-react-app
+pnpm create react-app app-create-react-app-1 && \
+cd app-create-react-app-1
 ```
 
 ```js
 // index.js
-import 'ui-component-web/dist/style.css'
+import 'lib-web-ui/dist/style.css'
 ```
 
 ```js
 // app.js
-import { Button } from 'ui-component-web'
+import { Button } from 'lib-web-ui'
 // ... <Button>click</Button>
 ```
 
@@ -427,13 +512,11 @@ import { Button } from 'ui-component-web'
 npm start
 ```
 
-## Separate Entries
-
-Import on demand:
+## Import On Demand - Separate Entries
 
 ```diff
--import { Button } from 'ui-component-web'
-+import Button from 'ui-component-web/button'
+-import { Button } from 'lib-web-ui'
++import Button from 'lib-web-ui/button'
 ```
 
 To avoid importing all components in case projects using the library without **tree shaking**.
@@ -476,99 +559,39 @@ npm run build
 + },
 ```
 
-`main.tsx`:
+```sh
+npm publish
+```
+
+Go to CRA project:
+
+`index.js`:
 
 ```diff
-...
--import { Button }  from 'ui-component-web';
-+import Button  from 'ui-component-web/button';
-...
--import 'ui-component-web/dist/style.css'
-+import 'ui-component-web/style.css'
-...
+-import 'lib-web-ui/dist/style.css'
++import 'lib-web-ui/style.css'
+```
+
+`app.js`:
+
+```diff
+-import { Button }  from 'lib-web-ui'
++import Button  from 'lib-web-ui/button'
 ```
 
 ```sh
-npm run dev
+npm start
 ```
 
-# Watch dev
+### TODO: Import styles on demand
 
-```js
-// tab.tsx
-import React, { useState } from 'react';
+## Import Lib in Next.js Project
 
-type TabProps = {
-  label: string;
-  children: React.ReactNode;
-};
+## Watch src Change in Next.js Projects
 
-type TabsProps = {
-  children: React.ReactElement<TabProps>[];
-};
-
-export const Tab: React.FC<TabProps> = ({ label, children }) => {
-  return <div>{children}</div>;
-};
-
-export const Tabs: React.FC<TabsProps> = ({ children }) => {
-  const [activeTab, setActiveTab] = useState(0);
-
-  return (
-    <div>
-      <div className="flex cursor-pointer border-b">
-        {children.map((tab, index) => (
-          <div
-            key={index}
-            className={`p-4 ${activeTab === index ? 'border-b-2 border-blue-500' : ''}`}
-            onClick={() => setActiveTab(index)}
-          >
-            {tab.props.label}
-          </div>
-        ))}
-      </div>
-      <div className="p-4">
-        {React.Children.map(children, (child, index) => {
-          if (index === activeTab) return child;
-          return null;
-        })}
-      </div>
-    </div>
-  );
-};
-```
-
-```js
-// main.tsx
-import { Tabs, Tab } from 'ui-component-web';
-
-    <h2>My Tabs Component</h2>
-
-    <Tabs>
-      <Tab label="Tab 1">
-        <div>Content of Tab 1</div>
-      </Tab>
-      <Tab label="Tab 2">
-        <div>Content of Tab 2</div>
-      </Tab>
-      <Tab label="Tab 3">
-        <div>Content of Tab 3</div>
-      </Tab>
-    </Tabs>
-```
-
-`vite.config.ts`:
-
-```js
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-// import path from 'path';
-
-export default defineConfig({
-  plugins: [
-    react()
-  ]
-});
-```
+- next.config.js
+  - module resolve alias
+    - turbo
+    - webpack
 
 ## Testing
