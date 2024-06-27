@@ -587,6 +587,8 @@ npm start
 
 ## Import Lib in Next.js Project
 
+Init a Next.js project with TS, TailwinCSS
+
 ## Watch src Change in Next.js Projects
 
 - tailwin.config.ts
