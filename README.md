@@ -589,6 +589,7 @@ npm start
 
 ## Watch src Change in Next.js Projects
 
+- tailwin.config.ts
 - next.config.js
   - module resolve alias
     - turbo
