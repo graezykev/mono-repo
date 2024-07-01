@@ -650,7 +650,7 @@ Also, configure `tsconfig.json` to resolve modules correctly:
 
 ## Testing
 
-## Documentation
+## Documentation & Showcase
 
 ## Playground
 
