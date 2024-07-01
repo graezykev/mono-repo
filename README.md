@@ -587,16 +587,76 @@ npm start
 
 ## Import Lib in Next.js Project
 
-Init a Next.js project with TS, TailwinCSS
+Initiate a `Next.js` project with TS, TailwinCSS
 
 ## Watch src Change in Next.js Projects
 
-- tailwin.config.ts
-- next.config.js
-  - module resolve alias
-    - turbo
-    - webpack
-- tsconfig.json
-  - path
+Add the source path of `lib-web-ui` to the `Next.js` project's TailwindCSS configuration file `tailwind.config.ts`:
+
+> The content section of your tailwind.config.js file is where you configure the paths to all of your HTML templates, JavaScript components, and any other source files that contain Tailwind class names.
+
+```diff
+const config: Config = {
+  content: [
+    ...
++   "../lib-web-ui/src/**/*.{js,jsx,ts,tsx}"
+  ],
+```
+
+By default, `Next.js` looks for the module `lib-web-ui` from `lib-web-ui/dist` which is specified in the `main` field of `lib-web-ui`'s package.json.
+
+So, we need to configure module alias in `next.config.mjs` to resolve the module `lib-web-ui` from the library source folder:
+
+```js
+const nextConfig = {
+  experimental: {
+    // for `next dev --turbo`
+    // not work for `next build`
+    turbo: {
+      resolveAlias: {
+        'lib-web-ui': '../lib-web-ui/src',
+        'lib-web-ui/button': '../lib-web-ui/src/button'
+      },
+    },
+  },
+  // for `next dev`
+  // and for `next build`
+  webpack: (config) => {
+    config.resolve.alias['lib-web-ui'] = path.resolve(__dirname, '../lib-web-ui/src')
+    config.resolve.alias['lib-web-ui/button'] = path.resolve(__dirname, '../lib-web-ui/src/button')
+    return config;
+  },
+};
+```
+
+This also enables `Next.js` to watch the changes of `lib-web-ui/src` while developing.
+
+Also, configure `tsconfig.json` to resolve modules correctly:
+
+```diff
+  "compilerOptions": {
+    ...
+    "paths": {
+      ...
++     "lib-web-ui": [
++       "../lib-web-ui/src"
++     ],
++     "lib-web-ui/button": [
++       "../lib-web-ui/src/button"
++     ]
+      ...
+    }
+```
 
 ## Testing
+
+## Documentation
+
+## Playground
+
+## CLI: create component
+
+- add source template
+- add `export` js
+- add `export` in package.json
+- add alias in projects
