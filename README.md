@@ -395,6 +395,25 @@ npm run dev
 
 ## Separate Demo Project
 
+```sh
+pnpm init && \
+touch vite.config.ts
+```
+
+`vite.config.ts`:
+
+```js
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+// import path from 'path';
+
+export default defineConfig({
+  plugins: [
+    react()
+  ]
+});
+```
+
 ```js
 // tab.tsx
 import React, { useState } from 'react';
@@ -456,20 +475,6 @@ import { Tabs, Tab } from 'lib-web-ui';
         <div>Content of Tab 3</div>
       </Tab>
     </Tabs>
-```
-
-`vite.config.ts`:
-
-```js
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-// import path from 'path';
-
-export default defineConfig({
-  plugins: [
-    react()
-  ]
-});
 ```
 
 ## Publish
