@@ -330,10 +330,9 @@ import { createRoot } from 'react-dom/client'
 
 import ButtonDemo from './demo/button'
 
-import './index.css' // Import Demo Page styles
-
-// TODO: avoid duplicate import
 import './src/index.css' // Import styles from the library
+
+import './index.css' // Import styles specific to Demo Pages
 
 const container = document.getElementById('app') || document.body
 const root = createRoot(container)
