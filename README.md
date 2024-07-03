@@ -174,7 +174,7 @@ import './index.css'; // Import TailwindCSS styles
 export { default as Button } from './button';
 ```
 
-### Build the Library
+## Build the Library
 
 ```sh
 touch vite.config.ts
