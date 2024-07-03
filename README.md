@@ -492,6 +492,10 @@ npm publish
 
 ## Import On Demand - Separate Entries
 
+> we did not import the square method from the src/math.js module. That function is what's known as "dead code", meaning an unused export that should be dropped.
+
+> In webpack, tree shaking works with both ECMAScript modules (ESM) and CommonJS, but it does not work with Asynchronous Module Definition (AMD) or Universal Module Definition (UMD).
+
 ```diff
 -import { Button } from 'lib-web-ui'
 +import Button from 'lib-web-ui/button'
