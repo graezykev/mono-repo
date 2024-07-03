@@ -545,26 +545,6 @@ npm run build
 npm publish
 ```
 
-Go to CRA project:
-
-`index.js`:
-
-```diff
--import 'lib-web-ui/dist/style.css'
-+import 'lib-web-ui/style.css'
-```
-
-`app.js`:
-
-```diff
--import { Button }  from 'lib-web-ui'
-+import Button  from 'lib-web-ui/button'
-```
-
-```sh
-npm start
-```
-
 ### TODO: Import styles on demand
 
 ## Import Lib in CRA Project
@@ -584,6 +564,7 @@ import 'lib-web-ui/dist/style.css'
 ```js
 // app.js
 import { Button } from 'lib-web-ui'
+// import Button  from 'lib-web-ui/button' // alternative import
 // ... <Button>click</Button>
 ```
 
