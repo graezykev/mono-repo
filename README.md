@@ -225,6 +225,72 @@ npm run build
 # check the output of `dist` folder
 ```
 
+## TypeScript Declarations
+
+Generate TypeScript Declarations
+
+```sh
+tsc --init # touch tsconfig.json
+```
+
+`tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationDir": "./dist",
+    "outDir": "./dist",
+    "baseUrl": "./"
+  },
+  "include": [
+    "src"
+  ]
+}
+```
+
+```sh
+pnpm add -D vite-plugin-dts
+```
+
+`vite.config.ts`:
+
+```diff
+...
+
++import dts from 'vite-plugin-dts'
+
+...
+  plugins: [
+    react(),
++   dts({
++     // tsconfigPath: path.resolve(__dirname, 'tsconfig.json'),
++     // outDir: path.resolve(__dirname, 'dist'),
++     insertTypesEntry: true
++   })
+  ],
+```
+
+```sh
+npm run build
+```
+
 ## Write the Demo
 
 ```sh
@@ -404,70 +470,6 @@ export default defineConfig({
     react()
   ]
 });
-```
-
-## Generate TypeScript Declarations
-
-```sh
-tsc --init # touch tsconfig.json
-```
-
-`tsconfig.json`:
-
-```json
-{
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "jsx": "react-jsx",
-    "strict": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "declaration": true,
-    "declarationDir": "./dist",
-    "outDir": "./dist",
-    "baseUrl": "./"
-  },
-  "include": [
-    "src"
-  ]
-}
-```
-
-```sh
-pnpm add -D vite-plugin-dts
-```
-
-`vite.config.ts`:
-
-```diff
-...
-
-+import dts from 'vite-plugin-dts'
-
-...
-  plugins: [
-    react(),
-+   dts({
-+     // tsconfigPath: path.resolve(__dirname, 'tsconfig.json'),
-+     // outDir: path.resolve(__dirname, 'dist'),
-+     insertTypesEntry: true
-+   })
-  ],
-```
-
-```sh
-npm run build
 ```
 
 ## Publish
