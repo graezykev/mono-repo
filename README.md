@@ -126,7 +126,7 @@ export function classNames(...classes: string[]):string {
 }
 ```
 
-## Write Demo Component
+## Write a Component
 
 ```js
 // button/index.tsx
@@ -158,7 +158,7 @@ const Button: React.FC<ButtonProps> = ({ children, type = 'button', className = 
 export default Button;
 ```
 
-## Write Entry Files
+## Export the Component
 
 ```css
 /* index.css */
@@ -225,7 +225,7 @@ npm run build
 # check the output of `dist` folder
 ```
 
-## Demo Folder
+## Write the Demo
 
 ```sh
 touch index.html && \
