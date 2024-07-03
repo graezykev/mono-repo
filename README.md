@@ -490,30 +490,6 @@ export default defineConfig({
 npm publish
 ```
 
-## Import Lib in CRA Project
-
-> CRA: create-react-app <https://create-react-app.dev/>
-
-```sh
-pnpm create react-app app-create-react-app-1 && \
-cd app-create-react-app-1
-```
-
-```js
-// index.js
-import 'lib-web-ui/dist/style.css'
-```
-
-```js
-// app.js
-import { Button } from 'lib-web-ui'
-// ... <Button>click</Button>
-```
-
-```sh
-npm start
-```
-
 ## Import On Demand - Separate Entries
 
 ```diff
@@ -586,6 +562,30 @@ npm start
 ```
 
 ### TODO: Import styles on demand
+
+## Import Lib in CRA Project
+
+> CRA: create-react-app <https://create-react-app.dev/>
+
+```sh
+pnpm create react-app app-create-react-app-1 && \
+cd app-create-react-app-1
+```
+
+```js
+// index.js
+import 'lib-web-ui/dist/style.css'
+```
+
+```js
+// app.js
+import { Button } from 'lib-web-ui'
+// ... <Button>click</Button>
+```
+
+```sh
+npm start
+```
 
 ## Import Lib in Next.js Project
 
