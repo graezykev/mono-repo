@@ -18,8 +18,8 @@ pnpm init
 ```sh
 mkdir lib-web-ui && \
 mkdir demo-lib-web-ui && \
-mkdir app-next-js-1 && \
-mkdir app-create-react-app-1
+mkdir app-next-1 && \
+mkdir app-cra-1
 ```
 
 ```sh
@@ -30,8 +30,8 @@ touch pnpm-workspace.yaml
 packages:
   - "lib-web-ui"
   - "demo-lib-web-ui"
-  - "app-next-js-*"
-  - "app-create-react-app-*"
+  - "app-next-*"
+  - "app-cra-*"
 ```
 
 ## Add Common Dependencies
@@ -547,13 +547,13 @@ npm publish
 
 ### TODO: Import styles on demand
 
-## Import Lib in CRA Project
+## Import Lib in CRA (create-react-app) Project
 
 > CRA: create-react-app <https://create-react-app.dev/>
 
 ```sh
-pnpm create react-app app-create-react-app-1 && \
-cd app-create-react-app-1
+pnpm create react-app app-cra-1 && \
+cd app-cra-1
 ```
 
 ```js
