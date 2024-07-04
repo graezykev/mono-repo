@@ -120,7 +120,7 @@ touch src/style.css
 ```
 
 ```js
-// _utils/class-name.ts
+// src/_utils/class-name.ts
 export function classNames(...classes: string[]):string {
   return classes.filter(Boolean).join(' ');
 }
@@ -129,11 +129,11 @@ export function classNames(...classes: string[]):string {
 ## Write a Component
 
 ```js
-// button/index.tsx
+// src/button/index.tsx
 import React, { MouseEventHandler } from 'react'
 import { classNames } from '../_utils/class-names'
 
-type ButtonProps = {
+export type ButtonProps = {
   children: React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
@@ -162,14 +162,14 @@ export default Button;
 ## Export the Component
 
 ```css
-/* style.css */
+/* src/style.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 ```
 
 ```js
-// index.ts
+// src/index.ts
 import './style.css'; // Import TailwindCSS styles
 
 export { default as Button } from './button';
@@ -281,9 +281,9 @@ pnpm add -D vite-plugin-dts
   plugins: [
     react(),
 +   dts({
-+     // tsconfigPath: path.resolve(__dirname, 'tsconfig.json'),
-+     // outDir: path.resolve(__dirname, 'dist'),
-+     insertTypesEntry: true
++     tsconfigPath: path.resolve(__dirname, 'tsconfig.json'),
++     outDir: path.resolve(__dirname, 'dist'),
++     // insertTypesEntry: true
 +   })
   ],
 ```
@@ -401,12 +401,12 @@ npm run dev
 // tab/index.tsx
 import React, { useState } from 'react'
 
-type TabProps = {
+export type TabProps = {
   label: string;
   children: React.ReactNode;
 };
 
-type TabsProps = {
+export type TabsProps = {
   children: React.ReactElement<TabProps>[];
 };
 
@@ -503,7 +503,8 @@ npm run build
 + "exports": {
 +   ".": {
 +     "import": "./dist/index.es.js",
-+     "require": "./dist/index.cjs.js"
++     "require": "./dist/index.cjs.js",
++     "types": "./dist/index.d.ts"
 +   },
 +   "./style.css": {
 +     "import": "./dist/style.css",
@@ -511,11 +512,13 @@ npm run build
 +   },
 +   "./button": {
 +     "import": "./dist/button.es.js",
-+     "require": "./dist/button.cjs.js"
++     "require": "./dist/button.cjs.js",
++     "types": "./dist/button/index.d.ts"
 +   },
 +   "./tab": {
 +     "import": "./dist/tab.es.js",
-+     "require": "./dist/tab.cjs.js"
++     "require": "./dist/tab.cjs.js",
++     "types": "./dist/tab/index.d.ts"
 +   }
 + },
 ```
