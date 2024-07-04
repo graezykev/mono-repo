@@ -393,7 +393,7 @@ export default defineConfig({
 npm run dev
 ```
 
-## Write another Demo
+## Write another Component
 
 `lib-web-ui/src/tab/index.tsx`:
 
@@ -440,6 +440,91 @@ export const Tabs: React.FC<TabsProps> = ({ children }) => {
   );
 };
 ```
+
+`lib-web-ui/src/index.tsx`:
+
+```diff
++export { Tab, Tabs } from './tab'
+```
+
+## Publish
+
+`package.json`:
+
+```diff
++ "type": "module",
++ "main": "dist/index.cjs.js",
++ "module": "dist/index.es.js",
++ "types": "dist/index.d.ts",
++ "files": [
++   "dist"
++ ],
+```
+
+```sh
+npm publish
+```
+
+## Import On Demand - Multiple Entry Points
+
+> we did not import the square method from the src/math.js module. That function is what's known as "dead code", meaning an unused export that should be dropped.
+
+> In webpack, tree shaking works with both ECMAScript modules (ESM) and CommonJS, but it does not work with Asynchronous Module Definition (AMD) or Universal Module Definition (UMD).
+
+```diff
+-import { Button } from 'lib-web-ui'
++import Button from 'lib-web-ui/button'
+```
+
+To avoid importing all components in case projects using the library without **tree shaking**.
+
+`vite.config.ts`:
+
+```diff
+...
+-     entry: path.resolve(__dirname, 'src'),
++     entry: {
++       index: path.resolve(__dirname, 'src'),
++       button: path.resolve(__dirname, 'src/button'),
++       tab: path.resolve(__dirname, 'src/tab')
++     },
+...
+-     fileName: (format) => `index.${format}.js`,
++     fileName: (format, entryName) => `${entryName}.${format}.js`,
+```
+
+```sh
+npm run build
+```
+
+`package.json`:
+
+```diff
++ "exports": {
++   ".": {
++     "import": "./dist/index.es.js",
++     "require": "./dist/index.cjs.js"
++   },
++   "./style.css": {
++     "import": "./dist/style.css",
++     "require": "./dist/style.css"
++   },
++   "./button": {
++     "import": "./dist/button.es.js",
++     "require": "./dist/button.cjs.js"
++   },
++   "./tab": {
++     "import": "./dist/tab.es.js",
++     "require": "./dist/tab.cjs.js"
++   }
++ },
+```
+
+```sh
+npm publish
+```
+
+### TODO: Import styles on demand
 
 ## Separate Demo Project
 
@@ -568,81 +653,6 @@ const config: Config = {
 +   "../lib-web-ui/src/**/*.{js,jsx,ts,tsx}"
   ],
 ```
-
-## Publish
-
-`package.json`:
-
-```diff
-+ "type": "module",
-+ "main": "dist/index.cjs.js",
-+ "module": "dist/index.es.js",
-+ "types": "dist/index.d.ts",
-+ "files": [
-+   "dist"
-+ ],
-```
-
-```sh
-npm publish
-```
-
-## Import On Demand - Multiple Entry Points
-
-> we did not import the square method from the src/math.js module. That function is what's known as "dead code", meaning an unused export that should be dropped.
-
-> In webpack, tree shaking works with both ECMAScript modules (ESM) and CommonJS, but it does not work with Asynchronous Module Definition (AMD) or Universal Module Definition (UMD).
-
-```diff
--import { Button } from 'lib-web-ui'
-+import Button from 'lib-web-ui/button'
-```
-
-To avoid importing all components in case projects using the library without **tree shaking**.
-
-`vite.config.ts`:
-
-```diff
-...
--     entry: path.resolve(__dirname, 'src'),
-+     entry: {
-+       index: path.resolve(__dirname, 'src'),
-+       button: path.resolve(__dirname, 'src/button'),
-+       tab: path.resolve(__dirname, 'src/tab')
-+     },
-...
--     fileName: (format) => `index.${format}.js`,
-+     fileName: (format, entryName) => `${entryName}.${format}.js`,
-```
-
-```sh
-npm run build
-```
-
-`package.json`:
-
-```diff
-+ "exports": {
-+   "./style.css": {
-+     "import": "./dist/style.css",
-+     "require": "./dist/style.css"
-+   },
-+   ".": {
-+     "import": "./dist/index.es.js",
-+     "require": "./dist/index.cjs.js"
-+   },
-+   "./button": {
-+     "import": "./dist/button.es.js",
-+     "require": "./dist/button.cjs.js"
-+   }
-+ },
-```
-
-```sh
-npm publish
-```
-
-### TODO: Import styles on demand
 
 ## Import Lib in CRA (create-react-app) Project
 
