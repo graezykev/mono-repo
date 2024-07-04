@@ -753,11 +753,11 @@ Also, configure `tsconfig.json` to resolve modules correctly:
     }
 ```
 
-## Testing
-
 ## Documentation & Showcase
 
 ## Playground
+
+## Testing
 
 ## CLI: create component
 
