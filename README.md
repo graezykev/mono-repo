@@ -757,6 +757,8 @@ Also, configure `tsconfig.json` to resolve modules correctly:
 
 ## Playground
 
+## Design Token
+
 ## Testing
 
 ## CLI: create component
@@ -765,7 +767,5 @@ Also, configure `tsconfig.json` to resolve modules correctly:
 - add `export` js
 - add `export` in package.json
 - add alias in projects
-
-## Design Token
 
 ## Auto Change Version
