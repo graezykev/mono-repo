@@ -495,7 +495,7 @@ import { Tabs, Tab } from 'lib-web-ui';
 npm publish
 ```
 
-## Import On Demand - Separate Entries
+## Import On Demand - Multiple Entry Points
 
 > we did not import the square method from the src/math.js module. That function is what's known as "dead code", meaning an unused export that should be dropped.
 
