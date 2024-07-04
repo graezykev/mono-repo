@@ -130,13 +130,14 @@ export function classNames(...classes: string[]):string {
 
 ```js
 // button/index.tsx
-import React from 'react';
-import { classNames } from '../_utils/class-names';
+import React, { MouseEventHandler } from 'react'
+import { classNames } from '../_utils/class-names'
 
 type ButtonProps = {
   children: React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 const Button: React.FC<ButtonProps> = ({ children, type = 'button', className = '', ...props }) => {
@@ -294,15 +295,15 @@ npm run build
 ## Write the Demo
 
 ```sh
-touch index.html && \
-touch index.tsx && \
-touch index.css && \
 mkdir demo && \
+touch demo/index.html && \
+touch demo/index.tsx && \
+touch demo/index.css && \
 mkdir demo/button && \
-touch demo/button/index.tsx && \
+touch demo/button/index.tsx
 ```
 
-`index.html`:
+`demo/index.html`:
 
 ```html
 <!DOCTYPE html>
@@ -323,7 +324,7 @@ touch demo/button/index.tsx && \
 ```
 
 ```ts
-// index.tsx
+// demo/index.tsx
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'
@@ -347,7 +348,7 @@ root.render(<App />)
 ```
 
 ```css
-/* index.css */
+/* demo/index.css */
 html {
   background-color: aquamarine;
 }
