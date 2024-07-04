@@ -116,7 +116,7 @@ touch src/button/index.tsx && \
 mkdir src/_utils && \
 touch src/_utils/class-name.ts && \
 touch src/index.ts && \
-touch src/index.css
+touch src/style.css
 ```
 
 ```js
@@ -162,7 +162,7 @@ export default Button;
 ## Export the Component
 
 ```css
-/* index.css */
+/* style.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -170,7 +170,7 @@ export default Button;
 
 ```js
 // index.ts
-import './index.css'; // Import TailwindCSS styles
+import './style.css'; // Import TailwindCSS styles
 
 export { default as Button } from './button';
 ```
@@ -393,30 +393,13 @@ export default defineConfig({
 npm run dev
 ```
 
-## Separate Demo Project
+## Write another Demo
 
-```sh
-pnpm init && \
-touch vite.config.ts
-```
-
-`vite.config.ts`:
+`lib-web-ui/src/tab/index.tsx`:
 
 ```js
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-// import path from 'path';
-
-export default defineConfig({
-  plugins: [
-    react()
-  ]
-});
-```
-
-```js
-// tab.tsx
-import React, { useState } from 'react';
+// tab/index.tsx
+import React, { useState } from 'react'
 
 type TabProps = {
   label: string;
@@ -458,11 +441,76 @@ export const Tabs: React.FC<TabsProps> = ({ children }) => {
 };
 ```
 
-```js
-// index.tsx
-import { Tabs, Tab } from 'lib-web-ui';
+## Separate Demo Project
 
-    <h2>My Tabs Component</h2>
+```sh
+pnpm init && \
+touch vite.config.ts && \
+mkdir src && \
+touch src/index.html && \
+touch src/index.tsx && \
+touch src/index.css
+```
+
+`vite.config.ts`:
+
+```js
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+// import path from 'path';
+
+export default defineConfig({
+  plugins: [
+    react()
+  ]
+});
+```
+
+`src/index.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Component Library Demo</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/index.tsx"></script>
+</body>
+
+</html>
+```
+
+`src/index.tsx`:
+
+```js
+import React from 'react';
+import { createRoot } from 'react-dom/client'
+
+import Button  from 'ui-component-web/button'; // Import the Button component from the library
+// import { Button }  from 'ui-component-web'; // Import the Button component in another way
+import { Tabs, Tab } from 'ui-component-web'; // Import Tab component
+
+import './index.css';
+
+import 'ui-component-web/style.css' // Import the CSS from the library
+
+const container = document.getElementById('app') || document.body
+const root = createRoot(container)
+
+const App = () => (
+  <div className="p-4">
+
+    <h2 className="text-2xl font-bold mb-4">Component Library Demo</h2>
+
+    <Button onClick={()=>alert('click')}>Click Me</Button>
+
+    <h2>My Tabs Component f</h2>
 
     <Tabs>
       <Tab label="Tab 1">
@@ -475,6 +523,19 @@ import { Tabs, Tab } from 'lib-web-ui';
         <div>Content of Tab 3</div>
       </Tab>
     </Tabs>
+
+  </div>
+);
+
+root.render(<App />)
+```
+
+`index.css`:
+
+```css
+html {
+  background-color: aquamarine;
+}
 ```
 
 ### Optional: Watch src code change
