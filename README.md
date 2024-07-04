@@ -650,7 +650,11 @@ npx tailwindcss init -p  --esm --ts
 `tailwind.config.ts`:
 
 ```diff
+...
++import libBaseTailwindConfig from '../ui-component-web/tailwind.config'
+...
 const config: Config = {
++ ...libBaseTailwindConfig
   content: [
     ...
 +   "../lib-web-ui/src/**/*.{js,jsx,ts,tsx}"
@@ -693,7 +697,11 @@ Add the source path of `lib-web-ui` to the `Next.js` project's TailwindCSS confi
 > The `content` section of your `tailwind.config.ts` file is where you configure the paths to all of your HTML templates, JavaScript components, and any other source files that contain Tailwind class names.
 
 ```diff
+...
++import libBaseTailwindConfig from '../ui-component-web/tailwind.config'
+...
 const config: Config = {
++ ...libBaseTailwindConfig
   content: [
     ...
 +   "../lib-web-ui/src/**/*.{js,jsx,ts,tsx}"
