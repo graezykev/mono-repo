@@ -93,7 +93,7 @@ pnpm install
 npx tailwindcss init -p  --esm --ts
 ```
 
-`tailwind.config.js`:
+`tailwind.config.ts`:
 
 ```diff
   content: [
@@ -477,6 +477,37 @@ import { Tabs, Tab } from 'lib-web-ui';
     </Tabs>
 ```
 
+### Optional: Watch src code change
+
+`vite.config.ts`:
+
+```diff
+export default defineConfig({
++ resolve: {
++   alias: {
++     'ui-component-web': path.resolve(__dirname, '../ui-component-web/src'),
++     'ui-component-web/index.css': path.resolve(__dirname, '../ui-component-web/src/index.css'),
++     'ui-component-web/button': path.resolve(__dirname, '../ui-component-web/src/button')
++   },
+  },
+```
+
+Init TailwindCSS:
+
+```sh
+npx tailwindcss init -p  --esm --ts
+```
+
+`tailwind.config.ts`:
+
+```diff
+const config: Config = {
+  content: [
+    ...
++   "../lib-web-ui/src/**/*.{js,jsx,ts,tsx}"
+  ],
+```
+
 ## Publish
 
 `package.json`:
@@ -585,7 +616,7 @@ Initiate a `Next.js` project with TS, TailwinCSS
 
 Add the source path of `lib-web-ui` to the `Next.js` project's TailwindCSS configuration file `tailwind.config.ts`:
 
-> The content section of your tailwind.config.js file is where you configure the paths to all of your HTML templates, JavaScript components, and any other source files that contain Tailwind class names.
+> The `content` section of your `tailwind.config.ts` file is where you configure the paths to all of your HTML templates, JavaScript components, and any other source files that contain Tailwind class names.
 
 ```diff
 const config: Config = {
