@@ -701,14 +701,12 @@ Add the source path of `lib-web-ui` to the `Next.js` project's TailwindCSS confi
 +import libBaseTailwindConfig from '../lib-web-ui/tailwind.config'
 ...
 const config: Config = {
-+ ...libBaseTailwindConfig
++ ...libBaseTailwindConfig // optimise this by deep merge
   content: [
     ...
 +   "../lib-web-ui/src/**/*.{js,jsx,ts,tsx}"
   ],
 ```
-
-> in real production projects, don't forget to. deep merge `libBaseTailwindConfig`
 
 By default, `Next.js` looks for the module `lib-web-ui` from `lib-web-ui/dist` which is specified in the `main` field of `lib-web-ui`'s package.json.
 
