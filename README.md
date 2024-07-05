@@ -753,9 +753,18 @@ Also, configure `tsconfig.json` to resolve modules correctly:
     }
 ```
 
+## Playground
+
 ## Documentation & Showcase
 
-## Playground
+- build docs from folder structure, `.md`
+
+`.md`:
+
+- embed demo Showcase
+- demo code
+- link to playground
+- API
 
 ## Design Token
 
