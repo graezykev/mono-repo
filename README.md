@@ -768,9 +768,10 @@ Also, configure `tsconfig.json` to resolve modules correctly:
   - Live code editor - CodeSandbox / StackBlitz
 - API
   - Props
-- Styling
-  - Color
-  - Sizes
+  - Styling
+    - Color
+    - Sizes
+    - CSS Classes
 - Accessibility
 - FAQs?
 - Contributing?
