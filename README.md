@@ -792,6 +792,13 @@ Also, configure `tsconfig.json` to resolve modules correctly:
 
 ## Design System Layers
 
-- Above Sea Level: Integration Guides, Components, Documents, Demos, Unit Testings
-- Below Sea Level: Play Ground / Sandbox, Design Tokens, Theming, Accessability, Performance Optimization, E2E Testing
+- Above Sea Level: Integration Guides, Components, React, Documents, Demos, Unit Testings
+- Below Sea Level: TailwindCSS, Server Components, Play Ground / Sandbox, Design Tokens, Theming, Accessability, Performance Optimization, E2E Testing
 - Below Seabed: Figma Integration, Auto-create CLI, Document Auto-generation, Sandbox Auto-generation, Version Management
+
+### Desing System: Why
+
+- reuse components, styles
+- collaboration
+- design audit
+- onboarding
