@@ -768,6 +768,17 @@ Also, configure `tsconfig.json` to resolve modules correctly:
 
 ## Design Token
 
+- color
+- font
+- size
+- typography
+- space
+- grid / layout
+- icon
+- bg
+- border
+- shadow
+
 ## Testing
 
 ## CLI: create component
