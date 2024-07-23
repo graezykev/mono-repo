@@ -782,6 +782,7 @@ Also, configure `tsconfig.json` to resolve modules correctly:
 
 - MDX
 - build docs from folder structure
+  - Creating projects with the SDK (stackblitz)
 
 ## Design Token
 
