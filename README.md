@@ -755,16 +755,29 @@ Also, configure `tsconfig.json` to resolve modules correctly:
 
 ## Playground
 
-## Documentation & Showcase
+## Documentation
 
-- build docs from folder structure, `.md`
+`README.md`:
 
-`.md`:
-
-- embed demo Showcase
-- demo code
-- link to playground
+- Introduction
+- Usage
+  - Basic examples / variations
+  - With Code snippets
+  - With explanations
+  - Advanced usage scenarios
+  - Live code editor - CodeSandbox / StackBlitz
+- Props
+- Styling
 - API
+- Accessibility
+- FAQs?
+- Contributing?
+- License?
+
+### Document Generation
+
+- MDX
+- build docs from folder structure
 
 ## Design Token
 
