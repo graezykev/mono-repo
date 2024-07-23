@@ -761,14 +761,16 @@ Also, configure `tsconfig.json` to resolve modules correctly:
 
 - Introduction
 - Usage
-  - Basic examples / variations
+  - Basic Examples / Variations
   - With Code snippets
   - With explanations
   - Advanced usage scenarios
   - Live code editor - CodeSandbox / StackBlitz
-- Props
-- Styling
 - API
+  - Props
+- Styling
+  - Color
+  - Sizes
 - Accessibility
 - FAQs?
 - Contributing?
