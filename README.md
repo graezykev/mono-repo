@@ -782,8 +782,9 @@ Also, configure `tsconfig.json` to resolve modules correctly:
 
 ### Document Generation
 
-- MDX
-- build docs from folder structure
+- build docs website from folder structure
+  - sidebar structure
+  - MDX
   - Creating projects with the SDK (stackblitz)
 
 ### Use Docusaurus
