@@ -757,6 +757,8 @@ Also, configure `tsconfig.json` to resolve modules correctly:
 
 ## Documentation
 
+### Essential Parts
+
 `README.md`:
 
 - Introduction
@@ -783,6 +785,77 @@ Also, configure `tsconfig.json` to resolve modules correctly:
 - MDX
 - build docs from folder structure
   - Creating projects with the SDK (stackblitz)
+
+### Use Docusaurus
+
+```sh
+pnpm create docusaurus doc-lib-web-ui classic --typescript
+```
+
+`pnpm-workspace.yaml`:
+
+```diff
++- "doc-lib-web-ui"
+```
+
+```sh
+pnpm install
+```
+
+```sh
+cd doc-lib-web-ui && \
+npm start
+```
+
+Add code below to `doc-lib-web-ui/docs/tutorial-basics/create-a-document.md`:
+
+```tsx
+import Button  from 'ui-component-web/button'; // Import the Button component from the library
+import 'ui-component-web/style.css' // Import the CSS from the library
+
+<Button onClick={()=>alert('you just clicked it')}>Click Me</Button>
+```
+
+`docusaurus.config.ts`:
+
+```diff
++  url: 'https://graezykev.github.io',
++  baseUrl: '/design-system', // For GitHub pages deployment, it is often '/<projectName>/'
++  organizationName: 'graezykev', // Usually your GitHub org/user name.
++  projectName: 'design-system', // Usually your repo name.
+```
+
+```sh
+npm run build
+```
+
+```sh
+npm run serve
+```
+
+Creat GitHub repository named `design-system`
+
+Generate new SSH key (Mac):
+
+```sh
+ssh-keygen -t ed25519 -C "your_github_account_email@example.com"
+```
+
+```sh
+cat ~/.ssh/id_ed25519.pub
+```
+
+Add a new SSH key to your GitHub accoun: GitHub -> Settings -> SSH and GPG keys -> New SSH key -> Paste key from the last step
+
+```sh
+GIT_USER=graezykev USE_SSH=true npm run deploy
+```
+
+Go to GitHub repository `design-system`:
+
+Settings -> Pages -> Build and deployment -> Source -> Deploy from a branch -> Branch -> `gh-pages`
+
+Visit <https://graezykev.github.io/design-system/>
 
 ## Design Token
 
