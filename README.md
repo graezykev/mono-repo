@@ -753,8 +753,6 @@ Also, configure `tsconfig.json` to resolve modules correctly:
     }
 ```
 
-## Playground
-
 ## Documentation
 
 ### Essential Parts
@@ -857,6 +855,31 @@ Go to GitHub repository `design-system`:
 Settings -> Pages -> Build and deployment -> Source -> Deploy from a branch -> Branch -> `gh-pages`
 
 Visit <https://graezykev.github.io/design-system/>
+
+## Playground
+
+### Automatic Script
+
+Read all text files under the demo folder
+
+Get all the path names & text contents into a JSON with the format below:
+
+```json
+{
+  files: {
+    'path/to/file1.js': 'the file content',
+    'path/to/file2.json': 'the file content',
+    'path/to/file3.tsx': 'the file content',
+    'other path': 'the file content'
+  }
+}
+```
+
+Translate the JSON to `a HTML form element` / `some JS code` according to the Stackblitz SDK
+
+Insert the form/code to the corresponding MDX file
+
+Watch the file changes and make the equivalent change to the MDX file
 
 ## Design Token
 
