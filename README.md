@@ -129,27 +129,37 @@ export function classNames(...classes: string[]):string {
 ## Write a Component
 
 ```js
-// src/button/index.tsx
-import React, { MouseEventHandler } from 'react'
-import { classNames } from '../_utils/class-names'
+import React, { MouseEventHandler } from 'react';
 
-export type ButtonProps = {
+interface ButtonProps {
+  type?: 'primary' | 'default' | 'dashed' | 'link';
+  disabled?: boolean;
   children: React.ReactNode;
-  type?: 'button' | 'submit' | 'reset';
-  className?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
-};
+}
 
-const Button: React.FC<ButtonProps> = ({ children, type = 'button', className = '', ...props }) => {
+const Button: React.FC<ButtonProps> = ({
+  type = 'default',
+  disabled = false,
+  children,
+  onClick,
+}) => {
+  const baseStyles = 'px-4 py-2 rounded focus:outline-none';
+  const typeStyles = {
+    primary: 'bg-blue-500 text-white hover:bg-blue-700',
+    default: 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100',
+    dashed: 'bg-white border-2 border-dashed border-gray-300 text-gray-700 hover:bg-gray-100',
+    link: 'bg-transparent text-blue-500 hover:bg-gray-100',
+  };
+  const disabledStyles = 'opacity-50 cursor-not-allowed';
+
+  const styles = `${baseStyles} ${typeStyles[type]} ${disabled ? disabledStyles : ''}`;
+
   return (
     <button
-      type={type}
-      className={classNames(
-        'px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm',
-        'text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
-        className
-      )}
-      {...props}
+      className={styles}
+      onClick={disabled ? undefined : onClick}
+      disabled={disabled}
     >
       {children}
     </button>
@@ -363,7 +373,27 @@ export default () => {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Button Library Demo</h1>
-      <Button onClick={()=>alert('click')}>Click Me</Button>
+      <div className="space-y-4">
+        <Button type="primary" onClick={() => alert('Primary Button Clicked')}>
+          Primary Button
+        </Button>
+        <Button type="default" onClick={() => alert('Default Button Clicked')}>
+          Default Button
+        </Button>
+        <Button type="dashed" onClick={() => alert('Dashed Button Clicked')}>
+          Dashed Button
+        </Button>
+        <Button type="link" onClick={() => alert('Link Button Clicked')}>
+          Link Button
+        </Button>
+        <Button type="primary" disabled>
+          Disabled Primary Button
+        </Button>
+        <Button type="default" disabled>
+          Disabled Default Button
+        </Button>
+      </div>
+
     </div>
   )
 }
@@ -596,7 +626,26 @@ const App = () => (
 
     <h2 className="text-2xl font-bold mb-4">Component Library Demo</h2>
 
-    <Button onClick={()=>alert('click')}>Click Me</Button>
+    <div className="space-y-4">
+      <Button type="primary" onClick={() => alert('Primary Button Clicked')}>
+        Primary Button
+      </Button>
+      <Button type="default" onClick={() => alert('Default Button Clicked')}>
+        Default Button
+      </Button>
+      <Button type="dashed" onClick={() => alert('Dashed Button Clicked')}>
+        Dashed Button
+      </Button>
+      <Button type="link" onClick={() => alert('Link Button Clicked')}>
+        Link Button
+      </Button>
+      <Button type="primary" disabled>
+        Disabled Primary Button
+      </Button>
+      <Button type="default" disabled>
+        Disabled Default Button
+      </Button>
+    </div>
 
     <h2>My Tabs Component f</h2>
 
@@ -812,7 +861,26 @@ Add code below to `doc-lib-web-ui/docs/tutorial-basics/create-a-document.md`:
 import Button  from 'ui-component-web/button'; // Import the Button component from the library
 import 'ui-component-web/style.css' // Import the CSS from the library
 
-<Button onClick={()=>alert('you just clicked it')}>Click Me</Button>
+<div className="space-y-4">
+  <Button type="primary" onClick={() => alert('Primary Button Clicked')}>
+    Primary Button
+  </Button>
+  <Button type="default" onClick={() => alert('Default Button Clicked')}>
+    Default Button
+  </Button>
+  <Button type="dashed" onClick={() => alert('Dashed Button Clicked')}>
+    Dashed Button
+  </Button>
+  <Button type="link" onClick={() => alert('Link Button Clicked')}>
+    Link Button
+  </Button>
+  <Button type="primary" disabled>
+    Disabled Primary Button
+  </Button>
+  <Button type="default" disabled>
+    Disabled Default Button
+  </Button>
+</div>
 ```
 
 `docusaurus.config.ts`:
