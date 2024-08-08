@@ -561,13 +561,15 @@ npm publish
 
 ## Separate Demo Project
 
+### Demo template
+
 ```sh
 pnpm init && \
 touch vite.config.ts && \
 mkdir src && \
-touch src/index.html && \
-touch src/index.tsx && \
-touch src/index.css
+touch index.html && \
+touch index.tsx && \
+touch index.css
 ```
 
 `vite.config.ts`:
@@ -598,25 +600,27 @@ export default defineConfig({
 
 <body>
   <div id="app"></div>
-  <script type="module" src="/src/index.tsx"></script>
+  <script type="module" src="index.tsx"></script>
 </body>
 
 </html>
 ```
 
-`src/index.tsx`:
+`index.tsx`:
 
-```js
-import React from 'react';
+```tsx
+import './index.css'
+import 'ui-component-web/style.css' // Import the CSS from the library
+
+import React from 'react'
 import { createRoot } from 'react-dom/client'
 
-import Button  from 'ui-component-web/button'; // Import the Button component from the library
-// import { Button }  from 'ui-component-web'; // Import the Button component in another way
-import { Tabs, Tab } from 'ui-component-web'; // Import Tab component
+import ButtonDemo from './src/button'
+import PrimaryButtonDemo from './src/button/variation1'
+import TabDemo from './src/tab'
+// import OtherDemo from './other-path'
+// ...
 
-import './index.css';
-
-import 'ui-component-web/style.css' // Import the CSS from the library
 
 const container = document.getElementById('app') || document.body
 const root = createRoot(container)
@@ -624,47 +628,22 @@ const root = createRoot(container)
 const App = () => (
   <div className="p-4">
 
-    <h2 className="text-2xl font-bold mb-4">Component Library Demo</h2>
+    <ButtonDemo />
 
-    <div className="space-y-4">
-      <Button type="primary" onClick={() => alert('Primary Button Clicked')}>
-        Primary Button
-      </Button>
-      <Button type="default" onClick={() => alert('Default Button Clicked')}>
-        Default Button
-      </Button>
-      <Button type="dashed" onClick={() => alert('Dashed Button Clicked')}>
-        Dashed Button
-      </Button>
-      <Button type="link" onClick={() => alert('Link Button Clicked')}>
-        Link Button
-      </Button>
-      <Button type="primary" disabled>
-        Disabled Primary Button
-      </Button>
-      <Button type="default" disabled>
-        Disabled Default Button
-      </Button>
-    </div>
+    <PrimaryButtonDemo />
 
-    <h2>My Tabs Component f</h2>
+    <TabDemo />
 
-    <Tabs>
-      <Tab label="Tab 1">
-        <div>Content of Tab 1</div>
-      </Tab>
-      <Tab label="Tab 2">
-        <div>Content of Tab 2</div>
-      </Tab>
-      <Tab label="Tab 3">
-        <div>Content of Tab 3</div>
-      </Tab>
-    </Tabs>
+    {/*
+      <OtherDemo />
+      ...
+    */}
 
   </div>
 );
 
 root.render(<App />)
+
 ```
 
 `index.css`:
@@ -672,6 +651,118 @@ root.render(<App />)
 ```css
 html {
   background-color: aquamarine;
+}
+```
+
+### Entry files for Each Component and their Variations
+
+```txt
+├── src
+│   ├── button
+│   │   ├── index.tsx
+│   │   └── variation1.tsx
+│   ├── other-component
+│   │   ├── index.tsx
+│   │   ├── variation1.tsx
+│   │   └── variation2.tsx
+│   └── tab
+│       └── index.tsx
+├── index.html
+├── index.tsx
+├── index.css
+├── package.json
+└── vite.config.ts
+```
+
+`src/button/index.tsx`:
+
+```tsx
+import React from 'react';
+
+import Button from 'ui-component-web/button'; // Import the Button component from the library
+// import { Button }  from 'ui-component-web'; // Import the Button component in another way
+
+export default function Demo() {
+  return (
+    <>
+      <h2 className="text-2xl font-bold mb-4">Button Component Demo</h2>
+
+      <div className="space-y-4">
+
+        <Button type="default" onClick={() => alert('Default Button Clicked')}>
+          Default Button
+        </Button>
+
+        <Button type="primary" onClick={() => alert('Primary Button Clicked')}>
+          Primary Button
+        </Button>
+
+        <Button type="dashed" onClick={() => alert('Dashed Button Clicked')}>
+          Dashed Button
+        </Button>
+
+        <Button type="link" onClick={() => alert('Link Button Clicked')}>
+          Link Button
+        </Button>
+        <Button type="primary" disabled>
+          Disabled Primary Button
+        </Button>
+        <Button type="default" disabled>
+          Disabled Default Button
+        </Button>
+      </div>
+    </>
+  )
+}
+```
+
+`src/button/variation1.tsx`:
+
+```tsx
+import React from 'react';
+
+import Button from 'ui-component-web/button'
+
+export default function Demo() {
+  return (
+    <>
+      <h2 className="text-2xl font-bold mb-4">Primary Button Component Demo</h2>
+
+      <div className="space-y-4">
+        <Button type="primary" onClick={() => alert('Primary Button Clicked')}>
+          Primary Button
+        </Button>
+      </div>
+    </>
+  )
+}
+```
+
+`src/tab/index.tsx`:
+
+```tsx
+import React from 'react';
+
+import { Tabs, Tab } from 'ui-component-web'; // Import Tab component
+
+export default function Demo() {
+  return (
+    <>
+      <h2>Tab Component Demo</h2>
+
+      <Tabs>
+        <Tab label="Tab 1">
+          <div>Content of Tab 1</div>
+        </Tab>
+        <Tab label="Tab 2">
+          <div>Content of Tab 2</div>
+        </Tab>
+        <Tab label="Tab 3">
+          <div>Content of Tab 3</div>
+        </Tab>
+      </Tabs>
+    </>
+  )
 }
 ```
 
