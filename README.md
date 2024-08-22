@@ -11,7 +11,7 @@ npm install -g pnpm
 ```sh
 mkdir mono-repo && \
 cd mono-repo && \
-echo "node_modules\ndist\n.DS_Store" >> .gitignore && \
+echo "node_modules\ndist\n.DS_Store\n.tmp\n" >> .gitignore && \
 pnpm init
 ```
 
