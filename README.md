@@ -567,26 +567,192 @@ npm publish
 pnpm init && \
 touch vite.config.ts && \
 mkdir src && \
-touch index.html && \
-touch index.tsx && \
-touch index.css
+touch template.html && \
+touch template.tsx && \
+touch src/index.css
 ```
 
 `vite.config.ts`:
 
 ```js
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-// import path from 'path';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import fs from 'fs'
+import path from 'path'
+
+const tempDir = '.tmp'
+const intermediateFiles: string[] = []
 
 export default defineConfig({
+  root: path.resolve(__dirname, tempDir),
+  // base: 'https://your-cnd.com', // default: '/'
   plugins: [
-    react()
-  ]
-});
+    react(),
+    generateComponentPages(),
+  ],
+  build: {
+    // sourcemap: true,
+    rollupOptions: {
+      input: getHtmlEntries()
+    },
+    outDir: path.resolve(__dirname, 'dist')
+  },
+  resolve: { alias: { "@": path.resolve("src") } }
+})
+
+function generateComponentPages() {
+  return {
+    name: 'generate-component-pages',
+    config() {
+
+      deletePath(tempDir)
+
+      const componentsDir = path.resolve(__dirname, 'src')
+      const htmlTemplate = fs.readFileSync(path.resolve(__dirname, 'template.html'), 'utf-8')
+      const tsxTemplate = fs.readFileSync(path.resolve(__dirname, 'template.tsx'), 'utf-8')
+      const cssPath = path.resolve(__dirname, 'index.css')
+      
+      traverseDir(componentsDir, (filePath, relativeDir) => {
+        if (filePath.endsWith('.tsx')) {
+          const componentName = path.basename(filePath, '.tsx')
+          const capitalizedComponentName = capitalizeFirstLetter(componentName)
+          const componentPath = `${relativeDir}/${componentName}`
+
+          if (componentName === 'index') {
+            // Create the index TSX and HTML
+            createPageFiles(`${tempDir}/${relativeDir}`, 'index', tsxTemplate, htmlTemplate, cssPath, capitalizedComponentName, componentPath)
+          } else {
+            // Create variation TSX and HTML
+            createPageFiles(`${tempDir}/${relativeDir}`, `${componentName}`, tsxTemplate, htmlTemplate, cssPath, capitalizedComponentName, componentPath)
+          }
+        }
+      })
+
+      // Generate list html (index.html)
+      const listHtmlPath = path.resolve(__dirname, tempDir, 'index.html')
+      const listHtmlContent = generateListHtml(componentsDir)
+      console.log('\nlist HTML:\n\n', listHtmlContent)
+      fs.writeFileSync(listHtmlPath, listHtmlContent)
+      intermediateFiles.push(listHtmlPath)
+    },
+    async buildEnd() {
+      console.log('\nintermediate files:\n\n', intermediateFiles)
+      intermediateFiles.forEach((dir) => {
+        deletePath(dir);
+      });
+      deletePath(tempDir)
+    }
+  }
+}
+
+// Utility function to delete files and directories
+const deletePath = (filePath: string) => {
+  if (fs.existsSync(filePath)) {
+    if (fs.statSync(filePath).isDirectory()) {
+      fs.readdirSync(filePath).forEach((file) => {
+        const currentPath = path.join(filePath, file);
+        deletePath(currentPath);
+      });
+      fs.rmdirSync(filePath);
+    } else {
+      fs.unlinkSync(filePath);
+    }
+  }
+}
+
+function createPageFiles(relativeDir: string, suffix: string, tsxTemplate: string, htmlTemplate: string, cssPath: string, componentName: string, componentPath: string) {
+  const jsFileName = `${relativeDir}/${suffix}.tsx`
+  const jsFilePath = path.resolve(__dirname, jsFileName)
+  ensureDirectoryExistence(jsFilePath)
+
+  // Adjust the component path to be relative to the 'src' directory and use lowercase for the path
+  const jsContent = tsxTemplate
+    .replace(/import\s+ButtonDemo\s+from\s+['"].*?['"];?\s*/, `import ${componentName} from '@/${componentPath}';\n`)
+    .replace(/<ButtonDemo\s*\/>/, `<${componentName} />`)
+
+  fs.writeFileSync(jsFilePath, jsContent)
+  intermediateFiles.push(jsFilePath)
+
+  // Create the modified HTML content
+  const htmlFileName = `${relativeDir}/${suffix}.html`
+  const htmlFilePath = path.resolve(__dirname, htmlFileName)
+  const htmlContent = htmlTemplate
+    .replace('<script type="module" src="template.tsx"></script>', `<script type="module" src="${suffix}.tsx"></script>`)
+    
+  ensureDirectoryExistence(htmlFilePath)
+  fs.writeFileSync(htmlFilePath, htmlContent)
+  intermediateFiles.push(htmlFilePath)
+
+  // // Copy CSS to the corresponding directory
+  // const cssDestPath = path.resolve(__dirname, `${relativeDir}/${suffix}.css`)
+  // fs.copyFileSync(cssPath, cssDestPath)
+  // intermediateFiles.push(cssDestPath)
+}
+
+function traverseDir(dir: string, callback: (filePath: string, relativeDir: string) => void) {
+  fs.readdirSync(dir).forEach((file) => {
+    const filePath = path.join(dir, file)
+    const stats = fs.statSync(filePath)
+    if (stats.isDirectory()) {
+      traverseDir(filePath, callback)
+    } else if (stats.isFile()) {
+      const relativeDir = path.relative(path.resolve(__dirname, 'src'), filePath)
+      callback(filePath, path.dirname(relativeDir))
+    }
+  })
+}
+
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+function getHtmlEntries() {
+  const entries: Record<string, string> = {}
+  traverseDir(path.resolve(__dirname, 'src'), (filePath, relativeDir) => {
+    if (filePath.endsWith('.tsx')) {
+      const componentName = path.basename(filePath, '.tsx')
+      if (componentName === 'index' || !filePath.endsWith('index.tsx')) {
+        // const htmlPath = `${relativeDir}${componentName === 'index' ? '/index' : `/${componentName}`}`
+        const htmlPath = `${relativeDir}/${componentName}`
+        const htmlFileName = `${htmlPath}.html`
+        entries[componentName === 'index' ? relativeDir : htmlPath] = path.resolve(__dirname, tempDir, htmlFileName)
+      }
+    }
+  })
+  entries.index = path.resolve(__dirname, tempDir, 'index.html')
+  console.log('\nentries:\n\n', entries)
+  return entries
+}
+
+function ensureDirectoryExistence(filePath: string) {
+  const dirname = path.dirname(filePath)
+  if (fs.existsSync(dirname)) {
+    return true
+  }
+  ensureDirectoryExistence(dirname)
+  fs.mkdirSync(dirname)
+}
+
+function generateListHtml(componentsDir: string) {
+  let listHtmlContent = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Component List</title></head><body><h1>Component List</h1><ul>'
+  traverseDir(componentsDir, (filePath, relativeDir) => {
+    if (filePath.endsWith('.tsx')) {
+      const componentName = path.basename(filePath, '.tsx')
+      if (componentName !== 'index') {
+        const htmlPath = `${relativeDir}/${componentName}.html`
+        listHtmlContent += `<li><a href="${htmlPath}">${componentName}</a></li>`
+      } else {
+        const htmlPath = `${relativeDir}/index.html`
+        listHtmlContent += `<li><a href="${htmlPath}">${relativeDir}</a></li>`
+      }
+    }
+  })
+  listHtmlContent += '</ul></body></html>'
+  return listHtmlContent
+}
 ```
 
-`src/index.html`:
+`template.html`:
 
 ```html
 <!DOCTYPE html>
@@ -600,24 +766,22 @@ export default defineConfig({
 
 <body>
   <div id="app"></div>
-  <script type="module" src="index.tsx"></script>
+  <script type="module" src="template.tsx"></script>
 </body>
 
 </html>
 ```
 
-`index.tsx`:
+`template.tsx`:
 
 ```tsx
-import './index.css'
+import '@/index.css'
 import 'ui-component-web/style.css' // Import the CSS from the library
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 
-import ButtonDemo from './src/button'
-import PrimaryButtonDemo from './src/button/variation1'
-import TabDemo from './src/tab'
+import ButtonDemo from '@/button'
 // import OtherDemo from './other-path'
 // ...
 
@@ -629,10 +793,6 @@ const App = () => (
   <div className="p-4">
 
     <ButtonDemo />
-
-    <PrimaryButtonDemo />
-
-    <TabDemo />
 
     {/*
       <OtherDemo />
@@ -646,7 +806,7 @@ root.render(<App />)
 
 ```
 
-`index.css`:
+`src/index.css`:
 
 ```css
 html {
@@ -658,19 +818,25 @@ html {
 
 ```txt
 ├── src
+│   ├── index.css
+│   │
 │   ├── button
 │   │   ├── index.tsx
 │   │   └── variation1.tsx
+│   │
 │   ├── other-component
 │   │   ├── index.tsx
 │   │   ├── variation1.tsx
 │   │   └── variation2.tsx
+│   │
 │   └── tab
 │       └── index.tsx
-├── index.html
-├── index.tsx
-├── index.css
+│
+├── template.html
+├── template.tsx
+│
 ├── package.json
+│
 └── vite.config.ts
 ```
 
@@ -696,7 +862,7 @@ export default function Demo() {
         <Button type="primary" onClick={() => alert('Primary Button Clicked')}>
           Primary Button
         </Button>
-
+        
         <Button type="dashed" onClick={() => alert('Dashed Button Clicked')}>
           Dashed Button
         </Button>
@@ -751,11 +917,11 @@ export default function Demo() {
       <h2>Tab Component Demo</h2>
 
       <Tabs>
-        <Tab label="Tab 1">
-          <div>Content of Tab 1</div>
+        <Tab label="Tab 1" a="f">
+          <div>Content of Tab 13</div>
         </Tab>
         <Tab label="Tab 2">
-          <div>Content of Tab 2</div>
+          <div>Content of Tab 21</div>
         </Tab>
         <Tab label="Tab 3">
           <div>Content of Tab 3</div>
