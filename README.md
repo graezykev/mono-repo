@@ -574,7 +574,7 @@ touch src/index.css
 
 `vite.config.ts`:
 
-```js
+```ts
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import fs from 'fs'
@@ -583,17 +583,19 @@ import path from 'path'
 const tempDir = '.tmp'
 const intermediateFiles: string[] = []
 
+const pages = getHtmlEntries()
+
 export default defineConfig({
   root: path.resolve(__dirname, tempDir),
   // base: 'https://your-cnd.com', // default: '/'
   plugins: [
     react(),
-    generateComponentPages(),
+    generateComponentPages()
   ],
   build: {
     // sourcemap: true,
     rollupOptions: {
-      input: getHtmlEntries()
+      input: pages
     },
     outDir: path.resolve(__dirname, 'dist')
   },
@@ -645,23 +647,10 @@ function generateComponentPages() {
   }
 }
 
-// Utility function to delete files and directories
-const deletePath = (filePath: string) => {
-  if (fs.existsSync(filePath)) {
-    if (fs.statSync(filePath).isDirectory()) {
-      fs.readdirSync(filePath).forEach((file) => {
-        const currentPath = path.join(filePath, file);
-        deletePath(currentPath);
-      });
-      fs.rmdirSync(filePath);
-    } else {
-      fs.unlinkSync(filePath);
-    }
-  }
-}
-
 function createPageFiles(relativeDir: string, suffix: string, tsxTemplate: string, htmlTemplate: string, cssPath: string, componentName: string, componentPath: string) {
-  const jsFileName = `${relativeDir}/${suffix}.tsx`
+  const randomStr = generateRandomString(5)
+  const jsFileId = `${suffix}-${randomStr}`
+  const jsFileName = `${relativeDir}/${jsFileId}.tsx`
   const jsFilePath = path.resolve(__dirname, jsFileName)
   ensureDirectoryExistence(jsFilePath)
 
@@ -677,8 +666,8 @@ function createPageFiles(relativeDir: string, suffix: string, tsxTemplate: strin
   const htmlFileName = `${relativeDir}/${suffix}.html`
   const htmlFilePath = path.resolve(__dirname, htmlFileName)
   const htmlContent = htmlTemplate
-    .replace('<script type="module" src="template.tsx"></script>', `<script type="module" src="${suffix}.tsx"></script>`)
-    
+    .replace('<script type="module" src="template.tsx"></script>', `<script type="module" src="${jsFileId}.tsx"></script>`)
+
   ensureDirectoryExistence(htmlFilePath)
   fs.writeFileSync(htmlFilePath, htmlContent)
   intermediateFiles.push(htmlFilePath)
@@ -739,16 +728,41 @@ function generateListHtml(componentsDir: string) {
     if (filePath.endsWith('.tsx')) {
       const componentName = path.basename(filePath, '.tsx')
       if (componentName !== 'index') {
-        const htmlPath = `${relativeDir}/${componentName}.html`
+        // const htmlPath = `${relativeDir}/${componentName}.html`
+        const htmlPath = `${relativeDir}/${componentName}`
         listHtmlContent += `<li><a href="${htmlPath}">${componentName}</a></li>`
       } else {
-        const htmlPath = `${relativeDir}/index.html`
+        const htmlPath = `${relativeDir}/`
         listHtmlContent += `<li><a href="${htmlPath}">${relativeDir}</a></li>`
       }
     }
   })
   listHtmlContent += '</ul></body></html>'
   return listHtmlContent
+}
+
+function deletePath(filePath: string) {
+  if (fs.existsSync(filePath)) {
+    if (fs.statSync(filePath).isDirectory()) {
+      fs.readdirSync(filePath).forEach((file) => {
+        const currentPath = path.join(filePath, file);
+        deletePath(currentPath);
+      });
+      fs.rmdirSync(filePath);
+    } else {
+      fs.unlinkSync(filePath);
+    }
+  }
+}
+
+function generateRandomString(length) {
+  const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 }
 ```
 
@@ -930,6 +944,14 @@ export default function Demo() {
     </>
   )
 }
+```
+
+```sh
+npm run dev
+```
+
+```sh
+npm run build
 ```
 
 ### Optional: Watch src code change
