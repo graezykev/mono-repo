@@ -567,9 +567,18 @@ npm publish
 pnpm init && \
 touch vite.config.ts && \
 mkdir src && \
-touch template.html && \
-touch template.tsx && \
+touch index.html && \
+touch index.tsx && \
 touch src/index.css
+```
+
+`package.json`:
+
+```diff
+  "scripts": {
++   "dev": "vite",
++   "build": "vite build"
+  },
 ```
 
 `vite.config.ts`:
@@ -610,8 +619,8 @@ function generateComponentPages() {
       deletePath(tempDir)
 
       const componentsDir = path.resolve(__dirname, 'src')
-      const htmlTemplate = fs.readFileSync(path.resolve(__dirname, 'template.html'), 'utf-8')
-      const tsxTemplate = fs.readFileSync(path.resolve(__dirname, 'template.tsx'), 'utf-8')
+      const htmlTemplate = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8')
+      const tsxTemplate = fs.readFileSync(path.resolve(__dirname, 'index.tsx'), 'utf-8')
       const cssPath = path.resolve(__dirname, 'index.css')
       
       traverseDir(componentsDir, (filePath, relativeDir) => {
@@ -666,7 +675,7 @@ function createPageFiles(relativeDir: string, suffix: string, tsxTemplate: strin
   const htmlFileName = `${relativeDir}/${suffix}.html`
   const htmlFilePath = path.resolve(__dirname, htmlFileName)
   const htmlContent = htmlTemplate
-    .replace('<script type="module" src="template.tsx"></script>', `<script type="module" src="${jsFileId}.tsx"></script>`)
+    .replace('<script type="module" src="index.tsx"></script>', `<script type="module" src="${jsFileId}.tsx"></script>`)
 
   ensureDirectoryExistence(htmlFilePath)
   fs.writeFileSync(htmlFilePath, htmlContent)
@@ -766,7 +775,7 @@ function generateRandomString(length) {
 }
 ```
 
-`template.html`:
+`index.html`:
 
 ```html
 <!DOCTYPE html>
@@ -780,13 +789,13 @@ function generateRandomString(length) {
 
 <body>
   <div id="app"></div>
-  <script type="module" src="template.tsx"></script>
+  <script type="module" src="index.tsx"></script>
 </body>
 
 </html>
 ```
 
-`template.tsx`:
+`index.tsx`:
 
 ```tsx
 import '@/index.css'
@@ -846,8 +855,8 @@ html {
 │   └── tab
 │       └── index.tsx
 │
-├── template.html
-├── template.tsx
+├── index.html
+├── index.tsx
 │
 ├── package.json
 │
@@ -949,6 +958,8 @@ export default function Demo() {
 ```sh
 npm run dev
 ```
+
+Visit <http://localhost:5173/>
 
 ```sh
 npm run build
