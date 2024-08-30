@@ -611,6 +611,9 @@ export default defineConfig({
   resolve: { alias: { "@": path.resolve("src") } }
 })
 
+const htmlTemplate = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8')
+const tsxTemplate = fs.readFileSync(path.resolve(__dirname, 'index.tsx'), 'utf-8')
+
 function generateComponentPages() {
   return {
     name: 'generate-component-pages',
@@ -619,9 +622,6 @@ function generateComponentPages() {
       deletePath(tempDir)
 
       const componentsDir = path.resolve(__dirname, 'src')
-      const htmlTemplate = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8')
-      const tsxTemplate = fs.readFileSync(path.resolve(__dirname, 'index.tsx'), 'utf-8')
-      const cssPath = path.resolve(__dirname, 'index.css')
       
       traverseDir(componentsDir, (filePath, relativeDir) => {
         if (filePath.endsWith('.tsx')) {
@@ -630,7 +630,9 @@ function generateComponentPages() {
           const componentPath = `${relativeDir}/${componentName}`
 
           // Create variation TSX and HTML
-          createPageFiles(`${tempDir}/${relativeDir}`, `${componentName}`, tsxTemplate, htmlTemplate, cssPath, capitalizedComponentName, componentPath)
+          const { jsFilePath, htmlFilePath } = createPageFiles(`${tempDir}/${relativeDir}`, `${componentName}`, capitalizedComponentName, componentPath)
+          intermediateFiles.push(jsFilePath, htmlFilePath)
+          createPlayGroundProject(componentPath, jsFilePath, htmlFilePath, filePath)
         }
       })
 
@@ -651,7 +653,12 @@ function generateComponentPages() {
   }
 }
 
-function createPageFiles(relativeDir: string, suffix: string, tsxTemplate: string, htmlTemplate: string, cssPath: string, componentName: string, componentPath: string) {
+function createPageFiles(
+  relativeDir: string,
+  suffix: string,
+  componentName: string,
+  componentPath: string
+) {
   suffix = suffix === 'index' ? suffix : suffix + '/index'
 
   const randomStr = generateRandomString(5)
@@ -666,7 +673,6 @@ function createPageFiles(relativeDir: string, suffix: string, tsxTemplate: strin
     .replace(/<ButtonDemo\s*\/>/, `<${componentName} />`)
 
   fs.writeFileSync(jsFilePath, jsContent)
-  intermediateFiles.push(jsFilePath)
 
   // Create the modified HTML content
   const htmlFileName = `${relativeDir}/${suffix}.html`
@@ -676,12 +682,26 @@ function createPageFiles(relativeDir: string, suffix: string, tsxTemplate: strin
 
   ensureDirectoryExistence(htmlFilePath)
   fs.writeFileSync(htmlFilePath, htmlContent)
-  intermediateFiles.push(htmlFilePath)
 
-  // // Copy CSS to the corresponding directory
-  // const cssDestPath = path.resolve(__dirname, `${relativeDir}/${suffix}.css`)
-  // fs.copyFileSync(cssPath, cssDestPath)
-  // intermediateFiles.push(cssDestPath)
+  return { jsFilePath, htmlFilePath }
+}
+
+function createPlayGroundProject(
+  componentPath: string,
+  jsFilePath: string,
+  htmlFilePath: string,
+  sourceFilePath: string
+) {
+  console.log(
+    '------\n',
+    componentPath, '\n',
+    jsFilePath, '\n',
+    htmlFilePath, '\n',
+    sourceFilePath, '\n',
+    path.relative(tempDir, htmlFilePath), '\n',
+    path.relative(tempDir, jsFilePath), '\n',
+    path.relative(__dirname, sourceFilePath), '\n'
+  )
 }
 
 function traverseDir(dir: string, callback: (filePath: string, relativeDir: string) => void) {
@@ -736,7 +756,7 @@ function generateListHtml(componentsDir: string) {
       if (componentName !== 'index') {
         // const htmlPath = `${relativeDir}/${componentName}.html`
         const htmlPath = `${relativeDir}/${componentName}/`
-        listHtmlContent += `<li><a href="${htmlPath}">${componentName}</a></li>`
+        listHtmlContent += `<li><a href="${htmlPath}">${relativeDir}/${componentName}</a></li>`
       } else {
         const htmlPath = `${relativeDir}/`
         listHtmlContent += `<li><a href="${htmlPath}">${relativeDir}</a></li>`
