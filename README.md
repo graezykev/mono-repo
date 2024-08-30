@@ -652,10 +652,13 @@ function generateComponentPages() {
 }
 
 function createPageFiles(relativeDir: string, suffix: string, tsxTemplate: string, htmlTemplate: string, cssPath: string, componentName: string, componentPath: string) {
+  suffix = suffix === 'index' ? suffix : suffix + '/index'
+
   const randomStr = generateRandomString(5)
   const jsFileId = `${suffix}-${randomStr}`
   const jsFileName = `${relativeDir}/${jsFileId}.tsx`
   const jsFilePath = path.resolve(__dirname, jsFileName)
+  console.log('======', jsFilePath)
   ensureDirectoryExistence(jsFilePath)
 
   // Adjust the component path to be relative to the 'src' directory and use lowercase for the path
@@ -669,8 +672,9 @@ function createPageFiles(relativeDir: string, suffix: string, tsxTemplate: strin
   // Create the modified HTML content
   const htmlFileName = `${relativeDir}/${suffix}.html`
   const htmlFilePath = path.resolve(__dirname, htmlFileName)
+  console.log('======', htmlFilePath)
   const htmlContent = htmlTemplate
-    .replace('<script type="module" src="index.tsx"></script>', `<script type="module" src="${jsFileId}.tsx"></script>`)
+    .replace('<script type="module" src="index.tsx"></script>', `<script type="module" src="index-${randomStr}.tsx"></script>`)
 
   ensureDirectoryExistence(htmlFilePath)
   fs.writeFileSync(htmlFilePath, htmlContent)
@@ -705,10 +709,10 @@ function getHtmlEntries() {
     if (filePath.endsWith('.tsx')) {
       const componentName = path.basename(filePath, '.tsx')
       if (componentName === 'index' || !filePath.endsWith('index.tsx')) {
-        // const htmlPath = `${relativeDir}${componentName === 'index' ? '/index' : `/${componentName}`}`
-        const htmlPath = `${relativeDir}/${componentName}`
+        const htmlPath = `${relativeDir}/${componentName === 'index' ? 'index' : `${componentName}/index`}`
+        // const htmlPath = `${relativeDir}/${componentName}`
         const htmlFileName = `${htmlPath}.html`
-        entries[componentName === 'index' ? relativeDir : htmlPath] = path.resolve(__dirname, tempDir, htmlFileName)
+        entries[componentName === 'index' ? relativeDir : `${relativeDir}/${componentName}`] = path.resolve(__dirname, tempDir, htmlFileName)
       }
     }
   })
@@ -733,7 +737,7 @@ function generateListHtml(componentsDir: string) {
       const componentName = path.basename(filePath, '.tsx')
       if (componentName !== 'index') {
         // const htmlPath = `${relativeDir}/${componentName}.html`
-        const htmlPath = `${relativeDir}/${componentName}`
+        const htmlPath = `${relativeDir}/${componentName}/`
         listHtmlContent += `<li><a href="${htmlPath}">${componentName}</a></li>`
       } else {
         const htmlPath = `${relativeDir}/`
