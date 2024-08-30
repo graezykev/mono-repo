@@ -658,7 +658,6 @@ function createPageFiles(relativeDir: string, suffix: string, tsxTemplate: strin
   const jsFileId = `${suffix}-${randomStr}`
   const jsFileName = `${relativeDir}/${jsFileId}.tsx`
   const jsFilePath = path.resolve(__dirname, jsFileName)
-  console.log('======', jsFilePath)
   ensureDirectoryExistence(jsFilePath)
 
   // Adjust the component path to be relative to the 'src' directory and use lowercase for the path
@@ -672,7 +671,6 @@ function createPageFiles(relativeDir: string, suffix: string, tsxTemplate: strin
   // Create the modified HTML content
   const htmlFileName = `${relativeDir}/${suffix}.html`
   const htmlFilePath = path.resolve(__dirname, htmlFileName)
-  console.log('======', htmlFilePath)
   const htmlContent = htmlTemplate
     .replace('<script type="module" src="index.tsx"></script>', `<script type="module" src="index-${randomStr}.tsx"></script>`)
 
