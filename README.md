@@ -686,21 +686,39 @@ function createPageFiles(
   return { jsFilePath, htmlFilePath }
 }
 
+const playgroundDistDir = 'playground-dist'
+
 function createPlayGroundProject(
   componentPath: string,
   jsFilePath: string,
   htmlFilePath: string,
   sourceFilePath: string
 ) {
+  let playgroundProjectDir:string
+  if (componentPath.endsWith('index')) {
+    playgroundProjectDir = componentPath.split('/')[0]
+  } else {
+    playgroundProjectDir = componentPath.replace('/', '-')
+  }
+
+  const htmlEntryFilePath = path.relative(tempDir, htmlFilePath)
+  const htmlEntryFileTargetPath = path.resolve(__dirname, playgroundDistDir, htmlEntryFilePath)
+
+  const jsEntryFilePath = path.relative(tempDir, jsFilePath)
+  const jsEntryFileTargetPath = path.resolve(__dirname, playgroundDistDir, jsEntryFilePath)
+
+  const jsSourceFilePath = path.relative(__dirname, sourceFilePath)
+  const jsSourceFileTargetPath = path.resolve(__dirname, playgroundDistDir, playgroundProjectDir, jsSourceFilePath)
+
   console.log(
     '------\n',
     componentPath, '\n',
     jsFilePath, '\n',
     htmlFilePath, '\n',
     sourceFilePath, '\n',
-    path.relative(tempDir, htmlFilePath), '\n',
-    path.relative(tempDir, jsFilePath), '\n',
-    path.relative(__dirname, sourceFilePath), '\n'
+    htmlEntryFileTargetPath, '\n',
+    jsEntryFileTargetPath, '\n',
+    jsSourceFileTargetPath, '\n'
   )
 }
 
