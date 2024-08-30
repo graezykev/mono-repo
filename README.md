@@ -629,17 +629,12 @@ function generateComponentPages() {
           const capitalizedComponentName = capitalizeFirstLetter(componentName)
           const componentPath = `${relativeDir}/${componentName}`
 
-          if (componentName === 'index') {
-            // Create the index TSX and HTML
-            createPageFiles(`${tempDir}/${relativeDir}`, 'index', tsxTemplate, htmlTemplate, cssPath, capitalizedComponentName, componentPath)
-          } else {
-            // Create variation TSX and HTML
-            createPageFiles(`${tempDir}/${relativeDir}`, `${componentName}`, tsxTemplate, htmlTemplate, cssPath, capitalizedComponentName, componentPath)
-          }
+          // Create variation TSX and HTML
+          createPageFiles(`${tempDir}/${relativeDir}`, `${componentName}`, tsxTemplate, htmlTemplate, cssPath, capitalizedComponentName, componentPath)
         }
       })
 
-      // Generate list html (index.html)
+      // Generate list html (index.html) to link all demos
       const listHtmlPath = path.resolve(__dirname, tempDir, 'index.html')
       const listHtmlContent = generateListHtml(componentsDir)
       console.log('\nlist HTML:\n\n', listHtmlContent)
