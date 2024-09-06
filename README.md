@@ -683,7 +683,7 @@ function generateComponentPages() {
       intermediateFiles.push(listHtmlPath)
     },
     async buildEnd() {
-      console.log('\nintermediate files:\n\n', intermediateFiles)
+      // console.log('\nintermediate files:\n\n', intermediateFiles)
       intermediateFiles.forEach((dir) => {
         deletePath(dir);
       });
@@ -745,7 +745,7 @@ function createPlayGroundProject(
 
   const playgroundTemplatePath = path.resolve(__dirname, playgroundDistDir)
 
-  const playgroundPackageJSONTemplate = path.resolve(playgroundTemplatePath, 'package.json')
+  const playgroundPackageJSONTemplate = path.resolve(playgroundTemplatePath, 'package.json') // TODO: version
   const playgroundPackageJSONTartget = path.resolve(playgroundProjectDir, 'package.json')
 
   const playgroundViteConfigTemplate = path.resolve(playgroundTemplatePath, 'vite.config.ts')
@@ -762,6 +762,9 @@ function createPlayGroundProject(
 
   const jsSourceFilePath = path.relative(__dirname, sourceFilePath)
   const jsSourceFileTargetPath = path.resolve(playgroundProjectDir, jsSourceFilePath)
+
+  const cssSourceFilePath = path.relative(__dirname, 'src/index.css')
+  const cssSourceFileTargetPath = path.resolve(playgroundProjectDir, 'src/index.css')
 
   // console.log(
   //   '------\n',
@@ -780,10 +783,14 @@ function createPlayGroundProject(
   fs.copyFileSync(jsFilePath, jsEntryFileTargetPath)
   ensureDirectoryExistence(jsSourceFileTargetPath)
   fs.copyFileSync(sourceFilePath, jsSourceFileTargetPath)
+  ensureDirectoryExistence(cssSourceFileTargetPath)
+  fs.copyFileSync(cssSourceFilePath, cssSourceFileTargetPath)
 
   fs.copyFileSync(playgroundPackageJSONTemplate, playgroundPackageJSONTartget)
   fs.copyFileSync(playgroundViteConfigTemplate, playgroundViteConfigTarget)
   fs.copyFileSync(playgroundTsConfigTemplate, playgroundTsConfigTarget)
+
+  generatePlaygroundJs(playgroundProjectDir)
 }
 
 function traverseDir(dir: string, callback: (filePath: string, relativeDir: string) => void) {
@@ -817,7 +824,7 @@ function getHtmlEntries() {
     }
   })
   entries.index = path.resolve(__dirname, tempDir, 'index.html')
-  console.log('\nentries:\n\n', entries)
+  // console.log('\nentries:\n\n', entries)
   return entries
 }
 
@@ -872,6 +879,69 @@ function generateRandomString(length) {
   }
   return result;
 }
+
+// Helper function to check if the file is text-based
+function isTextFile(filePath) {
+  const textExtensions = ['.js', '.html', '.tsx', '.jsx', '.css', '.ts', '.json'];
+  return textExtensions.includes(path.extname(filePath));
+}
+
+// Recursive function to read all files in the directory
+function readFiles(folder) {
+
+  function readFilesRecursively(dir, fileContents = {}) {
+    const files = fs.readdirSync(dir);
+
+    files.forEach(file => {
+      const fullPath = path.join(dir, file);
+      const relativePath = path.relative(folder, fullPath);
+
+      if (fs.statSync(fullPath).isDirectory()) {
+        readFilesRecursively(fullPath, fileContents);
+      } else if (isTextFile(fullPath)) {
+        try {
+          const content = fs.readFileSync(fullPath, 'utf8');
+          fileContents[relativePath] = content;
+        } catch (err) {
+          console.error(`Error reading file: ${relativePath}`, err);
+        }
+      }
+    });
+
+    return fileContents;
+  }
+
+  return readFilesRecursively(folder)
+
+}
+
+// Main function to write JSON into playground.js
+function generatePlaygroundJs(directory) {
+  const fileContents = readFiles(directory);
+  // const output = `const fileContents = ${JSON.stringify(fileContents, null, 2)};\n\nexport default fileContents;\n`;
+  const output = `
+import sdk from 'https://unpkg.com/@stackblitz/sdk@1/bundles/sdk.m.js';
+
+sdk.embedProject(
+  'embed', // document.body
+  {
+    title: 'React Starter',
+    description: 'A basic React project',
+    template: 'javascript',
+    files: ${JSON.stringify(fileContents, null, 6)},
+  },
+  {
+    clickToLoad: true,
+    openFile: 'index.html',
+    terminalHeight: 50,
+  },
+)
+`
+
+  fs.writeFileSync(path.join(directory, 'stackblitz-sdk.js'), output, 'utf8');
+  // console.log('playground js has been generated.');
+}
+
 ```
 
 `index.html`:
