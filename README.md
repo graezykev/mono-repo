@@ -566,6 +566,7 @@ npm publish
 ```sh
 pnpm init && \
 touch vite.config.ts && \
+touch tsconfig.json && \
 mkdir src && \
 touch index.html && \
 touch index.tsx && \
@@ -579,6 +580,44 @@ touch src/index.css
 +   "dev": "vite",
 +   "build": "vite build"
   },
+```
+
+`tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationDir": "./dist",
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "*.tsx"
+  ]
+}
 ```
 
 `vite.config.ts`:
@@ -639,7 +678,7 @@ function generateComponentPages() {
       // Generate list html (index.html) to link all demos
       const listHtmlPath = path.resolve(__dirname, tempDir, 'index.html')
       const listHtmlContent = generateListHtml(componentsDir)
-      console.log('\nlist HTML:\n\n', listHtmlContent)
+      // console.log('\nlist HTML:\n\n', listHtmlContent)
       fs.writeFileSync(listHtmlPath, listHtmlContent)
       intermediateFiles.push(listHtmlPath)
     },
@@ -686,7 +725,7 @@ function createPageFiles(
   return { jsFilePath, htmlFilePath }
 }
 
-const playgroundDistDir = 'playground-dist'
+const playgroundDistDir = 'playground'
 
 function createPlayGroundProject(
   componentPath: string,
@@ -694,32 +733,57 @@ function createPlayGroundProject(
   htmlFilePath: string,
   sourceFilePath: string
 ) {
-  let playgroundProjectDir:string
+  let playgroundProjectName:string
   if (componentPath.endsWith('index')) {
-    playgroundProjectDir = componentPath.split('/')[0]
+    playgroundProjectName = componentPath.split('/')[0]
   } else {
-    playgroundProjectDir = componentPath.replace('/', '-')
+    playgroundProjectName = componentPath.replace('/', '-')
   }
+  const playgroundProjectDir = path.resolve(__dirname, playgroundDistDir, 'dist', playgroundProjectName)
 
-  const htmlEntryFilePath = path.relative(tempDir, htmlFilePath)
-  const htmlEntryFileTargetPath = path.resolve(__dirname, playgroundDistDir, htmlEntryFilePath)
+  deletePath(playgroundProjectDir)
 
-  const jsEntryFilePath = path.relative(tempDir, jsFilePath)
-  const jsEntryFileTargetPath = path.resolve(__dirname, playgroundDistDir, jsEntryFilePath)
+  const playgroundTemplatePath = path.resolve(__dirname, playgroundDistDir)
+
+  const playgroundPackageJSONTemplate = path.resolve(playgroundTemplatePath, 'package.json')
+  const playgroundPackageJSONTartget = path.resolve(playgroundProjectDir, 'package.json')
+
+  const playgroundViteConfigTemplate = path.resolve(playgroundTemplatePath, 'vite.config.ts')
+  const playgroundViteConfigTarget = path.resolve(playgroundProjectDir, 'vite.config.ts')
+
+  const playgroundTsConfigTemplate = path.resolve(playgroundTemplatePath, 'tsconfig.json')
+  const playgroundTsConfigTarget = path.resolve(playgroundProjectDir, 'tsconfig.json')
+
+  const htmlEntryFileName = path.basename(htmlFilePath)
+  const htmlEntryFileTargetPath = path.resolve(playgroundProjectDir, htmlEntryFileName)
+
+  const jsEntryFileName = path.basename(jsFilePath)
+  const jsEntryFileTargetPath = path.resolve(playgroundProjectDir, jsEntryFileName)
 
   const jsSourceFilePath = path.relative(__dirname, sourceFilePath)
-  const jsSourceFileTargetPath = path.resolve(__dirname, playgroundDistDir, playgroundProjectDir, jsSourceFilePath)
+  const jsSourceFileTargetPath = path.resolve(playgroundProjectDir, jsSourceFilePath)
 
-  console.log(
-    '------\n',
-    componentPath, '\n',
-    jsFilePath, '\n',
-    htmlFilePath, '\n',
-    sourceFilePath, '\n',
-    htmlEntryFileTargetPath, '\n',
-    jsEntryFileTargetPath, '\n',
-    jsSourceFileTargetPath, '\n'
-  )
+  // console.log(
+  //   '------\n',
+  //   componentPath, '\n',
+  //   jsFilePath, '\n',
+  //   htmlFilePath, '\n',
+  //   sourceFilePath, '\n',
+  //   htmlEntryFileTargetPath, '\n',
+  //   jsEntryFileTargetPath, '\n',
+  //   jsSourceFileTargetPath, '\n'
+  // )
+
+  ensureDirectoryExistence(htmlEntryFileTargetPath)  
+  fs.copyFileSync(htmlFilePath, htmlEntryFileTargetPath)
+  ensureDirectoryExistence(jsEntryFileTargetPath)
+  fs.copyFileSync(jsFilePath, jsEntryFileTargetPath)
+  ensureDirectoryExistence(jsSourceFileTargetPath)
+  fs.copyFileSync(sourceFilePath, jsSourceFileTargetPath)
+
+  fs.copyFileSync(playgroundPackageJSONTemplate, playgroundPackageJSONTartget)
+  fs.copyFileSync(playgroundViteConfigTemplate, playgroundViteConfigTarget)
+  fs.copyFileSync(playgroundTsConfigTemplate, playgroundTsConfigTarget)
 }
 
 function traverseDir(dir: string, callback: (filePath: string, relativeDir: string) => void) {
@@ -998,6 +1062,105 @@ Visit <http://localhost:5173/>
 
 ```sh
 npm run build
+```
+
+### playground dir
+
+```sh
+mkdir playground && \
+touch playground/package.json && \
+touch playground/tsconfig.json && \
+touch playground/vite.config.ts
+```
+
+`playground/package.json`:
+
+```json
+{
+  "name": "ui-component-web-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "ui-component-web": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.3.1",
+    "typescript": "^5.5.2"
+  },
+  "stackblitz": {
+    "installDependencies": true,
+    "startCommand": "npm start"
+  }
+}
+```
+
+`playground/tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationDir": "./dist",
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "*.tsx"
+  ]
+}
+```
+
+`playground/vite.config.ts`:
+
+```ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
+
+export default defineConfig({
+  plugins: [
+    react()
+  ],
+  resolve: { alias: { "@": path.resolve("src") } }
+})
 ```
 
 ### Optional: Watch src code change
