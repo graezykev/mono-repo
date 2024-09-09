@@ -495,7 +495,7 @@ export const Tabs: React.FC<TabsProps> = ({ children }) => {
 ```
 
 ```sh
-npm publish
+npm publish # npm publish --access public
 ```
 
 ## Import On Demand - Multiple Entry Points
