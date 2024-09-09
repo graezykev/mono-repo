@@ -77,7 +77,7 @@ pnpm init
 `package.json`:
 
 ```diff
-- "name": "ui-component-web",
+- "name": "lib-web-ui",
 + "name": "@designgreat/lib-web-ui",
 + "peerDependencies": {
 +   "react": "^18.3.1",
@@ -971,7 +971,7 @@ sdk.embedProject(
 
 ```tsx
 import '@/index.css'
-import 'ui-component-web/style.css' // Import the CSS from the library
+import '@designgreat/lib-web-ui/style.css' // Import the CSS from the library
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'
@@ -1040,8 +1040,8 @@ html {
 ```tsx
 import React from 'react';
 
-import Button from 'ui-component-web/button'; // Import the Button component from the library
-// import { Button }  from 'ui-component-web'; // Import the Button component in another way
+import Button from '@designgreat/lib-web-ui/button'; // Import the Button component from the library
+// import { Button }  from '@designgreat/lib-web-ui'; // Import the Button component in another way
 
 export default function Demo() {
   return (
@@ -1082,7 +1082,7 @@ export default function Demo() {
 ```tsx
 import React from 'react';
 
-import Button from 'ui-component-web/button'
+import Button from '@designgreat/lib-web-ui/button'
 
 export default function Demo() {
   return (
@@ -1104,7 +1104,7 @@ export default function Demo() {
 ```tsx
 import React from 'react';
 
-import { Tabs, Tab } from 'ui-component-web'; // Import Tab component
+import { Tabs, Tab } from '@designgreat/lib-web-ui'; // Import Tab component
 
 export default function Demo() {
   return (
@@ -1150,7 +1150,7 @@ touch playground/vite.config.ts
 
 ```json
 {
-  "name": "ui-component-web-demo",
+  "name": "lib-web-ui-demo",
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
@@ -1166,7 +1166,7 @@ touch playground/vite.config.ts
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "ui-component-web": "workspace:*"
+    "@designgreat/lib-web-ui": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
@@ -1244,9 +1244,9 @@ export default defineConfig({
 export default defineConfig({
 + resolve: {
 +   alias: {
-+     'ui-component-web': path.resolve(__dirname, '../ui-component-web/src'),
-+     'ui-component-web/index.css': path.resolve(__dirname, '../ui-component-web/src/index.css'),
-+     'ui-component-web/button': path.resolve(__dirname, '../ui-component-web/src/button')
++     '@designgreat/lib-web-ui': path.resolve(__dirname, '../lib-web-ui/src'),
++     '@designgreat/lib-web-ui/index.css': path.resolve(__dirname, '../lib-web-ui/src/index.css'),
++     '@designgreat/lib-web-ui/button': path.resolve(__dirname, '../lib-web-ui/src/button')
 +   },
   },
 ```
