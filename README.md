@@ -57,12 +57,12 @@ pnpm add -D tailwindcss postcss autoprefixer -w
 ```diff
   "dependencies": {
     ...
-+   "lib-web-ui": "workspace:*"
++   "@designgreat/lib-web-ui": "workspace:*"
   },
 ```
 
 ```sh
-# link `lib-web-ui` to pnpm-lock.yaml
+# link `lib-web-ui` (@designgreat/lib-web-ui) to pnpm-lock.yaml
 pnpm install
 ```
 
@@ -77,6 +77,8 @@ pnpm init
 `package.json`:
 
 ```diff
+- "name": "ui-component-web",
++ "name": "@designgreat/lib-web-ui",
 + "peerDependencies": {
 +   "react": "^18.3.1",
 +   "react-dom": "^18.3.1"
@@ -85,7 +87,7 @@ pnpm init
 
 ```sh
 pnpm install
-# add `importers` -> `lib-web-ui` to pnpm-lock.yaml
+# add `importers` -> `lib-web-ui` (@designgreat/lib-web-ui) to pnpm-lock.yaml
 ```
 
 ## Init TailwindCSS
@@ -503,8 +505,8 @@ npm publish
 > In webpack, tree shaking works with both ECMAScript modules (ESM) and CommonJS, but it does not work with Asynchronous Module Definition (AMD) or Universal Module Definition (UMD).
 
 ```diff
--import { Button } from 'lib-web-ui'
-+import Button from 'lib-web-ui/button'
+-import { Button } from '@designgreat/lib-web-ui'
++import Button from '@designgreat/lib-web-ui/button'
 ```
 
 To avoid importing all components in case projects using the library without **tree shaking**.
@@ -1280,13 +1282,13 @@ cd app-cra-1
 
 ```js
 // index.js
-import 'lib-web-ui/dist/style.css'
+import '@designgreat/lib-web-ui/style.css'
 ```
 
 ```js
 // app.js
-import { Button } from 'lib-web-ui'
-// import Button  from 'lib-web-ui/button' // alternative import
+import { Button } from '@designgreat/lib-web-ui'
+// import Button  from '@designgreat/lib-web-ui/button' // alternative import
 // ... <Button>click</Button>
 ```
 
@@ -1316,9 +1318,9 @@ const config: Config = {
   ],
 ```
 
-By default, `Next.js` looks for the module `lib-web-ui` from `lib-web-ui/dist` which is specified in the `main` field of `lib-web-ui`'s package.json.
+By default, `Next.js` looks for the module `@designgreat/lib-web-ui` from `lib-web-ui/dist` which is specified in the `main` field of `@designgreat/lib-web-ui`'s package.json.
 
-So, we need to configure module alias in `next.config.mjs` to resolve the module `lib-web-ui` from the library source folder:
+So, we need to configure module alias in `next.config.mjs` to resolve the module `@designgreat/lib-web-ui` from the library source folder `src`:
 
 ```js
 const nextConfig = {
@@ -1327,16 +1329,16 @@ const nextConfig = {
     // not work for `next build`
     turbo: {
       resolveAlias: {
-        'lib-web-ui': '../lib-web-ui/src',
-        'lib-web-ui/button': '../lib-web-ui/src/button'
+        '@designgreat/lib-web-ui': '../lib-web-ui/src',
+        '@designgreat/lib-web-ui/button': '../lib-web-ui/src/button'
       },
     },
   },
   // for `next dev`
   // and for `next build`
   webpack: (config) => {
-    config.resolve.alias['lib-web-ui'] = path.resolve(__dirname, '../lib-web-ui/src')
-    config.resolve.alias['lib-web-ui/button'] = path.resolve(__dirname, '../lib-web-ui/src/button')
+    config.resolve.alias['@designgreat/lib-web-ui'] = path.resolve(__dirname, '../lib-web-ui/src')
+    config.resolve.alias['@designgreat/lib-web-ui/button'] = path.resolve(__dirname, '../lib-web-ui/src/button')
     return config;
   },
 };
@@ -1351,10 +1353,10 @@ Also, configure `tsconfig.json` to resolve modules correctly:
     ...
     "paths": {
       ...
-+     "lib-web-ui": [
++     "@designgreat/lib-web-ui": [
 +       "../lib-web-ui/src"
 +     ],
-+     "lib-web-ui/button": [
++     "@designgreat/lib-web-ui/button": [
 +       "../lib-web-ui/src/button"
 +     ]
       ...
@@ -1411,14 +1413,14 @@ pnpm install
 
 ```sh
 cd doc-lib-web-ui && \
-npm start
+pnpm start
 ```
 
 Add code below to `doc-lib-web-ui/docs/tutorial-basics/create-a-document.md`:
 
 ```tsx
-import Button  from 'ui-component-web/button'; // Import the Button component from the library
-import 'ui-component-web/style.css' // Import the CSS from the library
+import Button  from '@designgreat/lib-web-ui/button'; // Import the Button component from the library
+import '@designgreat/lib-web-ui/style.css' // Import the CSS from the library
 
 <div className="space-y-4">
   <Button type="primary" onClick={() => alert('Primary Button Clicked')}>
