@@ -1280,6 +1280,16 @@ pnpm create react-app app-cra-1 && \
 cd app-cra-1
 ```
 
+`app-cra-1/package.json`:
+
+```diff
+  "dependencies": {
+    ...
+-   "react": "^18.3.1",
+-   "react-dom": "^18.3.1"
+  },
+```
+
 ```js
 // index.js
 import '@designgreat/lib-web-ui/style.css'
@@ -1299,6 +1309,23 @@ npm start
 ## Import Lib in Next.js Project
 
 Initiate a `Next.js` project with TS, TailwinCSS
+
+`app-next-js-a/package.json`:
+
+```diff
+  "dependencies": {
+-   "react": "^18",
+-   "react-dom": "^18"
+  },
+  "devDependencies": {
+-   "typescript": "^5",
+-   "@types/node": "^20",
+-   "@types/react": "^18",
+-   "@types/react-dom": "^18",
+-   "postcss": "^8",
+-   "tailwindcss": "^3.4.1"
+  }
+```
 
 ## Watch src Change in Next.js Projects
 
@@ -1399,6 +1426,20 @@ Also, configure `tsconfig.json` to resolve modules correctly:
 
 ```sh
 pnpm create docusaurus doc-lib-web-ui classic --typescript
+```
+
+`doc-lib-web-ui/package.json`:
+
+```diff
+  "dependencies": {
+    ...
+-   "react": "^18.0.0",
+-   "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    ...
+-   "typescript": "~5.2.2"
+  }
 ```
 
 `pnpm-workspace.yaml`:
