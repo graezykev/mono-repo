@@ -70,6 +70,7 @@ pnpm install
 
 ```sh
 cd lib-web-ui && \
+echo "registry = 'https://registry.npmjs.org/'" >> .npmrc && \
 pnpm init
 ```
 
