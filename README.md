@@ -735,7 +735,7 @@ function createPageFiles(
 
 const playgroundDistDir = 'playground'
 
-function createPlayGroundProject(
+async function createPlayGroundProject(
   componentPath: string,
   jsFilePath: string,
   htmlFilePath: string,
@@ -794,8 +794,8 @@ function createPlayGroundProject(
   ensureDirectoryExistence(cssSourceFileTargetPath)
   fs.copyFileSync(cssSourceFilePath, cssSourceFileTargetPath)
 
-  copyModifyPackageJSON(playgroundPackageJSONTemplate, playgroundPackageJSONTartget)
-  
+  await copyModifyPackageJSON(playgroundPackageJSONTemplate, playgroundPackageJSONTartget)
+
   fs.copyFileSync(playgroundViteConfigTemplate, playgroundViteConfigTarget)
   fs.copyFileSync(playgroundTsConfigTemplate, playgroundTsConfigTarget)
 
@@ -806,7 +806,7 @@ async function copyModifyPackageJSON(playgroundPackageJSONTemplate, playgroundPa
   // fs.copyFileSync(playgroundPackageJSONTemplate, playgroundPackageJSONTartget)
   const json = JSON.parse(fs.readFileSync(playgroundPackageJSONTemplate, 'utf-8'))
   const version = await getLatestVersion('@designgreat/ui-component-web')
-  console.log('latest version: ', version)
+  // console.log('latest version: ', version)
   json.dependencies['@designgreat/ui-component-web'] = `^${version}`
   fs.writeFileSync(playgroundPackageJSONTartget, JSON.stringify(json, null, 2))
 }
