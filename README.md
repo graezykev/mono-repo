@@ -567,6 +567,10 @@ npm publish
 ### Demo template
 
 ```sh
+mkdir scripts &&
+touch scripts/get-npm-latest-version.ts &&
+mkdir demo-lib-web-ui &&
+cd demo-lib-web-ui &&
 pnpm init && \
 touch vite.config.ts && \
 touch tsconfig.json && \
@@ -630,6 +634,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import fs from 'fs'
 import path from 'path'
+import { getLatestVersion } from '../scripts/get-npm-latest-version'
 
 const tempDir = '.tmp'
 const intermediateFiles: string[] = []
@@ -748,7 +753,7 @@ function createPlayGroundProject(
 
   const playgroundTemplatePath = path.resolve(__dirname, playgroundDistDir)
 
-  const playgroundPackageJSONTemplate = path.resolve(playgroundTemplatePath, 'package.json') // TODO: version
+  const playgroundPackageJSONTemplate = path.resolve(playgroundTemplatePath, 'package.json')
   const playgroundPackageJSONTartget = path.resolve(playgroundProjectDir, 'package.json')
 
   const playgroundViteConfigTemplate = path.resolve(playgroundTemplatePath, 'vite.config.ts')
@@ -789,11 +794,21 @@ function createPlayGroundProject(
   ensureDirectoryExistence(cssSourceFileTargetPath)
   fs.copyFileSync(cssSourceFilePath, cssSourceFileTargetPath)
 
-  fs.copyFileSync(playgroundPackageJSONTemplate, playgroundPackageJSONTartget)
+  copyModifyPackageJSON(playgroundPackageJSONTemplate, playgroundPackageJSONTartget)
+  
   fs.copyFileSync(playgroundViteConfigTemplate, playgroundViteConfigTarget)
   fs.copyFileSync(playgroundTsConfigTemplate, playgroundTsConfigTarget)
 
   generatePlaygroundJs(playgroundProjectDir)
+}
+
+async function copyModifyPackageJSON(playgroundPackageJSONTemplate, playgroundPackageJSONTartget) {
+  // fs.copyFileSync(playgroundPackageJSONTemplate, playgroundPackageJSONTartget)
+  const json = JSON.parse(fs.readFileSync(playgroundPackageJSONTemplate, 'utf-8'))
+  const version = await getLatestVersion('@designgreat/ui-component-web')
+  console.log('latest version: ', version)
+  json.dependencies['@designgreat/ui-component-web'] = `^${version}`
+  fs.writeFileSync(playgroundPackageJSONTartget, JSON.stringify(json, null, 2))
 }
 
 function traverseDir(dir: string, callback: (filePath: string, relativeDir: string) => void) {
@@ -915,7 +930,6 @@ function readFiles(folder) {
   }
 
   return readFilesRecursively(folder)
-
 }
 
 // Main function to write JSON into playground.js
@@ -944,6 +958,64 @@ sdk.embedProject(
   fs.writeFileSync(path.join(directory, 'stackblitz-sdk.js'), output, 'utf8');
   // console.log('playground js has been generated.');
 }
+
+```
+
+`/scripts/get-npm-latest-version.ts`:
+
+```ts
+const https = require('https');
+
+function fetchPackageInfo(packageName: string): Promise<{version: string}> {
+  const url = `https://registry.npmjs.org/${packageName}/latest`;
+
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      let data = '';
+
+      // A chunk of data has been received.
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      // The whole response has been received.
+      res.on('end', () => {
+        if (res.statusCode === 200) {
+          try {
+            const jsonResponse = JSON.parse(data);
+            resolve(jsonResponse);
+          } catch (error) {
+            reject(new Error('Error parsing response'));
+          }
+        } else if (res.statusCode === 404) {
+          reject(new Error(`Package "${packageName}" not found.`));
+        } else {
+          reject(new Error(`Failed to retrieve data. Status code: ${res.statusCode}`));
+        }
+      });
+    }).on('error', (err) => {
+      reject(new Error(`Error fetching the package: ${err.message}`));
+    });
+  });
+}
+
+export async function getLatestVersion(packageName): Promise<string | undefined> {
+  try {
+    const packageInfo = await fetchPackageInfo(packageName);
+    console.log(`The latest version of ${packageName} is: ${packageInfo.version}`);
+    return packageInfo.version
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+// // Example usage
+// const packageName = process.argv[2];
+// if (packageName) {
+//   getLatestVersion(packageName);
+// } else {
+//   console.error('Please provide a package name as an argument.');
+// }
 
 ```
 
