@@ -936,6 +936,9 @@ function readFiles(folder) {
 function generatePlaygroundJs(directory) {
   const fileContents = readFiles(directory);
   // const output = `const fileContents = ${JSON.stringify(fileContents, null, 2)};\n\nexport default fileContents;\n`;
+
+  const packageJson = JSON.parse(fileContents['package.json'])
+
   const output = `
 import sdk from 'https://unpkg.com/@stackblitz/sdk@1/bundles/sdk.m.js';
 
@@ -944,8 +947,12 @@ sdk.embedProject(
   {
     title: 'React Starter',
     description: 'A basic React project',
-    template: 'javascript',
-    files: ${JSON.stringify(fileContents, null, 6)},
+    template: 'node',
+    dependencies: ${JSON.stringify({
+      ...packageJson.dependencies,
+      ...packageJson.devDependencies
+    }, null, 2)},
+    files: ${JSON.stringify(fileContents,null, 2)},
   },
   {
     clickToLoad: true,
