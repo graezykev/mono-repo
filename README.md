@@ -437,7 +437,7 @@ import React, { useState } from 'react'
 export type TabProps = {
   label: string;
   children: React.ReactNode;
-};
+}
 
 export type TabsProps = {
   children: React.ReactElement<TabProps>[];
