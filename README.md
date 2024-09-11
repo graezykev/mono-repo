@@ -1663,6 +1663,7 @@ Watch the file changes and make the equivalent change to the MDX file
 ### Desing System: Why
 
 - reuse components, styles
+- theme / style controling
 - collaboration
 - design audit
 - onboarding
