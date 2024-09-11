@@ -441,7 +441,7 @@ export type TabProps = {
 
 export type TabsProps = {
   children: React.ReactElement<TabProps>[];
-};
+}
 
 export const Tab: React.FC<TabProps> = ({ label, children }) => {
   return <div>{children}</div>;
