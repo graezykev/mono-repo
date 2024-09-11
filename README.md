@@ -370,7 +370,7 @@ html {
 ```js
 // demo/button/index.tsx
 
-import { Button } from '../../src' // Import the Button component from the library // TODO: tsconfig -> path
+import { Button } from '../../src' // Import the Button component from the library
 
 export default () => {
   return (
