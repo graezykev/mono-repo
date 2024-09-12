@@ -1648,7 +1648,7 @@ Watch the file changes and make the equivalent change to the MDX file
 ## CLI: create component
 
 - add source template
-  - * component name (in camel case, snake case, pascal case or kebab case)
+  - component name * (in camel case, snake case, pascal case or kebab case)
   - discription
   - props
 - add `export` js
