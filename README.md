@@ -1660,8 +1660,8 @@ Watch the file changes and make the equivalent change to the MDX file
 
 ## Design System Layers
 
-- Above Sea Level: React, Component Library, Documents, Integration Guides, Demos, Unit Testing
-- Below Sea Level: TailwindCSS, Server Components, Theming (choosing, modifying), Design Tokens (overiding), Accessability, Play Ground / Sandbox, E2E Testing, Performance Optimization (Bundle size etc.)
+- Above Sea Level: React, Component Library, API Documents, Integration Guides, Demos, Unit Testing
+- Below Sea Level: TailwindCSS, Icons, Design Tokens (overiding), Theming (choosing, modifying), Accessability, Mobile/PC/Responsive Adaptive, Play Ground / Sandbox, Server Components, E2E Testing, Performance Optimization (Bundle size etc.)
 - Below Seabed: Figma Integration, Auto (create) CLI, Document Auto-generation, Sandbox Auto-generation, Auto Version Management
 
 ### Desing System: Why
