@@ -1633,15 +1633,33 @@ Watch the file changes and make the equivalent change to the MDX file
 ## Design Token
 
 - color
-- font
 - size
 - typography
+  - Font Selection
+  - Font Size
+  - Font Weight
+  - Line Height
+  - Letter Spacing / Word Spacing
+  - Text Color
+  - Text Alignment
+  - Text Decoration
+  - Text Transform
+  - Whitespace
+  - word break
+  - Margins / Paddings
+  - text overflow
+  - line clamp
+  - text shadow
 - space
 - grid / layout
-- icon
 - bg
 - border
+  - width
+  - style
+  - color
+  - radius
 - shadow
+- icon
 
 ## Testing
 
