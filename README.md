@@ -1639,6 +1639,7 @@ Watch the file changes and make the equivalent change to the MDX file
   - Font Size
   - Font Weight
   - Line Height
+  - vertical align
   - Letter Spacing / Word Spacing
   - Text Color
   - Text Alignment
