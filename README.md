@@ -1662,6 +1662,160 @@ Watch the file changes and make the equivalent change to the MDX file
 - shadow
 - icon
 
+```js
+const Font_Family_Base = 'sans-serif'
+
+const Font_Size_Base = 16
+const Font_Size_Small = Font_Size_Base * .75 // 12
+const Font_Size_Heading1 = Font_Size_Base * 2.75 // 44
+// Font_Size_Heading2~6 ...
+
+const Font_Weight_Normal = 400
+const Font_Weight_Bold = 700
+
+const Text_Color_Base = '#000000'
+const Background_Color_Base = '#FFFFFF'
+
+const StyleDictionary = {
+  color: {
+    text: {
+      base: {
+        value: Text_Color_Base
+      },
+      link: { // LVHA
+        link: {},
+        visited: {},
+        hover: {},
+        active: {}
+      }
+    },
+    background: {
+      base: {
+        value: Background_Color_Base
+      },
+      button: {
+        primary: {
+          hover: {},
+          focus: {},
+          active: {}
+        }
+      }
+    },
+    shadow: {
+      text: {},
+      box: {}
+    }
+  }
+  size: {
+    font: {
+      base: {}
+      paragraph: {
+        value: FontSizeBase
+      },
+      heading1: {
+        value: Font_Size_Heading1
+      },
+      heading2: {}
+    },
+    height: {
+      line: {},
+      box: {}
+    },
+    width: {
+      box: {},
+      border: {}
+    },
+    radius: {
+      border: {}
+    },
+    spacing: {
+      letter: {
+        base: {
+          value: 'normal'
+        }
+      },
+      word: {
+        base: {
+          value: 'normal'
+        }
+      },
+      indent: {
+        base: {
+          value: 0
+        }
+      },
+      margin: {},
+      padding: {}
+    }
+  },
+  fontFace: {
+    base: {
+      value: Font_Family_Base
+    }
+    Latin: {},
+    zh_Hans: {},
+    zh_Hans_SG: {},
+    zh_Hant: {},
+    zh_Hant_HK: {},
+    zh_Hant_TW: {}
+    Arabic: {},
+    zh: {},
+    Greek: {}
+    Vietnamese: {},
+    Hebrew: {}
+  },
+  fontFamily: {
+    base: {
+      value: Font_Family_Base
+    }
+    paragraph: {}
+  },
+  fontWeight: {
+    base: {
+      value: Font_Weight_Normal
+    },
+    bold: {
+      value: Font_Weight_Bold
+    }
+  },
+  fontStyle: {
+    base: {
+      value: 'normal'
+    },
+    annotation: {
+      value: 'italic'
+    },
+    special: {
+      value: 'oblique'
+    }
+  },
+  align: {
+    horizontal: {},
+    vertical: {}
+  },
+  whiteSpace: {
+    base: {
+      value: 'normal'
+    },
+    singleLine: {
+      value: 'nowrap'
+    },
+    preserved: {
+      value: 'pre'
+    }
+  }
+  borderStyle: {
+    base: {
+      value: 'solid'
+    }
+  },
+  transition: {},
+  asset: {
+
+  }
+}
+```
+
 ## Testing
 
 ## CLI: create component
