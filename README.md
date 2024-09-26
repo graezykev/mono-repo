@@ -1810,6 +1810,7 @@ const StyleDictionary = {
     }
   },
   transition: {},
+  transform: {},
   asset: {
 
   }
