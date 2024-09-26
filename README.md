@@ -1793,6 +1793,7 @@ const StyleDictionary = {
     horizontal: {},
     vertical: {}
   },
+  wordBreak: {},
   whiteSpace: {
     base: {
       value: 'normal'
