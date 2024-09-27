@@ -1700,7 +1700,8 @@ const StyleDictionary = {
         primary: {
           hover: {},
           focus: {},
-          active: {}
+          active: {},
+          disabled: {}
         }
       }
     },
@@ -1733,6 +1734,9 @@ const StyleDictionary = {
         paragraghSparse: {
           value: 1.7
         },
+        elementary: {
+          value: 1
+        },
         heading: {
           value: 1.2
         }
@@ -1741,7 +1745,8 @@ const StyleDictionary = {
     },
     width: {
       box: {},
-      border: {}
+      border: {},
+      outline: {}
     },
     radius: {
       border: {}
@@ -1763,7 +1768,12 @@ const StyleDictionary = {
         }
       },
       margin: {},
-      padding: {}
+      padding: {},
+      offset: {
+        outline: {
+          value: 1
+        }
+      }
     }
   },
   fontFace: {
@@ -1823,9 +1833,16 @@ const StyleDictionary = {
       value: 'pre'
     }
   },
-  borderStyle: {
-    base: {
-      value: 'solid'
+  style: {
+    border: {
+      base: {
+        value: 'solid'
+      }
+    },
+    outline: {
+      base: {
+        value: 'none'
+      }
     }
   },
   transition: {},
