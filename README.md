@@ -1663,9 +1663,12 @@ Watch the file changes and make the equivalent change to the MDX file
 - icon
 
 ```js
-const Font_Family_Base = 'sans-serif'
+const REM = 16
 
-const Font_Size_Base = 16
+const Font_Family_Fallback = 'sans-serif'
+
+const Font_Size_Base = REM // 16
+const Font_Size_Medium_Small = Font_Size_Base * .875 // 12
 const Font_Size_Small = Font_Size_Base * .75 // 12
 const Font_Size_Heading1 = Font_Size_Base * 2.75 // 44
 // Font_Size_Heading2~6 ...
@@ -1705,12 +1708,14 @@ const StyleDictionary = {
       text: {},
       box: {}
     }
-  }
+  },
   size: {
     font: {
-      base: {}
+      base: {
+        value: Font_Size_Base
+      },
       paragraph: {
-        value: FontSizeBase
+        value: Font_Size_Base
       },
       heading1: {
         value: Font_Size_Heading1
@@ -1718,7 +1723,20 @@ const StyleDictionary = {
       heading2: {}
     },
     height: {
-      line: {},
+      line: {
+        base: {
+          value: 1.15
+        },
+        paragragh: {
+          value: 1.5
+        },
+        paragraghSparse: {
+          value: 1.7
+        },
+        heading: {
+          value: 1.2
+        }
+      },
       box: {}
     },
     width: {
@@ -1750,24 +1768,24 @@ const StyleDictionary = {
   },
   fontFace: {
     base: {
-      value: Font_Family_Base
-    }
+      value: Font_Family_Fallback
+    },
     Latin: {},
     zh_Hans: {},
     zh_Hans_SG: {},
     zh_Hant: {},
     zh_Hant_HK: {},
-    zh_Hant_TW: {}
+    zh_Hant_TW: {},
     Arabic: {},
     zh: {},
-    Greek: {}
+    Greek: {},
     Vietnamese: {},
     Hebrew: {}
   },
   fontFamily: {
     base: {
-      value: Font_Family_Base
-    }
+      value: Font_Family_Fallback
+    },
     paragraph: {}
   },
   fontWeight: {
@@ -1804,7 +1822,7 @@ const StyleDictionary = {
     preserved: {
       value: 'pre'
     }
-  }
+  },
   borderStyle: {
     base: {
       value: 'solid'
