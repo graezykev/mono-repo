@@ -1946,6 +1946,12 @@ const StyleDictionary = {
         },
         middle: {
           value: 'middle'
+        },
+        Superscript: {
+          value: 'supper'
+        },
+        subscript: {
+          value: 'sub'
         }
       }
     },
