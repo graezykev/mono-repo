@@ -1692,6 +1692,12 @@ const StyleDictionary = {
         active: {}
       }
     },
+    decoration: {
+      text: {
+        base: {
+        }
+      }
+    },
     background: {
       base: {
         value: Background_Color_Base
@@ -1757,6 +1763,18 @@ const StyleDictionary = {
     },
     radius: {
       border: {}
+    },
+    thickness: {
+      decoration: {
+        text: {
+          base: {
+            value: 'auto' // default
+          },
+          fixed5: {
+            value: 5 // px
+          }
+        }
+      }
     },
     spacing: {
       letter: {
@@ -1897,17 +1915,6 @@ const StyleDictionary = {
       value: Font_Weight_Bold
     }
   },
-  fontStyle: {
-    base: {
-      value: 'normal'
-    },
-    annotation: {
-      value: 'italic'
-    },
-    special: {
-      value: 'oblique'
-    }
-  },
   align: {
     text: {
       horizontal: {
@@ -1960,6 +1967,17 @@ const StyleDictionary = {
     }
   },
   style: {
+    font: {
+      base: {
+        value: 'normal'
+      },
+      annotation: {
+        value: 'italic'
+      },
+      special: {
+        value: 'oblique'
+      }
+    },
     border: {
       base: {
         value: 'solid'
@@ -1969,7 +1987,37 @@ const StyleDictionary = {
       base: {
         value: 'none'
       }
+    },
+    decoration: {
+      text: {
+        underline: {
+          value: 'solid'
+        }
+      }
+    },
+    list: {
+      value: 'disc' // none circle square upper-roman lower-alpha
     }
+  },
+  position: {
+    box: {},
+    listStyle: {
+      value: 'outside' // inside
+    },
+    line: {
+      decoration: {
+        text: {
+          base: {
+            value: 'none'
+          },
+          overline: {},
+          underline: {},
+          lineThrough: {
+            value: 'line-through'
+          }
+        }
+      }
+    },
   },
   transition: {},
   asset: {}
