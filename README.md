@@ -1892,8 +1892,43 @@ const StyleDictionary = {
     }
   },
   align: {
-    horizontal: {},
-    vertical: {}
+    text: {
+      horizontal: {
+        centered: {
+          value: 'center'
+        }
+      },
+      vertical: {}
+    },
+    box: {
+      container: {
+        mainAxis: { // justify-content
+          // flex-start flex-end space-around space-between
+          centered: {
+            value: 'center'
+          }
+        },
+        crossAxis: {
+          nowrap: { // align-items
+            // flex-start flex-end stretch baseline
+            centered: {
+              value: 'center'
+            }
+          },
+          wrap: { // align-content
+            // flex-start flex-end space-around space-between stretch
+            centered: {
+              value: 'center'
+            }
+          }
+        }
+      },
+      items: { // align-self -- overrides --> align-items
+        centered: {
+          value: 'center'
+        }
+      }
+    }
   },
   wordBreak: {},
   whiteSpace: {
