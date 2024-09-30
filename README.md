@@ -1940,7 +1940,14 @@ const StyleDictionary = {
           value: 'center'
         }
       },
-      vertical: {}
+      vertical: {
+        base: {
+          value: 'baseline'
+        },
+        middle: {
+          value: 'middle'
+        }
+      }
     },
     box: {
       container: {
