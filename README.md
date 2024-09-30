@@ -1705,9 +1705,16 @@ const StyleDictionary = {
         }
       }
     },
+    border: {},
     shadow: {
-      text: {},
-      box: {}
+      text: {
+        x: {},
+        y: {}
+      },
+      box: {
+        x: {},
+        y: {}
+      }
     }
   },
   size: {
