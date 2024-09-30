@@ -1966,6 +1966,11 @@ const StyleDictionary = {
       value: 'pre'
     }
   },
+  textTransform: {
+    base: {
+      value: none // uppercase lowercase capitalize
+    }
+  },
   style: {
     font: {
       base: {
