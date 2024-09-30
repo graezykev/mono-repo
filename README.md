@@ -1776,6 +1776,11 @@ const StyleDictionary = {
       },
       margin: {},
       padding: {},
+      position: {
+        x: {},
+        y: {},
+        z: {}
+      },
       offset: {
         outline: {
           value: 1
@@ -1793,6 +1798,16 @@ const StyleDictionary = {
             spreadRadius: {}
           }
         }
+      }
+    },
+    flexGrow: {
+      base: {
+        value: 0 // default
+      }
+    },
+    flexShrink: {
+      base: {
+        value: 1 // default
       }
     },
     translate: {
