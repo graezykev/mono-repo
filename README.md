@@ -1777,8 +1777,10 @@ const StyleDictionary = {
       margin: {},
       padding: {},
       position: {
-        x: {},
-        y: {},
+        left: {},
+        top: {},
+        right: {},
+        bottom: {},
         z: {}
       },
       offset: {
