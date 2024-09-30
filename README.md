@@ -1915,6 +1915,16 @@ const StyleDictionary = {
       value: Font_Weight_Bold
     }
   },
+    textTransform: {
+    base: {
+      value: none // uppercase lowercase capitalize
+    }
+  },
+  fontStretch: {
+    base: {
+      value: 'normal' // normal=100% condensed=75% expanded=125% ultra-expanded=200%
+    }
+  },
   align: {
     text: {
       horizontal: {
@@ -1964,11 +1974,6 @@ const StyleDictionary = {
     },
     preserved: {
       value: 'pre'
-    }
-  },
-  textTransform: {
-    base: {
-      value: none // uppercase lowercase capitalize
     }
   },
   style: {
