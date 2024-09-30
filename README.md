@@ -1772,7 +1772,74 @@ const StyleDictionary = {
       offset: {
         outline: {
           value: 1
+        },
+        shadow: {
+          text: {
+            x: {},
+            y: {},
+            blurRadius: {}
+          },
+          box: {
+            x: {},
+            y: {},
+            blurRadius: {},
+            spreadRadius: {}
+          }
         }
+      }
+    },
+    translate: {
+      transform: {
+        x: {},
+        y: {},
+        z: {},
+        '3d': {}
+      }
+    },
+    scale: {
+      transform: {
+        x: {
+          base: {
+            value: 1
+          }
+        },
+        y: {},
+        z: {},
+        '3d': {}
+      }
+    },
+    rotate: {
+      transform: {
+        x: {
+          base: {
+            value: '0deg'
+          }
+        },
+        y: {},
+        z: {},
+        '3d': {}
+      }
+    },
+    skew: {
+      transform: {
+        x: {
+          base: {
+            value: '0deg'
+          }
+        },
+        y: {}
+      }
+    },
+    perspective: {
+      transform: {
+        base: {
+          value: 'none'
+        }
+      }
+    },
+    matrix: {
+      transform: {
+        a: {}, b: {}, c: {}, d: {}, tx: {}, ty: {}
       }
     }
   },
@@ -1846,10 +1913,7 @@ const StyleDictionary = {
     }
   },
   transition: {},
-  transform: {},
-  asset: {
-
-  }
+  asset: {}
 }
 ```
 
