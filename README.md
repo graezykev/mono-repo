@@ -1820,6 +1820,14 @@ const StyleDictionary = {
         }
       }
     },
+    lineClamp: {
+      base: {
+        value: 'none'
+      },
+      singleLine: {
+        value: 1
+      }
+    },
     flexGrow: {
       base: {
         value: 0 // default
@@ -1915,7 +1923,7 @@ const StyleDictionary = {
       value: Font_Weight_Bold
     }
   },
-    textTransform: {
+  textTransform: {
     base: {
       value: none // uppercase lowercase capitalize
     }
@@ -1964,7 +1972,17 @@ const StyleDictionary = {
       }
     }
   },
-  wordBreak: {},
+  wordBreak: {
+    base: {
+      value: 'normal'
+    },
+    breakAll: {
+      value: 'break-all'
+    },
+    breakWord: {
+      value: 'break-word'
+    }
+  },
   whiteSpace: {
     base: {
       value: 'normal'
@@ -2029,8 +2047,28 @@ const StyleDictionary = {
       }
     },
   },
+  overflow: {
+    box: {},
+    text: {
+      base: {
+        value: 'ellipsis'
+      },
+      ellipsis: {
+        value: 'ellipsis'
+      }
+    }
+  },
   transition: {},
   asset: {}
+}
+
+const ellipsisWithLineClamp = (num) => {
+  'text-overflow': 'ellipsis',
+  overflow: 'hidden',
+  'white-space': num <= 1 ? 'nowrap' : 'normal',
+  display: '-webkit-box', // must
+  '-webkit-line-clamp': num, // must
+  '-webkit-box-orient': 'vertical' // must
 }
 ```
 
