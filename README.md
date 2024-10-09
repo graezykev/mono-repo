@@ -1632,35 +1632,75 @@ Watch the file changes and make the equivalent change to the MDX file
 
 ## Design Token
 
-- color
-- size
-- typography
-  - Font Selection
-  - Font Size
-  - Font Weight
-  - Line Height
-  - vertical align
-  - Letter Spacing / Word Spacing
-  - Text Color
-  - Text Alignment
-  - Text Decoration
-  - Text Transform
-  - Whitespace
-  - word break
-  - Margins / Paddings
-  - text overflow
-  - line clamp
-  - text shadow
-- space
-- grid / layout
-- bg
-- border
-  - width
-  - style
+### What
+
+They help establish a **common vocabulary** across organisations like Designer, Developer(Web, Native App, React Native etc.), PM etc.
+
+A protocol.
+
+platform-agnostic.
+
+A (Design) Token is an information associated with a name, at minimum a **name/value** pair.
+
+For example:
+
+```css
+color-text-primary: #000000;
+font-size-heading-level-1: 44px;
+```
+
+> This specification was published by the Design Tokens Community Group. It is not a W3C Standard nor is it on the W3C Standards Track. <https://tr.designtokens.org/format/#sotd>
+
+### Types
+
+- Types
   - color
-  - radius
-- shadow
-- icon
+    - font
+    - background
+    - border
+    - outline
+  - size/dimension
+    - width
+    - height
+    - border radius
+  - Duration
+  - Number
+    - line height
+    - z index
+  - Font Family
+  - Font Weight
+  - Font style
+  - Cubic Bézier
+  - File/assets/path/URL
+- Composite Types
+  - typography
+    - Font Family
+    - Font Size
+    - Font Weight
+    - Line Height
+    - vertical align
+    - Letter Spacing / Word Spacing
+    - Text Color
+    - Text Alignment
+    - Text Decoration
+    - Text Transform
+    - Whitespace
+    - word break
+    - Margins / Paddings
+    - text overflow
+    - line clamp
+    - text shadow
+  - space
+  - grid / layout
+  - bg
+  - border
+    - width
+    - style
+    - color
+  - box shadow
+  - icon
+
+### Design Token Structure
 
 ```js
 const REM = 16
@@ -2084,6 +2124,10 @@ const ellipsisWithLineClamp = (num) => {
   '-webkit-box-orient': 'vertical' // must
 }
 ```
+
+### Translation Tools
+
+Style Dictionary
 
 ## Testing
 
