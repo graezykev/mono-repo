@@ -1634,13 +1634,14 @@ Watch the file changes and make the equivalent change to the MDX file
 
 ### What
 
-They help establish a **common vocabulary** across organisations like Designer, Developer(Web, Native App, React Native etc.), PM etc.
+> This specification was published by the Design Tokens Community Group. It is not a W3C Standard nor is it on the W3C Standards Track. <https://tr.designtokens.org/format/#sotd>
 
-Manintain high consistency across product UI.
+<https://www.youtube.com/watch?v=wtTstdiBuUk>
 
-A protocol to translate Design to Development.
+They help establish a **common vocabulary** (platform-agnostic) across organisations like Designer, Developer(Web, Native App, React Native etc.), PM etc.
 
-platform-agnostic.
+- A protocol to translate Design to Development.
+  - nicknames - Designers "choose" and Developers "use"
 
 A (Design) Token is an information associated with a name, at minimum a **name/value** pair.
 
@@ -1651,7 +1652,12 @@ color-text-primary: #000000;
 font-size-heading-level-1: 44px;
 ```
 
-> This specification was published by the Design Tokens Community Group. It is not a W3C Standard nor is it on the W3C Standards Track. <https://tr.designtokens.org/format/#sotd>
+- Manintain high consistency across product UI.
+  - update (the value of the nickname)
+
+- Compartmentalise
+  - global token
+  - alias token
 
 ### Types
 
