@@ -1636,7 +1636,9 @@ Watch the file changes and make the equivalent change to the MDX file
 
 They help establish a **common vocabulary** across organisations like Designer, Developer(Web, Native App, React Native etc.), PM etc.
 
-A protocol.
+Manintain high consistency across product UI.
+
+A protocol to translate Design to Development.
 
 platform-agnostic.
 
