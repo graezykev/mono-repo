@@ -2136,6 +2136,8 @@ const ellipsisWithLineClamp = (num) => {
 
 ### Translation Tools
 
+Create a separate Figma file for your design tokens <https://diez.org/getting-started/figma.html>
+
 Style Dictionary
 
 ## Testing
