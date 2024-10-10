@@ -2139,7 +2139,36 @@ const ellipsisWithLineClamp = (num) => {
 
 Create a separate Figma file for your design tokens <https://diez.org/getting-started/figma.html>
 
-Style Dictionary
+#### Style Dictionary
+
+```sh
+cd lib-web-ui
+```
+
+```sh
+pnpm add -D style-dictionary
+```
+
+```sh
+pnpm exec style-dictionary init complete
+```
+
+```sh
+mv config.json sd.config.json
+```
+
+```sh
+touch sd.config.json
+```
+
+`sd.config.json`:
+
+```json
+```
+
+```sh
+pnpm exec style-dictionary build --config ./sd.config.json
+```
 
 ## Testing
 
