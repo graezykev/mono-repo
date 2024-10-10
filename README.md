@@ -1659,7 +1659,7 @@ font-size-heading-level-1: 44px;
   - global token
   - alias token
 
-### Types
+### Categary & Type
 
 - Categary & Type
   - Color
