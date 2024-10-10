@@ -1662,16 +1662,17 @@ font-size-heading-level-1: 44px;
 ### Types
 
 - Types
-  - color
+  - Color
     - font
     - background
     - border
     - outline
-  - size/dimension
+  - Size/dimension
+    - font
     - width
     - height
     - border radius
-  - Duration
+  - Duration/Time
   - Number
     - line height
     - z index
