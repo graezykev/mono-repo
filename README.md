@@ -2335,7 +2335,6 @@ mv config.json sd.config.json # touch sd.config.json
     }
   }
 }
-
 ```
 
 ```sh
