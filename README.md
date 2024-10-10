@@ -1661,7 +1661,7 @@ font-size-heading-level-1: 44px;
 
 ### Types
 
-- Types
+- Categary & Type
   - Color
     - font
     - background
@@ -1678,9 +1678,9 @@ font-size-heading-level-1: 44px;
     - z index
   - Font Family
   - Font Weight
-  - Font style
+  - Font Style
   - Cubic Bézier
-  - File/assets/path/URL
+  - Asset/File/Path/URL
 - Composite Types
   - typography
     - Font Family
