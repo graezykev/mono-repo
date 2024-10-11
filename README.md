@@ -2164,7 +2164,7 @@ npx style-dictionary@4.1.3 init complete
 
 <!-- rm -rf android ios README.md StyleDictionary.podspec LICENSE package.json -->
 
-Use js because it's more programmable and extensible
+Use js because it's more programmable and extensible.
 
 ```sh
 mv config.json sd.config.js # touch sd.config.js
@@ -2343,6 +2343,26 @@ export default {
   }
 }
 
+```
+
+```sh
+mv tokens/color/base.json tokens/color/base.js
+```
+
+Similarly, edit the first line of `tokens/color/base.js`:
+
+```diff
+-{
++export default {
+```
+
+Use js to because it's more programmable and extensible.
+
+Edit `sd.config.js`:
+
+```diff
+- "source": ["tokens/**/*.json"],
++ "source": ["tokens/**/*.json", "tokens/**/*.js"],
 ```
 
 ```sh
