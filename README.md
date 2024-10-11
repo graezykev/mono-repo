@@ -2346,7 +2346,7 @@ export default {
 ```
 
 ```sh
-npx style-dictionary@4.1.3 build --config ./sd.config.json
+npx style-dictionary@4.1.3 build --config ./sd.config.js
 ```
 
 ## Testing
