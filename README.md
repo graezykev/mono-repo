@@ -1641,7 +1641,7 @@ Watch the file changes and make the equivalent change to the MDX file
 
 They help establish a **common vocabulary** (platform-agnostic) across organisations like Designer, Developer(Web, Native App, React Native etc.), PM etc.
 
-- A protocol, A Design Language, to translate Design to Development.
+- Simply put, design token is A protocol, A Design Language, to translate Design to Development.
   - nicknames - Designers "choose" and Developers "use"
 
 A (Design) Token is an information associated with a name, at minimum a **name/value** pair.
