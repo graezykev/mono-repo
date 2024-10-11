@@ -1680,9 +1680,13 @@ font-size-heading-level-1: 44px;
     - z index
   - Font Family
   - Font Weight
-  - Font Style
+  - Font Style?
   - Cubic Bézier
   - Asset/File/Path/URL
+    - fonts
+    - svgs
+    - icon fonts
+  - others
 - Composite Types
   - typography
     - Font Family
