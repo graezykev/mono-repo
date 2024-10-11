@@ -2154,7 +2154,7 @@ mkdir style-dictionary && cd style-dictionary
 ```
 
 ```sh
-pnpm exec style-dictionary init complete
+npx style-dictionary init complete
 ```
 
 <!-- rm -rf android ios README.md StyleDictionary.podspec LICENSE package.json -->
@@ -2171,7 +2171,7 @@ mv config.json sd.config.json # touch sd.config.json
   "platforms": {
     "css": {
       "transformGroup": "css",
-      "buildPath": "style-dictionary/css/",
+      "buildPath": "css/",
       "prefix": "token",
       "files": [
         {
@@ -2183,7 +2183,7 @@ mv config.json sd.config.json # touch sd.config.json
     },
     "jsts": {
       "transformGroup": "js",
-      "buildPath": "style-dictionary/jsts/",
+      "buildPath": "jsts/",
       "files": [
         {
           "destination": "variables.js",
@@ -2197,7 +2197,7 @@ mv config.json sd.config.json # touch sd.config.json
     },
     "ios": {
       "transformGroup": "ios",
-      "buildPath": "style-dictionary/ios/Classes/Generated/",
+      "buildPath": "ios/Classes/Generated/",
       "prefix": "StyleDictionary",
       "files": [
         {
@@ -2297,7 +2297,7 @@ mv config.json sd.config.json # touch sd.config.json
 
     "android": {
       "transformGroup": "android",
-      "buildPath": "style-dictionary/android/styledictionary/src/main/res/values/",
+      "buildPath": "android/styledictionary/src/main/res/values/",
       "files": [
         {
           "destination": "style_dictionary_colors.xml",
@@ -2324,7 +2324,7 @@ mv config.json sd.config.json # touch sd.config.json
 
     "android-asset": {
       "transformGroup": "android",
-      "buildPath": "style-dictionary/android/styledictionary/src/main/",
+      "buildPath": "android/styledictionary/src/main/",
       "files": [
         {
           "destination": "assets/data/properties.json",
@@ -2335,10 +2335,11 @@ mv config.json sd.config.json # touch sd.config.json
     }
   }
 }
+
 ```
 
 ```sh
-pnpm exec style-dictionary build --config ./sd.config.json
+npx style-dictionary build --config ./sd.config.json
 ```
 
 ## Testing
