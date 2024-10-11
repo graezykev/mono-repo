@@ -2151,7 +2151,7 @@ cd lib-web-ui
 ```
 
 ```sh
-# pnpm add -D style-dictionary
+# pnpm add -D style-dictionary@4.1.3
 ```
 
 ```sh
@@ -2159,19 +2159,21 @@ mkdir style-dictionary && cd style-dictionary
 ```
 
 ```sh
-npx style-dictionary init complete
+npx style-dictionary@4.1.3 init complete
 ```
 
 <!-- rm -rf android ios README.md StyleDictionary.podspec LICENSE package.json -->
 
+Use js because it's more programmable and extensible
+
 ```sh
-mv config.json sd.config.json # touch sd.config.json
+mv config.json sd.config.js # touch sd.config.js
 ```
 
-`sd.config.json`:
+`sd.config.js`:
 
-```json
-{
+```js
+export default {
   "source": ["tokens/**/*.json"],
   "platforms": {
     "css": {
@@ -2344,7 +2346,7 @@ mv config.json sd.config.json # touch sd.config.json
 ```
 
 ```sh
-npx style-dictionary build --config ./sd.config.json
+npx style-dictionary@4.1.3 build --config ./sd.config.json
 ```
 
 ## Testing
