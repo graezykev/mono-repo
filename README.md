@@ -2170,6 +2170,14 @@ Use js because it's more programmable and extensible.
 mv config.json sd.config.js # touch sd.config.js
 ```
 
+`package.json`:
+
+```diff
+  "scripts": {
+-   "build": "style-dictionary build",
++   "build": "style-dictionary build --config ./sd.config.js",
+```
+
 `sd.config.js`:
 
 ```js
@@ -2346,17 +2354,36 @@ export default {
 ```
 
 ```sh
-mv tokens/color/base.json tokens/color/base.js
+npm run build
+# npx style-dictionary@4.1.3 build --config ./sd.config.js
 ```
 
-Similarly, edit the first line of `tokens/color/base.js`:
+##### Create 1st Design Token
 
-```diff
--{
-+export default {
+```sh
+rm -rf tokens && \
+mkdir tokens && \
+mkdir tokens/color
+```
+
+```sh
+touch tokens/color/base.js
 ```
 
 Use js to because it's more programmable and extensible.
+
+`tokens/color/base.js`:
+
+```js
+export default {
+  color: {
+    base: {
+      "white": { "value": "white", "type": "color" },
+      "black": { "value": "#000000", "type": "color" }
+    }
+  }
+}
+```
 
 Edit `sd.config.js`:
 
@@ -2366,7 +2393,24 @@ Edit `sd.config.js`:
 ```
 
 ```sh
-npx style-dictionary@4.1.3 build --config ./sd.config.js
+npm run build
+```
+
+###### Add Colors with HSL, RGBA, HSV
+
+```diff
+export default {
+  color: {
+    base: {
+      ...
++     "red": { "value": "hsl(0, 100%, 50%)", "type": "color" },
++     "green": { "value": "#00ff00", "type": "color" },
++     "blue": { "value": "hsv(240, 100%, 100%)", "type": "color" },
++.    "red-transparent-50": { "value": "#ff000080", "type": "color" },
+```
+
+```sh
+npm run build
 ```
 
 ## Testing
