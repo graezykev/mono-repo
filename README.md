@@ -2406,7 +2406,17 @@ export default {
 +     "red": { "value": "hsl(0, 100%, 50%)", "type": "color" },
 +     "green": { "value": "#00ff00", "type": "color" },
 +     "blue": { "value": "hsv(240, 100%, 100%)", "type": "color" },
-+.    "red-transparent-50": { "value": "#ff000080", "type": "color" },
++     "blue-transparent-50": { "value": "rgba(0, 0, 255, 50%)", "type": "color" },
++     "red-transparent-50": { "value": "#ff000080", "type": "color" },
+```
+
+`sd.config.js`:
+
+```diff
+    "jsts": {
+-     "transformGroup": "js",
++     // "transformGroup": "js", // ['attribute/cti', 'name/pascal', 'size/rem', 'color/hex'],
++     "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'color/css'],
 ```
 
 ```sh
