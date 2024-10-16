@@ -2475,7 +2475,11 @@ Transparency or opacity. Transparency helps UI adapt to different background col
 
 ### Color Inverse
 
-Emphasis levels <https://atlassian.design/foundations/color-new#emphasis-levels>
+Means switching the colors to their opposite values on the color wheel.
+
+For example, turning black text on a white background to white text on a black background. This is often used to create high-contrast versions of designs for better accessibility.
+
+Emphasis levels <https://atlassian.design/foundations/color-new#emphasis-levels> are used to differentiate the importance of text or elements in a design. You might have high emphasis (bold and bright colors) for primary actions like buttons or headers, medium emphasis for secondary actions, and low emphasis (muted colors) for less critical information like captions.
 
 ### Theme Color Conversion
 
