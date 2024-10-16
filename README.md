@@ -2481,6 +2481,23 @@ For example, turning black text on a white background to white text on a black b
 
 Emphasis levels <https://atlassian.design/foundations/color-new#emphasis-levels> are used to differentiate the importance of text or elements in a design. You might have high emphasis (bold and bright colors) for primary actions like buttons or headers, medium emphasis for secondary actions, and low emphasis (muted colors) for less critical information like captions.
 
+- high emphasis
+  - primary actions like buttons or headers
+    - "Login" button
+    - Save
+    - Add to Cart
+- medium emphasis
+  - secondary actions
+    - Forgot Password
+    - Cancel
+    - Add to Wishlist
+
+- low emphasis
+  - Placeholder Text
+  - captions
+  - Disabled Buttons
+  - Footnotes and Fine Print
+
 ### Theme Color Conversion
 
 Neutral colors should be set up in a way that makes it easy to convert a light theme to a dark theme.
