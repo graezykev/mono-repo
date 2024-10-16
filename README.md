@@ -2396,7 +2396,7 @@ Edit `sd.config.js`:
 npm run build
 ```
 
-###### Add Colors with HSL, RGBA, HSV
+##### Add Colors with HSL, RGBA, HSV
 
 ```diff
 export default {
@@ -2422,6 +2422,104 @@ export default {
 ```sh
 npm run build
 ```
+
+### Color Palette
+
+#### Base Colors
+
+#### Accent Colors / Saturated colors
+
+Derive from base colors.
+
+### Color roles
+
+#### Brand/Primary Colors
+
+The brand’s identity/overall look/feel.
+
+Usually choose 1 or 2 colors.
+
+For example, Apple's website.
+
+#### Secondary Colors
+
+Used to support the primary colors.
+
+- information - informative UI, information icon, progress etc.
+- input - form fields
+- discovery - something new
+- inverse - UI elements that sit on bold emphasis backgrounds
+
+##### Interaction states
+
+hovered, pressed, selected, focused, or disabled
+
+#### Semantic Colors
+
+- Success - is often associated with **green**
+- Warning - orange
+- Error / Fail - red
+
+#### Neutral Colors
+
+- backgrounds
+- text
+- shapes
+- disabled states
+
+#### Alpha Colors
+
+Transparency or opacity. Transparency helps UI adapt to different background colors and elevations.
+
+- Mask layer
+
+### Color Inverse
+
+Emphasis levels <https://atlassian.design/foundations/color-new#emphasis-levels>
+
+### Theme Color Conversion
+
+Neutral colors should be set up in a way that makes it easy to convert a light theme to a dark theme.
+
+<https://atlassian.design/foundations/color-new/color-palette-new#picking-colors-for-dark-mode>
+
+Saturated colors should also be easy to **convert** from a light theme to a dark theme using symmetry.
+
+For instance, if a button color is 700 in light theme, it will be 400 in dark theme. If a section message background is 100 in light theme, it will be 1000 in dark theme. Design tokens will handle these conversions for you.
+
+<https://atlassian.design/foundations/color-new/color-palette-new#picking-colors-for-dark-mode>
+
+### Color Accessibility
+
+### Color Example
+
+Apple’s brand colors are iconic and meticulously chosen. Primarily, Apple sticks to a minimalist color palette that includes silver, space gray, and gold for its devices. Their website reflects this too, using these colors in product imagery and accents. You’ll often see the crisp white background, which helps these brand colors pop. When they introduce new products or features, they sometimes incorporate vibrant, eye-catching colors like bright red for special editions (such as the (PRODUCT)RED line).
+
+Apple's use of colors is a masterclass in branding. Let's break it down:
+
+- Brand Colors
+
+Apple's brand colors are clean and sophisticated. You'll mainly see **silver**, **space gray**, and **gold** — these exude luxury and high-tech vibes.
+
+- Primary Colors
+
+These are the main colors you'll associate with Apple's brand. The iconic white and black are staples, appearing in everything from the background to the text. Occasionally, you'll see **blue**, **green**, and **red** in promotional materials or special products, but they're used sparingly to maintain brand consistency.
+
+- Neutral Colors
+
+Apple excels in its use of neutral colors to create a minimalist and modern look. The website uses a lot of **white** backgrounds, with gray and **black** text. These colors provide a clean canvas that makes product images pop without distraction.
+
+- Alpha Colors
+
+On Apple’s site, for instance, alpha colors might be used for **overlay effects**, subtle shading, and creating a sense of depth, while still keeping the focus on the main content. Makes the whole experience feel slick and seamless!
+
+- Semantic Colors
+
+Semantic colors are used to convey specific meanings or statuses. For example, Apple uses **green** to indicate success or completion (like the green checkmark in the Apple Store) and **red** to signal errors or important notifications (like the red badge on app icons).
+
+- Accent Colors
+
+Accents are used to highlight key elements without overwhelming the overall design. On Apple’s site, you might see **blue** used for links and interactive elements, subtly guiding users' attention without clashing with the primary and neutral colors.
 
 ## Testing
 
