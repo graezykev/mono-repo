@@ -2522,7 +2522,7 @@ hovered, pressed, selected, focused, or disabled
     ...
     base: {
       ...
-+     "neutral": { "value": "#2C3E5D", "type": "color" }
++     "grey": { "value": "#2C3E5D", "type": "color" }
     }
 ```
 
@@ -2543,7 +2543,7 @@ export default {
         "700": { "value": "#3d5782", "type": "color" },
         "800": { "value": "#304365", "type": "color" },
         "900": { "value": "#223048", "type": "color" },
-        "1000": { "value": "#141d2b", "type": "color" },
+        "1000": { "value": "{color.base.grey}", "type": "color" },
         "1100": { "value": "#070a0e", "type": "color" },
         "default": { "value": "{color.accent.neutral.1000}", "type": "color" }
       }
@@ -2582,16 +2582,19 @@ export default {
 export default {
   color: {
     alpha: {
-      "neutral-dark": {
-        "100": { "value": "#f2f4f70A", "type": "color" }, // "500": { "value": "{color.accent.neutral-dark.1100}", "attributes": { "alpha": 0.04 }, "type": "color" }
-        "200": { "value": "#f2f4f714", "type": "color" }, // "500": { "value": "{color.accent.neutral-dark.1100}", "attributes": { "alpha": 0.08 }, "type": "color" }
-        "300": { "value": "#f2f4f729", "type": "color" }, // "500": { "value": "{color.accent.neutral-dark.1100}", "attributes": { "alpha": 0.16 }, "type": "color" }
-        "400": { "value": "#f2f4f747", "type": "color" }, // "500": { "value": "{color.accent.neutral-dark.1100}", "attributes": { "alpha": 0.28 }, "type": "color" }
-        "500": { "value": "#f2f4f780", "type": "color" } // "500": { "value": "{color.accent.neutral-dark.1100}", "attributes": { "alpha": 0.5 }, "type": "color" }
+      "neutral": {
+        "dark": {
+          "100": { "value": "#f2f4f70A", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.1100}", "attributes": { "alpha": 0.04 }, "type": "color" }
+          "200": { "value": "#f2f4f714", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.1100}", "attributes": { "alpha": 0.08 }, "type": "color" }
+          "300": { "value": "#f2f4f729", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.1100}", "attributes": { "alpha": 0.16 }, "type": "color" }
+          "400": { "value": "#f2f4f747", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.1100}", "attributes": { "alpha": 0.28 }, "type": "color" }
+          "500": { "value": "#f2f4f780", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.1100}", "attributes": { "alpha": 0.5 }, "type": "color" }
+        }
       }
     }
   }
 }
+
 ```
 
 - Mask layer
@@ -2637,15 +2640,19 @@ For instance, if a button color is 700 in light theme, it will be 400 in dark th
 
 <https://atlassian.design/foundations/color-new/color-palette-new#picking-colors-for-dark-mode>
 
-`tokens/color/base.js`:
+`tokens/color/base-dark.js`:
 
-```diff
-    ...
+```js
+export default {
+  color: {
     base: {
-      ...
-      "neutral": { "value": "#2C3E5D", "type": "color" },
-+     "neutral-dark": { "value": "#B6C2CF", "type": "color" }
+      "grey": {
+        "dark": { "value": "#B6C2CF", "type": "color" }
+      }
     }
+  }
+}
+
 ```
 
 `tokens/color/accent/neutral-dark.js`:
@@ -2654,20 +2661,22 @@ For instance, if a button color is 700 in light theme, it will be 400 in dark th
 export default {
   color: {
     accent: {
-      "neutral-dark": { // https://mdigi.tools/color-shades/#b6c2cf
-        "0": { "value": "#080b0d", "type": "color" },
-        "100": { "value": "#192026", "type": "color" },
-        "200": { "value": "##2a3540", "type": "color" },
-        "300": { "value": "##3b4a5a", "type": "color" },
-        "400": { "value": "##4c5f73", "type": "color" },
-        "500": { "value": "##5d748d", "type": "color" },
-        "600": { "value": "#7289a2", "type": "color" },
-        "700": { "value": "#8c9fb3", "type": "color" },
-        "800": { "value": "#a5b4c4", "type": "color" },
-        "900": { "value": "#bfc9d5", "type": "color" },
-        "1000": { "value": "#d9dfe6", "type": "color" },
-        "1100": { "value": "#f2f4f7", "type": "color" },
-        "default": { "value": "{color.accent.neutral.1000}", "type": "color" }
+      "neutral": {
+        "dark": { // https://mdigi.tools/color-shades/#b6c2cf
+          "0": { "value": "#080b0d", "type": "color" },
+          "100": { "value": "#192026", "type": "color" },
+          "200": { "value": "##2a3540", "type": "color" },
+          "300": { "value": "##3b4a5a", "type": "color" },
+          "400": { "value": "##4c5f73", "type": "color" },
+          "500": { "value": "##5d748d", "type": "color" },
+          "600": { "value": "#7289a2", "type": "color" },
+          "700": { "value": "#8c9fb3", "type": "color" },
+          "800": { "value": "#a5b4c4", "type": "color" },
+          "900": { "value": "#bfc9d5", "type": "color" },
+          "1000": { "value": "{color.base.grey.dark}", "type": "color" },
+          "1100": { "value": "#f2f4f9", "type": "color" },
+          "default": { "value": "{color.accent.neutral.dark.1000}", "type": "color" }
+        }
       }
     }
   }
