@@ -2484,7 +2484,7 @@ export default {
 
 The brand’s identity/overall look/feel.
 
-Usually choose 1 or 2 colors.
+Usually choose 1 - 3 colors.
 
 For example, Apple's website.
 
@@ -2509,9 +2509,11 @@ hovered, pressed, selected, focused, or disabled
 
 #### Neutral Colors
 
-- backgrounds
 - text
+- backgrounds
 - shapes
+  - border
+  - shadow
 - disabled states
 
 `tokens/color/base.js`:
@@ -2554,6 +2556,43 @@ export default {
 #### Alpha Colors
 
 Transparency or opacity. Transparency helps UI adapt to different background colors and elevations.
+
+`tokens/color/alpha/neutral.js`:
+
+```js
+export default {
+  color: {
+    alpha: {
+      "neutral": {
+        "100": { "value": "#070a0e08", "type": "color" }, // "500": { "value": "{color.accent.neutral.1100}", "attributes": { "alpha": 0.03 } "type": "color" }
+        "200": { "value": "#070a0e0F", "type": "color" }, // "500": { "value": "{color.accent.neutral.1100}", "attributes": { "alpha": 0.06 } "type": "color" }
+        "300": { "value": "#070a0e24", "type": "color" }, // "500": { "value": "{color.accent.neutral.1100}", "attributes": { "alpha": 0.14 } "type": "color" }
+        "400": { "value": "#070a0e4F", "type": "color" }, // "500": { "value": "{color.accent.neutral.1100}", "attributes": { "alpha": 0.31 } "type": "color" }
+        "500": { "value": "#070a0e7D", "type": "color" } // "500": { "value": "{color.accent.neutral.1100}", "attributes": { "alpha": 0.49 } "type": "color" }
+      }
+    }
+  }
+}
+
+```
+
+`tokens/color/alpha/neutral-dark.js`:
+
+```js
+export default {
+  color: {
+    alpha: {
+      "neutral-dark": {
+        "100": { "value": "#f2f4f70A", "type": "color" }, // "500": { "value": "{color.accent.neutral-dark.1100}", "attributes": { "alpha": 0.04 }, "type": "color" }
+        "200": { "value": "#f2f4f714", "type": "color" }, // "500": { "value": "{color.accent.neutral-dark.1100}", "attributes": { "alpha": 0.08 }, "type": "color" }
+        "300": { "value": "#f2f4f729", "type": "color" }, // "500": { "value": "{color.accent.neutral-dark.1100}", "attributes": { "alpha": 0.16 }, "type": "color" }
+        "400": { "value": "#f2f4f747", "type": "color" }, // "500": { "value": "{color.accent.neutral-dark.1100}", "attributes": { "alpha": 0.28 }, "type": "color" }
+        "500": { "value": "#f2f4f780", "type": "color" } // "500": { "value": "{color.accent.neutral-dark.1100}", "attributes": { "alpha": 0.5 }, "type": "color" }
+      }
+    }
+  }
+}
+```
 
 - Mask layer
 
