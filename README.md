@@ -2467,7 +2467,7 @@ export default {
         "500": { "value": "#1a79ff", "type": "color" },
         "600": { "value": "#0060e6", "type": "color" },
         "700": { "value": "#0055cc", "type": "color" },
-        "default-700": { "value": "{color.base.blue}", "type": "color" },
+        "default": { "value": "{color.accent.blue.700}", "type": "color" },
         "800": { "value": "#003580", "type": "color" },
         "900": { "value": "#00204d", "type": "color" },
         "1000": { "value": "#000b1a", "type": "color" }
@@ -2513,6 +2513,43 @@ hovered, pressed, selected, focused, or disabled
 - text
 - shapes
 - disabled states
+
+`tokens/color/base.js`:
+
+```diff
+    ...
+    base: {
+      ...
++     "neutral": { "value": "#2C3E5D", "type": "color" }
+    }
+```
+
+`tokens/color/accent/neutral.js`:
+
+```js
+export default {
+  color: {
+    accent: {
+      "neutral": { // https://mdigi.tools/color-shades/#2C3E5D
+        "0": { "value": "#f1f3f8", "type": "color" },
+        "100": { "value": "#d4dceb", "type": "color" },
+        "200": { "value": "#b7c5dd", "type": "color" },
+        "300": { "value": "#9aaecf", "type": "color" },
+        "400": { "value": "#7d96c2", "type": "color" },
+        "500": { "value": "#607fb4", "type": "color" },
+        "600": { "value": "#4b6a9f", "type": "color" },
+        "700": { "value": "#3d5782", "type": "color" },
+        "800": { "value": "#304365", "type": "color" },
+        "900": { "value": "#223048", "type": "color" },
+        "1000": { "value": "#141d2b", "type": "color" },
+        "default": { "value": "{color.accent.neutral.1000}", "type": "color" },
+        "1100": { "value": "#070a0e", "type": "color" }
+      }
+    }
+  }
+}
+
+```
 
 #### Alpha Colors
 
@@ -2560,6 +2597,19 @@ Saturated colors should also be easy to **convert** from a light theme to a dark
 For instance, if a button color is 700 in light theme, it will be 400 in dark theme. If a section message background is 100 in light theme, it will be 1000 in dark theme. Design tokens will handle these conversions for you.
 
 <https://atlassian.design/foundations/color-new/color-palette-new#picking-colors-for-dark-mode>
+
+`tokens/color/base.js`:
+
+```diff
+    ...
+    base: {
+      ...
+      "neutral": { "value": "#2C3E5D", "type": "color" },
++     "neutral-dark": { "value": "#B6C2CF", "type": "color" }
+    }
+```
+
+`tokens/color/accent/neutral-dark.js`:
 
 ### Color Accessibility
 
