@@ -2611,7 +2611,34 @@ For instance, if a button color is 700 in light theme, it will be 400 in dark th
 
 `tokens/color/accent/neutral-dark.js`:
 
+```js
+export default {
+  color: {
+    accent: {
+      "neutral-dark": { // https://mdigi.tools/color-shades/#b6c2cf
+        "0": { "value": "#080b0d", "type": "color" },
+        "100": { "value": "#192026", "type": "color" },
+        "200": { "value": "##2a3540", "type": "color" },
+        "300": { "value": "##3b4a5a", "type": "color" },
+        "400": { "value": "##4c5f73", "type": "color" },
+        "500": { "value": "##5d748d", "type": "color" },
+        "600": { "value": "#7289a2", "type": "color" },
+        "700": { "value": "#8c9fb3", "type": "color" },
+        "800": { "value": "#a5b4c4", "type": "color" },
+        "900": { "value": "#bfc9d5", "type": "color" },
+        "1000": { "value": "#d9dfe6", "type": "color" },
+        "1100": { "value": "#f2f4f7", "type": "color" },
+        "default": { "value": "{color.accent.neutral.1000}", "type": "color" }
+      }
+    }
+  }
+}
+
+```
+
 ### Color Accessibility
+
+<https://webaim.org/resources/contrastchecker/>
 
 ### Color Example
 
