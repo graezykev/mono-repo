@@ -2467,10 +2467,10 @@ export default {
         "500": { "value": "#1a79ff", "type": "color" },
         "600": { "value": "#0060e6", "type": "color" },
         "700": { "value": "#0055cc", "type": "color" },
-        "default": { "value": "{color.accent.blue.700}", "type": "color" },
         "800": { "value": "#003580", "type": "color" },
         "900": { "value": "#00204d", "type": "color" },
-        "1000": { "value": "#000b1a", "type": "color" }
+        "1000": { "value": "#000b1a", "type": "color" },
+        "default": { "value": "{color.accent.blue.700}", "type": "color" }
       }
     }
   }
@@ -2542,8 +2542,8 @@ export default {
         "800": { "value": "#304365", "type": "color" },
         "900": { "value": "#223048", "type": "color" },
         "1000": { "value": "#141d2b", "type": "color" },
-        "default": { "value": "{color.accent.neutral.1000}", "type": "color" },
-        "1100": { "value": "#070a0e", "type": "color" }
+        "1100": { "value": "#070a0e", "type": "color" },
+        "default": { "value": "{color.accent.neutral.1000}", "type": "color" }
       }
     }
   }
