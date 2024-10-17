@@ -2427,9 +2427,56 @@ npm run build
 
 #### Base Colors
 
-#### Accent Colors / Saturated colors
+`tokens/color/base.js`:
+
+```js
+export default {
+  color: {
+    base: {
+      "red": { "value": "#AE2E24", "type": "color" },
+      "orange": { "value": "#A54800", "type": "color" },
+      "yellow": { "value": "#7F5F01", "type": "color" },
+      "green": { "value": "#216E4E", "type": "color" },
+      "teal": { "value": "#206A83", "type": "color" },
+      "blue": { "value": "#0055CC", "type": "color" },
+      "purple": { "value": "#5E4DB2", "type": "color" },
+      "magenta": { "value": "#943D73", "type": "color" },
+      "lime": { "value": "#4C6B1F", "type": "color" }
+    }
+  }
+}
+```
+
+#### Accent Colors / Color Shades
 
 Derive from base colors.
+
+Different shades of the base color.
+
+`tokens/color/accent/blue.js`:
+
+```js
+export default {
+  color: {
+    accent: {
+      "blue": { // https://mdigi.tools/color-shades/#0055cc
+        "100": { "value": "#e5f0ff", "type": "color" },
+        "200": { "value": "#b3d2ff", "type": "color" },
+        "300": { "value": "#80b5ff", "type": "color" },
+        "400": { "value": "#4d97ff", "type": "color" },
+        "500": { "value": "#1a79ff", "type": "color" },
+        "600": { "value": "#0060e6", "type": "color" },
+        "700": { "value": "#0055cc", "type": "color" },
+        "default-700": { "value": "{color.base.blue}", "type": "color" },
+        "800": { "value": "#003580", "type": "color" },
+        "900": { "value": "#00204d", "type": "color" },
+        "1000": { "value": "#000b1a", "type": "color" }
+      }
+    }
+  }
+}
+
+```
 
 ### Color roles
 
