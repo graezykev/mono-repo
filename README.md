@@ -2819,18 +2819,18 @@ For instance, if a button color is 700 in light theme, it will be 400 in dark th
 <https://atlassian.design/foundations/color-new/color-palette-new#picking-colors-for-dark-mode>
 
 ```sh
-touch tokens/color/base-dark-grey.js && \
+touch tokens/color/base-grey-dark.js && \
 touch tokens/color/accent/neutral-dark.js
 ```
 
-`tokens/color/base-dark-grey.js`:
+`tokens/color/base-grey-dark.js`:
 
 ```js
 export default {
   color: {
-    dark: {
-      base: {
-        grey: { "value": "#C7D1DB", "type": "color" }
+    base: {
+      grey: {
+        dark: { "value": "#C7D1DB", "type": "color" }
       }
     }
   }
@@ -2843,9 +2843,9 @@ export default {
 ```js
 export default {
   color: {
-    "dark": {
-      "accent": {
-        "neutral": { // https://mdigi.tools/color-shades/#b6c2cf
+    "accent": {
+      "neutral": {
+        "dark": { // https://mdigi.tools/color-shades/#b6c2cf
           "0": { "value": "#080b0d", "type": "color" },
           "100": { "value": "#192026", "type": "color" },
           "200": { "value": "#2a3540", "type": "color" },
@@ -2872,14 +2872,14 @@ export default {
 `tokens/color/accent/neutral-dark.js`:
 
 ```js
-import tokens from '../base-dark-grey.js'
+import tokens from '../base-grey-dark.js'
 import { generateColorShades } from '../../../utils/index.js'
 
 const name = 'grey' // Auto-Generate Accent Colors for Neutral Colors from all Grey Color
 
-const colors = tokens.color.dark.base
+const colors = tokens.color.base[name]
 
-const shades = generateColorShades(name, colors, 12, 11)
+const shades = generateColorShades('dark', colors, 12, 11)
 // console.log(shades)
 const accents = Object.keys(shades).reduce((acc, level) => ({
   ...acc,
@@ -2892,9 +2892,9 @@ const accents = Object.keys(shades).reduce((acc, level) => ({
 
 export default {
   color: {
-    dark: {
-      accent: {
-        neutral: accents
+    accent: {
+      neutral: {
+        dark: accents
       }
     }
   }
