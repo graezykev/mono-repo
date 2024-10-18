@@ -2484,6 +2484,13 @@ export default {
 
 The brand’s identity/overall look/feel.
 
+Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influence-on-users-actions/>
+
+- Red — Confidence, youth, and power
+- Blue — Trust, security, and stability
+- Black — Reliable, sophisticated, and experienced
+- ...
+
 Usually choose 1 - 3 colors.
 
 For example, Apple's website.
