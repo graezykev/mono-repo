@@ -2710,7 +2710,7 @@ const name = 'grey' // Auto-Generate Accent Colors for Neutral Colors from Grey 
 
 const colors = tokens.color.base
 
-const shades = generateColorShades(name, colors, 12, 11)
+const shades = generateColorShades(name, colors, 12, 11, 0.05, 1) // make the lightest color white
 // console.log(shades)
 const accents = Object.keys(shades).reduce((acc, level) => ({
   ...acc,
@@ -2879,11 +2879,11 @@ const name = 'grey' // Auto-Generate Accent Colors for Neutral Colors from all G
 
 const colors = tokens.color.base[name]
 
-const shades = generateColorShades('dark', colors, 12, 11)
+const shades = generateColorShades('dark', colors, 12, 2)
 // console.log(shades)
 const accents = Object.keys(shades).reduce((acc, level) => ({
   ...acc,
-  [level]: {
+  [isNaN(level) ? level : (12 - level + 1)]: {
     value: shades[level],
     type: 'color'
   }
