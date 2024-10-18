@@ -2460,20 +2460,93 @@ export default {
   color: {
     accent: {
       "blue": { // https://mdigi.tools/color-shades/#0055cc
-        "100": { "value": "#e5f0ff", "type": "color" },
-        "200": { "value": "#b3d2ff", "type": "color" },
-        "300": { "value": "#80b5ff", "type": "color" },
-        "400": { "value": "#4d97ff", "type": "color" },
-        "500": { "value": "#1a79ff", "type": "color" },
-        "600": { "value": "#0060e6", "type": "color" },
-        "700": { "value": "#0055cc", "type": "color" },
-        "800": { "value": "#003580", "type": "color" },
-        "900": { "value": "#00204d", "type": "color" },
-        "1000": { "value": "#000b1a", "type": "color" },
-        "default": { "value": "{color.accent.blue.700}", "type": "color" }
+        "1": { "value": "#e5f0ff", "type": "color" },
+        "2": { "value": "#b7d5ff", "type": "color" },
+        "3": { "value": "#88baff", "type": "color" },
+        "4": { "value": "#599eff", "type": "color" },
+        "5": { "value": "#2a83ff", "type": "color" },
+        "6": { "value": "#0068fb", "type": "color" },
+        "7": { "value": "#0055CC", "type": "color" },
+        "8": { "value": "#003c90", "type": "color" },
+        "9": { "value": "#002355", "type": "color" },
+        "10":{ "value": "#000b19", "type": "color" },
+        "default": { "value": "{color.accent.blue.7}", "type": "color" }
       }
     }
   }
+}
+
+```
+
+##### Auto-Generate Accent Colors / Color Shades
+
+`tokens/color/accent/blue.js`:
+
+```js
+import tinycolor2 from 'tinycolor2'
+import tokens from '../base.js'
+
+const totalShades = 10
+const defaultShade = 7
+const darkestLightness = 0.05
+const lightestLightness = 0.95
+const darkerShades = totalShades - defaultShade
+const lighterShades = defaultShade - 1
+
+const name = 'blue'
+
+const shades = generateColorShades(name)
+// console.log(shades)
+const configs = Object.keys(shades).reduce((acc, level) => ({
+  ...acc,
+  [level]: {
+    value: shades[level],
+    type: 'color'
+  }
+}), {})
+configs.default = configs[`${defaultShade}`]
+// console.log(configs)
+
+export default {
+  color: {
+    accent: {
+      [name]: configs
+    }
+  }
+}
+
+function generateColorShades(name) {
+  const rst = {}
+
+  const value = tokens.color.base[name].value
+  rst[`${defaultShade}`] = value
+
+  const color = tinycolor2(value)
+
+  // console.warn('=============', name, value, color.toHsl(), color.toHslString(), color.getBrightness(), color.getAlpha())
+
+  const hsl = color.toHsl()
+  const lightness = hsl.l
+  const lightGap = (lightestLightness - lightness) / lighterShades
+  const darkGap = (lightness - darkestLightness) / darkerShades
+
+  for (let from = 1; from <= darkerShades; from++) {
+    const l = lightness - from * darkGap
+    const newColor = tinycolor2(Object.assign({}, hsl, { l }))
+    // console.log(newColor.toHex())
+    rst[`${defaultShade + from}`] = `#${newColor.toHex()}`
+  }
+
+  for (let from = 1; from <= lighterShades; from++) {
+    const l = lightness + from * lightGap
+    const newColor = tinycolor2(Object.assign({}, hsl, { l }))
+    // console.log(newColor.toHex())
+    rst[`${defaultShade - from}`] = `#${newColor.toHex()}`
+  }
+
+  // console.log(rst)
+
+  return rst
 }
 
 ```
