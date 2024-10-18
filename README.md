@@ -2654,14 +2654,21 @@ hovered, pressed, selected, focused, or disabled
   - shadow
 - disabled states
 
-`tokens/color/base.js`:
+```sh
+touch tokens/color/base-grey.js
+```
 
-```diff
-    ...
+`tokens/color/base-grey.js`:
+
+```js
+export default {
+  color: {
     base: {
-      ...
-+     "grey": { "value": "#172B4D", "type": "color" }
+      "grey": { "value": "#172B4D", "type": "color" }
     }
+  }
+}
+
 ```
 
 `tokens/color/accent/neutral.js`:
@@ -2696,7 +2703,7 @@ export default {
 `tokens/color/accent/neutral.js`:
 
 ```js
-import tokens from '../base.js'
+import tokens from '../base-grey.js'
 import { generateColorShades } from '../../../utils/index.js'
 
 const name = 'grey' // Auto-Generate Accent Colors for Neutral Colors from Grey Color
@@ -2811,14 +2818,19 @@ For instance, if a button color is 700 in light theme, it will be 400 in dark th
 
 <https://atlassian.design/foundations/color-new/color-palette-new#picking-colors-for-dark-mode>
 
-`tokens/color/base-dark.js`:
+```sh
+touch tokens/color/base-dark-grey.js && \
+touch tokens/color/accent/neutral-dark.js
+```
+
+`tokens/color/base-dark-grey.js`:
 
 ```js
 export default {
   color: {
-    base: {
-      "grey": {
-        "dark": { "value": "#B6C2CF", "type": "color" }
+    dark: {
+      base: {
+        grey: { "value": "#C7D1DB", "type": "color" }
       }
     }
   }
@@ -2831,9 +2843,9 @@ export default {
 ```js
 export default {
   color: {
-    accent: {
-      "neutral": {
-        "dark": { // https://mdigi.tools/color-shades/#b6c2cf
+    "dark": {
+      "accent": {
+        "neutral": { // https://mdigi.tools/color-shades/#b6c2cf
           "0": { "value": "#080b0d", "type": "color" },
           "100": { "value": "#192026", "type": "color" },
           "200": { "value": "#2a3540", "type": "color" },
@@ -2848,6 +2860,41 @@ export default {
           "1100": { "value": "#f2f4f9", "type": "color" },
           "default": { "value": "{color.accent.neutral.dark.1000}", "type": "color" }
         }
+      }
+    }
+  }
+}
+
+```
+
+#### Auto-Generate Accent Colors for Dark Mode Neutral Colors
+
+`tokens/color/accent/neutral-dark.js`:
+
+```js
+import tokens from '../base-dark-grey.js'
+import { generateColorShades } from '../../../utils/index.js'
+
+const name = 'grey' // Auto-Generate Accent Colors for Neutral Colors from all Grey Color
+
+const colors = tokens.color.dark.base
+
+const shades = generateColorShades(name, colors, 12, 11)
+// console.log(shades)
+const accents = Object.keys(shades).reduce((acc, level) => ({
+  ...acc,
+  [level]: {
+    value: shades[level],
+    type: 'color'
+  }
+}), {})
+// console.log(accents)
+
+export default {
+  color: {
+    dark: {
+      accent: {
+        neutral: accents
       }
     }
   }
