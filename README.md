@@ -2484,35 +2484,16 @@ export default {
 npm install tinycolor2
 ```
 
-`tokens/color/accent/blue.js`:
+```sh
+mkdir utils && touch utils/index.js
+```
+
+`utils/index.js`:
 
 ```js
 import tinycolor2 from 'tinycolor2'
-import tokens from '../base.js'
 
-const name = 'blue'
-const colors = tokens.color.base
-
-const shades = generateColorShades(name, colors)
-// console.log(shades)
-const accents = Object.keys(shades).reduce((acc, level) => ({
-  ...acc,
-  [level]: {
-    value: shades[level],
-    type: 'color'
-  }
-}), {})
-// console.log(accents)
-
-export default {
-  color: {
-    accent: {
-      [name]: accents
-    }
-  }
-}
-
-function generateColorShades(
+export function generateColorShades(
   name,
   colors,
   totalShades = 10,
@@ -2559,6 +2540,36 @@ function generateColorShades(
 
 ```
 
+`tokens/color/accent/blue.js`:
+
+```js
+import tokens from '../base.js'
+import { generateColorShades } from '../../../utils/index.js'
+
+const name = 'blue'
+const colors = tokens.color.base
+
+const shades = generateColorShades(name, colors)
+// console.log(shades)
+const accents = Object.keys(shades).reduce((acc, level) => ({
+  ...acc,
+  [level]: {
+    value: shades[level],
+    type: 'color'
+  }
+}), {})
+// console.log(accents)
+
+export default {
+  color: {
+    accent: {
+      [name]: accents
+    }
+  }
+}
+
+```
+
 ##### Auto-Generate Accent Colors from all Base Colors
 
 ```sh
@@ -2567,8 +2578,8 @@ touch rm tokens/color/accent/base.js
 ```
 
 ```js
-import tinycolor2 from 'tinycolor2'
 import tokens from '../base.js'
+import { generateColorShades } from '../../../utils/index.js'
 
 const colors = tokens.color.base
 
@@ -2594,51 +2605,6 @@ export default {
   color: {
     accent
   }
-}
-
-function generateColorShades(
-  name,
-  colors,
-  totalShades = 10,
-  defaultShade = 7,
-  darkestLightness = 0.05,
-  lightestLightness = 0.95,
-) {
-  const darkerShades = totalShades - defaultShade
-  const lighterShades = defaultShade - 1
-
-  const rst = {}
-
-  const value = colors[name].value
-  rst[`${defaultShade}`] = value
-  rst.default = rst[`${defaultShade}`]
-
-  const color = tinycolor2(value)
-
-  // console.warn('=============', name, value, color.toHsl(), color.toHslString(), color.getBrightness(), color.getAlpha())
-
-  const hsl = color.toHsl()
-  const lightness = hsl.l
-  const lightGap = (lightestLightness - lightness) / lighterShades
-  const darkGap = (lightness - darkestLightness) / darkerShades
-
-  for (let from = 1; from <= darkerShades; from++) {
-    const l = lightness - from * darkGap
-    const newColor = tinycolor2(Object.assign({}, hsl, { l }))
-    // console.log(newColor.toHex())
-    rst[`${defaultShade + from}`] = `#${newColor.toHex()}`
-  }
-
-  for (let from = 1; from <= lighterShades; from++) {
-    const l = lightness + from * lightGap
-    const newColor = tinycolor2(Object.assign({}, hsl, { l }))
-    // console.log(newColor.toHex())
-    rst[`${defaultShade - from}`] = `#${newColor.toHex()}`
-  }
-
-  // console.log(rst)
-
-  return rst
 }
 
 ```
@@ -2694,7 +2660,7 @@ hovered, pressed, selected, focused, or disabled
     ...
     base: {
       ...
-+     "grey": { "value": "#2C3E5D", "type": "color" }
++     "grey": { "value": "#172B4D", "type": "color" }
     }
 ```
 
@@ -2704,7 +2670,7 @@ hovered, pressed, selected, focused, or disabled
 export default {
   color: {
     accent: {
-      "neutral": { // https://mdigi.tools/color-shades/#2C3E5D
+      "neutral": { // https://mdigi.tools/color-shades/#172B4D
         "0": { "value": "#f1f3f8", "type": "color" },
         "100": { "value": "#d4dceb", "type": "color" },
         "200": { "value": "#b7c5dd", "type": "color" },
@@ -2719,6 +2685,39 @@ export default {
         "1100": { "value": "#070a0e", "type": "color" },
         "default": { "value": "{color.accent.neutral.1000}", "type": "color" }
       }
+    }
+  }
+}
+
+```
+
+##### Auto-Generate Accent Colors for Neutral Colors from Grey Color
+
+`tokens/color/accent/neutral.js`:
+
+```js
+import tokens from '../base.js'
+import { generateColorShades } from '../../../utils/index.js'
+
+const name = 'grey' // Auto-Generate Accent Colors for Neutral Colors from Grey Color
+
+const colors = tokens.color.base
+
+const shades = generateColorShades(name, colors, 12, 11)
+// console.log(shades)
+const accents = Object.keys(shades).reduce((acc, level) => ({
+  ...acc,
+  [level]: {
+    value: shades[level],
+    type: 'color'
+  }
+}), {})
+// console.log(accents)
+
+export default {
+  color: {
+    accent: {
+      neutral: accents
     }
   }
 }
