@@ -2487,8 +2487,9 @@ import tinycolor2 from 'tinycolor2'
 import tokens from '../base.js'
 
 const name = 'blue'
+const colors = tokens.color.base
 
-const shades = generateColorShades(name)
+const shades = generateColorShades(name, colors)
 // console.log(shades)
 const accents = Object.keys(shades).reduce((acc, level) => ({
   ...acc,
@@ -2509,6 +2510,7 @@ export default {
 
 function generateColorShades(
   name,
+  colors,
   totalShades = 10,
   defaultShade = 7,
   darkestLightness = 0.05,
@@ -2519,7 +2521,7 @@ function generateColorShades(
 
   const rst = {}
 
-  const value = tokens.color.base[name].value
+  const value = colors[name].value
   rst[`${defaultShade}`] = value
   rst.default = rst[`${defaultShade}`]
 
