@@ -2486,40 +2486,42 @@ export default {
 import tinycolor2 from 'tinycolor2'
 import tokens from '../base.js'
 
-const totalShades = 10
-const defaultShade = 7
-const darkestLightness = 0.05
-const lightestLightness = 0.95
-const darkerShades = totalShades - defaultShade
-const lighterShades = defaultShade - 1
-
 const name = 'blue'
 
 const shades = generateColorShades(name)
 // console.log(shades)
-const configs = Object.keys(shades).reduce((acc, level) => ({
+const accents = Object.keys(shades).reduce((acc, level) => ({
   ...acc,
   [level]: {
     value: shades[level],
     type: 'color'
   }
 }), {})
-configs.default = configs[`${defaultShade}`]
-// console.log(configs)
+// console.log(accents)
 
 export default {
   color: {
     accent: {
-      [name]: configs
+      [name]: accents
     }
   }
 }
 
-function generateColorShades(name) {
+function generateColorShades(
+  name,
+  totalShades = 10,
+  defaultShade = 7,
+  darkestLightness = 0.05,
+  lightestLightness = 0.95,
+) {
+  const darkerShades = totalShades - defaultShade
+  const lighterShades = defaultShade - 1
+
   const rst = {}
 
   const value = tokens.color.base[name].value
   rst[`${defaultShade}`] = value
+  rst.default = rst[`${defaultShade}`]
 
   const color = tinycolor2(value)
 
