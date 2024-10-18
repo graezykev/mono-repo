@@ -2480,6 +2480,10 @@ export default {
 
 ##### Auto-Generate Accent Colors / Color Shades
 
+```sh
+npm install tinycolor2
+```
+
 `tokens/color/accent/blue.js`:
 
 ```js
@@ -2505,6 +2509,90 @@ export default {
     accent: {
       [name]: accents
     }
+  }
+}
+
+function generateColorShades(
+  name,
+  colors,
+  totalShades = 10,
+  defaultShade = 7,
+  darkestLightness = 0.05,
+  lightestLightness = 0.95,
+) {
+  const darkerShades = totalShades - defaultShade
+  const lighterShades = defaultShade - 1
+
+  const rst = {}
+
+  const value = colors[name].value
+  rst[`${defaultShade}`] = value
+  rst.default = rst[`${defaultShade}`]
+
+  const color = tinycolor2(value)
+
+  // console.warn('=============', name, value, color.toHsl(), color.toHslString(), color.getBrightness(), color.getAlpha())
+
+  const hsl = color.toHsl()
+  const lightness = hsl.l
+  const lightGap = (lightestLightness - lightness) / lighterShades
+  const darkGap = (lightness - darkestLightness) / darkerShades
+
+  for (let from = 1; from <= darkerShades; from++) {
+    const l = lightness - from * darkGap
+    const newColor = tinycolor2(Object.assign({}, hsl, { l }))
+    // console.log(newColor.toHex())
+    rst[`${defaultShade + from}`] = `#${newColor.toHex()}`
+  }
+
+  for (let from = 1; from <= lighterShades; from++) {
+    const l = lightness + from * lightGap
+    const newColor = tinycolor2(Object.assign({}, hsl, { l }))
+    // console.log(newColor.toHex())
+    rst[`${defaultShade - from}`] = `#${newColor.toHex()}`
+  }
+
+  // console.log(rst)
+
+  return rst
+}
+
+```
+
+##### Auto-Generate Accent Colors from all Base Colors
+
+```sh
+rm tokens/color/accent/blue.js && \
+touch rm tokens/color/accent/base.js
+```
+
+```js
+import tinycolor2 from 'tinycolor2'
+import tokens from '../base.js'
+
+const colors = tokens.color.base
+
+const accent = Object.keys(colors).reduce((accent, name) => ({
+  ...accent,
+  [name]: (function () {
+    const shades = generateColorShades(name, colors)
+    // console.log(shades)
+    const accents = Object.keys(shades).reduce((acc, level) => ({
+      ...acc,
+      [level]: {
+        value: shades[level],
+        type: 'color'
+      }
+    }), {})
+    return accents
+  }())
+}), {})
+
+// console.log(accent)
+
+export default {
+  color: {
+    accent
   }
 }
 
