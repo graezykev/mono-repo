@@ -2735,6 +2735,10 @@ export default {
 
 Transparency or opacity. Transparency helps UI adapt to different background colors and elevations.
 
+e.g.
+
+- Mask layer
+
 `tokens/color/alpha/neutral.js`:
 
 ```js
@@ -2830,8 +2834,6 @@ export default {
 }
 
 ```
-
-- Mask layer
 
 ### Color Inverse
 
