@@ -2574,7 +2574,7 @@ export default {
 
 ```sh
 rm tokens/color/accent/blue.js && \
-touch rm tokens/color/accent/base.js
+touch tokens/color/accent/base.js
 ```
 
 ```js
@@ -2677,20 +2677,20 @@ export default {
 export default {
   color: {
     accent: {
-      "neutral": { // https://mdigi.tools/color-shades/#172B4D
-        "0": { "value": "#f1f3f8", "type": "color" },
-        "100": { "value": "#d4dceb", "type": "color" },
-        "200": { "value": "#b7c5dd", "type": "color" },
-        "300": { "value": "#9aaecf", "type": "color" },
-        "400": { "value": "#7d96c2", "type": "color" },
-        "500": { "value": "#607fb4", "type": "color" },
-        "600": { "value": "#4b6a9f", "type": "color" },
-        "700": { "value": "#3d5782", "type": "color" },
-        "800": { "value": "#304365", "type": "color" },
-        "900": { "value": "#223048", "type": "color" },
-        "1000": { "value": "{color.base.grey}", "type": "color" },
-        "1100": { "value": "#070a0e", "type": "color" },
-        "default": { "value": "{color.accent.neutral.1000}", "type": "color" }
+      "neutral": {
+        "1": { "value": "#ffffff", "type": "color" },
+        "2": { "value": "#dfe8f6", "type": "color" },
+        "3": { "value": "#c0d0ec", "type": "color" },
+        "4": { "value": "#a0b9e3", "type": "color" },
+        "5": { "value": "#81a2d9", "type": "color" },
+        "6": { "value": "#618ad0", "type": "color" },
+        "7": { "value": "#4273c6", "type": "color" },
+        "8": { "value": "#3360ac", "type": "color" },
+        "9": { "value": "#2a4e8c", "type": "color" },
+        "10": { "value": "#203d6d", "type": "color" },
+        "11": { "value": "{color.base.grey}", "type": "color" }, // reference
+        "12": { "value": "#060b14", "type": "color" },
+        "default": { "value": "{color.accent.neutral.11}", "type": "color" } // reference
       }
     }
   }
@@ -2845,20 +2845,20 @@ export default {
   color: {
     "accent": {
       "neutral": {
-        "dark": { // https://mdigi.tools/color-shades/#b6c2cf
-          "0": { "value": "#080b0d", "type": "color" },
-          "100": { "value": "#192026", "type": "color" },
-          "200": { "value": "#2a3540", "type": "color" },
-          "300": { "value": "#3b4a5a", "type": "color" },
-          "400": { "value": "#4c5f73", "type": "color" },
-          "500": { "value": "#5d748d", "type": "color" },
-          "600": { "value": "#7289a2", "type": "color" },
-          "700": { "value": "#8c9fb3", "type": "color" },
-          "800": { "value": "#a5b4c4", "type": "color" },
-          "900": { "value": "#bfc9d5", "type": "color" },
-          "1000": { "value": "{color.base.grey.dark}", "type": "color" },
-          "1100": { "value": "#f2f4f9", "type": "color" },
-          "default": { "value": "{color.accent.neutral.dark.1000}", "type": "color" }
+        "dark": {
+          "1": { "value": "#0a0d10", "type": "color" },
+          "2": { "value": "#192027", "type": "color" },
+          "3": { "value": "#29343f", "type": "color" },
+          "4": { "value": "#384857", "type": "color" },
+          "5": { "value": "#475b6f", "type": "color" },
+          "6": { "value": "#576f87", "type": "color" },
+          "7": { "value": "#67829e", "type": "color" },
+          "8": { "value": "#7f96ad", "type": "color" },
+          "9": { "value": "#97aabc", "type": "color" },
+          "10": { "value": "#afbdcc", "type": "color" },
+          "11": { "value": "{color.base.grey.dark}", "type": "color" }, // reference
+          "12": { "value": "#eff2f5", "type": "color" },
+          "default": { "value": "{color.accent.neutral.dark.11}", "type": "color" } // reference
         }
       }
     }
@@ -2875,7 +2875,7 @@ export default {
 import tokens from '../base-grey-dark.js'
 import { generateColorShades } from '../../../utils/index.js'
 
-const name = 'grey' // Auto-Generate Accent Colors for Neutral Colors from all Grey Color
+const name = 'grey' // Auto-Generate Accent Colors for Dark Mode Neutral Colors from Dark Mode Grey Color
 
 const colors = tokens.color.base[name]
 
@@ -2883,7 +2883,11 @@ const shades = generateColorShades('dark', colors, 12, 2)
 // console.log(shades)
 const accents = Object.keys(shades).reduce((acc, level) => ({
   ...acc,
-  [isNaN(level) ? level : (12 - level + 1)]: {
+  [
+    isNaN(level) ?
+      level : // default
+      (12 - level + 1) // revert color shade level: 1<->12, 2<->11, 3<->10, ...
+  ]: {
     value: shades[level],
     type: 'color'
   }
