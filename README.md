@@ -2742,11 +2742,11 @@ export default {
   color: {
     alpha: {
       "neutral": {
-        "100": { "value": "#070a0e08", "type": "color" }, // "500": { "value": "{color.accent.neutral.1100}", "attributes": { "alpha": 0.03 } "type": "color" }
-        "200": { "value": "#070a0e0F", "type": "color" }, // "500": { "value": "{color.accent.neutral.1100}", "attributes": { "alpha": 0.06 } "type": "color" }
-        "300": { "value": "#070a0e24", "type": "color" }, // "500": { "value": "{color.accent.neutral.1100}", "attributes": { "alpha": 0.14 } "type": "color" }
-        "400": { "value": "#070a0e4F", "type": "color" }, // "500": { "value": "{color.accent.neutral.1100}", "attributes": { "alpha": 0.31 } "type": "color" }
-        "500": { "value": "#070a0e7D", "type": "color" } // "500": { "value": "{color.accent.neutral.1100}", "attributes": { "alpha": 0.49 } "type": "color" }
+        "1": { "value": "#172b4d08", "type": "color" }, // "1": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.03 } "type": "color" }
+        "2": { "value": "#172b4d0f", "type": "color" }, // "2": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.06 } "type": "color" }
+        "3": { "value": "#172b4d24", "type": "color" }, // "3": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.14 } "type": "color" }
+        "4": { "value": "#172b4d4f", "type": "color" }, // "4": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.31 } "type": "color" }
+        "5": { "value": "#172b4d7d", "type": "color" } // "5": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.49 } "type": "color" }
       }
     }
   }
@@ -2762,11 +2762,67 @@ export default {
     alpha: {
       "neutral": {
         "dark": {
-          "100": { "value": "#f2f4f70A", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.1100}", "attributes": { "alpha": 0.04 }, "type": "color" }
-          "200": { "value": "#f2f4f714", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.1100}", "attributes": { "alpha": 0.08 }, "type": "color" }
-          "300": { "value": "#f2f4f729", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.1100}", "attributes": { "alpha": 0.16 }, "type": "color" }
-          "400": { "value": "#f2f4f747", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.1100}", "attributes": { "alpha": 0.28 }, "type": "color" }
-          "500": { "value": "#f2f4f780", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.1100}", "attributes": { "alpha": 0.5 }, "type": "color" }
+          "1": { "value": "#c7d1db0a", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.04 }, "type": "color" }
+          "2": { "value": "#c7d1db14", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.08 }, "type": "color" }
+          "3": { "value": "#c7d1db29", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.16 }, "type": "color" }
+          "4": { "value": "#c7d1db47", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.28 }, "type": "color" }
+          "5": { "value": "#c7d1db80", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.5 }, "type": "color" }
+        }
+      }
+    }
+  }
+}
+
+```
+
+##### Auto-Generate Alpha Colors
+
+`tokens/color/alpha/neutral.js`:
+
+```js
+import tinycolor2 from 'tinycolor2'
+
+import tokens from '../accent/neutral.js'
+
+// console.log(tokens.color.accent.neutral['11'].value)
+const neutral = tinycolor2(tokens.color.accent.neutral['11'].value)
+
+export default {
+  color: {
+    alpha: {
+      "neutral": {
+        "1": { "value": neutral.setAlpha(0.03).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.03 } "type": "color" }
+        "2": { "value": neutral.setAlpha(0.06).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.06 } "type": "color" }
+        "3": { "value": neutral.setAlpha(0.14).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.14 } "type": "color" }
+        "4": { "value": neutral.setAlpha(0.31).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.31 } "type": "color" }
+        "5": { "value": neutral.setAlpha(0.49).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.49 } "type": "color" }
+      }
+    }
+  }
+}
+
+```
+
+`tokens/color/alpha/neutral-dark.js`:
+
+```js
+import tinycolor2 from 'tinycolor2'
+
+import tokens from '../accent/neutral-dark.js'
+
+// console.log(tokens.color.accent.neutral.dark['11'].value)
+const neutralDark = tinycolor2(tokens.color.accent.neutral.dark['11'].value)
+
+export default {
+  color: {
+    alpha: {
+      "neutral": {
+        "dark": {
+          "1": { "value": neutralDark.setAlpha(0.04).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.04 } "type": "color" }
+          "2": { "value": neutralDark.setAlpha(0.08).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.08 } "type": "color" }
+          "3": { "value": neutralDark.setAlpha(0.16).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.16 } "type": "color" }
+          "4": { "value": neutralDark.setAlpha(0.28).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.28 } "type": "color" }
+          "5": { "value": neutralDark.setAlpha(0.5).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.5 } "type": "color" }
         }
       }
     }
