@@ -2841,9 +2841,17 @@ Means switching the colors to their opposite values on the color wheel.
 
 For example, turning black text on a white background to white text on a black background. This is often used to create high-contrast versions of designs for better accessibility.
 
+Use inverse colors on bold backgrounds.
+
+#### Emphasis levels
+
 Emphasis levels <https://atlassian.design/foundations/color-new#emphasis-levels> are used to differentiate the importance of text or elements in a design.
 
-Emphasis determines the amount of contrast a color has against the default surface. Emphasis can range from subtlest to boldest. Bolder colors have more contrast against the default surface, which adds more attention than subtle colors.
+Emphasis determines the amount of contrast a color has against the default surface.
+
+Emphasis can range from **subtlest** to **boldest**.
+
+Bolder colors have more **contrast** against the default surface, which adds more attention than subtle colors.
 
 You might have high emphasis (bold and bright colors) for primary actions like buttons or headers, medium emphasis for secondary actions, and low emphasis (muted colors) for less critical information like captions.
 
@@ -2852,6 +2860,7 @@ You might have high emphasis (bold and bright colors) for primary actions like b
     - "Login" button
     - Save
     - Add to Cart
+
 - medium emphasis
   - secondary actions
     - Forgot Password
