@@ -2423,11 +2423,21 @@ export default {
 npm run build
 ```
 
+## Design Token - Color
+
 ### Color Palette
 
-#### Base Colors
+#### Global Colors
 
-`tokens/color/base.js`:
+```sh
+rm tokens/color/base.js && \
+touch tokens/color/base-saturated.js && \
+touch tokens/color/base-grey.js
+```
+
+##### Saturated Colors
+
+`tokens/color/base-saturated.js`:
 
 ```js
 export default {
@@ -2444,10 +2454,28 @@ export default {
       "lime": { "value": "#4C6B1F", "type": "color" }
     }
   }
+
 }
 ```
 
-#### Accent Colors / Color Shades
+##### Grey Color
+
+`tokens/color/base-grey.js`:
+
+```js
+export default {
+  color: {
+    base: {
+      "grey": { "value": "#172B4D", "type": "color" }
+    }
+  }
+}
+
+```
+
+#### Derived Colors
+
+##### Accent Colors / Color Shades
 
 Derive from base colors.
 
@@ -2478,7 +2506,7 @@ export default {
 
 ```
 
-##### Auto-Generate Accent Colors / Color Shades
+###### Auto-Generate Accent Colors / Color Shades
 
 ```sh
 npm install tinycolor2
@@ -2543,7 +2571,7 @@ export function generateColorShades(
 `tokens/color/accent/blue.js`:
 
 ```js
-import tokens from '../base.js'
+import tokens from '../base-saturated.js'
 import { generateColorShades } from '../../../utils/index.js'
 
 const name = 'blue'
@@ -2570,15 +2598,18 @@ export default {
 
 ```
 
-##### Auto-Generate Accent Colors from all Base Colors
+###### Auto-Generate Accent Colors from all Base Colors
 
 ```sh
 rm tokens/color/accent/blue.js && \
-touch tokens/color/accent/base.js
+touch tokens/color/accent/base-saturated.js && \
+touch tokens/color/accent/base-grey.js
 ```
 
+`tokens/color/accent/base-saturated.js`:
+
 ```js
-import tokens from '../base.js'
+import tokens from '../base-saturated.js'
 import { generateColorShades } from '../../../utils/index.js'
 
 const colors = tokens.color.base
@@ -2604,6 +2635,65 @@ const accent = Object.keys(colors).reduce((accent, name) => ({
 export default {
   color: {
     accent
+  }
+}
+
+```
+
+`tokens/color/accent/base-grey.js`:
+
+```js
+import tokens from '../base-grey.js'
+import { generateColorShades } from '../../../utils/index.js'
+
+const name = 'grey'
+
+const colors = tokens.color.base
+
+const shades = generateColorShades(name, colors, 12, 11, 0.05, 1) // make the lightest color white
+// console.log(shades)
+const accents = Object.keys(shades).reduce((acc, level) => ({
+  ...acc,
+  [level]: {
+    value: shades[level],
+    type: 'color'
+  }
+}), {})
+// console.log(accents)
+
+export default {
+  color: {
+    accent: {
+      [name]: accents
+    }
+  }
+}
+
+```
+
+##### Alpha Colors
+
+`tokens/color/alpha/base-grey.js`:
+
+```js
+import tinycolor2 from 'tinycolor2'
+
+import tokens from '../accent/base-grey.js'
+
+// console.log(tokens.color.accent.neutral['11'].value)
+const neutral = tinycolor2(tokens.color.accent.neutral['11'].value)
+
+export default {
+  color: {
+    alpha: {
+      "grey": {
+        "1": { "value": neutral.setAlpha(0.03).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.03 } "type": "color" }
+        "2": { "value": neutral.setAlpha(0.06).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.06 } "type": "color" }
+        "3": { "value": neutral.setAlpha(0.14).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.14 } "type": "color" }
+        "4": { "value": neutral.setAlpha(0.31).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.31 } "type": "color" }
+        "5": { "value": neutral.setAlpha(0.49).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.49 } "type": "color" }
+      }
+    }
   }
 }
 
@@ -2639,7 +2729,7 @@ Used to support the primary colors.
 
 hovered, pressed, selected, focused, or disabled
 
-#### Semantic Colors
+#### Utility Colors
 
 - Success - is often associated with **green**
 - Warning - orange
@@ -2654,21 +2744,13 @@ hovered, pressed, selected, focused, or disabled
   - shadow
 - disabled states
 
+##### Reference Grey Colors as Neutral Colors
+
 ```sh
-touch tokens/color/base-grey.js
-```
-
-`tokens/color/base-grey.js`:
-
-```js
-export default {
-  color: {
-    base: {
-      "grey": { "value": "#172B4D", "type": "color" }
-    }
-  }
-}
-
+rm tokens/color/alpha/base-accent.js && \
+rm tokens/color/alpha/base-grey.js && \
+touch tokens/color/accent/neutral.js && \
+touch tokens/color/alpha/neutral.js
 ```
 
 `tokens/color/accent/neutral.js`:
@@ -2731,7 +2813,7 @@ export default {
 
 ```
 
-#### Alpha Colors
+##### Neutral Alpha Colors
 
 Transparency or opacity. Transparency helps UI adapt to different background colors and elevations.
 
@@ -2758,28 +2840,7 @@ export default {
 
 ```
 
-`tokens/color/alpha/neutral-dark.js`:
-
-```js
-export default {
-  color: {
-    alpha: {
-      "neutral": {
-        "dark": {
-          "1": { "value": "#c7d1db0a", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.04 }, "type": "color" }
-          "2": { "value": "#c7d1db14", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.08 }, "type": "color" }
-          "3": { "value": "#c7d1db29", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.16 }, "type": "color" }
-          "4": { "value": "#c7d1db47", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.28 }, "type": "color" }
-          "5": { "value": "#c7d1db80", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.5 }, "type": "color" }
-        }
-      }
-    }
-  }
-}
-
-```
-
-##### Auto-Generate Alpha Colors
+###### Auto-Generate Alpha Colors
 
 `tokens/color/alpha/neutral.js`:
 
@@ -2807,33 +2868,7 @@ export default {
 
 ```
 
-`tokens/color/alpha/neutral-dark.js`:
-
-```js
-import tinycolor2 from 'tinycolor2'
-
-import tokens from '../accent/neutral-dark.js'
-
-// console.log(tokens.color.accent.neutral.dark['11'].value)
-const neutralDark = tinycolor2(tokens.color.accent.neutral.dark['11'].value)
-
-export default {
-  color: {
-    alpha: {
-      "neutral": {
-        "dark": {
-          "1": { "value": neutralDark.setAlpha(0.04).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.04 } "type": "color" }
-          "2": { "value": neutralDark.setAlpha(0.08).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.08 } "type": "color" }
-          "3": { "value": neutralDark.setAlpha(0.16).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.16 } "type": "color" }
-          "4": { "value": neutralDark.setAlpha(0.28).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.28 } "type": "color" }
-          "5": { "value": neutralDark.setAlpha(0.5).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.5 } "type": "color" }
-        }
-      }
-    }
-  }
-}
-
-```
+### Color Nicknames
 
 ### Color Inverse
 
@@ -2847,11 +2882,20 @@ Use inverse colors on bold backgrounds.
 
 Emphasis levels <https://atlassian.design/foundations/color-new#emphasis-levels> are used to differentiate the importance of text or elements in a design.
 
-Emphasis determines the amount of contrast a color has against the default surface.
-
 Emphasis can range from **subtlest** to **boldest**.
 
+- subtlest
+- subtler
+- subtle
+- bold
+- bolder
+- boldest
+
+Emphasis determines the amount of **contrast** a color has against the default surface.
+
 Bolder colors have more **contrast** against the default surface, which adds more attention than subtle colors.
+
+##### For Example
 
 You might have high emphasis (bold and bright colors) for primary actions like buttons or headers, medium emphasis for secondary actions, and low emphasis (muted colors) for less critical information like captions.
 
@@ -2885,9 +2929,12 @@ For instance, if a button color is 700 in light theme, it will be 400 in dark th
 
 <https://atlassian.design/foundations/color-new/color-palette-new#picking-colors-for-dark-mode>
 
+#### Neutral Accent/Alpha Colors for Dark Mode
+
 ```sh
 touch tokens/color/base-grey-dark.js && \
-touch tokens/color/accent/neutral-dark.js
+touch tokens/color/accent/neutral-dark.js && \
+touch tokens/color/alpha/neutral-dark.js
 ```
 
 `tokens/color/base-grey-dark.js`:
@@ -2934,7 +2981,28 @@ export default {
 
 ```
 
-#### Auto-Generate Accent Colors for Dark Mode Neutral Colors
+`tokens/color/alpha/neutral-dark.js`:
+
+```js
+export default {
+  color: {
+    alpha: {
+      "neutral": {
+        "dark": {
+          "1": { "value": "#c7d1db0a", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.04 }, "type": "color" }
+          "2": { "value": "#c7d1db14", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.08 }, "type": "color" }
+          "3": { "value": "#c7d1db29", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.16 }, "type": "color" }
+          "4": { "value": "#c7d1db47", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.28 }, "type": "color" }
+          "5": { "value": "#c7d1db80", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.5 }, "type": "color" }
+        }
+      }
+    }
+  }
+}
+
+```
+
+#### Auto-Generate Neutral Accent Colors for Dark Mode
 
 `tokens/color/accent/neutral-dark.js`:
 
@@ -2966,6 +3034,36 @@ export default {
     accent: {
       neutral: {
         dark: accents
+      }
+    }
+  }
+}
+
+```
+
+#### Auto-Generate Neutral Alpha Colors for Dark Mode
+
+`tokens/color/alpha/neutral-dark.js`:
+
+```js
+import tinycolor2 from 'tinycolor2'
+
+import tokens from '../accent/neutral-dark.js'
+
+// console.log(tokens.color.accent.neutral.dark['11'].value)
+const neutralDark = tinycolor2(tokens.color.accent.neutral.dark['11'].value)
+
+export default {
+  color: {
+    alpha: {
+      "neutral": {
+        "dark": {
+          "1": { "value": neutralDark.setAlpha(0.04).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.04 } "type": "color" }
+          "2": { "value": neutralDark.setAlpha(0.08).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.08 } "type": "color" }
+          "3": { "value": neutralDark.setAlpha(0.16).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.16 } "type": "color" }
+          "4": { "value": neutralDark.setAlpha(0.28).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.28 } "type": "color" }
+          "5": { "value": neutralDark.setAlpha(0.5).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.5 } "type": "color" }
+        }
       }
     }
   }
