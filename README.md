@@ -2802,6 +2802,8 @@ Used to support the primary colors.
 - discovery - something new
 - input - form fields
 
+![apple new](apple-new.png)
+
 ##### Interaction states
 
 hovered, pressed, selected, focused, or disabled
