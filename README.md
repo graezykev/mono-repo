@@ -2804,11 +2804,43 @@ Used to support the primary colors.
 
 hovered, pressed, selected, focused, or disabled
 
-#### Utility Colors
+#### Semantic Colors
 
 - Success - is often associated with **green**
 - Warning - orange
 - Error / Fail - red
+
+```sh
+touch tokens/color/semantic.js
+```
+
+`tokens/color/semantic.js`:
+
+```js
+export default {
+  color: {
+    semantic: {
+      'tip': {
+        value: '{color.accent.blue.default}',
+        type: 'color'
+      },
+      'success': {
+        value: '{color.accent.green.default}',
+        type: 'color'
+      },
+      'warning': {
+        value: '{color.accent.orange.default}',
+        type: 'color'
+      },
+      'error': {
+        value: '{color.accent.red.default}',
+        type: 'color'
+      }
+    }
+  }
+}
+
+```
 
 #### Neutral Colors
 
