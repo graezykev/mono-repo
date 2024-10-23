@@ -2722,6 +2722,8 @@ For example, Apple's brand colors are clean and sophisticated. Except for the ic
 
 ![apple silver space gray gold](apple-silver-space-grey-gold.png)
 
+![apple space gray logo](apple-space-gray-logo.png)
+
 #### Primary Colors
 
 A website's Primary Colors are quit similar to or even overlap with its Brand Colors.
