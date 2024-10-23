@@ -2799,17 +2799,32 @@ Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influen
 
 Used to support the primary colors.
 
+Usually use accent or alpha colors derived primary colors or other saturated colors.
+
 - discovery - something new
 
 ![apple new](apple-new.png)
 
 - input - form fields
+  - text input border
+  - text input border active
+  - text input placeholder
+  - text input color
+  - error tip
+  - success tip
+  - checkbox border
+  - checkbox outline
+  - checkbox background
+  - checkbox tick
+  - radio
 
 ![apple input](apple-input.png)
 
-##### Interaction states
+- Interaction states
 
 hovered, pressed, selected, focused, or disabled
+
+active, visited
 
 #### Semantic Colors
 
