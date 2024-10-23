@@ -2800,9 +2800,12 @@ Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influen
 Used to support the primary colors.
 
 - discovery - something new
-- input - form fields
 
 ![apple new](apple-new.png)
+
+- input - form fields
+
+![apple input](apple-input.png)
 
 ##### Interaction states
 
