@@ -3026,7 +3026,7 @@ export default {
 import tokens from '../base-grey-dark.js'
 import { generateColorShades } from '../../../utils/index.js'
 
-const name = 'grey' // Auto-Generate Accent Colors for Dark Mode Neutral Colors from Dark Mode Grey Color
+const name = 'grey'
 
 const colors = tokens.color.base[name]
 
