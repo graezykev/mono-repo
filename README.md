@@ -2481,6 +2481,11 @@ Derive from base colors.
 
 Different shades of the base color.
 
+```sh
+mkdir tokens/color/accent && \
+touch touch tokens/color/accent/blue.js
+```
+
 `tokens/color/accent/blue.js`:
 
 ```js
@@ -2598,7 +2603,7 @@ export default {
 
 ```
 
-###### Auto-Generate Accent Colors from all Base Colors
+###### Auto-Generate Accent Colors for Base Colors
 
 ```sh
 rm tokens/color/accent/blue.js && \
@@ -2642,6 +2647,8 @@ export default {
 
 `tokens/color/accent/base-grey.js`:
 
+Slightly diffrent in `totalShades`, `defaultShade`, `darkestLightness` and `lightestLightness`.
+
 ```js
 import tokens from '../base-grey.js'
 import { generateColorShades } from '../../../utils/index.js'
@@ -2673,6 +2680,11 @@ export default {
 
 ##### Alpha Colors
 
+```sh
+mkdir tokens/color/alpha && \
+touch tokens/color/alpha/base-grey.js
+```
+
 `tokens/color/alpha/base-grey.js`:
 
 ```js
@@ -2680,18 +2692,17 @@ import tinycolor2 from 'tinycolor2'
 
 import tokens from '../accent/base-grey.js'
 
-// console.log(tokens.color.accent.neutral['11'].value)
-const neutral = tinycolor2(tokens.color.accent.neutral['11'].value)
+const grey = tinycolor2(tokens.color.accent.grey.default.value)
 
 export default {
   color: {
     alpha: {
-      "grey": {
-        "1": { "value": neutral.setAlpha(0.03).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.03 } "type": "color" }
-        "2": { "value": neutral.setAlpha(0.06).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.06 } "type": "color" }
-        "3": { "value": neutral.setAlpha(0.14).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.14 } "type": "color" }
-        "4": { "value": neutral.setAlpha(0.31).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.31 } "type": "color" }
-        "5": { "value": neutral.setAlpha(0.49).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.49 } "type": "color" }
+      grey: {
+        "1": { "value": grey.setAlpha(0.03).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.03 } "type": "color" }
+        "2": { "value": grey.setAlpha(0.06).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.06 } "type": "color" }
+        "3": { "value": grey.setAlpha(0.14).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.14 } "type": "color" }
+        "4": { "value": grey.setAlpha(0.31).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.31 } "type": "color" }
+        "5": { "value": grey.setAlpha(0.49).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.49 } "type": "color" }
       }
     }
   }
@@ -2721,9 +2732,8 @@ For example, Apple's website.
 Used to support the primary colors.
 
 - information - informative UI, information icon, progress etc.
-- input - form fields
 - discovery - something new
-- inverse - UI elements that sit on bold emphasis backgrounds
+- input - form fields
 
 ##### Interaction states
 
@@ -2747,8 +2757,6 @@ hovered, pressed, selected, focused, or disabled
 ##### Reference Grey Colors as Neutral Colors
 
 ```sh
-rm tokens/color/alpha/base-accent.js && \
-rm tokens/color/alpha/base-grey.js && \
 touch tokens/color/accent/neutral.js && \
 touch tokens/color/alpha/neutral.js
 ```
@@ -2760,19 +2768,19 @@ export default {
   color: {
     accent: {
       "neutral": {
-        "1": { "value": "#ffffff", "type": "color" },
-        "2": { "value": "#dfe8f6", "type": "color" },
-        "3": { "value": "#c0d0ec", "type": "color" },
-        "4": { "value": "#a0b9e3", "type": "color" },
-        "5": { "value": "#81a2d9", "type": "color" },
-        "6": { "value": "#618ad0", "type": "color" },
-        "7": { "value": "#4273c6", "type": "color" },
-        "8": { "value": "#3360ac", "type": "color" },
-        "9": { "value": "#2a4e8c", "type": "color" },
-        "10": { "value": "#203d6d", "type": "color" },
-        "11": { "value": "{color.base.grey}", "type": "color" }, // reference
-        "12": { "value": "#060b14", "type": "color" },
-        "default": { "value": "{color.accent.neutral.11}", "type": "color" } // reference
+        "1": { "value": "{color.accent.grey.1}", "type": "color" },
+        "2": { "value": "{color.accent.grey.2}", "type": "color" },
+        "3": { "value": "{color.accent.grey.3}", "type": "color" },
+        "4": { "value": "{color.accent.grey.4}", "type": "color" },
+        "5": { "value": "{color.accent.grey.5}", "type": "color" },
+        "6": { "value": "{color.accent.grey.6}", "type": "color" },
+        "7": { "value": "{color.accent.grey.7}", "type": "color" },
+        "8": { "value": "{color.accent.grey.8}", "type": "color" },
+        "9": { "value": "{color.accent.grey.9}", "type": "color" },
+        "10": { "value": "{color.accent.grey.10}", "type": "color" },
+        "11": { "value": "{color.accent.grey.11}", "type": "color" },
+        "12": { "value": "{color.accent.grey.12}", "type": "color" },
+        "default": { "value": "{color.accent.neutral.11}", "type": "color" } // reference 11 as default
       }
     }
   }
@@ -2780,7 +2788,11 @@ export default {
 
 ```
 
-##### Auto-Generate Accent Colors for Neutral Colors from Grey Color
+##### Auto-Generate Neutral Colors from Grey Color
+
+```sh
+rm tokens/color/accent/base-grey.js
+```
 
 `tokens/color/accent/neutral.js`:
 
@@ -2788,7 +2800,7 @@ export default {
 import tokens from '../base-grey.js'
 import { generateColorShades } from '../../../utils/index.js'
 
-const name = 'grey' // Auto-Generate Accent Colors for Neutral Colors from Grey Color
+const name = 'grey' // Auto-Generate Neutral Colors from Grey Color
 
 const colors = tokens.color.base
 
@@ -2828,11 +2840,11 @@ export default {
   color: {
     alpha: {
       "neutral": {
-        "1": { "value": "#172b4d08", "type": "color" }, // "1": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.03 } "type": "color" }
-        "2": { "value": "#172b4d0f", "type": "color" }, // "2": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.06 } "type": "color" }
-        "3": { "value": "#172b4d24", "type": "color" }, // "3": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.14 } "type": "color" }
-        "4": { "value": "#172b4d4f", "type": "color" }, // "4": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.31 } "type": "color" }
-        "5": { "value": "#172b4d7d", "type": "color" } // "5": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.49 } "type": "color" }
+        "1": { "value": "{color.alpha.grey.1}", "type": "color" },
+        "2": { "value": "{color.alpha.grey.2}", "type": "color" },
+        "3": { "value": "{color.alpha.grey.3}", "type": "color" },
+        "4": { "value": "{color.alpha.grey.4}", "type": "color" },
+        "5": { "value": "{color.alpha.grey.5}", "type": "color" }
       }
     }
   }
@@ -2840,7 +2852,11 @@ export default {
 
 ```
 
-###### Auto-Generate Alpha Colors
+###### Auto-Generate Neutral Alpha Colors
+
+```sh
+rm tokens/color/alpha/base-grey.js
+```
 
 `tokens/color/alpha/neutral.js`:
 
