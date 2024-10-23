@@ -2712,9 +2712,79 @@ export default {
 
 ### Color roles
 
-#### Brand/Primary Colors
+#### Brand Colors
 
-The brand’s identity/overall look/feel.
+Brand Color is widly used in Logos, Trademarks or other elements inculcating the brand’s identity/overall look/feel.
+
+For example, Apple's brand colors are clean and sophisticated. Except for the iconic black and white logo, you'll mainly see **silver**, **space gray**, and **gold** in its products — these exude luxury and high-tech vibes.
+
+![apple black and white logo](apple-black-and-white-logo.png)
+
+![apple silver space gray gold](apple-silver-space-grey-gold.png)
+
+#### Primary Colors
+
+A website's Primary Colors are quit similar to or even overlap with its Brand Colors.
+
+Primary Colors are primarily used for informative UI, such as an information icon, or UI that communicates something is in progress.
+
+For example, When you're purchasing an iPhone on Apple's website, you'll find they constanly use **blue** color to show the significant parts such as purchase button, selection highlights, noticeable links and buttons etc.
+
+Blue is the primary color of Apple's website.
+
+![apple website blue color](apple-website-purchase-iphone-blue.png)
+
+Usually choose 1 - 3 colors from the Color Pallet as Primary Colors.
+
+```sh
+touch tokens/color/primary.js
+```
+
+`tokens/color/primary.js`:
+
+```js
+export default {
+  color: {
+    primary: {
+      '1': {
+        value: '{color.accent.blue.default}',
+        type: 'color'
+      },
+      '2': {
+        value: '{color.accent.teal.default}',
+        type: 'color'
+      },
+      '3': {
+        value: '{color.accent.red.default}',
+        type: 'color'
+      },
+      'default': {
+        value: '{color.primary.1}',
+        type: 'color'
+      }
+    }
+  }
+}
+
+```
+
+Choose the brand colors from Color Pallet or use primary color (as I said they are usually overlap).
+
+```sh
+touch tokens/color/brand.js
+```
+
+```js
+export default {
+  color: {
+    brand: {
+      value: '{color.primary.1}',
+      type: 'color'
+    }
+  }
+}
+
+```
 
 Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influence-on-users-actions/>
 
@@ -2723,15 +2793,10 @@ Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influen
 - Black — Reliable, sophisticated, and experienced
 - ...
 
-Usually choose 1 - 3 colors.
-
-For example, Apple's website.
-
 #### Secondary Colors
 
 Used to support the primary colors.
 
-- information - informative UI, information icon, progress etc.
 - discovery - something new
 - input - form fields
 
