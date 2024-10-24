@@ -3052,6 +3052,8 @@ Emphasis determines the amount of **contrast** a color has against the default s
 
 Bolder colors have more **contrast** against the default surface, which adds more attention than subtle colors.
 
+##### Reference accents to generate emphasis levels and use them for button states
+
 ##### For Example
 
 You might have high emphasis (bold and bright colors) for primary actions like buttons or headers, medium emphasis for secondary actions, and low emphasis (muted colors) for less critical information like captions.
