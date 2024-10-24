@@ -2738,9 +2738,18 @@ For example, Apple's brand colors are clean and sophisticated. Except for the ic
 
 ![apple space gray logo](apple-space-gray-logo.png)
 
+##### Color meanings
+
+Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influence-on-users-actions/>
+
+- Red — Confidence, youth, and power
+- Blue — Trust, security, and stability
+- Black — Reliable, sophisticated, and experienced
+- ...
+
 #### Primary Colors
 
-A website's Primary Colors are quit similar to or even overlap with its Brand Colors.
+A website's Primary Colors are quit similar to, or, even overlap its Brand Colors.
 
 Primary Colors are primarily used for informative UI, such as an information icon, or UI that communicates something is in progress.
 
@@ -2790,7 +2799,7 @@ export default {
 
 ```
 
-Choose the brand colors from Color Pallet or use primary color (as I said they are usually overlap).
+Choose Brand colors from Color Pallet or use primary colors (as I said they are usually overlap each other).
 
 ```sh
 touch tokens/color/brand.js
@@ -2808,45 +2817,48 @@ export default {
 
 ```
 
-Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influence-on-users-actions/>
+#### Secondary Colors (Tertiary/Quartus...)
 
-- Red — Confidence, youth, and power
-- Blue — Trust, security, and stability
-- Black — Reliable, sophisticated, and experienced
-- ...
-
-#### Secondary Colors
-
-Used to support the primary colors.
-
-Usually use accent or alpha colors derived primary colors or other saturated colors.
+Secondary (Tertiary/Quartus) Colors are used to support the primary colors.
 
 - discovery - something new
 
 ![apple new](apple-new.png)
 
-- input - form fields
-  - text input border
-  - text input border active
-  - text input placeholder
-  - text input color
-  - error tip
-  - success tip
-  - checkbox border
-  - checkbox outline
-  - checkbox background
-  - checkbox tick
-  - radio
-
-![apple input](apple-input.png)
-
 - Interaction states
 
 hovered, pressed, selected, focused, or disabled
 
-active, visited
+active, visited etc.
 
 ![apple button state color.gif](apple-button-state-color.gif)
+
+- input (form fields)
+  - text input box border
+  - text input box outline
+  - text input box shadow
+  - text input box placeholder color
+  - text input box color
+  - error tips
+  - success tips
+  - warning tips
+  - checkbox border
+  - checkbox outline
+  - checkbox shadow
+  - checkbox background
+  - checkbox tick color
+  - radio colors
+  - ...
+
+![apple input](apple-input.png)
+
+Apple use the primary color (blue) as the border of the text input box on the active state, and a lighter color of it as the shadow.
+
+##### Choose
+
+Usually use accents or alphas that derived from primary colors or other saturated colors.
+
+Brand Colors can overlap Primary Colors, similarly, Secondary Colors can also overlap Primary Colors.
 
 #### Semantic Colors
 
