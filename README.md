@@ -2759,13 +2759,9 @@ Blue is the primary color of Apple's website.
 
 ![apple website blue color](apple-website-purchase-iphone-blue.png)
 
-Usually, you can choose different colors from the Color Pallet as Primary Colors like `blue`, `teal`, and `red`, you can also choose different accents of the same color. It depends on the design philosophy of your designer.
+Usually, we choose different base colors from the Color Pallet as Primary Colors like `blue`, `teal`, and `red`. We can also choose different accents of a same color as Primary Colors.
 
-Apple's website uses 2 slightly different `blue` colors on their links and buttons.
-
-![apple primary colors](apple-primary-colors.png)
-
-The difference between them is the lightness of them, one is `45%` and the other is `40%`.
+It all depends on the design philosophy of your designer.
 
 ```sh
 touch tokens/color/primary.js
@@ -2778,15 +2774,15 @@ export default {
   color: {
     primary: {
       '1': {
-        value: '{color.accent.blue.default}',
+        value: '{color.accent.blue.7}',
         type: 'color'
       },
       '2': {
-        value: '{color.accent.teal.default}',
+        value: '{color.accent.teal.7}',
         type: 'color'
       },
       '3': {
-        value: '{color.accent.red.default}',
+        value: '{color.accent.magenta.7}',
         type: 'color'
       },
       'default': {
@@ -2821,11 +2817,161 @@ export default {
 
 Secondary (Tertiary/Quartus) Colors are used to support the primary colors.
 
-- discovery - something new
+Usually we use accents or alphas that derived from primary colors or other saturated colors.
 
-![apple new](apple-new.png)
+Brand Colors can overlap Primary Colors, similarly, Secondary Colors can also overlap Primary Colors, so can tertiary and quartus colors.
 
-- Interaction states
+##### Less important informations
+
+Apple's website uses 2 slightly different `blue` colors on their links and buttons.
+
+![apple primary colors](apple-primary-colors.png)
+
+The difference between them is the lightness of them, the one for button background is `45%` and the other one for link text color is a darker one of `40%`.
+
+If the blue color for button background is the primary color, then the blue color for link is the secondary color.
+
+Complying with this design decision, we create the secondary colors using darker ones from the primary colors:
+
+```sh
+touch tokens/color/secondary.js
+```
+
+`tokens/color/secondary.js`:
+
+```js
+export default {
+  color: {
+    secondary: {
+      '1': {
+        value: '{color.accent.blue.8}', // a darker one of the primary color
+        type: 'color'
+      },
+      '2': {
+        value: '{color.accent.teal.8}',
+        type: 'color'
+      },
+      '3': {
+        value: '{color.accent.magenta.8}',
+        type: 'color'
+      },
+      'default': {
+        value: '{color.secondary.1}',
+        type: 'color'
+      }
+    }
+  }
+}
+
+```
+
+Apple uses a lighter, more transparent accent of the primary color in the box shadow of a active text input box, we can regard it as a tertiary color.
+
+![apple tertiary color](apple-tertiary-color.png)
+
+Similarly, we can create the tertiary colors using lighter accents from the primary colors:
+
+```sh
+touch tokens/color/tertiary.js
+```
+
+`tokens/color/tertiary.js`:
+
+```js
+export default {
+  color: {
+    tertiary: {
+      '1': {
+        value: '{color.accent.blue.6}', // a lighter one of the primary color
+        type: 'color'
+      },
+      '2': {
+        value: '{color.accent.teal.6}',
+        type: 'color'
+      },
+      '3': {
+        value: '{color.accent.magenta.6}',
+        type: 'color'
+      },
+      'default': {
+        value: '{color.tertiary.1}',
+        type: 'color'
+      }
+    }
+  }
+}
+
+```
+
+At last, create the quartus colors by using lighter accents of the primary colors.
+
+```sh
+touch tokens/color/quartus.js
+```
+
+`tokens/color/quartus.js`:
+
+```js
+export default {
+  color: {
+    quartus: {
+      '1': {
+        value: '{color.accent.blue.5}', // a lighter one of the tertiary color
+        type: 'color'
+      },
+      '2': {
+        value: '{color.accent.teal.5}',
+        type: 'color'
+      },
+      '3': {
+        value: '{color.accent.magenta.5}',
+        type: 'color'
+      },
+      'default': {
+        value: '{color.quartus.1}',
+        type: 'color'
+      }
+    }
+  }
+}
+
+```
+
+Or, by increacing their transparency.
+
+`tokens/color/quartus.js`:
+
+```js
+import tinycolor2 from 'tinycolor2'
+
+import tokens from './accent/base-saturated.js'
+
+export default {
+  color: {
+    quartus: {
+      '1': {
+        value: tinycolor2(tokens.color.accent.blue['5'].value).setAlpha(0.5).toHex8String(),
+        type: 'color'
+      },
+      '2': {
+        value: tinycolor2(tokens.color.accent.teal['5'].value).setAlpha(0.5).toHex8String(),
+        type: 'color'
+      },
+      '3': {
+        value: tinycolor2(tokens.color.accent.magenta['5'].value).setAlpha(0.5).toHex8String(),
+        type: 'color'
+      },
+      'default': {
+        value: '{color.quartus.1}',
+        type: 'color'
+      }
+    }
+  }
+}
+
+```
+
+##### Interaction states
 
 hovered, pressed, selected, focused, or disabled
 
@@ -2854,17 +3000,14 @@ active, visited etc.
 
 Apple use the primary color (blue) as the border of the text input box on the active state, and a lighter color of it as the shadow.
 
-##### Choose
-
-Usually use accents or alphas that derived from primary colors or other saturated colors.
-
-Brand Colors can overlap Primary Colors, similarly, Secondary Colors can also overlap Primary Colors.
-
 #### Semantic Colors
 
 - Success - is often associated with **green**
 - Warning - orange
 - Error / Fail - red
+- discovery - something new
+
+![apple new](apple-new.png)
 
 ```sh
 touch tokens/color/semantic.js
@@ -2876,7 +3019,11 @@ touch tokens/color/semantic.js
 export default {
   color: {
     semantic: {
-      'tip': {
+      'new': {
+        value: '{color.accent.purple.default}',
+        type: 'color'
+      },
+      'info': {
         value: '{color.accent.blue.default}',
         type: 'color'
       },
