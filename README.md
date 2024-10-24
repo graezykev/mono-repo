@@ -2747,9 +2747,29 @@ Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influen
 - Black — Reliable, sophisticated, and experienced
 - ...
 
+Brand Colors are often chosen from Primary Colors or Base Colors from your Color Pallet
+
+For example, we pick Brand color from (the first one of) primary colors (brand colors and primary colors usually overlap each other).
+
+```sh
+touch tokens/color/brand.js
+```
+
+```js
+export default {
+  color: {
+    brand: {
+      value: '{color.primary.1}',
+      type: 'color'
+    }
+  }
+}
+
+```
+
 #### Primary Colors
 
-A website's Primary Colors are quit similar to, or, even overlap its Brand Colors.
+A website's Primary Colors are the most often used colors, or, they are often use on the most important informations, indicating the website's main theme or style.
 
 Primary Colors are primarily used for informative UI, such as an information icon, or UI that communicates something is in progress.
 
@@ -2789,24 +2809,6 @@ export default {
         value: '{color.primary.1}',
         type: 'color'
       }
-    }
-  }
-}
-
-```
-
-Choose Brand colors from Color Pallet or use primary colors (as I said they are usually overlap each other).
-
-```sh
-touch tokens/color/brand.js
-```
-
-```js
-export default {
-  color: {
-    brand: {
-      value: '{color.primary.1}',
-      type: 'color'
     }
   }
 }
