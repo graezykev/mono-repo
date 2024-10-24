@@ -2724,48 +2724,7 @@ export default {
 
 ```
 
-### Color roles
-
-#### Brand Colors
-
-Brand Color is widly used in Logos, Trademarks or other elements inculcating the brand’s identity/overall look/feel.
-
-For example, Apple's brand colors are clean and sophisticated. Except for the iconic black and white logo, you'll mainly see **silver**, **space gray**, and **gold** in its products — these exude luxury and high-tech vibes.
-
-![apple black and white logo](apple-black-and-white-logo.png)
-
-![apple silver space gray gold](apple-silver-space-grey-gold.png)
-
-![apple space gray logo](apple-space-gray-logo.png)
-
-##### Color meanings
-
-Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influence-on-users-actions/>
-
-- Red — Confidence, youth, and power
-- Blue — Trust, security, and stability
-- Black — Reliable, sophisticated, and experienced
-- ...
-
-Brand Colors are often chosen from Primary Colors or Base Colors from your Color Pallet
-
-For example, we pick Brand color from (the first one of) primary colors (brand colors and primary colors usually overlap each other).
-
-```sh
-touch tokens/color/brand.js
-```
-
-```js
-export default {
-  color: {
-    brand: {
-      value: '{color.primary.1}',
-      type: 'color'
-    }
-  }
-}
-
-```
+### Color Significance
 
 #### Primary Colors
 
@@ -2823,7 +2782,7 @@ Usually we use accents or alphas that derived from primary colors or other satur
 
 Brand Colors can overlap Primary Colors, similarly, Secondary Colors can also overlap Primary Colors, so can tertiary and quartus colors.
 
-##### Less important informations
+##### Less Significant informations
 
 Apple's website uses 2 slightly different `blue` colors on their links and buttons.
 
@@ -2833,7 +2792,7 @@ The difference between them is the lightness of them, the one for button backgro
 
 If the blue color for button background is the primary color, then the blue color for link is the secondary color.
 
-Complying with this design decision, we create the secondary colors using darker ones from the primary colors:
+Complying with this design decision, we create the secondary colors using the **darker** ones from the primary colors:
 
 ```sh
 touch tokens/color/secondary.js
@@ -2867,11 +2826,15 @@ export default {
 
 ```
 
-Apple uses a lighter, more transparent accent of the primary color in the box shadow of a active text input box, we can regard it as a tertiary color.
+##### Supplementary informations
 
-![apple tertiary color](apple-tertiary-color.png)
+Apple uses different blue colors for the default, hover, pressing, and disable states of a button's background color.
 
-Similarly, we can create the tertiary colors using lighter accents from the primary colors:
+![apple button state color](apple-button-state-color.gif)
+
+Here, the colors for default, hover, pressing, and disable states are different accents or alphas of the blue color, we can regard them as the primary, secondary, tertiary and quartus colors.
+
+So, we create the tertiary colors using the lighter accents of the primary colors:
 
 ```sh
 touch tokens/color/tertiary.js
@@ -2905,7 +2868,7 @@ export default {
 
 ```
 
-At last, create the quartus colors by using lighter accents of the primary colors.
+At last, we create the quartus colors by using a lighter accents of the primary colors, even lighter than the tertiary colors.
 
 ```sh
 touch tokens/color/quartus.js
@@ -2973,35 +2936,58 @@ export default {
 
 ```
 
-##### Interaction states
+##### Other assistant Colors
 
-hovered, pressed, selected, focused, or disabled
-
-active, visited etc.
-
-![apple button state color.gif](apple-button-state-color.gif)
-
-##### input (form fields)
-
-- text input box border
-- text input box outline
-- text input box shadow
-- text input box placeholder color
-- text input box color
-- error tips
-- success tips
-- warning tips
-- checkbox border
-- checkbox outline
-- checkbox shadow
-- checkbox background
-- checkbox tick color
-- radio colors
-- ...
+If you look at Apple's website, their are many other less used colors such as red, green etc., they can be added to the secondary, tertiary or quartus colors.
 
 ![apple input](apple-input.png)
 
-Apple use the primary color (blue) as the border of the text input box on the active state, and a lighter color of it as the shadow.
+e.g., it uses the primary color (`blue`) on the border for the active state of the text input box, and a lighter accent of the primary color on its box shadow, you can regard it as a tertiary color.
+
+![apple tertiary color](apple-tertiary-color.png)
+
+### Color roles
+
+#### Brand Colors
+
+Brand Color is widly used in Logos, Trademarks or other elements inculcating the brand’s identity/overall look/feel.
+
+For example, Apple's brand colors are clean and sophisticated. Except for the iconic black and white logo, you'll mainly see **silver**, **space gray**, and **gold** in its products — these exude luxury and high-tech vibes.
+
+![apple black and white logo](apple-black-and-white-logo.png)
+
+![apple silver space gray gold](apple-silver-space-grey-gold.png)
+
+![apple space gray logo](apple-space-gray-logo.png)
+
+##### Color meanings
+
+Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influence-on-users-actions/>
+
+- Red — Confidence, youth, and power
+- Blue — Trust, security, and stability
+- Black — Reliable, sophisticated, and experienced
+- ...
+
+Brand Colors are often chosen from Primary Colors or Base Colors from your Color Pallet
+
+For example, we pick Brand color from (the first one of) primary colors (brand colors and primary colors usually overlap each other).
+
+```sh
+touch tokens/color/brand.js
+```
+
+```js
+export default {
+  color: {
+    brand: {
+      value: '{color.primary.1}',
+      type: 'color'
+    }
+  }
+}
+
+```
 
 #### Semantic Colors
 
@@ -3186,6 +3172,30 @@ export default {
 }
 
 ```
+
+#### Input (form fields)
+
+- text input box border
+- text input box outline
+- text input box shadow
+- text input box placeholder color
+- text input box color
+- error tips
+- success tips
+- warning tips
+- checkbox border
+- checkbox outline
+- checkbox shadow
+- checkbox background
+- checkbox tick color
+- radio colors
+- ...
+
+#### Interaction states
+
+hovered, pressed, selected, focused, or disabled
+
+active, visited etc.
 
 ### Color Nicknames
 
