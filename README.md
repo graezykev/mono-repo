@@ -2979,22 +2979,23 @@ active, visited etc.
 
 ![apple button state color.gif](apple-button-state-color.gif)
 
-- input (form fields)
-  - text input box border
-  - text input box outline
-  - text input box shadow
-  - text input box placeholder color
-  - text input box color
-  - error tips
-  - success tips
-  - warning tips
-  - checkbox border
-  - checkbox outline
-  - checkbox shadow
-  - checkbox background
-  - checkbox tick color
-  - radio colors
-  - ...
+##### input (form fields)
+
+- text input box border
+- text input box outline
+- text input box shadow
+- text input box placeholder color
+- text input box color
+- error tips
+- success tips
+- warning tips
+- checkbox border
+- checkbox outline
+- checkbox shadow
+- checkbox background
+- checkbox tick color
+- radio colors
+- ...
 
 ![apple input](apple-input.png)
 
