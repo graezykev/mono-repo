@@ -2425,9 +2425,9 @@ npm run build
 
 ## Design Token - Color
 
-### Color Palette
+### Color Palette / Global Colors
 
-#### Global Colors
+#### Base Colors
 
 ```sh
 rm tokens/color/base.js && \
