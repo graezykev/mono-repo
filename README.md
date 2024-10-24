@@ -2479,7 +2479,21 @@ export default {
 
 Derive from base colors.
 
-Different shades of the base color.
+Different shades and/or Tints of the base color.
+
+Shades and tints are variations of a base color.
+
+Shades are created by adding black to a base color, making it darker. For example:
+
+Base color (Primary Blue): #0052CC
+
+Shade: #003399 (adds depth and can be used for shadows or more somber design elements)
+
+Tints are made by adding white to a base color, making it lighter. For example:
+
+Base color (Primary Blue): #0052CC
+
+Tint: #99CCFF (used for highlights or to give a lighter, softer appearance)
 
 ```sh
 mkdir tokens/color/accent && \
@@ -2736,7 +2750,13 @@ Blue is the primary color of Apple's website.
 
 ![apple website blue color](apple-website-purchase-iphone-blue.png)
 
-Usually choose 1 - 3 colors from the Color Pallet as Primary Colors.
+Usually, you can choose different colors from the Color Pallet as Primary Colors like `blue`, `teal`, and `red`, you can also choose different accents of the same color. It depends on the design philosophy of your designer.
+
+Apple's website uses 2 slightly different `blue` colors on their links and buttons.
+
+![apple primary colors](apple-primary-colors.png)
+
+The difference between them is the lightness of them, one is `45%` and the other is `40%`.
 
 ```sh
 touch tokens/color/primary.js
@@ -2825,6 +2845,8 @@ Usually use accent or alpha colors derived primary colors or other saturated col
 hovered, pressed, selected, focused, or disabled
 
 active, visited
+
+![apple button state color.gif](apple-button-state-color.gif)
 
 #### Semantic Colors
 
