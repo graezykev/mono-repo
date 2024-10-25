@@ -3040,8 +3040,6 @@ export default {
 
 ```
 
-##### Other assistant Colors
-
 ##### Form Fields
 
 Form Field Elements:
