@@ -2726,54 +2726,6 @@ export default {
 
 ### Color Significance / Color Roles
 
-#### Primary Colors
-
-A website's Primary Colors are the most often used colors, or, they are often use on the most important informations, indicating the website's main theme or style.
-
-Primary Colors are primarily used for informative UI, such as an information icon, or UI that communicates something is in progress.
-
-For example, When you're purchasing an iPhone on Apple's website, you'll find they constanly use **blue** color to show the significant parts such as purchase button, selection highlights, noticeable links and buttons etc.
-
-Blue is the primary color of Apple's website.
-
-![apple website blue color](apple-website-purchase-iphone-blue.png)
-
-Usually, we choose different base colors from the Color Pallet as Primary Colors like `blue`, `teal`, and `red`. We can also choose different accents of a same color as Primary Colors.
-
-It all depends on the design philosophy of your designer.
-
-```sh
-touch tokens/color/primary.js
-```
-
-`tokens/color/primary.js`:
-
-```js
-export default {
-  color: {
-    primary: {
-      '1': {
-        value: '{color.accent.blue.7}',
-        type: 'color'
-      },
-      '2': {
-        value: '{color.accent.teal.7}',
-        type: 'color'
-      },
-      '3': {
-        value: '{color.accent.magenta.7}',
-        type: 'color'
-      },
-      'default': {
-        value: '{color.primary.1}',
-        type: 'color'
-      }
-    }
-  }
-}
-
-```
-
 #### Brand Colors
 
 Brand Color is widly used in Logos, Trademarks or other elements inculcating the brand’s identity/overall look/feel.
@@ -2815,25 +2767,147 @@ Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influen
 - Black — Reliable, sophisticated, and experienced
 - ...
 
-#### Secondary Colors (Tertiary/Quartus...)
+#### Primary Colors
 
-Secondary (Tertiary/Quartus) Colors are used to support the primary colors.
+A website's Primary Colors are the most often used colors, or, they are often use on the most important informations, indicating the website's main theme or style.
 
-Usually we use accents or alphas that derived from primary colors or other saturated colors.
+Primary Colors are primarily used for informative UI, such as an information icon, or UI that communicates something is in progress.
 
-Brand Colors can overlap Primary Colors, similarly, Secondary Colors can also overlap Primary Colors, so can tertiary and quartus colors.
+For example, When you're purchasing an iPhone on Apple's website, you'll find they constanly use **blue** color to show the significant parts such as purchase button, selection highlights, noticeable links and buttons etc.
 
-##### Less Significant informations
+Blue is the primary color of Apple's website.
+
+![apple website blue color](apple-website-purchase-iphone-blue.png)
+
+Usually, we choose different base colors from the Color Pallet as Primary Colors like `blue`, `teal`, and `red`. We can also choose different accents of a same color as Primary Colors.
+
+It all depends on the design philosophy of your designer.
+
+```sh
+touch tokens/color/primary.js
+```
+
+`tokens/color/primary.js`:
+
+```js
+export default {
+  color: {
+    primary: {
+      'default': {
+        value: '{color.primary.1}',
+        type: 'color'
+      },
+      '1': {
+        value: '{color.accent.blue.7}', // for the [default] state
+        type: 'color'
+      }
+    }
+  }
+}
+```
 
 Apple's website uses 2 slightly different `blue` colors on their links and buttons.
 
 ![apple primary colors](apple-primary-colors.png)
 
-The difference between them is the lightness of them, the one for button background is `45%` and the other one for link text color is a darker one of `40%`.
+The difference between the two blue color is the lightness, the lightness for button background is `45%` and the other one for link text is a darker lightness of `40%`.
 
-If the blue color for button background is the primary color, then the blue color for link is the secondary color.
+If the one for button background is the primary color, then the one for links is the another version of primary color.
 
-Complying with this design decision, we create the secondary colors using the **darker** ones from the primary colors:
+Complying with this design decision, we create another primary color using a **darker** one of the `blue` color:
+
+`tokens/color/primary.js`:
+
+```diff
+export default {
+  color: {
+    primary: {
+      ...
+      '1': {
+        value: '{color.accent.blue.7}',
+        type: 'color'
+      },
++     '2': {
++       value: '{color.accent.blue.8}', // a darker one for the [hover] state
++       type: 'color'
++     }
+    }
+  }
+}
+```
+
+Apple uses different blue colors for the default, hover, pressing, and disable states for a button's background color.
+
+![apple button state color](apple-button-state-color.gif)
+
+Here, the colors for default, hover, pressing, and disable states are different accents and different transparents of the `blue` color, we can regard them as different emphasis of the primary colors.
+
+So, we create the next primary color using the lighter accent of the `blue` color:
+
+`tokens/color/primary.js`:
+
+```diff
+export default {
+  color: {
+    primary: {
+      ...
+      '2': {
+        value: '{color.accent.blue.8}',
+        type: 'color'
+      },
++     '3': { // a lighter one for the [active] (pressing) state
++       value: '{color.accent.blue.6}',
++       type: 'color'
++     }
+    }
+  }
+}
+
+```
+
+At last, we create next primary color by using a lighter(even lighter than the the previous one) and more transparent of the `blue` color.
+
+`tokens/color/primary.js`:
+
+```diff
++import tinycolor from 'tinycolor2'
++import tokens from './accent/base-saturated.js'
+
+export default {
+  color: {
+    primary: {
+      ...
+      '3': { // a lighter one for the [active] (pressing) state
+        value: '{color.accent.blue.6}',
+        type: 'color'
+      },
++    '4': { // a lighter and more transparent one for the [disabled] state
++       value: tinycolor(tokens.color.accent.blue['5'].value).setAlpha(0.5).toHex8String(),
++       type: 'color'
++     }
+    }
+  }
+}
+
+```
+
+#### Secondary (Tertiary/Quartus...) Colors
+
+In corporation practise, except for Primary Colors indicating the general feeling, there're always at least 2-3 Supplementary colors to assist the website's style.
+
+Secondary (Tertiary/Quartus) Colors are used to support the primary colors.
+
+We can use accents or alpha variants derived from primary colors as secondary colors, but more often we use other saturated colors from the color pallet.
+
+##### Less Significant informations
+
+In Apple's checkout page, you'll find not only the iconic blue button, but another less significant button with a black color background.
+
+![apple black button](apple-black-button.png)
+
+Similar to primary colors, secondary color can also has its own variants.
+
+Once the base color for secondary color is set, let's say, we decide to use `teal` color, we can use the same philosophy of primary color to generate the secondary colors.
 
 ```sh
 touch tokens/color/secondary.js
@@ -2842,23 +2916,30 @@ touch tokens/color/secondary.js
 `tokens/color/secondary.js`:
 
 ```js
+import tinycolor from 'tinycolor2'
+import tokens from './accent/base-saturated.js'
+
 export default {
   color: {
     secondary: {
-      '1': {
-        value: '{color.accent.blue.8}', // a darker one of the primary color
+      'default': {
+        value: '{color.secondary.1}',
         type: 'color'
       },
-      '2': {
+      '1': { // the default color
+        value: '{color.accent.teal.7}',
+        type: 'color'
+      },
+      '2': { // a darker one
         value: '{color.accent.teal.8}',
         type: 'color'
       },
-      '3': {
-        value: '{color.accent.magenta.8}',
+      '3': { // a lighter one
+        value: '{color.accent.teal.6}',
         type: 'color'
       },
-      'default': {
-        value: '{color.secondary.1}',
+      '4': { // a lighter and more transparent one
+        value: tinycolor(tokens.color.accent.teal['5'].value).setAlpha(0.5).toHex8String(),
         type: 'color'
       }
     }
@@ -2869,13 +2950,13 @@ export default {
 
 ##### Supplementary informations
 
-Apple uses different blue colors for the default, hover, pressing, and disable states of a button's background color.
+There're other assistant colors but constantly used in Apple's website and its applications, products etc.
 
-![apple button state color](apple-button-state-color.gif)
+Such as the iconic green and purple color.
 
-Here, the colors for default, hover, pressing, and disable states are different accents or alphas of the blue color, we can regard them as the primary, secondary, tertiary and quartus colors.
+![apple green purple.png](apple-green-purple.png)
 
-So, we create the tertiary colors using the lighter accents of the primary colors:
+So we can generate these supplementary colors as tertiary colors or quartus colors etc.
 
 ```sh
 touch tokens/color/tertiary.js
@@ -2884,23 +2965,30 @@ touch tokens/color/tertiary.js
 `tokens/color/tertiary.js`:
 
 ```js
+import tinycolor from 'tinycolor2'
+import tokens from './accent/base-saturated.js'
+
 export default {
   color: {
     tertiary: {
-      '1': {
-        value: '{color.accent.blue.6}', // a lighter one of the primary color
+      'default': {
+        value: '{color.tertiary.1}',
         type: 'color'
       },
-      '2': {
-        value: '{color.accent.teal.6}',
+      '1': { // the default color
+        value: '{color.accent.magenta.7}',
         type: 'color'
       },
-      '3': {
+      '2': { // a darker one
+        value: '{color.accent.magenta.8}',
+        type: 'color'
+      },
+      '3': { // a lighter one
         value: '{color.accent.magenta.6}',
         type: 'color'
       },
-      'default': {
-        value: '{color.tertiary.1}',
+      '4': { // a lighter and more transparent one
+        value: tinycolor(tokens.color.accent.magenta['5'].value).setAlpha(0.5).toHex8String(),
         type: 'color'
       }
     }
@@ -2908,8 +2996,6 @@ export default {
 }
 
 ```
-
-At last, we create the quartus colors by using a lighter accents of the primary colors, even lighter than the tertiary colors.
 
 ```sh
 touch tokens/color/quartus.js
@@ -2918,57 +3004,30 @@ touch tokens/color/quartus.js
 `tokens/color/quartus.js`:
 
 ```js
-export default {
-  color: {
-    quartus: {
-      '1': {
-        value: '{color.accent.blue.5}', // a lighter one of the tertiary color
-        type: 'color'
-      },
-      '2': {
-        value: '{color.accent.teal.5}',
-        type: 'color'
-      },
-      '3': {
-        value: '{color.accent.magenta.5}',
-        type: 'color'
-      },
-      'default': {
-        value: '{color.quartus.1}',
-        type: 'color'
-      }
-    }
-  }
-}
-
-```
-
-Or, by increacing their transparency.
-
-`tokens/color/quartus.js`:
-
-```js
-import tinycolor2 from 'tinycolor2'
-
+import tinycolor from 'tinycolor2'
 import tokens from './accent/base-saturated.js'
 
 export default {
   color: {
     quartus: {
-      '1': {
-        value: tinycolor2(tokens.color.accent.blue['5'].value).setAlpha(0.5).toHex8String(),
-        type: 'color'
-      },
-      '2': {
-        value: tinycolor2(tokens.color.accent.teal['5'].value).setAlpha(0.5).toHex8String(),
-        type: 'color'
-      },
-      '3': {
-        value: tinycolor2(tokens.color.accent.magenta['5'].value).setAlpha(0.5).toHex8String(),
-        type: 'color'
-      },
       'default': {
         value: '{color.quartus.1}',
+        type: 'color'
+      },
+      '1': { // the default color
+        value: '{color.accent.lime.7}',
+        type: 'color'
+      },
+      '2': { // a darker one
+        value: '{color.accent.lime.8}',
+        type: 'color'
+      },
+      '3': { // a lighter one
+        value: '{color.accent.lime.6}',
+        type: 'color'
+      },
+      '4': { // a lighter and more transparent one
+        value: tinycolor(tokens.color.accent.lime['5'].value).setAlpha(0.5).toHex8String(),
         type: 'color'
       }
     }
@@ -2979,7 +3038,7 @@ export default {
 
 ##### Other assistant Colors
 
-If you look at Apple's website, their are many other less used colors such as red, green etc., they can be added to the secondary, tertiary or quartus colors.
+If you look at Apple's website, their are many other less used colors such as `red`, `green` etc., they can be added to the secondary, tertiary or quartus colors.
 
 ![apple input](apple-input.png)
 
@@ -3565,7 +3624,7 @@ On Apple’s site, for instance, alpha colors might be used for **overlay effect
 
 - Semantic Colors
 
-Semantic colors are used to convey specific meanings or statuses. For example, Apple uses **green** to indicate success or completion (like the green checkmark in the Apple Store) and **red** to signal errors or important notifications (like the red badge on app icons).
+Semantic colors are used to convey specific meanings or statuses. For example, Apple uses **green** to show success or completion (like the green checkmark in the Apple Store) and **red** to signal errors or important notifications (like the red badge on app icons).
 
 - Accent Colors
 
