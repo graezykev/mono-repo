@@ -2758,14 +2758,12 @@ export default {
 
 ```
 
-##### Color meanings
-
-Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influence-on-users-actions/>
-
-- Red — Confidence, youth, and power
-- Blue — Trust, security, and stability
-- Black — Reliable, sophisticated, and experienced
-- ...
+> Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influence-on-users-actions/>
+>
+> - Red — Confidence, youth, and power
+> - Blue — Trust, security, and stability
+> - Black — Reliable, sophisticated, and experienced
+> - ...
 
 #### Primary Colors
 
