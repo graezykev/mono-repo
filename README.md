@@ -3118,7 +3118,7 @@ Interaction states for a button tag:
 - `:focus-visible`
 - `:active`
 
-Picking **primary** colors, **secondary** colors, **tertiary** colors and **quartus** colors to apply for interaction states:
+Picking different **primary** colors to apply for interaction states:
 
 ```sh
 touch tokens/color/interaction.js
@@ -3141,7 +3141,7 @@ export default {
             type: 'color'
           },
           "hover": {
-            value: '{color.secondary.1}',
+            value: '{color.primary.2}',
             type: 'color'
           },
           "focus": {
@@ -3153,7 +3153,7 @@ export default {
             type: 'color'
           },
           "active": {
-            value: '{color.tertiary.1}',
+            value: '{color.primary.3}',
             type: 'color'
           }
         }
@@ -3173,7 +3173,7 @@ export default {
         },
         "interaction": {
           "hover": {
-            value: '{color.secondary.1}',
+            value: '{color.primary.2}',
             type: 'color'
           },
           "focus": {
@@ -3185,7 +3185,17 @@ export default {
             type: 'color'
           },
           "active": {
-            value: '{color.tertiary.1}',
+            value: '{color.primary.3}',
+            type: 'color'
+          }
+        }
+      }
+    },
+    "shadow": {
+      "input": {
+        "interaction": {
+          "focus": {
+            value: '{color.primary.4}',
             type: 'color'
           }
         }
