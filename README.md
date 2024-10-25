@@ -2954,7 +2954,11 @@ There're other assistant colors but constantly used in Apple's website and its a
 
 Such as the iconic green and purple color.
 
-![apple green purple.png](apple-green-purple.png)
+![apple green purple](apple-green-purple.png)
+
+![apple purple](apple-purple.jpg)
+
+![apple green](apple-green.jpg)
 
 So we can generate these supplementary colors as tertiary colors or quartus colors etc.
 
