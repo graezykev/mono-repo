@@ -2960,15 +2960,6 @@ For example, Apple's brand colors are clean and sophisticated. Except for the ic
 
 ![apple space gray logo](apple-space-gray-logo.png)
 
-##### Color meanings
-
-Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influence-on-users-actions/>
-
-- Red — Confidence, youth, and power
-- Blue — Trust, security, and stability
-- Black — Reliable, sophisticated, and experienced
-- ...
-
 Brand Colors are often chosen from Primary Colors or Base Colors from your Color Pallet
 
 For example, we pick Brand color from (the first one of) primary colors (brand colors and primary colors usually overlap each other).
@@ -2988,6 +2979,15 @@ export default {
 }
 
 ```
+
+##### Color meanings
+
+Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influence-on-users-actions/>
+
+- Red — Confidence, youth, and power
+- Blue — Trust, security, and stability
+- Black — Reliable, sophisticated, and experienced
+- ...
 
 #### Semantic Colors
 
