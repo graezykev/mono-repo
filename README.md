@@ -3352,7 +3352,7 @@ Wherever Apple's website wants to show something new, they use a orange-like col
 ![apple new](apple-new.png)
 
 These are the typical colors used to show in some specify scenarios.
-As we don't use green traffic signals to stop cars from going, neither we don't use green color to suggest a "stop" or "error" meaning on a website.
+As we don't use green traffic signals to stop cars from going, neither we use green color to suggest a "stop" or "error" meaning on a website.
 
 - Success - is often associated with **green**
 - Warning - orange
