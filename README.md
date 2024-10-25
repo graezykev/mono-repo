@@ -3192,7 +3192,7 @@ Form Field Elements:
 - label
 - button shadow, outline, border, background, text
 
-States For an Input Element (`<input>`, `<textarea>`, `<select>`, `<option>`, `<radio>`, `<checkbox>`):
+States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>`, `<radio>`, `<checkbox>`):
 
 - `:default`
 - `:autofill`
