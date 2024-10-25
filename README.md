@@ -3171,29 +3171,71 @@ export default {
 
 ```
 
-#### Input (form fields)
+#### Form Fields
 
-- text input box border
-- text input box outline
+Form Field Elements:
+
 - text input box shadow
-- text input box placeholder color
-- text input box color
-- error tips
-- success tips
-- warning tips
-- checkbox border
-- checkbox outline
+- text input box outline
+- text input box border
+- text input box background
+- text input box placeholder
+- text input box text content
 - checkbox shadow
+- checkbox outline
+- checkbox border
 - checkbox background
 - checkbox tick color
 - radio colors
 - ...
+- select box
+- label
+- button shadow, outline, border, background, text
+
+States For an Input Element (`<input>`, `<textarea>`, `<select>`, `<option>`, `<radio>`, `<checkbox>`):
+
+- `:default`
+- `:autofill`
+- `:enabled`
+- `:disabled`
+- `:read-only`
+- `:read-write`
+- `:placeholder-shown`
+- `:checked`
+- `:indeterminate`
+- `:blank`
+- `:valid`
+- `:invalid`
+- `:in-range`
+- `:out-of-range`
+- `:required`
+- `:optional`
+- `:user-valid`
+- `:user-invalid`
 
 #### Interaction states
 
-hovered, pressed, selected, focused, or disabled
+There are lots of interaction states needed different colors to differentiate them, such as hovering, focusing (keyboard navigating), clicking (pressing) etc.
+
+hovered, pressed, selected, focused
 
 active, visited etc.
+
+Interaction states for a link tag (**L, V, H, A**):
+
+- `:link`
+- `:visited`
+- `:hover`
+- `:focus`
+- `:focus-visible`
+- `:active`
+
+Interaction states for a button tag:
+
+- `:hover`
+- `:focus`
+- `:focus-visible`
+- `:active`
 
 ### Color Nicknames
 
