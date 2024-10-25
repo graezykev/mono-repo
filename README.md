@@ -2724,7 +2724,7 @@ export default {
 
 ```
 
-### Color Significance
+### Color Significance / Color Roles
 
 #### Primary Colors
 
@@ -2773,6 +2773,47 @@ export default {
 }
 
 ```
+
+#### Brand Colors
+
+Brand Color is widly used in Logos, Trademarks or other elements inculcating the brand’s identity/overall look/feel.
+
+For example, Apple's brand colors are clean and sophisticated. Except for the iconic black and white logo, you'll mainly see **silver**, **space gray**, and **gold** in its products — these exude luxury and high-tech vibes.
+
+![apple black and white logo](apple-black-and-white-logo.png)
+
+![apple silver space gray gold](apple-silver-space-grey-gold.png)
+
+![apple space gray logo](apple-space-gray-logo.png)
+
+Brand Colors are often chosen from Primary Colors or Base Colors from your Color Pallet
+
+For example, we pick Brand color from (the first one of) primary colors (brand colors and primary colors usually overlap each other).
+
+```sh
+touch tokens/color/brand.js
+```
+
+```js
+export default {
+  color: {
+    brand: {
+      value: '{color.primary.1}',
+      type: 'color'
+    }
+  }
+}
+
+```
+
+##### Color meanings
+
+Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influence-on-users-actions/>
+
+- Red — Confidence, youth, and power
+- Blue — Trust, security, and stability
+- Black — Reliable, sophisticated, and experienced
+- ...
 
 #### Secondary Colors (Tertiary/Quartus...)
 
@@ -2946,94 +2987,6 @@ e.g., it uses the primary color (`blue`) on the border for the active state of t
 
 ![apple tertiary color](apple-tertiary-color.png)
 
-### Color roles
-
-#### Brand Colors
-
-Brand Color is widly used in Logos, Trademarks or other elements inculcating the brand’s identity/overall look/feel.
-
-For example, Apple's brand colors are clean and sophisticated. Except for the iconic black and white logo, you'll mainly see **silver**, **space gray**, and **gold** in its products — these exude luxury and high-tech vibes.
-
-![apple black and white logo](apple-black-and-white-logo.png)
-
-![apple silver space gray gold](apple-silver-space-grey-gold.png)
-
-![apple space gray logo](apple-space-gray-logo.png)
-
-Brand Colors are often chosen from Primary Colors or Base Colors from your Color Pallet
-
-For example, we pick Brand color from (the first one of) primary colors (brand colors and primary colors usually overlap each other).
-
-```sh
-touch tokens/color/brand.js
-```
-
-```js
-export default {
-  color: {
-    brand: {
-      value: '{color.primary.1}',
-      type: 'color'
-    }
-  }
-}
-
-```
-
-##### Color meanings
-
-Color meanings in branding <https://blog.tubikstudio.com/color-in-design-influence-on-users-actions/>
-
-- Red — Confidence, youth, and power
-- Blue — Trust, security, and stability
-- Black — Reliable, sophisticated, and experienced
-- ...
-
-#### Semantic Colors
-
-- Success - is often associated with **green**
-- Warning - orange
-- Error / Fail - red
-- discovery - something new
-
-![apple new](apple-new.png)
-
-```sh
-touch tokens/color/semantic.js
-```
-
-`tokens/color/semantic.js`:
-
-```js
-export default {
-  color: {
-    semantic: {
-      'new': {
-        value: '{color.accent.purple.default}',
-        type: 'color'
-      },
-      'info': {
-        value: '{color.accent.blue.default}',
-        type: 'color'
-      },
-      'success': {
-        value: '{color.accent.green.default}',
-        type: 'color'
-      },
-      'warning': {
-        value: '{color.accent.orange.default}',
-        type: 'color'
-      },
-      'error': {
-        value: '{color.accent.red.default}',
-        type: 'color'
-      }
-    }
-  }
-}
-
-```
-
 #### Neutral Colors
 
 - text
@@ -3166,6 +3119,51 @@ export default {
         "3": { "value": neutral.setAlpha(0.14).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.14 } "type": "color" }
         "4": { "value": neutral.setAlpha(0.31).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.31 } "type": "color" }
         "5": { "value": neutral.setAlpha(0.49).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.49 } "type": "color" }
+      }
+    }
+  }
+}
+
+```
+
+#### Semantic Colors
+
+- Success - is often associated with **green**
+- Warning - orange
+- Error / Fail - red
+- discovery - something new
+
+![apple new](apple-new.png)
+
+```sh
+touch tokens/color/semantic.js
+```
+
+`tokens/color/semantic.js`:
+
+```js
+export default {
+  color: {
+    semantic: {
+      'new': {
+        value: '{color.accent.purple.default}',
+        type: 'color'
+      },
+      'info': {
+        value: '{color.accent.blue.default}',
+        type: 'color'
+      },
+      'success': {
+        value: '{color.accent.green.default}',
+        type: 'color'
+      },
+      'warning': {
+        value: '{color.accent.orange.default}',
+        type: 'color'
+      },
+      'error': {
+        value: '{color.accent.red.default}',
+        type: 'color'
       }
     }
   }
