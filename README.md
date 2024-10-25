@@ -2987,6 +2987,151 @@ e.g., it uses the primary color (`blue`) on the border for the active state of t
 
 ![apple tertiary color](apple-tertiary-color.png)
 
+##### Form Fields
+
+Form Field Elements:
+
+- text input box shadow
+- text input box outline
+- text input box border
+- text input box background
+- text input box placeholder
+- text input box text content
+- checkbox shadow
+- checkbox outline
+- checkbox border
+- checkbox background
+- checkbox checkmark color
+- radio
+- select box
+- label
+- button shadow, outline, border, background, text
+
+States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>`, `<radio>`, `<checkbox>`):
+
+- `:default`
+- `:autofill`
+- `:enabled`
+- `:disabled`
+- `:read-only`
+- `:read-write`
+- `:placeholder-shown`
+- `:checked`
+- `:indeterminate`
+- `:blank`
+- `:valid`
+- `:invalid`
+- `:in-range`
+- `:out-of-range`
+- `:required`
+- `:optional`
+- `:user-valid`
+- `:user-invalid`
+
+##### Interaction states
+
+There are lots of interaction states needed different colors (on the text or the background) to differentiate them, such as selecting some text, hovering on a link, a link which was visited, focusing (keyboard navigating) on an input box, clicking (pressing) a button etc.
+
+Interaction states for normal text:
+
+- selection (`::selection`)
+
+![css selection](css-selected.gif)
+
+Interaction states for a link tag (**L, V, H, A**):
+
+- `:link`
+- `:visited`
+- `:hover`
+- `:focus`
+- `:focus-visible`
+- `:active`
+
+Interaction states for a button tag:
+
+- `:hover`
+- `:focus`
+- `:focus-visible`
+- `:active`
+
+Picking **primary** colors, **secondary** colors, **tertiary** colors and **quartus** colors to apply for interaction states:
+
+```sh
+touch tokens/color/interaction.js
+```
+
+`tokens/color/interaction.js`:
+
+```js
+export default {
+  color: {
+    "text": {
+      "link": {
+        "default": {
+          value: '{color.primary.1}',
+          type: 'color'
+        },
+        "interaction": {
+          "visited": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "hover": {
+            value: '{color.secondary.1}',
+            type: 'color'
+          },
+          "focus": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "focus-visible": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "active": {
+            value: '{color.tertiary.1}',
+            type: 'color'
+          }
+        }
+      }
+    },
+    "background": {
+      "interaction": {
+        "selected": {
+          value: '{color.quartus.1}',
+          type: 'color'
+        }
+      },
+      "button": {
+        "default": {
+          value: '{color.primary.1}',
+          type: 'color'
+        },
+        "interaction": {
+          "hover": {
+            value: '{color.secondary.1}',
+            type: 'color'
+          },
+          "focus": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "focus-visible": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "active": {
+            value: '{color.tertiary.1}',
+            type: 'color'
+          }
+        }
+      }
+    }
+  }
+}
+
+```
+
 #### Neutral Colors
 
 - text
@@ -3164,151 +3309,6 @@ export default {
       'error': {
         value: '{color.accent.red.default}',
         type: 'color'
-      }
-    }
-  }
-}
-
-```
-
-#### Form Fields
-
-Form Field Elements:
-
-- text input box shadow
-- text input box outline
-- text input box border
-- text input box background
-- text input box placeholder
-- text input box text content
-- checkbox shadow
-- checkbox outline
-- checkbox border
-- checkbox background
-- checkbox checkmark color
-- radio
-- select box
-- label
-- button shadow, outline, border, background, text
-
-States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>`, `<radio>`, `<checkbox>`):
-
-- `:default`
-- `:autofill`
-- `:enabled`
-- `:disabled`
-- `:read-only`
-- `:read-write`
-- `:placeholder-shown`
-- `:checked`
-- `:indeterminate`
-- `:blank`
-- `:valid`
-- `:invalid`
-- `:in-range`
-- `:out-of-range`
-- `:required`
-- `:optional`
-- `:user-valid`
-- `:user-invalid`
-
-#### Interaction states
-
-There are lots of interaction states needed different colors (on the text or the background) to differentiate them, such as selecting some text, hovering on a link, a link which was visited, focusing (keyboard navigating) on an input box, clicking (pressing) a button etc.
-
-Interaction states for normal text:
-
-- selection (`::selection`)
-
-![css selection](css-selected.gif)
-
-Interaction states for a link tag (**L, V, H, A**):
-
-- `:link`
-- `:visited`
-- `:hover`
-- `:focus`
-- `:focus-visible`
-- `:active`
-
-Interaction states for a button tag:
-
-- `:hover`
-- `:focus`
-- `:focus-visible`
-- `:active`
-
-Picking **primary** colors, **secondary** colors, **tertiary** colors and **quartus** colors to apply for interaction states:
-
-```sh
-touch tokens/color/interaction.js
-```
-
-`tokens/color/interaction.js`:
-
-```js
-export default {
-  color: {
-    "text": {
-      "link": {
-        "default": {
-          value: '{color.primary.1}',
-          type: 'color'
-        },
-        "interaction": {
-          "visited": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "hover": {
-            value: '{color.secondary.1}',
-            type: 'color'
-          },
-          "focus": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "focus-visible": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "active": {
-            value: '{color.tertiary.1}',
-            type: 'color'
-          }
-        }
-      }
-    },
-    "background": {
-      "interaction": {
-        "selected": {
-          value: '{color.quartus.1}',
-          type: 'color'
-        }
-      },
-      "button": {
-        "default": {
-          value: '{color.primary.1}',
-          type: 'color'
-        },
-        "interaction": {
-          "hover": {
-            value: '{color.secondary.1}',
-            type: 'color'
-          },
-          "focus": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "focus-visible": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "active": {
-            value: '{color.tertiary.1}',
-            type: 'color'
-          }
-        }
       }
     }
   }
