@@ -3185,9 +3185,8 @@ Form Field Elements:
 - checkbox outline
 - checkbox border
 - checkbox background
-- checkbox tick color
-- radio colors
-- ...
+- checkbox checkmark color
+- radio
 - select box
 - label
 - button shadow, outline, border, background, text
@@ -3215,11 +3214,13 @@ States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>
 
 #### Interaction states
 
-There are lots of interaction states needed different colors to differentiate them, such as hovering, focusing (keyboard navigating), clicking (pressing) etc.
+There are lots of interaction states needed different colors (on the text or the background) to differentiate them, such as selecting some text, hovering on a link, a link which was visited, focusing (keyboard navigating) on an input box, clicking (pressing) a button etc.
 
-hovered, pressed, selected, focused
+Interaction states for normal text:
 
-active, visited etc.
+- selection (`::selection`)
+
+![css selection](css-selected.gif)
 
 Interaction states for a link tag (**L, V, H, A**):
 
@@ -3236,6 +3237,78 @@ Interaction states for a button tag:
 - `:focus`
 - `:focus-visible`
 - `:active`
+
+Picking **primary** colors, **secondary** colors, **tertiary** colors and **quartus** colors to apply for interaction states:
+
+```js
+export default {
+  color: {
+    "text": {
+      "link": {
+        "default": {
+          value: '{color.primary.1}',
+          type: 'color'
+        },
+        "interaction": {
+          "visited": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "hover": {
+            value: '{color.secondary.1}',
+            type: 'color'
+          },
+          "focus": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "focus-visible": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "active": {
+            value: '{color.tertiary.1}',
+            type: 'color'
+          }
+        }
+      }
+    },
+    "background": {
+      "interaction": {
+        "selected": {
+          value: '{color.quartus.1}',
+          type: 'color'
+        }
+      },
+      "button": {
+        "default": {
+          value: '{color.primary.1}',
+          type: 'color'
+        },
+        "interaction": {
+          "hover": {
+            value: '{color.secondary.1}',
+            type: 'color'
+          },
+          "focus": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "focus-visible": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "active": {
+            value: '{color.tertiary.1}',
+            type: 'color'
+          }
+        }
+      }
+    }
+  }
+}
+
+```
 
 ### Color Nicknames
 
