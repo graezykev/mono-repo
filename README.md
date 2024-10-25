@@ -2475,7 +2475,7 @@ export default {
 
 #### Derived Colors
 
-##### Accent Colors / Color Shades
+##### Accents
 
 Derive from base colors.
 
@@ -2692,7 +2692,7 @@ export default {
 
 ```
 
-##### Alpha Colors
+##### Alpha
 
 ```sh
 mkdir tokens/color/alpha && \
