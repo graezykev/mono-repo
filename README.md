@@ -3098,7 +3098,7 @@ Interaction states for normal text:
 
 - selection (`::selection`)
 
-![css selection](css-selected.gif)
+![apple selection](apple-selection.gif)
 
 Interaction states for a link tag (**L, V, H, A**):
 
