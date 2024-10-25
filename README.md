@@ -3240,6 +3240,12 @@ Interaction states for a button tag:
 
 Picking **primary** colors, **secondary** colors, **tertiary** colors and **quartus** colors to apply for interaction states:
 
+```sh
+touch tokens/color/interaction.js
+```
+
+`tokens/color/interaction.js`:
+
 ```js
 export default {
   color: {
