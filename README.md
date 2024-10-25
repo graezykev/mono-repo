@@ -3197,6 +3197,18 @@ active, visited etc.
 
 ### Color Nicknames
 
+- color
+  - text
+    - title 1
+    - title 2
+    - content
+    - sub content
+    - link
+    - button
+  - background
+  - border
+  - shadow
+
 ### Color Inverse
 
 Means switching the colors to their opposite values on the color wheel.
