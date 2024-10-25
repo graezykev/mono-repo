@@ -3042,14 +3042,6 @@ export default {
 
 ##### Other assistant Colors
 
-If you look at Apple's website, their are many other less used colors such as `red`, `green` etc., they can be added to the secondary, tertiary or quartus colors.
-
-![apple input](apple-input.png)
-
-e.g., it uses the primary color (`blue`) on the border for the active state of the text input box, and a lighter accent of the primary color on its box shadow, you can regard it as a tertiary color.
-
-![apple tertiary color](apple-tertiary-color.png)
-
 ##### Form Fields
 
 Form Field Elements:
@@ -3093,7 +3085,16 @@ States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>
 
 ##### Interaction states
 
+Apple uses the primary color (`blue`) on the border for the focused state of the text input box, and a lighter accent of the primary color on its box shadow.
+
+![apple focus color](apple-focus-color.png)
+
 There are lots of interaction states needed different colors (on the text or the background) to differentiate them, such as selecting some text, hovering on a link, a link which was visited, focusing (keyboard navigating) on an input box, clicking (pressing) a button etc.
+
+Interaction states for Form Fields:
+
+- `:focus`
+- `:active`
 
 Interaction states for normal text:
 
@@ -3336,12 +3337,21 @@ export default {
 
 #### Semantic Colors
 
+If you look at Apple's website, their are many other less used colors such as `red`, `green` etc. to show error or correct indication, they can be added as some semantic colors.
+
+![apple input](apple-input.png)
+
+Wherever Apple's website wants to show something new, they use a orange-like color.
+
+![apple new](apple-new.png)
+
+These are the typical colors used to show in some specify scenarios.
+As we don't use green traffic signals to stop cars from going, neither we don't use green color to suggest a "stop" or "error" meaning on a website.
+
 - Success - is often associated with **green**
 - Warning - orange
 - Error / Fail - red
-- discovery - something new
-
-![apple new](apple-new.png)
+- discovery - use to show something new
 
 ```sh
 touch tokens/color/semantic.js
