@@ -3253,6 +3253,10 @@ export default {
 export default {
   color: {
     text: {
+      "default": {
+        value: '{color.accent.neutral.default}',
+        type: 'color'
+      },
       "link": {
         "default": {
           value: '{color.primary.1}',
