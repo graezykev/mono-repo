@@ -2431,13 +2431,13 @@ npm run build
 
 ```sh
 rm tokens/color/base.js && \
-touch tokens/color/base-saturated.js && \
-touch tokens/color/base-grey.js
+touch tokens/color/base/saturated.js && \
+touch tokens/color/base/grey.js
 ```
 
 ##### Saturated Colors
 
-`tokens/color/base-saturated.js`:
+`tokens/color/base/saturated.js`:
 
 ```js
 export default {
@@ -2460,7 +2460,7 @@ export default {
 
 ##### Grey Color
 
-`tokens/color/base-grey.js`:
+`tokens/color/base/grey.js`:
 
 ```js
 export default {
@@ -2513,7 +2513,7 @@ export default {
         "4": { "value": "#599eff", "type": "color" },
         "5": { "value": "#2a83ff", "type": "color" },
         "6": { "value": "#0068fb", "type": "color" },
-        "7": { "value": "#0055CC", "type": "color" },
+        "7": { "value": "{color.base.blue}", "type": "color" },
         "8": { "value": "#003c90", "type": "color" },
         "9": { "value": "#002355", "type": "color" },
         "10":{ "value": "#000b19", "type": "color" },
@@ -2590,7 +2590,7 @@ export function generateColorShades(
 `tokens/color/accent/blue.js`:
 
 ```js
-import tokens from '../base-saturated.js'
+import tokens from '../base/saturated.js'
 import { generateColorShades } from '../../../utils/index.js'
 
 const name = 'blue'
@@ -2621,14 +2621,14 @@ export default {
 
 ```sh
 rm tokens/color/accent/blue.js && \
-touch tokens/color/accent/base-saturated.js && \
-touch tokens/color/accent/base-grey.js
+touch tokens/color/accent/base/saturated.js && \
+touch tokens/color/accent/base/grey.js
 ```
 
-`tokens/color/accent/base-saturated.js`:
+`tokens/color/accent/base/saturated.js`:
 
 ```js
-import tokens from '../base-saturated.js'
+import tokens from '../base/saturated.js'
 import { generateColorShades } from '../../../utils/index.js'
 
 const colors = tokens.color.base
@@ -2659,12 +2659,12 @@ export default {
 
 ```
 
-`tokens/color/accent/base-grey.js`:
+`tokens/color/accent/base/grey.js`:
 
 Slightly diffrent in `totalShades`, `defaultShade`, `darkestLightness` and `lightestLightness`.
 
 ```js
-import tokens from '../base-grey.js'
+import tokens from '../base/grey.js'
 import { generateColorShades } from '../../../utils/index.js'
 
 const name = 'grey'
@@ -2696,15 +2696,15 @@ export default {
 
 ```sh
 mkdir tokens/color/alpha && \
-touch tokens/color/alpha/base-grey.js
+touch tokens/color/alpha/grey.js
 ```
 
-`tokens/color/alpha/base-grey.js`:
+`tokens/color/alpha/grey.js`:
 
 ```js
 import tinycolor2 from 'tinycolor2'
 
-import tokens from '../accent/base-grey.js'
+import tokens from '../accent/grey.js'
 
 const grey = tinycolor2(tokens.color.accent.grey.default.value)
 
@@ -2869,7 +2869,7 @@ At last, we create next primary color by using a lighter(even lighter than the t
 
 ```diff
 +import tinycolor from 'tinycolor2'
-+import tokens from './accent/base-saturated.js'
++import tokens from './accent/saturated.js'
 
 export default {
   color: {
@@ -2915,7 +2915,7 @@ touch tokens/color/secondary.js
 
 ```js
 import tinycolor from 'tinycolor2'
-import tokens from './accent/base-saturated.js'
+import tokens from './accent/saturated.js'
 
 export default {
   color: {
@@ -2968,7 +2968,7 @@ touch tokens/color/tertiary.js
 
 ```js
 import tinycolor from 'tinycolor2'
-import tokens from './accent/base-saturated.js'
+import tokens from './accent/saturated.js'
 
 export default {
   color: {
@@ -3007,7 +3007,7 @@ touch tokens/color/quartus.js
 
 ```js
 import tinycolor from 'tinycolor2'
-import tokens from './accent/base-saturated.js'
+import tokens from './accent/saturated.js'
 
 export default {
   color: {
@@ -3248,13 +3248,13 @@ export default {
 ##### Auto-Generate Neutral Colors from Grey Color
 
 ```sh
-rm tokens/color/accent/base-grey.js
+rm tokens/color/accent/grey.js
 ```
 
 `tokens/color/accent/neutral.js`:
 
 ```js
-import tokens from '../base-grey.js'
+import tokens from '../base/grey.js'
 import { generateColorShades } from '../../../utils/index.js'
 
 const name = 'grey' // Auto-Generate Neutral Colors from Grey Color
@@ -3312,7 +3312,7 @@ export default {
 ###### Auto-Generate Neutral Alpha Colors
 
 ```sh
-rm tokens/color/alpha/base-grey.js
+rm tokens/color/alpha/grey.js
 ```
 
 `tokens/color/alpha/neutral.js`:
@@ -3473,12 +3473,12 @@ For instance, if a button color is 700 in light theme, it will be 400 in dark th
 #### Neutral Accent/Alpha Colors for Dark Mode
 
 ```sh
-touch tokens/color/base-grey-dark.js && \
+touch tokens/color/base/grey-dark.js && \
 touch tokens/color/accent/neutral-dark.js && \
 touch tokens/color/alpha/neutral-dark.js
 ```
 
-`tokens/color/base-grey-dark.js`:
+`tokens/color/base/grey-dark.js`:
 
 ```js
 export default {
@@ -3548,7 +3548,7 @@ export default {
 `tokens/color/accent/neutral-dark.js`:
 
 ```js
-import tokens from '../base-grey-dark.js'
+import tokens from '../base/grey-dark.js'
 import { generateColorShades } from '../../../utils/index.js'
 
 const name = 'grey'
