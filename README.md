@@ -3038,170 +3038,6 @@ export default {
 
 ```
 
-##### Form Fields
-
-Form Field Elements:
-
-- text input box shadow
-- text input box outline
-- text input box border
-- text input box background
-- text input box placeholder
-- text input box text content
-- checkbox shadow
-- checkbox outline
-- checkbox border
-- checkbox background
-- checkbox checkmark color
-- radio
-- select box
-- label
-- button shadow, outline, border, background, text
-
-States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>`, `<radio>`, `<checkbox>`):
-
-- `:default`
-- `:autofill`
-- `:enabled`
-- `:disabled`
-- `:read-only`
-- `:read-write`
-- `:placeholder-shown`
-- `:checked`
-- `:indeterminate`
-- `:blank`
-- `:valid`
-- `:invalid`
-- `:in-range`
-- `:out-of-range`
-- `:required`
-- `:optional`
-- `:user-valid`
-- `:user-invalid`
-
-##### Interaction states
-
-Apple uses the primary color (`blue`) on the border for the focused state of the text input box, and a lighter accent of the primary color on its box shadow.
-
-![apple focus color](apple-focus-color.png)
-
-There are lots of interaction states needed different colors (on the text or the background) to differentiate them, such as selecting some text, hovering on a link, a link which was visited, focusing (keyboard navigating) on an input box, clicking (pressing) a button etc.
-
-Interaction states for Form Fields:
-
-- `:focus`
-- `:active`
-
-Interaction states for normal text:
-
-- selection (`::selection`)
-
-![apple selection](apple-selection.gif)
-
-Interaction states for a link tag (**L, V, H, A**):
-
-- `:link`
-- `:visited`
-- `:hover`
-- `:focus`
-- `:focus-visible`
-- `:active`
-
-Interaction states for a button tag:
-
-- `:hover`
-- `:focus`
-- `:focus-visible`
-- `:active`
-
-Picking different **primary** colors to apply for interaction states:
-
-```sh
-touch tokens/color/interaction.js
-```
-
-`tokens/color/interaction.js`:
-
-```js
-export default {
-  color: {
-    "text": {
-      "link": {
-        "default": {
-          value: '{color.primary.1}',
-          type: 'color'
-        },
-        "interaction": {
-          "visited": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "hover": {
-            value: '{color.primary.2}',
-            type: 'color'
-          },
-          "focus": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "focus-visible": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "active": {
-            value: '{color.primary.3}',
-            type: 'color'
-          }
-        }
-      }
-    },
-    "background": {
-      "interaction": {
-        "selected": {
-          value: '{color.quartus.1}',
-          type: 'color'
-        }
-      },
-      "button": {
-        "default": {
-          value: '{color.primary.1}',
-          type: 'color'
-        },
-        "interaction": {
-          "hover": {
-            value: '{color.primary.2}',
-            type: 'color'
-          },
-          "focus": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "focus-visible": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "active": {
-            value: '{color.primary.3}',
-            type: 'color'
-          }
-        }
-      }
-    },
-    "shadow": {
-      "input": {
-        "interaction": {
-          "focus": {
-            value: '{color.primary.4}',
-            type: 'color'
-          }
-        }
-      }
-    }
-  }
-}
-
-```
-
 #### Neutral Colors
 
 - text
@@ -3408,6 +3244,228 @@ export default {
   - background
   - border
   - shadow
+
+#### Form Fields
+
+Form Field Elements:
+
+- text input box shadow
+- text input box outline
+- text input box border
+- text input box background
+- text input box placeholder
+- text input box text content
+- checkbox shadow
+- checkbox outline
+- checkbox border
+- checkbox background
+- checkbox checkmark color
+- radio
+- select box
+- label
+- button shadow, outline, border, background, text
+
+States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>`, `<radio>`, `<checkbox>`):
+
+- `:default`
+- `:autofill`
+- `:enabled`
+- `:disabled`
+- `:read-only`
+- `:read-write`
+- `:placeholder-shown`
+- `:checked`
+- `:indeterminate`
+- `:blank`
+- `:valid`
+- `:invalid`
+- `:in-range`
+- `:out-of-range`
+- `:required`
+- `:optional`
+- `:user-valid`
+- `:user-invalid`
+
+#### Interaction states
+
+Apple uses the primary color (`blue`) on the border for the focused state of the text input box, and a lighter accent of the primary color on its box shadow.
+
+![apple focus color](apple-focus-color.png)
+
+There are lots of interaction states needed different colors (on the text or the background) to differentiate them, such as selecting some text, hovering on a link, a link which was visited, focusing (keyboard navigating) on an input box, clicking (pressing) a button etc.
+
+Interaction states for Form Fields:
+
+- `:focus`
+- `:active`
+
+Interaction states for normal text:
+
+- selection (`::selection`)
+
+![apple selection](apple-selection.gif)
+
+Interaction states for a link tag (**L, V, H, A**):
+
+- `:link`
+- `:visited`
+- `:hover`
+- `:focus`
+- `:focus-visible`
+- `:active`
+
+Interaction states for a button tag:
+
+- `:hover`
+- `:focus`
+- `:focus-visible`
+- `:active`
+
+Picking different **primary** colors to apply for interaction states:
+
+```sh
+touch tokens/color/interaction.js
+```
+
+`tokens/color/interaction.js`:
+
+```js
+export default {
+  color: {
+    "text": {
+      "link": {
+        "default": {
+          value: '{color.primary.1}',
+          type: 'color'
+        },
+        "interaction": {
+          "visited": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "hover": {
+            value: '{color.primary.2}',
+            type: 'color'
+          },
+          "focus": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "focus-visible": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "active": {
+            value: '{color.primary.3}',
+            type: 'color'
+          }
+        }
+      }
+    },
+    "background": {
+      "interaction": {
+        "selected": {
+          value: '{color.quartus.1}',
+          type: 'color'
+        }
+      },
+      "button": {
+        "default": {
+          value: '{color.primary.1}',
+          type: 'color'
+        },
+        "interaction": {
+          "hover": {
+            value: '{color.primary.2}',
+            type: 'color'
+          },
+          "focus": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "focus-visible": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "active": {
+            value: '{color.primary.3}',
+            type: 'color'
+          }
+        }
+      }
+    },
+    "shadow": {
+      "input": {
+        "interaction": {
+          "focus": {
+            value: '{color.primary.4}',
+            type: 'color'
+          }
+        }
+      },
+      "checkbox": {
+        "interaction": {
+          "focus": {
+            value: '{color.primary.4}',
+            type: 'color'
+          }
+        }
+      },
+      "radio": {
+        "interaction": {
+          "focus": {
+            value: '{color.primary.4}',
+            type: 'color'
+          }
+        }
+      },
+      "select": {
+        "interaction": {
+          "focus": {
+            value: '{color.primary.4}',
+            type: 'color'
+          }
+        }
+      }
+    },
+    "border": {
+      "input": {
+        "interaction": {
+          "focus": {
+            value: '{color.primary.1}',
+            type: 'color'
+          }
+        }
+      },
+      "checkbox": {
+        "interaction": {
+          "focus": {
+            value: '{color.primary.1}',
+            type: 'color'
+          }
+        }
+      },
+      "radio": {
+        "interaction": {
+          "focus": {
+            value: '{color.primary.1}',
+            type: 'color'
+          }
+        }
+      },
+      "select": {
+        "interaction": {
+          "focus": {
+            value: '{color.primary.1}',
+            type: 'color'
+          }
+        }
+      }
+    }
+  }
+}
+
+```
 
 ### Color Inverse
 
