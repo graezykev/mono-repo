@@ -3245,6 +3245,26 @@ export default {
   - border
   - shadow
 
+#### Text
+
+`tokens/color/text.js`:
+
+```js
+export default {
+  color: {
+    text: {
+      "link": {
+        "default": {
+          value: '{color.primary.1}',
+          type: 'color'
+        }
+      }
+    }
+  }
+}
+
+```
+
 #### Form Fields
 
 Form Field Elements:
@@ -3264,6 +3284,111 @@ Form Field Elements:
 - select box
 - label
 - button shadow, outline, border, background, text
+
+`tokens/color/input.js`:
+
+```js
+export default {
+  color: {
+    shadow: {
+      input: {},
+      checkbox: {},
+      radio: {},
+      select: {},
+      button: {}
+    },
+    outline: {
+      input: {},
+      checkbox: {},
+      radio: {},
+      select: {},
+      button: {}
+    },
+    border: {
+      input: {
+        default: {
+          value: "{color.accent.neutral.8}",
+          type: 'color'
+        }
+      },
+      checkbox: {
+        default: {
+          value: "{color.border.input.default}",
+          type: 'color'
+        }
+      },
+      radio: {
+        default: {
+          value: "{color.border.input.default}",
+          type: 'color'
+        }
+      },
+      select: {
+        default: {
+          value: "{color.border.input.default}",
+          type: 'color'
+        }
+      },
+      button: {}
+    },
+    background: {
+      input: {},
+      checkbox: {},
+      radio: {},
+      select: {},
+      button: {
+        "default": {
+          value: '{color.primary.1}',
+          type: 'color'
+        }
+      }
+    },
+    text: {
+      button: {
+        value: "{color.accent.neutral.1}", // `white`
+        type: 'color'
+      },
+      input: {
+        value: "{color.accent.neutral.11}", // {color.accent.neutral.default}
+        type: 'color'
+      },
+      'label-left': {
+        value: "{color.text.input}", // same to input text
+        type: 'color'
+      },
+      'label-top': {
+        value: "{color.text.input}", // same to input text
+        type: 'color'
+      },
+      'label-inside-border': {
+        value: "{color.text.input}", // same to input text
+        type: 'color'
+      },
+      'label-checkbox-radio-text': {
+        value: "{color.text.input}", // same to input text
+        type: 'color'
+      },
+      'label-under-input': {
+        value: "{color.accent.neutral.10}",
+        type: 'color'
+      },
+      'label-inset-input': {
+        value: "{color.accent.neutral.9}",
+        type: 'color'
+      },
+      'placeholder': {
+        value: "{color.text.label-inset-input}", // same to label-inset-input
+        type: 'color'
+      },
+      'tip-error': {
+        value: "{color.semantic.error}",
+        type: 'color'
+      }
+    }
+  }
+}
+
+```
 
 States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>`, `<radio>`, `<checkbox>`):
 
@@ -3334,10 +3459,6 @@ export default {
   color: {
     "text": {
       "link": {
-        "default": {
-          value: '{color.primary.1}',
-          type: 'color'
-        },
         "interaction": {
           "visited": {
             value: '{color.primary.1}',
@@ -3370,10 +3491,6 @@ export default {
         }
       },
       "button": {
-        "default": {
-          value: '{color.primary.1}',
-          type: 'color'
-        },
         "interaction": {
           "hover": {
             value: '{color.primary.2}',
@@ -3476,6 +3593,8 @@ For example, turning black text on a white background to white text on a black b
 Use inverse colors on bold backgrounds.
 
 #### Emphasis levels
+
+<https://m3.material.io/components/all-buttons#a9ca71a6-bc37-46ea-a768-f9e0c6ecdef2>
 
 Emphasis levels <https://atlassian.design/foundations/color-new#emphasis-levels> are used to differentiate the importance of text or elements in a design.
 
