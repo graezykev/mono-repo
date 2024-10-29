@@ -3477,6 +3477,34 @@ export default {
             type: 'color'
           }
         }
+      },
+      checkbox: {
+        state: {
+          checked: {
+            value: '{color.primary.1}',
+            type: 'color'
+          }
+        }
+      },
+      radio: {
+        state: {
+          checked: {
+            value: '{color.primary.1}',
+            type: 'color'
+          }
+        }
+      }
+    },
+    background: {
+      checkbox: {
+        state: {
+          checked: {
+            value: '{color.primary.1}',
+            type: 'color'
+          }
+        }
+      },
+      radio: {
       }
     }
   }
