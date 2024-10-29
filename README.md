@@ -3387,7 +3387,7 @@ export default {
         value: "{color.text.input}", // same to input text
         type: 'color'
       },
-      'label-top': {
+      'label-above': {
         value: "{color.text.input}", // same to input text
         type: 'color'
       },
@@ -3399,7 +3399,7 @@ export default {
         value: "{color.text.input}", // same to input text
         type: 'color'
       },
-      'label-under-input': {
+      'label-below': {
         value: "{color.accent.neutral.10}",
         type: 'color'
       },
