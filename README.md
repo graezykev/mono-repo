@@ -3333,13 +3333,30 @@ export default {
           type: 'color'
         }
       },
+      option: {},
       button: {}
     },
     background: {
       input: {},
-      checkbox: {},
-      radio: {},
-      select: {},
+      checkbox: {
+        checkmark: {
+          value: '{color.accent.neutral.1}',
+          type: 'color'
+        }
+      },
+      radio: {
+        checkmark: {
+          value: '{color.primary.1}',
+          type: 'color'
+        }
+      },
+      select: {
+        arrow: {
+          value: '{color.accent.neutral.1}',
+          type: 'color'
+        }
+      },
+      option: {},
       button: {
         "default": {
           value: '{color.primary.1}',
@@ -3351,6 +3368,16 @@ export default {
       button: {
         value: "{color.accent.neutral.1}", // `white`
         type: 'color'
+      },
+      select: {
+        value: "{color.accent.neutral.11}",
+        type: 'color'
+      },
+      option: {
+        default: {
+          value: "{color.accent.neutral.11}",
+          type: 'color'
+        }
       },
       input: {
         value: "{color.accent.neutral.11}", // {color.accent.neutral.default}
@@ -3485,6 +3512,14 @@ export default {
             type: 'color'
           }
         }
+      },
+      "option": {
+        "interaction": {
+          "hover": {
+            value: '{color.accent.neutral.1}',
+            type: 'color'
+          }
+        }
       }
     },
     "background": {
@@ -3506,6 +3541,18 @@ export default {
           },
           "focus-visible": {
             value: '{color.primary.1}',
+            type: 'color'
+          },
+          "active": {
+            value: '{color.primary.3}',
+            type: 'color'
+          }
+        }
+      },
+      "option": {
+        "interaction": {
+          "hover": {
+            value: '{color.primary.2}',
             type: 'color'
           },
           "active": {
