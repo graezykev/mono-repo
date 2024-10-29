@@ -3380,8 +3380,10 @@ export default {
         }
       },
       input: {
-        value: "{color.accent.neutral.11}", // {color.accent.neutral.default}
-        type: 'color'
+        "default": {
+          value: "{color.accent.neutral.11}", // {color.accent.neutral.default}
+          type: 'color'
+        }
       },
       'label-left': {
         value: "{color.text.input}", // same to input text
@@ -3408,12 +3410,10 @@ export default {
         type: 'color'
       },
       'placeholder': {
-        value: "{color.text.label-inset-input}", // same to label-inset-input
-        type: 'color'
-      },
-      'tip-error': {
-        value: "{color.semantic.error}",
-        type: 'color'
+        default: {
+          value: "{color.text.label-inset-input}", // same to label-inset-input
+          type: 'color'
+        }
       }
     }
   }
@@ -3441,6 +3441,48 @@ States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>
 - `:optional`
 - `:user-valid`
 - `:user-invalid`
+
+`tokens/color/state.js`:
+
+```js
+export default {
+  color: {
+    text: {
+      input: {
+        state: {
+          invalid: {
+            value: "{color.semantic.error}",
+            type: 'color'
+          }
+        }
+      },
+      'placeholder': {
+        state: {
+          invalid: {
+            value: "{color.semantic.error}",
+            type: 'color'
+          }
+        }
+      },
+      'tip-error': {
+        value: "{color.semantic.error}",
+        type: 'color'
+      }
+    },
+    border: {
+      input: {
+        state: {
+          invalid: {
+            value: "{color.semantic.error}",
+            type: 'color'
+          }
+        }
+      }
+    }
+  }
+}
+
+```
 
 #### Interaction states
 
