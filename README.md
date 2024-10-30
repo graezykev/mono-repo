@@ -3446,6 +3446,8 @@ States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>
 - `:user-valid`
 - `:user-invalid`
 
+- opened state of select/dropdown...
+
 `tokens/color/state.js`:
 
 ```js
