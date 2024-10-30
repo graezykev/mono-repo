@@ -3210,7 +3210,7 @@ export default {
         type: 'color'
       },
       'info': {
-        value: '{color.accent.blue.default}',
+        value: '{color.primary.default}',
         type: 'color'
       },
       'success': {
@@ -3231,7 +3231,7 @@ export default {
 
 ```
 
-### Color Nicknames
+### Color Nicknames / Shortcuts
 
 - color
   - text
@@ -3261,15 +3261,57 @@ Different grey scale.
 export default {
   color: {
     text: {
-      "default": {
-        value: '{color.accent.neutral.default}',
+      bold: {
+        value: '{color.accent.neutral.12}',
         type: 'color'
       },
-      "link": {
-        "default": {
+      default: {
+        value: '{color.accent.neutral.11}',
+        type: 'color'
+      },
+      subtle: {
+        value: '{color.accent.neutral.10}',
+        type: 'color'
+      },
+      subtler: {
+        value: '{color.accent.neutral.9}',
+        type: 'color'
+      },
+      subtlest: {
+        value: '{color.accent.neutral.8}',
+        type: 'color'
+      },
+      link: {
+        default: {
           value: '{color.primary.1}',
           type: 'color'
         }
+      },
+      nav: {
+        default: {
+          value: '{color.text.default}',
+          type: 'color'
+        },
+        'secondary': {
+          value: '{color.text.subtle}',
+          type: 'color'
+        },
+        'tertiary': {
+          value: '{color.text.subtler}',
+          type: 'color'
+        },
+        selected: {
+          value: '{color.primary.1}',
+          type: 'color'
+        }
+      },
+      information: {
+        value: '{color.semantic.info}',
+        type: 'color'
+      },
+      discover: {
+        value: '{color.semantic.new}',
+        type: 'color'
       }
     }
   }
