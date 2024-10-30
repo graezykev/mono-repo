@@ -3237,6 +3237,7 @@ export default {
   - text
     - default content
     - subtle content
+    - other subtler contents
     - bolder title
     - link
       - default
@@ -3244,16 +3245,18 @@ export default {
       - hover
       - focus
       - active
-    - button
-      - default button
-      - subtle button
-      - wireframe button
-      - link button
+    - form elements
+      - button
+        - default button
+        - subtle button
+        - wireframe button
+        - link button
     - navigation
   - background
     - default
     - subtle
-    - button
+    - form elements
+      - button
     - navigation
   - border
   - shadow
