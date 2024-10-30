@@ -3366,8 +3366,10 @@ export default {
     },
     text: {
       button: {
-        value: "{color.accent.neutral.1}", // `white`
-        type: 'color'
+        default: {
+          value: "{color.accent.neutral.1}", // `white`
+          type: 'color'
+        }
       },
       select: {
         default: {
@@ -3451,6 +3453,11 @@ States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>
 `tokens/color/state.js`:
 
 ```js
+import tokens from './accent/neutral.js'
+import tinycolor from 'tinycolor2'
+
+const white = tinycolor(tokens.color.accent.neutral['1'].value)
+
 export default {
   color: {
     text: {
@@ -3458,6 +3465,14 @@ export default {
         state: {
           invalid: {
             value: "{color.semantic.error}",
+            type: 'color'
+          }
+        }
+      },
+      button: {
+        state: {
+          disabled: {
+            value: white.setAlpha(0.5).toHex8String(),
             type: 'color'
           }
         }
