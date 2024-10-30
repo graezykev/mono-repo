@@ -3253,6 +3253,8 @@ export default {
   - background
     - default
     - subtle
+    - button
+    - navigation
   - border
   - shadow
 
