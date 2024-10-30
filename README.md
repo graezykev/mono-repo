@@ -3247,6 +3247,14 @@ export default {
 
 #### Text
 
+![apple normal grey](apple-normal-grey.png)
+
+![apple normal grey 2](apple-normal-grey-2.png)
+
+Different grey scale.
+
+![apple different grey scale](apple-different-grey-scale.png)
+
 `tokens/color/text.js`:
 
 ```js
@@ -3450,7 +3458,7 @@ States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>
 
 - opened state of select/dropdown...
 
-`tokens/color/state.js`:
+`tokens/color/input-state.js`:
 
 ```js
 import tokens from './accent/neutral.js'
