@@ -3370,8 +3370,10 @@ export default {
         type: 'color'
       },
       select: {
-        value: "{color.accent.neutral.11}",
-        type: 'color'
+        default: {
+          value: "{color.accent.neutral.11}",
+          type: 'color'
+        }
       },
       option: {
         default: {
@@ -3454,6 +3456,14 @@ export default {
         state: {
           invalid: {
             value: "{color.semantic.error}",
+            type: 'color'
+          }
+        }
+      },
+      select: {
+        state: {
+          opened: {
+            value: "{color.primary.1}",
             type: 'color'
           }
         }
