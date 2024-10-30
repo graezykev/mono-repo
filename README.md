@@ -3510,6 +3510,14 @@ export default {
       }
     },
     background: {
+      button: {
+        state: {
+          disabled: {
+            value: '{color.primary.4}',
+            type: 'color'
+          }
+        }
+      },
       checkbox: {
         state: {
           checked: {
