@@ -3235,17 +3235,32 @@ export default {
 
 - color
   - text
-    - title 1
-    - title 2
-    - content
-    - sub content
+    - default content
+    - subtle content
+    - bolder title
     - link
+      - default
+      - visited
+      - hover
+      - focus
+      - active
     - button
+      - default button
+      - subtle button
+      - wireframe button
+      - link button
+    - navigation
   - background
+    - default
+    - subtle
   - border
   - shadow
 
-#### Text
+```sh
+mkdir tokens/color/shortcut
+```
+
+#### Text / Icons
 
 ![apple normal grey](apple-normal-grey.png)
 
@@ -3255,7 +3270,7 @@ Different grey scale.
 
 ![apple different grey scale](apple-different-grey-scale.png)
 
-`tokens/color/text.js`:
+`tokens/color/shortcut/text.js`:
 
 ```js
 export default {
@@ -3319,6 +3334,21 @@ export default {
 
 ```
 
+`tokens/color/shortcut/icon.js`:
+
+```js
+import tokens from './text.js'
+
+export default {
+  color: {
+    icon: {
+      ...tokens.color.text
+    }
+  }
+}
+
+```
+
 #### Form Fields
 
 Form Field Elements:
@@ -3339,7 +3369,7 @@ Form Field Elements:
 - label
 - button shadow, outline, border, background, text
 
-`tokens/color/input.js`:
+`tokens/color/shortcut/input.js`:
 
 ```js
 export default {
@@ -3500,7 +3530,7 @@ States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>
 
 - opened state of select/dropdown...
 
-`tokens/color/input-state.js`:
+`tokens/color/shortcut/input-state.js`:
 
 ```js
 import tokens from './accent/neutral.js'
@@ -3637,10 +3667,10 @@ Interaction states for a button tag:
 Picking different **primary** colors to apply for interaction states:
 
 ```sh
-touch tokens/color/interaction.js
+touch tokens/color/shortcut/interaction.js
 ```
 
-`tokens/color/interaction.js`:
+`tokens/color/shortcut/interaction.js`:
 
 ```js
 export default {
