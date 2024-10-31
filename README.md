@@ -3402,7 +3402,80 @@ export default {
 
 ```
 
+#### Border
+
 #### States
+
+`tokens/color/primary.js`:
+
+```diff
+...
+
+export default {
+  color: {
+    primary: {
+      ...
++     visited: {
++       default: {
++         value: '{color.primary.1}',
++         type: 'color'
++       }
++     },
++     hover: {
++       default: {
++         value: '{color.primary.2}',
++         type: 'color'
++       }
++     },
++     focus: {
++       default: {
++         value: '{color.primary.1}',
++         type: 'color'
++       },
++       shadow: {
++         value: '{color.primary.4}',
++         type: 'color'
++       }
++     },
++     active: {
++       default: {
++         value: '{color.primary.3}',
++         type: 'color'
++       }
++     },
++     disabled: {
++       default: {
++         value: '{color.primary.4}',
++         type: 'color'
++       }
++     },
++     activated: {
++       default: {
++         value: '{color.primary.1}',
++         type: 'color'
++       },
++       bg: {
++         value: '{color.primary.4}',
++         type: 'color'
++       }
++     },
++     opened: {
++       default: {
++         value: '{color.primary.1}',
++         type: 'color'
++       }
++     },
++     checked: {
++       default: {
++         value: '{color.primary.1}',
++         type: 'color'
++       }
++     }
+    }
+  }
+}
+
+```
 
 `tokens/shortcut/state.js`:
 
@@ -3414,7 +3487,7 @@ export default {
         'secondary': {
           state: {
             activated: {
-              value: '{color.primary.1}',
+              value: '{color.primary.activated.default}',
               type: 'color'
             }
           }
@@ -3422,7 +3495,7 @@ export default {
         'tertiary': {
           state: {
             activated: {
-              value: '{color.primary.1}',
+              value: '{color.primary.activated.default}',
               type: 'color'
             }
           }
@@ -3434,7 +3507,7 @@ export default {
         default: {
           state: {
             activated: {
-              value: '{color.primary.4}',
+              value: '{color.primary.activated.bg}',
               type: 'color'
             }
           }
@@ -3457,23 +3530,23 @@ export default {
       "link": {
         "interaction": {
           "visited": {
-            value: '{color.primary.1}',
+            value: '{color.primary.visited.default}',
             type: 'color'
           },
           "hover": {
-            value: '{color.primary.2}',
+            value: '{color.primary.hover.default}',
             type: 'color'
           },
           "focus": {
-            value: '{color.primary.1}',
+            value: '{color.primary.focus.default}',
             type: 'color'
           },
           "focus-visible": {
-            value: '{color.primary.1}',
+            value: '{color.primary.focus.default}',
             type: 'color'
           },
           "active": {
-            value: '{color.primary.3}',
+            value: '{color.primary.active.default}',
             type: 'color'
           }
         }
@@ -3835,7 +3908,7 @@ export default {
       select: {
         state: {
           opened: {
-            value: "{color.primary.1}",
+            value: "{color.primary.opened.default}",
             type: 'color'
           }
         }
@@ -3881,7 +3954,7 @@ export default {
       checkbox: {
         state: {
           checked: {
-            value: '{color.primary.1}',
+            value: '{color.primary.checked.default}',
             type: 'color'
           }
         }
@@ -3889,7 +3962,7 @@ export default {
       radio: {
         state: {
           checked: {
-            value: '{color.primary.1}',
+            value: '{color.primary.checked.default}',
             type: 'color'
           }
         }
@@ -3899,7 +3972,7 @@ export default {
       button: {
         state: {
           disabled: {
-            value: '{color.primary.4}',
+            value: '{color.primary.disabled.default}',
             type: 'color'
           }
         },
@@ -3915,7 +3988,7 @@ export default {
       checkbox: {
         state: {
           checked: {
-            value: '{color.primary.1}',
+            value: '{color.primary.checked.default}',
             type: 'color'
           }
         }
@@ -3987,19 +4060,19 @@ export default {
       "button": {
         "interaction": {
           "hover": {
-            value: '{color.primary.2}',
+            value: '{color.primary.hover.default}',
             type: 'color'
           },
           "focus": {
-            value: '{color.primary.1}',
+            value: '{color.primary.focus.default}',
             type: 'color'
           },
           "focus-visible": {
-            value: '{color.primary.1}',
+            value: '{color.primary.focus.default}',
             type: 'color'
           },
           "active": {
-            value: '{color.primary.3}',
+            value: '{color.primary.active.default}',
             type: 'color'
           }
         },
@@ -4027,11 +4100,11 @@ export default {
       "option": {
         "interaction": {
           "hover": {
-            value: '{color.primary.2}',
+            value: '{color.primary.hover.default}',
             type: 'color'
           },
           "active": {
-            value: '{color.primary.3}',
+            value: '{color.primary.active.default}',
             type: 'color'
           }
         }
@@ -4041,7 +4114,7 @@ export default {
       "input": {
         "interaction": {
           "focus": {
-            value: '{color.primary.4}',
+            value: '{color.primary.focus.shadow}',
             type: 'color'
           }
         }
@@ -4049,7 +4122,7 @@ export default {
       "checkbox": {
         "interaction": {
           "focus": {
-            value: '{color.primary.4}',
+            value: '{color.primary.focus.shadow}',
             type: 'color'
           }
         }
@@ -4057,7 +4130,7 @@ export default {
       "radio": {
         "interaction": {
           "focus": {
-            value: '{color.primary.4}',
+            value: '{color.primary.focus.shadow}',
             type: 'color'
           }
         }
@@ -4065,7 +4138,7 @@ export default {
       "select": {
         "interaction": {
           "focus": {
-            value: '{color.primary.4}',
+            value: '{color.primary.focus.shadow}',
             type: 'color'
           }
         }
@@ -4115,7 +4188,7 @@ export default {
       "input": {
         "interaction": {
           "focus": {
-            value: '{color.primary.1}',
+            value: '{color.primary.focus.default}',
             type: 'color'
           }
         }
@@ -4123,7 +4196,7 @@ export default {
       "checkbox": {
         "interaction": {
           "focus": {
-            value: '{color.primary.1}',
+            value: '{color.primary.focus.default}',
             type: 'color'
           }
         }
@@ -4131,7 +4204,7 @@ export default {
       "radio": {
         "interaction": {
           "focus": {
-            value: '{color.primary.1}',
+            value: '{color.primary.focus.default}',
             type: 'color'
           }
         }
@@ -4139,7 +4212,7 @@ export default {
       "select": {
         "interaction": {
           "focus": {
-            value: '{color.primary.1}',
+            value: '{color.primary.focus.default}',
             type: 'color'
           }
         }
