@@ -3243,6 +3243,13 @@ export default {
       - :hover
       - :focus
       - :active
+    - navigation
+      - default
+      - secondary
+        - activated
+      - tertiary
+        - :hover
+        - activated
     - form elements
       - label
         - left
@@ -3257,9 +3264,9 @@ export default {
           - invalid(empty)
       - button
         - default button
-        - secondary button
         - subtle button
         - wireframe button
+        - secondary button
         - link button
         - :disabled
       - checkbox label
@@ -3269,13 +3276,17 @@ export default {
       - option text
         - :hover
       - text tips (warning, error etc.)
-    - navigation
   - background
     - default
-    - subtle
+    - bold
     - form elements
       - button
     - navigation
+      - default
+        - hover
+        - activated
+      - secondary
+      - tertiary
   - border
   - shadow
 
@@ -3331,16 +3342,28 @@ export default {
           type: 'color'
         },
         'secondary': {
-          value: '{color.text.subtle}',
-          type: 'color'
+          default: {
+            value: '{color.text.subtle}',
+            type: 'color'
+          },
+          activated: {
+            value: '{color.primary.1}',
+            type: 'color'
+          }
         },
         'tertiary': {
-          value: '{color.text.subtler}',
-          type: 'color'
-        },
-        selected: {
-          value: '{color.primary.1}',
-          type: 'color'
+          default: {
+            value: '{color.text.subtler}',
+            type: 'color'
+          },
+          hover: {
+            value: '{color.text.subtle}',
+            type: 'color'
+          },
+          activated: {
+            value: '{color.primary.1}',
+            type: 'color'
+          }
         }
       },
       information: {
@@ -3366,6 +3389,54 @@ export default {
   color: {
     icon: {
       ...tokens.color.text
+    }
+  }
+}
+
+```
+
+#### Background
+
+`tokens/shortcut/background.js`:
+
+```js
+export default {
+  color: {
+    background: {
+      bolder: {
+        value: '{color.accent.neutral.3}',
+        type: 'color'
+      },
+      bold: {
+        value: '{color.accent.neutral.2}',
+        type: 'color'
+      },
+      default: {
+        value: '{color.accent.neutral.1}',
+        type: 'color'
+      },
+      nav: {
+        default: {
+          hover: {
+            value: '{color.background.bold}',
+            type: 'color'
+          },
+          activated: {
+            value: '{color.primary.4}',
+            type: 'color'
+          }
+        },
+        secondary: {},
+        tertiary: {}
+      },
+      information: {
+        value: '{color.semantic.info.3}',
+        type: 'color'
+      },
+      discover: {
+        value: '{color.semantic.new.3}',
+        type: 'color'
+      }
     }
   }
 }
