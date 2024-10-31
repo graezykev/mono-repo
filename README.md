@@ -3711,7 +3711,7 @@ export default {
 
 ```
 
-#### Form Fields States
+##### Form Fields States
 
 States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>`, `<radio>`, `<checkbox>`):
 
@@ -3868,7 +3868,7 @@ export default {
 
 ```
 
-#### Interaction states
+##### Form Fields Interactions
 
 Apple uses the primary color (`blue`) on the border for the focused state of the text input box, and a lighter accent of the primary color on its box shadow.
 
