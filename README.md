@@ -3579,7 +3579,8 @@ States For an Form Field Element (`<input>`, `<textarea>`, `<select>`, `<option>
 `tokens/color/shortcut/input-state.js`:
 
 ```js
-import tokens from './accent/neutral.js'
+import tokens from '../accent/neutral.js'
+import tokens2 from '../alpha/neutral.js'
 import tinycolor from 'tinycolor2'
 
 const white = tinycolor(tokens.color.accent.neutral['1'].value)
@@ -3600,6 +3601,14 @@ export default {
           disabled: {
             value: white.setAlpha(0.5).toHex8String(),
             type: 'color'
+          }
+        },
+        subtle: {
+          state: {
+            disabled: {
+              value: tokens2.color.alpha.neutral['5'],
+              type: 'color'
+            }
           }
         }
       },
@@ -3625,6 +3634,22 @@ export default {
       }
     },
     border: {
+      button: {
+        state: {
+          disabled: {
+            value: '{color.background.button.state.disabled}',
+            type: 'color'
+          }
+        },
+        subtle: {
+          state: {
+            disabled: {
+              value: "{color.background.button.subtle.state.disabled}",
+              type: 'color'
+            }
+          }
+        }
+      },
       input: {
         state: {
           invalid: {
@@ -3656,6 +3681,14 @@ export default {
           disabled: {
             value: '{color.primary.4}',
             type: 'color'
+          }
+        },
+        subtle: {
+          state: {
+            disabled: {
+              value: "{color.alpha.neutral.2}",
+              type: 'color'
+            }
           }
         }
       },
