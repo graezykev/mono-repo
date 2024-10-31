@@ -3443,6 +3443,52 @@ export default {
 
 ```
 
+#### Interaction States
+
+`tokens/shortcut/interaction.js`:
+
+```js
+export default {
+  color: {
+    "text": {
+      "link": {
+        "interaction": {
+          "visited": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "hover": {
+            value: '{color.primary.2}',
+            type: 'color'
+          },
+          "focus": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "focus-visible": {
+            value: '{color.primary.1}',
+            type: 'color'
+          },
+          "active": {
+            value: '{color.primary.3}',
+            type: 'color'
+          }
+        }
+      }
+    },
+    "background": {
+      "interaction": {
+        "selected": {
+          value: '{color.quartus.1}',
+          type: 'color'
+        }
+      }
+    }
+  }
+}
+
+```
+
 #### Form Fields
 
 Form Field Elements:
