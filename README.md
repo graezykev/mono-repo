@@ -3437,7 +3437,18 @@ export default {
         }
       },
       option: {},
-      button: {}
+      button: { // same to background
+        "default": {
+          value: '{color.background.button.default}',
+          type: 'color'
+        },
+        subtle: {
+          default: {
+            value: "{color.background.button.subtle.default}",
+            type: 'color'
+          }
+        }
+      }
     },
     background: {
       input: {},
@@ -3464,6 +3475,12 @@ export default {
         "default": {
           value: '{color.primary.1}',
           type: 'color'
+        },
+        subtle: {
+          default: {
+            value: "{color.alpha.neutral.4}",
+            type: 'color'
+          }
         }
       }
     },
@@ -3472,6 +3489,12 @@ export default {
         default: {
           value: "{color.accent.neutral.1}", // `white`
           type: 'color'
+        },
+        subtle: {
+          default: {
+            value: "{color.accent.neutral.11}",
+            type: 'color'
+          }
         }
       },
       select: {
