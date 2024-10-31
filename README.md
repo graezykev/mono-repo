@@ -3250,43 +3250,17 @@ export default {
       - tertiary
         - :hover
         - activated
-    - form elements
-      - label
-        - left
-        - above
-        - below
-        - inside border
-        - inset input
-      - input
-        - input
-          - invalid
-        - placeholder
-          - invalid(empty)
-      - button
-        - default button
-        - subtle button
-        - wireframe button
-        - secondary button
-        - link button
-        - :disabled
-      - checkbox label
-      - radio label
-      - select text
-        - opened
-      - option text
-        - :hover
-      - text tips (warning, error etc.)
+    - discover tags
   - background
     - default
     - bold
-    - form elements
-      - button
     - navigation
       - default
         - hover
         - activated
       - secondary
       - tertiary
+    - discover tags
   - border
   - shadow
 
@@ -3551,6 +3525,42 @@ Form Field Elements:
 - select box
 - label
 - button shadow, outline, border, background, text
+
+Structure:
+
+- color
+  - text
+    - form elements
+      - label
+        - left
+        - above
+        - below
+        - inside border
+        - inset input
+      - input
+        - input
+          - invalid
+        - placeholder
+          - invalid(empty)
+      - button
+        - default button
+        - subtle button
+        - wireframe button
+        - secondary button
+        - link button
+        - :disabled
+      - checkbox label
+      - radio label
+      - select text
+        - opened
+      - option text
+        - :hover
+      - text tips (warning, error etc.)
+  - background
+    - form elements
+      - button
+  - border
+  - shadow
 
 `tokens/color/shortcut/input.js`:
 
