@@ -4100,11 +4100,11 @@ export default {
       "option": {
         "interaction": {
           "hover": {
-            value: '{color.primary.hover.default}',
+            value: '{color.background.bold}',
             type: 'color'
           },
           "active": {
-            value: '{color.primary.active.default}',
+            value: '{color.background.bolder}',
             type: 'color'
           }
         }
