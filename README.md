@@ -3715,33 +3715,39 @@ export default {
           type: 'color'
         }
       },
+      label: {
+        default: {
+          value: "{color.text.input}", // same to input text
+          type: 'color'
+        }
+      },
       'label-left': {
-        value: "{color.text.input}", // same to input text
+        value: "{color.text.label.default}",
         type: 'color'
       },
       'label-above': {
-        value: "{color.text.input}", // same to input text
+        value: "{color.text.label.default}",
         type: 'color'
       },
       'label-inside-border': {
-        value: "{color.text.input}", // same to input text
+        value: "{color.text.label.default}",
         type: 'color'
       },
       'label-checkbox-radio-text': {
-        value: "{color.text.input}", // same to input text
+        value: "{color.text.label.default}",
         type: 'color'
       },
       'label-below': {
         value: "{color.accent.neutral.10}",
         type: 'color'
       },
-      'label-inset-input': {
-        value: "{color.accent.neutral.9}",
+      'label-inset-input': { // same to placeholder
+        value: "{color.text.placeholder}",
         type: 'color'
       },
       'placeholder': {
         default: {
-          value: "{color.text.label-inset-input}", // same to label-inset-input
+          value: "{color.accent.neutral.9}",
           type: 'color'
         }
       }
@@ -3789,6 +3795,14 @@ export default {
   color: {
     text: {
       input: {
+        state: {
+          invalid: {
+            value: "{color.semantic.error.default}",
+            type: 'color'
+          }
+        }
+      },
+      label: {
         state: {
           invalid: {
             value: "{color.semantic.error.default}",
