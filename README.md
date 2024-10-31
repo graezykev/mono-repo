@@ -3817,39 +3817,15 @@ Interaction states for a button tag:
 Picking different **primary** colors to apply for interaction states:
 
 ```sh
-touch tokens/color/shortcut/interaction.js
+touch tokens/color/shortcut/input-interaction.js
 ```
 
-`tokens/color/shortcut/interaction.js`:
+`tokens/color/shortcut/input-interaction.js`:
 
 ```js
 export default {
   color: {
     "text": {
-      "link": {
-        "interaction": {
-          "visited": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "hover": {
-            value: '{color.primary.2}',
-            type: 'color'
-          },
-          "focus": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "focus-visible": {
-            value: '{color.primary.1}',
-            type: 'color'
-          },
-          "active": {
-            value: '{color.primary.3}',
-            type: 'color'
-          }
-        }
-      },
       "option": {
         "interaction": {
           "hover": {
@@ -3860,12 +3836,6 @@ export default {
       }
     },
     "background": {
-      "interaction": {
-        "selected": {
-          value: '{color.quartus.1}',
-          type: 'color'
-        }
-      },
       "button": {
         "interaction": {
           "hover": {
