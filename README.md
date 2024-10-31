@@ -3345,19 +3345,11 @@ export default {
           default: {
             value: '{color.text.subtle}',
             type: 'color'
-          },
-          activated: {
-            value: '{color.primary.1}',
-            type: 'color'
           }
         },
         'tertiary': {
           default: {
             value: '{color.text.subtler}',
-            type: 'color'
-          },
-          activated: {
-            value: '{color.primary.1}',
             type: 'color'
           }
         }
@@ -3412,12 +3404,7 @@ export default {
         type: 'color'
       },
       nav: {
-        default: {
-          activated: {
-            value: '{color.primary.4}',
-            type: 'color'
-          }
-        },
+        default: {},
         secondary: {},
         tertiary: {}
       },
@@ -3428,6 +3415,50 @@ export default {
       discover: {
         value: '{color.semantic.new.3}',
         type: 'color'
+      }
+    }
+  }
+}
+
+```
+
+#### States
+
+`tokens/shortcut/state.js`:
+
+```js
+export default {
+  color: {
+    text: {
+      nav: {
+        'secondary': {
+          state: {
+            activated: {
+              value: '{color.primary.1}',
+              type: 'color'
+            }
+          }
+        },
+        'tertiary': {
+          state: {
+            activated: {
+              value: '{color.primary.1}',
+              type: 'color'
+            }
+          }
+        }
+      }
+    },
+    background: {
+      nav: {
+        default: {
+          state: {
+            activated: {
+              value: '{color.primary.4}',
+              type: 'color'
+            }
+          }
+        }
       }
     }
   }
