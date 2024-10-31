@@ -3356,10 +3356,6 @@ export default {
             value: '{color.text.subtler}',
             type: 'color'
           },
-          hover: {
-            value: '{color.text.subtle}',
-            type: 'color'
-          },
           activated: {
             value: '{color.primary.1}',
             type: 'color'
@@ -3417,10 +3413,6 @@ export default {
       },
       nav: {
         default: {
-          hover: {
-            value: '{color.background.bold}',
-            type: 'color'
-          },
           activated: {
             value: '{color.primary.4}',
             type: 'color'
@@ -3474,6 +3466,16 @@ export default {
             type: 'color'
           }
         }
+      },
+      nav: {
+        tertiary: {
+          interaction: {
+            hover: {
+              value: '{color.text.subtle}',
+              type: 'color'
+            }
+          }
+        }
       }
     },
     "background": {
@@ -3481,6 +3483,16 @@ export default {
         "selected": {
           value: '{color.quartus.1}',
           type: 'color'
+        }
+      },
+      nav: {
+        default: {
+          interaction: {
+            hover: {
+              value: '{color.background.bold}',
+              type: 'color'
+            }
+          }
         }
       }
     }
