@@ -3232,7 +3232,7 @@ export default {
 ### Color Nicknames / Shortcuts
 
 - color
-  - text
+  - text/icon
     - default content
     - subtle content
     - other subtler contents
