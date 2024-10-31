@@ -3532,6 +3532,9 @@ Structure:
   - text
     - form elements
       - label
+        - default
+          - state
+            - :invalid
         - left
         - above
         - below
@@ -3539,26 +3542,53 @@ Structure:
         - inset input
       - input
         - input
-          - invalid
+          - state
+            - :invalid
         - placeholder
-          - invalid(empty)
+          - state
+            - :invalid(empty)
       - button
         - default button
+          - state
+            - :disabled
         - subtle button
         - wireframe button
         - secondary button
         - link button
-        - :disabled
       - checkbox label
       - radio label
       - select text
-        - opened
-      - option text
-        - :hover
+        - state
+          - opened
+      - option
+        - interaction
+          - :hover
       - text tips (warning, error etc.)
   - background
     - form elements
       - button
+        - default button
+          - interaction
+            - :hover
+            - :focus
+            - :active
+          - state
+            - :disabled
+        - subtle button
+          - interaction
+          - state
+      - checkbox
+        - checkmark
+        - state
+          - :checked
+      - option
+        - interaction
+          - :hover
+          - :active
+      - radio
+        - checkmark
+      - select
+        - arrow
   - border
   - shadow
 
@@ -3870,8 +3900,7 @@ export default {
           }
         }
       },
-      radio: {
-      }
+      radio: {}
     }
   }
 }
