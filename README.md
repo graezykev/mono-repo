@@ -3371,6 +3371,10 @@ export default {
 export default {
   color: {
     background: {
+      boldest: {
+        value: '{color.accent.neutral.4}',
+        type: 'color'
+      },
       bolder: {
         value: '{color.accent.neutral.3}',
         type: 'color'
@@ -4094,6 +4098,18 @@ export default {
               value: "{color.alpha.neutral.3}",
               type: 'color'
             }
+          }
+        }
+      },
+      select: {
+        "interaction": {
+          "hover": {
+            value: '{color.background.bolder}',
+            type: 'color'
+          },
+          "active": {
+            value: '{color.background.boldest}',
+            type: 'color'
           }
         }
       },
