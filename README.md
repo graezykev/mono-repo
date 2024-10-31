@@ -3813,6 +3813,26 @@ export default {
             value: '{color.primary.3}',
             type: 'color'
           }
+        },
+        subtle: {
+          "interaction": {
+            "hover": {
+              value: "{color.alpha.neutral.5}",
+              type: 'color'
+            },
+            "focus": {
+              value: "{color.alpha.neutral.4}",
+              type: 'color'
+            },
+            "focus-visible": {
+              value: "{color.alpha.neutral.4}",
+              type: 'color'
+            },
+            "active": {
+              value: "{color.alpha.neutral.3}",
+              type: 'color'
+            }
+          }
         }
       },
       "option": {
@@ -3863,6 +3883,46 @@ export default {
       }
     },
     "border": {
+      button: {
+        "interaction": {
+          "hover": {
+            value: "{color.background.button.interaction.hover}",
+            type: 'color'
+          },
+          "focus": {
+            value: "{color.background.button.interaction.focus}",
+            type: 'color'
+          },
+          "focus-visible": {
+            value: "{color.background.button.interaction.focus-visible}",
+            type: 'color'
+          },
+          "active": {
+            value: "{color.background.button.interaction.active}",
+            type: 'color'
+          }
+        },
+        subtle: {
+          "interaction": {
+            "hover": {
+              value: "{color.background.button.subtle.interaction.hover}",
+              type: 'color'
+            },
+            "focus": {
+              value: "{color.background.button.subtle.interaction.focus}",
+              type: 'color'
+            },
+            "focus-visible": {
+              value: "{color.background.button.subtle.interaction.focus-visible}",
+              type: 'color'
+            },
+            "active": {
+              value: "{color.background.button.subtle.interaction.active}",
+              type: 'color'
+            }
+          }
+        }
+      },
       "input": {
         "interaction": {
           "focus": {
