@@ -3467,6 +3467,10 @@ export default {
 +       default: {
 +         value: '{color.primary.1}',
 +         type: 'color'
++       },
++       bg: {
++         value: '{color.primary.4}',
++         type: 'color'
 +       }
 +     },
 +     checked: {
@@ -3993,6 +3997,14 @@ export default {
         state: {
           checked: {
             value: '{color.primary.checked.default}',
+            type: 'color'
+          }
+        }
+      },
+      select: {
+        state: {
+          opened: {
+            value: "{color.primary.opened.bg}",
             type: 'color'
           }
         }
