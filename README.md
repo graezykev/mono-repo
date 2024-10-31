@@ -3202,28 +3202,26 @@ touch tokens/color/semantic.js
 `tokens/color/semantic.js`:
 
 ```js
+import tokens from './accent/saturated.js'
+import tokens2 from './primary.js'
+
 export default {
   color: {
     semantic: {
       'new': {
-        value: '{color.accent.purple.default}',
-        type: 'color'
+        ...tokens.color.accent.purple
       },
       'info': {
-        value: '{color.primary.default}',
-        type: 'color'
+        ...tokens2.color.primary
       },
       'success': {
-        value: '{color.accent.green.default}',
-        type: 'color'
+        ...tokens.color.accent.green
       },
       'warning': {
-        value: '{color.accent.orange.default}',
-        type: 'color'
+        ...tokens.color.accent.orange
       },
       'error': {
-        value: '{color.accent.red.default}',
-        type: 'color'
+        ...tokens.color.accent.red
       }
     }
   }
@@ -3241,16 +3239,36 @@ export default {
     - bolder title
     - link
       - default
-      - visited
-      - hover
-      - focus
-      - active
+      - :visited
+      - :hover
+      - :focus
+      - :active
     - form elements
+      - label
+        - left
+        - above
+        - below
+        - inside border
+        - inset input
+      - input
+        - input
+          - invalid
+        - placeholder
+          - invalid(empty)
       - button
         - default button
+        - secondary button
         - subtle button
         - wireframe button
         - link button
+        - :disabled
+      - checkbox label
+      - radio label
+      - select text
+        - opened
+      - option text
+        - :hover
+      - text tips (warning, error etc.)
     - navigation
   - background
     - default
@@ -3326,11 +3344,11 @@ export default {
         }
       },
       information: {
-        value: '{color.semantic.info}',
+        value: '{color.semantic.info.default}',
         type: 'color'
       },
       discover: {
-        value: '{color.semantic.new}',
+        value: '{color.semantic.new.default}',
         type: 'color'
       }
     }
@@ -3549,7 +3567,7 @@ export default {
       input: {
         state: {
           invalid: {
-            value: "{color.semantic.error}",
+            value: "{color.semantic.error.default}",
             type: 'color'
           }
         }
@@ -3573,13 +3591,13 @@ export default {
       'placeholder': {
         state: {
           invalid: {
-            value: "{color.semantic.error}",
+            value: "{color.semantic.error.default}",
             type: 'color'
           }
         }
       },
       'tip-error': {
-        value: "{color.semantic.error}",
+        value: "{color.semantic.error.default}",
         type: 'color'
       }
     },
@@ -3587,7 +3605,7 @@ export default {
       input: {
         state: {
           invalid: {
-            value: "{color.semantic.error}",
+            value: "{color.semantic.error.default}",
             type: 'color'
           }
         }
