@@ -3239,25 +3239,31 @@ export default {
     - bolder title
     - link
       - default
-      - :visited
-      - :hover
-      - :focus
-      - :active
+      - interaction
+        - :visited
+        - :hover
+        - :focus
+        - :active
     - navigation
       - default
       - secondary
-        - activated
+        - state
+          - activated
       - tertiary
-        - :hover
-        - activated
+        - interaction
+          - :hover
+        - state
+          - activated
     - discover tags
   - background
     - default
     - bold
     - navigation
       - default
-        - hover
-        - activated
+        - interaction
+          - :hover
+        - state
+          - activated
       - secondary
       - tertiary
     - discover tags
