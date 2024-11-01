@@ -3492,6 +3492,24 @@ export default {
 
 ```
 
+#### Shadow
+
+`tokens/shortcut/shadow.js`
+
+```js
+export default {
+  color: {
+    shadow: {
+      default: {
+        value: '{color.alpha.neutral.4}',
+        type: 'color'
+      }
+    }
+  }
+}
+
+```
+
 #### States
 
 `tokens/color/primary.js`:
