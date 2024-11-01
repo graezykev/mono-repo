@@ -3293,7 +3293,7 @@ export default {
 mkdir tokens/color/shortcut
 ```
 
-#### Text / Icons
+#### Text / Icons / Text Decoration / Text Emphasis
 
 ![apple normal grey](apple-normal-grey.png)
 
@@ -3492,7 +3492,7 @@ export default {
 
 ```
 
-#### Shadow
+#### Shadow (Box&Text) / Outline
 
 `tokens/shortcut/shadow.js`
 
@@ -3705,6 +3705,7 @@ Form Field Elements:
 - text input box background
 - text input box placeholder
 - text input box text content
+- text input caret
 - checkbox shadow
 - checkbox outline
 - checkbox border
@@ -3737,6 +3738,7 @@ Structure:
         - placeholder
           - state
             - :invalid(empty)
+        - caret
       - button
         - default button
           - state
@@ -3902,6 +3904,10 @@ export default {
       input: {
         "default": {
           value: "{color.accent.neutral.11}", // {color.accent.neutral.default}
+          type: 'color'
+        },
+        caret: {
+          value: "{color.text.input.default}",
           type: 'color'
         }
       },
