@@ -3839,6 +3839,12 @@ export default {
             value: "{color.background.button.subtle.default}",
             type: 'color'
           }
+        },
+        wireframe: {
+          default: {
+            value: "{color.primary.default}",
+            type: 'color'
+          }
         }
       }
     },
@@ -3873,7 +3879,8 @@ export default {
             value: "{color.alpha.neutral.4}",
             type: 'color'
           }
-        }
+        },
+        wireframe: {}
       }
     },
     text: {
@@ -3885,6 +3892,12 @@ export default {
         subtle: {
           default: {
             value: "{color.accent.neutral.11}",
+            type: 'color'
+          }
+        },
+        wireframe: {
+          default: {
+            value: "{color.border.button.wireframe.default}",
             type: 'color'
           }
         }
