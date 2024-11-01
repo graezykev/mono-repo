@@ -3879,8 +3879,7 @@ export default {
             value: "{color.alpha.neutral.4}",
             type: 'color'
           }
-        },
-        wireframe: {}
+        }
       }
     },
     text: {
