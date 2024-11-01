@@ -4524,6 +4524,7 @@ Emphasis can range from **subtlest** to **boldest**.
 - subtlest
 - subtler
 - subtle
+- default
 - bold
 - bolder
 - boldest
@@ -4531,8 +4532,6 @@ Emphasis can range from **subtlest** to **boldest**.
 Emphasis determines the amount of **contrast** a color has against the default surface.
 
 Bolder colors have more **contrast** against the default surface, which adds more attention than subtle colors.
-
-##### Reference accents to generate emphasis levels and use them for button states
 
 ##### For Example
 
@@ -4555,6 +4554,160 @@ You might have high emphasis (bold and bright colors) for primary actions like b
   - captions
   - Disabled Buttons
   - Footnotes and Fine Print
+
+##### Generate Emphasis Level
+
+`utils/index.js`:
+
+```diff
+import tinycolor2 from 'tinycolor2'
+
++const emphasisLevels = [
++ 'subtlest',
++ 'subtler',
++ 'subtle',
++ 'default',
++ 'bold',
++ 'bolder',
++ 'boldest'
++]
+
++const defaultIndex = emphasisLevels.indexOf('default')
+
+export function generateColorShades(
+  name,
+  colors,
+  totalShades = 10,
+  defaultShade = 7,
+  darkestLightness = 0.05,
+  lightestLightness = 0.95,
+) {
+  const darkerShades = totalShades - defaultShade
+  const lighterShades = defaultShade - 1
+
+  const rst = {}
+
+  const value = colors[name].value
+  rst[`${defaultShade}`] = value
+  rst.default = rst[`${defaultShade}`]
+
+  const color = tinycolor2(value)
+
+  // console.warn('=============', name, value, color.toHsl(), color.toHslString(), color.getBrightness(), color.getAlpha())
+
+  const hsl = color.toHsl()
+  const lightness = hsl.l
+  const lightGap = (lightestLightness - lightness) / lighterShades
+  const darkGap = (lightness - darkestLightness) / darkerShades
+
+  for (let from = 1; from <= darkerShades; from++) {
+    const l = lightness - from * darkGap
+    const newColor = tinycolor2(Object.assign({}, hsl, { l }))
+    // console.log(newColor.toHex())
+    rst[`${defaultShade + from}`] = `#${newColor.toHex()}`
+  }
+
+  for (let from = 1; from <= lighterShades; from++) {
+    const l = lightness + from * lightGap
+    const newColor = tinycolor2(Object.assign({}, hsl, { l }))
+    // console.log(newColor.toHex())
+    rst[`${defaultShade - from}`] = `#${newColor.toHex()}`
+  }
+
+  // console.log(rst)
+
++ for (let l = defaultIndex + 1; l < emphasisLevels.length; l++) {
++   const curLevel = emphasisLevels[l]
++   const reflectLevel = defaultShade + (l - defaultIndex)
++   const target = rst[reflectLevel]
++   if (!target) break
++   rst[curLevel] = target
++ }
++
++ for (let l = defaultIndex - 1; l >= 0; l--) {
++   const curLevel = emphasisLevels[l]
++   const reflectLevel = defaultShade - (defaultIndex - l)
++   const target = rst[reflectLevel]
++   if (!target) break
++   rst[curLevel] = target
++ }
+
+  return rst
+}
+
+```
+
+##### Reference Emphasis Levels for primary colors
+
+`tokens/color/primary.js`:
+
+```diff
+...
+export default {
+  color: {
+    primary: {
+-     'default': {
+-       value: '{color.primary.1}',
+-       type: 'color'
+-     },
+-     '1': { // for the [default] state
+-       value: '{color.accent.blue.7}',
+-       type: 'color'
+-     },
++     'default': {
++       value: '{color.accent.blue.7}',
++       type: 'color'
++     },
+-     '2': { // a darker one for the [hover] state
+-       value: '{color.accent.blue.8}',
+-       type: 'color'
+-     },
++     'bold': { // a darker one for the [hover] state
++       value: '{color.accent.blue.bold}',
++       type: 'color'
++     },
+-     '3': { // a lighter one for the [active] (pressing) state
+-       value: '{color.accent.blue.6}',
+-       type: 'color'
+-     },
++     'subtle': { // a lighter one for the [active] (pressing) state
++       value: '{color.accent.blue.subtle}',
++       type: 'color'
++     },
+-     '4': { // a lighter and more transparent one for the [disabled] state
+-       value: tinycolor(tokens.color.accent.blue['5'].value).setAlpha(0.5).toHex8String(),
+-       type: 'color'
+-     },
++     'subtler': { // a more lighter one for the [active] (pressing) state
++       value: '{color.accent.blue.subtler}',
++       type: 'color'
++     },
++     'subtlest': { // a more lighter and more transparent one for the [disabled] state
++       value: tinycolor(tokens.color.accent.blue['subtlest'].value).setAlpha(0.7).toHex8String(),
++       type: 'color'
++     },
+      ...
+    }
+  }
+}
+```
+
+Then, replace all `{color.primary.1}` with `{color.primary.default}`
+
+![alt text](QQ_1730457933990.png)
+
+Replace all `{color.primary.2}` with `{color.primary.bold}`
+
+Replace all `{color.primary.3}` with `{color.primary.subtle}`
+
+Replace all `{color.primary.4}` with `{color.primary.subtlest}`
+
+```txt
+color.background.information.value tries to reference color.semantic.info.1, which is not defined.
+color.border.information.value tries to reference color.semantic.info.1, which is not defined.
+```
+
+Do the same change to secondary colors, tertiary colors and quartus colors.
 
 ### Theme Color Conversion
 
