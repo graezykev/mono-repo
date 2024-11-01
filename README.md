@@ -4499,9 +4499,11 @@ export default {
 - gradient (background-image)
 - filter
 - text-emphasis-color
+- accent-color
 - column-rule-color
 - flood-color
 - lighting-color
+- color-scheme
 
 ### Color Inverse
 
