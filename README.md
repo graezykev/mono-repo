@@ -3408,6 +3408,43 @@ export default {
 
 #### Border
 
+`tokens/shortcut/border.js`:
+
+```js
+export default {
+  color: {
+    border: {
+      bold: {
+        value: '{color.accent.neutral.7}',
+        type: 'color'
+      },
+      default: {
+        value: '{color.alpha.neutral.5}',
+        type: 'color'
+      },
+      subtle: {
+        value: '{color.alpha.neutral.4}',
+        type: 'color'
+      },
+      nav: {
+        default: {},
+        secondary: {},
+        tertiary: {}
+      },
+      information: {
+        value: '{color.semantic.info.3}',
+        type: 'color'
+      },
+      discover: {
+        value: '{color.semantic.new.3}',
+        type: 'color'
+      }
+    }
+  }
+}
+
+```
+
 #### States
 
 `tokens/color/primary.js`:
@@ -3631,6 +3668,7 @@ Structure:
         - input
           - state
             - :invalid
+            - :disabled
         - placeholder
           - state
             - :invalid(empty)
@@ -3701,25 +3739,25 @@ export default {
     border: {
       input: {
         default: {
-          value: "{color.accent.neutral.8}",
+          value: "{color.border.default}",
           type: 'color'
         }
       },
       checkbox: {
         default: {
-          value: "{color.border.input.default}",
+          value: "{color.border.default}",
           type: 'color'
         }
       },
       radio: {
         default: {
-          value: "{color.border.input.default}",
+          value: "{color.border.default}",
           type: 'color'
         }
       },
       select: {
         default: {
-          value: "{color.border.input.default}",
+          value: "{color.border.default}",
           type: 'color'
         }
       },
@@ -3956,6 +3994,10 @@ export default {
           invalid: {
             value: "{color.semantic.error.default}",
             type: 'color'
+          },
+          disabled: {
+            value: "{color.border.subtle}",
+            type: 'color'
           }
         }
       },
@@ -3964,6 +4006,10 @@ export default {
           checked: {
             value: '{color.primary.checked.default}',
             type: 'color'
+          },
+          disabled: {
+            value: "{color.border.subtle}",
+            type: 'color'
           }
         }
       },
@@ -3971,6 +4017,18 @@ export default {
         state: {
           checked: {
             value: '{color.primary.checked.default}',
+            type: 'color'
+          },
+          disabled: {
+            value: "{color.border.subtle}",
+            type: 'color'
+          }
+        }
+      },
+      select: {
+        state: {
+          disabled: {
+            value: "{color.border.subtle}",
             type: 'color'
           }
         }
