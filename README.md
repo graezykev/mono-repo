@@ -4227,6 +4227,28 @@ export default {
             type: 'color'
           }
         }
+      },
+      button: {
+        wireframe: {
+          interaction: {
+            "hover": {
+              value: '{color.accent.neutral.1}',
+              type: 'color'
+            },
+            "focus": {
+              value: '{color.accent.neutral.1}',
+              type: 'color'
+            },
+            "focus-visible": {
+              value: '{color.accent.neutral.1}',
+              type: 'color'
+            },
+            "active": {
+              value: '{color.accent.neutral.1}',
+              type: 'color'
+            }
+          }
+        }
       }
     },
     "background": {
@@ -4268,6 +4290,26 @@ export default {
               type: 'color'
             }
           }
+        },
+        wireframe: {
+          "interaction": {
+            "hover": {
+              value: '{color.primary.hover.default}',
+              type: 'color'
+            },
+            "focus": {
+              value: '{color.primary.focus.default}',
+              type: 'color'
+            },
+            "focus-visible": {
+              value: '{color.primary.focus.default}',
+              type: 'color'
+            },
+            "active": {
+              value: '{color.primary.active.default}',
+              type: 'color'
+            }
+          }
         }
       },
       select: {
@@ -4296,6 +4338,30 @@ export default {
       }
     },
     "shadow": {
+      button: {
+        interaction: {
+          focus: {
+            value: '{color.primary.focus.shadow}',
+            type: 'color'
+          }
+        },
+        subtle: {
+          interaction: {
+            focus: {
+              value: '{color.primary.focus.shadow}',
+              type: 'color'
+            }
+          }
+        },
+        wireframe: {
+          interaction: {
+            focus: {
+              value: '{color.primary.focus.shadow}',
+              type: 'color'
+            }
+          }
+        }
+      },
       "input": {
         "interaction": {
           "focus": {
@@ -4365,6 +4431,26 @@ export default {
             },
             "active": {
               value: "{color.background.button.subtle.interaction.active}",
+              type: 'color'
+            }
+          }
+        },
+        wireframe: {
+          "interaction": {
+            "hover": {
+              value: '{color.background.button.wireframe.interaction.hover}',
+              type: 'color'
+            },
+            "focus": {
+              value: '{color.background.button.wireframe.interaction.focus}',
+              type: 'color'
+            },
+            "focus-visible": {
+              value: '{color.background.button.wireframe.interaction.focus}',
+              type: 'color'
+            },
+            "active": {
+              value: '{color.background.button.wireframe.interaction.active}',
               type: 'color'
             }
           }
