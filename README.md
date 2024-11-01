@@ -4503,7 +4503,7 @@ export default {
 - column-rule-color
 - flood-color
 - lighting-color
-- color-scheme
+- border-block-color
 
 ### Color Inverse
 
