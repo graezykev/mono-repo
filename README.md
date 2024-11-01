@@ -3293,7 +3293,7 @@ export default {
 mkdir tokens/color/shortcut
 ```
 
-#### Text / Icons / Text Decoration / Text Emphasis
+#### Text / Icons / Text Decoration
 
 ![apple normal grey](apple-normal-grey.png)
 
@@ -4493,6 +4493,15 @@ export default {
 }
 
 ```
+
+#### unfrequently used colors
+
+- gradient (background-image)
+- filter
+- text-emphasis-color
+- column-rule-color
+- flood-color
+- lighting-color
 
 ### Color Inverse
 
