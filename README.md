@@ -3255,9 +3255,15 @@ export default {
         - state
           - activated
     - discover tags
+    - information tags
+    - success tags
+    - warning tags
+    - error tags
   - background
     - default
     - bold
+    - bolder
+    - boldest
     - navigation
       - default
         - interaction
@@ -3267,7 +3273,20 @@ export default {
       - secondary
       - tertiary
     - discover tags
+    - discover tags
+    - information tags
+    - success tags
+    - warning tags
+    - error tags
   - border
+    - default
+    - bold
+    - subtle
+    - discover tags
+    - information tags
+    - success tags
+    - warning tags
+    - error tags
   - shadow
 
 ```sh
@@ -3376,6 +3395,8 @@ export default {
 ```
 
 #### Background
+
+![apple background](apple-background.png)
 
 `tokens/shortcut/background.js`:
 
