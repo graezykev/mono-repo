@@ -3341,6 +3341,18 @@ export default {
       discover: {
         value: '{color.semantic.new.default}',
         type: 'color'
+      },
+      success: {
+        value: '{color.semantic.success.default}',
+        type: 'color'
+      },
+      warning: {
+        value: '{color.semantic.warning.default}',
+        type: 'color'
+      },
+      error: {
+        value: '{color.semantic.error.default}',
+        type: 'color'
       }
     }
   }
@@ -3387,17 +3399,24 @@ export default {
         value: '{color.accent.neutral.1}',
         type: 'color'
       },
-      nav: {
-        default: {},
-        secondary: {},
-        tertiary: {}
-      },
       information: {
-        value: '{color.semantic.info.3}',
+        value: '{color.semantic.info.1}',
         type: 'color'
       },
       discover: {
-        value: '{color.semantic.new.3}',
+        value: '{color.semantic.new.1}',
+        type: 'color'
+      },
+      success: {
+        value: '{color.semantic.success.1}',
+        type: 'color'
+      },
+      warning: {
+        value: '{color.semantic.warning.1}',
+        type: 'color'
+      },
+      error: {
+        value: '{color.semantic.error.1}',
         type: 'color'
       }
     }
@@ -3426,17 +3445,24 @@ export default {
         value: '{color.alpha.neutral.4}',
         type: 'color'
       },
-      nav: {
-        default: {},
-        secondary: {},
-        tertiary: {}
-      },
       information: {
-        value: '{color.semantic.info.3}',
+        value: '{color.semantic.info.1}',
         type: 'color'
       },
       discover: {
-        value: '{color.semantic.new.3}',
+        value: '{color.semantic.new.1}',
+        type: 'color'
+      },
+      success: {
+        value: '{color.semantic.success.1}',
+        type: 'color'
+      },
+      warning: {
+        value: '{color.semantic.warning.1}',
+        type: 'color'
+      },
+      error: {
+        value: '{color.semantic.error.1}',
         type: 'color'
       }
     }
