@@ -4032,6 +4032,14 @@ export default {
               type: 'color'
             }
           }
+        },
+        wireframe: {
+          state: {
+            disabled: {
+              value: "{color.border.button.wireframe.state.disabled}",
+              type: 'color'
+            }
+          }
         }
       },
       select: {
@@ -4067,6 +4075,14 @@ export default {
           state: {
             disabled: {
               value: "{color.background.button.subtle.state.disabled}",
+              type: 'color'
+            }
+          }
+        },
+        wireframe: {
+          state: {
+            disabled: {
+              value: "{color.primary.4}",
               type: 'color'
             }
           }
