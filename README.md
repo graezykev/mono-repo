@@ -4517,9 +4517,11 @@ Use inverse colors on bold backgrounds.
 
 <https://m3.material.io/components/all-buttons#a9ca71a6-bc37-46ea-a768-f9e0c6ecdef2>
 
-Emphasis levels <https://atlassian.design/foundations/color-new#emphasis-levels> are used to differentiate the importance of text or elements in a design.
+<https://atlassian.design/foundations/color-new#emphasis-levels>
 
-Emphasis can range from **subtlest** to **boldest**.
+Emphasis Levels  are used to differentiate the importance of text or elements in a design.
+
+**Firstly**, in terms of a single color, different shades show different Emphasis, and Emphasis can range from **subtlest** to **boldest**.
 
 - subtlest
 - subtler
@@ -4529,13 +4531,17 @@ Emphasis can range from **subtlest** to **boldest**.
 - bolder
 - boldest
 
-Emphasis determines the amount of **contrast** a color has against the default surface.
+For example, when disigning colors for a button, Different Shades of the blue color indicate Different significances of the button's status, the darker the color, the more emphatic it is.
+
+![different color shades](different-color-shades.png)
+
+**Secondly**, Emphasis determines the amount of **contrast** a color has against the default surface.
 
 Bolder colors have more **contrast** against the default surface, which adds more attention than subtle colors.
 
-##### For Example
+![color contrast](contrast.png)
 
-You might have high emphasis (bold and bright colors) for primary actions like buttons or headers, medium emphasis for secondary actions, and low emphasis (muted colors) for less critical information like captions.
+**For Example**, You might have high emphasis (bold and bright colors) for primary actions like buttons or headers, medium emphasis for secondary actions, and low emphasis (muted colors) for less critical information like captions.
 
 - high emphasis
   - primary actions like buttons or headers
