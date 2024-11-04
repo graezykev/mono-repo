@@ -4863,6 +4863,10 @@ export default {
 
 ```
 
+#### Use theme agnostic color descriptions
+
+<https://atlassian.design/foundations/color-new/color-picker-swatches#use-theme-agnostic-color-descriptions>
+
 ### Color Accessibility
 
 <https://webaim.org/resources/contrastchecker/>
