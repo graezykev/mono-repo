@@ -4694,7 +4694,7 @@ export default {
 
 Then, replace all `{color.primary.1}` with `{color.primary.default}`
 
-![alt text](QQ_1730457933990.png)
+![replace primary](replace-primary.png)
 
 Replace all `{color.primary.2}` with `{color.primary.bold}`
 
