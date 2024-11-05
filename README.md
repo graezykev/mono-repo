@@ -4703,15 +4703,47 @@ Do the same change to secondary colors, tertiary colors and quartus colors.
 
 ### Color Inverse
 
-Means switching the colors to their opposite values on the color wheel.
+Color Inverse, can used to create high emphasis levels.
 
 For example, turning black text on a white background to white text on a black background. This is often used to create high-contrast versions of designs for better accessibility.
 
-Use inverse colors on bold backgrounds.
+Inverse Colors can be created by switching the colors to their **opposite** values on the color wheel, but it's not just about switching between black and white.
+
+On Apple's website, the blue and white color are always appearing as a color pair, such as white text on blue background, blue text and border on white background.
+
+![apple color inverse](apple-color-inverse.png)
+
+This also happens in other color pairs.
+
+![apple color inverse](apple-color-inverse.gif)
+
+Let's go back to the previous example of colors for a button.
 
 ![color contrast](contrast.png)
 
-Here, it's not only the contrast between the blue button and the white background, but also the contrast it has between blue color and the white text, that constitute the Emphasis Level.
+It's not only the contrast between the blue button and the white background, but also the contrast it has between blue color and the white text, that constitute the Emphasis Level.
+
+The `hover` and `disabled` status of the button has low contrast, which deemphasize the button.
+
+Here, the darker blue colors of the `default` and `active` button, and the white color of the text, are considered **inverse** colors, or color pairs. While the light blue and white pairs on `hover` and `disabled` buttons, are not.
+
+Let's say you have a "submit" button on your page, which should be an important element. If you replace the background with a light blue which you use on the `hover` status, the color would be considered as less significant, this is not a best practies.
+
+For those importand elements of your website (application), you need to use inverse color pairs to add more attention.
+
+This usually happens on elements with bold backgrounds, like important buttons, error tips, warning toast etc.
+
+![red good](red-good.png)
+
+Using white text on a red background to emphasis error/fail informations is a best practise while black text is not.
+
+![red bad](red-bad.png)
+
+However, using black text on a orange background to emphasis warning information is a much better choice than white text.
+
+![orange good](orange-good.png)
+
+![orange bad](orange-bad.png)
 
 ### Theme Color Conversion
 
