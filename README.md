@@ -4739,13 +4739,13 @@ Using white text on a red background to emphasis error/fail informations is a be
 
 ![red bad](red-bad.png)
 
-However, using black text on a orange background to emphasis warning information is a much better choice than white text.
+However, using black (grey) text on an orange background to emphasis warning information is a much better choice than white text.
 
 ![orange good](orange-good.png)
 
 ![orange bad](orange-bad.png)
 
-#### Create Inverse Colors for bold Backgrounds
+#### Create Inverse Colors for Backgrounds
 
 ### Theme Color Conversion
 
