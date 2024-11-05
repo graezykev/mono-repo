@@ -4505,14 +4505,6 @@ export default {
 - lighting-color
 - border-block-color
 
-### Color Inverse
-
-Means switching the colors to their opposite values on the color wheel.
-
-For example, turning black text on a white background to white text on a black background. This is often used to create high-contrast versions of designs for better accessibility.
-
-Use inverse colors on bold backgrounds.
-
 #### Emphasis levels
 
 <https://m3.material.io/components/all-buttons#a9ca71a6-bc37-46ea-a768-f9e0c6ecdef2>
@@ -4521,45 +4513,39 @@ Use inverse colors on bold backgrounds.
 
 Emphasis Levels  are used to differentiate the importance of text or elements in a design.
 
-**Firstly**, in terms of a single color, different shades show different Emphasis, and Emphasis can range from **subtlest** to **boldest**.
+Take X for example, it use a grey color `rgb(15, 20, 25)` for the main content of the tweets, and a lighter grey `rgb(83, 100, 113)` for those extra informations such as user names, dates, sources, and footers of the tweet.
+
+![x text color emphasis level](x-text-color-emphasis-level.png)
+
+The darker color has a higher **contrast** against the background (white color).
+
+Another example, when disigning colors for a button, different Shades of the blue color indicate different significances of the button's status, the darker the color, the more emphatic it is.
+
+![different color shades](different-color-shades.png)
+
+Emphasis Level determines the amount of **contrast** a color has against the default surface. Based on the same background color, different shades show different emphasis, and emphasis can range from **subtlest** to **boldest**.
 
 - subtlest
 - subtler
 - subtle
-- default
+- **default**
 - bold
 - bolder
 - boldest
 
-For example, when disigning colors for a button, Different Shades of the blue color indicate Different significances of the button's status, the darker the color, the more emphatic it is.
-
-![different color shades](different-color-shades.png)
-
-**Secondly**, Emphasis determines the amount of **contrast** a color has against the default surface.
-
 Bolder colors have more **contrast** against the default surface, which adds more attention than subtle colors.
 
-![color contrast](contrast.png)
+You might have high emphasis (bold and bright colors) for primary actions like buttons or headers, medium emphasis for secondary actions, and low emphasis (muted colors) for less critical information like captions.
 
-**For Example**, You might have high emphasis (bold and bright colors) for primary actions like buttons or headers, medium emphasis for secondary actions, and low emphasis (muted colors) for less critical information like captions.
+Let's look at how Apple uses emphasis levels on its website:
 
-- high emphasis
-  - primary actions like buttons or headers
-    - "Login" button
-    - Save
-    - Add to Cart
+**High Emphasis**: The product images and prominent buttons (like "Buy" or "Learn More") are in high emphasis colors. These elements are designed to catch your eye and draw attention.
 
-- medium emphasis
-  - secondary actions
-    - Forgot Password
-    - Cancel
-    - Add to Wishlist
+**Medium Emphasis**: The product titles and secondary buttons (like "Add to Bag") use medium emphasis colors. They are noticeable but not as striking as the high emphasis elements.
 
-- low emphasis
-  - Placeholder Text
-  - captions
-  - Disabled Buttons
-  - Footnotes and Fine Print
+**Low Emphasis**: Elements like disclaimers, footnotes, and less critical information (like legal text) are in low emphasis colors. These are usually lighter or muted shades that don't distract from the main content.
+
+Apple's design ensures that the most important information stands out while still providing necessary details in a less prominent way.
 
 ##### Generate Emphasis Level
 
@@ -4714,6 +4700,18 @@ color.border.information.value tries to reference color.semantic.info.1, which i
 ```
 
 Do the same change to secondary colors, tertiary colors and quartus colors.
+
+### Color Inverse
+
+Means switching the colors to their opposite values on the color wheel.
+
+For example, turning black text on a white background to white text on a black background. This is often used to create high-contrast versions of designs for better accessibility.
+
+Use inverse colors on bold backgrounds.
+
+![color contrast](contrast.png)
+
+Here, it's not only the contrast between the blue button and the white background, but also the contrast it has between blue color and the white text, that constitute the Emphasis Level.
 
 ### Theme Color Conversion
 
