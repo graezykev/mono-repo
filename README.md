@@ -4745,6 +4745,8 @@ However, using black text on a orange background to emphasis warning information
 
 ![orange bad](orange-bad.png)
 
+#### Create Inverse Colors for bold Backgrounds
+
 ### Theme Color Conversion
 
 Neutral colors should be set up in a way that makes it easy to convert a light theme to a dark theme.
