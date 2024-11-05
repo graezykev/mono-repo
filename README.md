@@ -4913,6 +4913,8 @@ export default {
 
 <https://webaim.org/resources/contrastchecker/?fcolor=D9DFE6&bcolor=080B0D>
 
+<https://www.boia.org/blog/whats-the-difference-between-wcag-level-a-level-aa-and-level-aaa>
+
 ### Color Example
 
 Apple’s brand colors are iconic and meticulously chosen. Primarily, Apple sticks to a minimalist color palette that includes silver, space gray, and gold for its devices. Their website reflects this too, using these colors in product imagery and accents. You’ll often see the crisp white background, which helps these brand colors pop. When they introduce new products or features, they sometimes incorporate vibrant, eye-catching colors like bright red for special editions (such as the (PRODUCT)RED line).
