@@ -3877,7 +3877,7 @@ export default {
       },
       label: {
         default: {
-          value: "{color.text.input}", // same to input text
+          value: "{color.text.input.default}", // same to input text
           type: 'color'
         }
       },
@@ -3902,7 +3902,7 @@ export default {
         type: 'color'
       },
       'label-inset-input': { // same to placeholder
-        value: "{color.text.placeholder}",
+        value: "{color.text.placeholder.default}",
         type: 'color'
       },
       'placeholder': {
@@ -3980,7 +3980,7 @@ export default {
         subtle: {
           state: {
             disabled: {
-              value: tokens2.color.alpha.neutral['5'],
+              value: tokens2.color.alpha.neutral['5'].value,
               type: 'color'
             }
           }
