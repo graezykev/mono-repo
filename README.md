@@ -3421,23 +3421,23 @@ export default {
         type: 'color'
       },
       information: {
-        value: '{color.semantic.info.1}',
+        value: '{color.semantic.info.default}',
         type: 'color'
       },
       discover: {
-        value: '{color.semantic.new.1}',
+        value: '{color.semantic.new.default}',
         type: 'color'
       },
       success: {
-        value: '{color.semantic.success.1}',
+        value: '{color.semantic.success.default}',
         type: 'color'
       },
       warning: {
-        value: '{color.semantic.warning.1}',
+        value: '{color.semantic.warning.default}',
         type: 'color'
       },
       error: {
-        value: '{color.semantic.error.1}',
+        value: '{color.semantic.error.default}',
         type: 'color'
       }
     }
@@ -3467,23 +3467,23 @@ export default {
         type: 'color'
       },
       information: {
-        value: '{color.semantic.info.1}',
+        value: '{color.semantic.info.default}',
         type: 'color'
       },
       discover: {
-        value: '{color.semantic.new.1}',
+        value: '{color.semantic.new.default}',
         type: 'color'
       },
       success: {
-        value: '{color.semantic.success.1}',
+        value: '{color.semantic.success.default}',
         type: 'color'
       },
       warning: {
-        value: '{color.semantic.warning.1}',
+        value: '{color.semantic.warning.default}',
         type: 'color'
       },
       error: {
-        value: '{color.semantic.error.1}',
+        value: '{color.semantic.error.default}',
         type: 'color'
       }
     }
@@ -4700,6 +4700,64 @@ color.border.information.value tries to reference color.semantic.info.1, which i
 ```
 
 Do the same change to secondary colors, tertiary colors and quartus colors.
+
+#### Use medium emphasis for default warning color
+
+use the lighter accent as default warning background color
+
+`tokens/color/semantic.js`:
+
+```diff
+      'warning': {
+-       ...tokens.color.accent.orange
++       ...tokens.color.accent.orange,
++       default: tokens.color.accent.orange['6'], // use the lighter accent as default warning background color
++       subtle: tokens.color.accent.orange['5'],
++       subtler: tokens.color.accent.orange['4'],
++       subtlest: tokens.color.accent.orange['3'],
++       bold: tokens.color.accent.orange['7'],
++       bolder: tokens.color.accent.orange['8'],
++       boldest: tokens.color.accent.orange['9'],
+      },
+```
+
+#### Use medium emphasis for discovery information color
+
+set the background & border colors to much lighter colors
+
+`tokens/color/shortcut/background.js`:
+
+```diff
++import tokens from '../semantic.js'
++import tinycolor from 'tinycolor2'
+
+export default {
+  color: {
+    background: {
+      ...
+      discover: {
+-       value: '{color.semantic.new.default}',
++       value: tinycolor(tokens.color.semantic.new.subtlest.value).setAlpha(0.5).toHex8String(),
+        type: 'color'
+      },
+```
+
+`tokens/color/shortcut/border.js`:
+
+```diff
++import tokens from '../semantic.js'
++import tinycolor from 'tinycolor2'
+
+export default {
+  color: {
+    border: {
+      ...
+      discover: {
+-       value: '{color.semantic.new.default}',
++       value: tinycolor(tokens.color.semantic.new.subtlest.value).setAlpha(0.5).toHex8String(),
+        type: 'color'
+      },
+```
 
 ### Color Inverse
 
