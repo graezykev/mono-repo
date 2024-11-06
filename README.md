@@ -3881,27 +3881,27 @@ export default {
           type: 'color'
         }
       },
-      'label-left': {
+      'label.left': {
         value: "{color.text.label.default}",
         type: 'color'
       },
-      'label-above': {
+      'label.above': {
         value: "{color.text.label.default}",
         type: 'color'
       },
-      'label-inside-border': {
+      'label.inside.border': {
         value: "{color.text.label.default}",
         type: 'color'
       },
-      'label-checkbox-radio-text': {
+      'label.checkbox.radio': {
         value: "{color.text.label.default}",
         type: 'color'
       },
-      'label-below': {
+      'label.below': {
         value: "{color.accent.neutral.10}",
         type: 'color'
       },
-      'label-inset-input': { // same to placeholder
+      'label.inside.input': { // same to placeholder
         value: "{color.text.placeholder.default}",
         type: 'color'
       },
