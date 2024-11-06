@@ -4587,6 +4587,19 @@ export function generateColorShades(
 
 ```
 
+By this mapping, the accents actually have semantic names instead of `blue.1`, `blue.2`, ..., `blue.10`
+
+- `{color.accent.blue.1}` = `{color.accent.blue.lightest}`
+- `{color.accent.blue.2}` = `{color.accent.blue.lighter}`
+- `{color.accent.blue.3}` = `{color.accent.blue.light}`
+- `{color.accent.blue.4}` = `{color.accent.blue.subtlest}`
+- `{color.accent.blue.5}` = `{color.accent.blue.subtler}`
+- `{color.accent.blue.6}` = `{color.accent.blue.subtle}`
+- `{color.accent.blue.7}` = `{color.accent.blue.default}`
+- `{color.accent.blue.8}` = `{color.accent.blue.bold}`
+- `{color.accent.blue.9}` = `{color.accent.blue.bolder}`
+- `{color.accent.blue.10}` = `{color.accent.blue.boldest}`
+
 ##### Reference Emphasis Levels for primary colors
 
 `tokens/color/primary.js`:
@@ -4632,7 +4645,7 @@ export default {
 +       value: '{color.accent.blue.subtler}',
 +       type: 'color'
 +     },
-+     'subtlest': { // a more lighter and more transparent one for the [disabled] state
++     'blur': { // a more lighter and more transparent one for the [disabled] state
 +       value: tinycolor(tokens.color.accent.blue['subtlest'].value).setAlpha(0.7).toHex8String(),
 +       type: 'color'
 +     },
@@ -4650,7 +4663,7 @@ Replace all `{color.primary.2}` with `{color.primary.bold}`
 
 Replace all `{color.primary.3}` with `{color.primary.subtle}`
 
-Replace all `{color.primary.4}` with `{color.primary.subtlest}`
+Replace all `{color.primary.4}` with `{color.primary.blur}`
 
 ```txt
 color.background.information.value tries to reference color.semantic.info.1, which is not defined.
