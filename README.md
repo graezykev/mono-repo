@@ -4475,8 +4475,11 @@ Another example, when disigning colors for a button, different Shades of the blu
 
 ![different color shades](different-color-shades.png)
 
-Emphasis Level determines the amount of **contrast** a color has against the default surface. Based on the same background color, different shades show different emphasis, and emphasis can range from **subtlest** to **boldest**.
+Emphasis Level determines the amount of **contrast** a color has against the default surface. Based on the same background color, different shades show different emphasis, and emphasis can range from lightest to **subtle** to **boldest**.
 
+- lightest
+- lighter
+- light
 - subtlest
 - subtler
 - subtle
@@ -4507,6 +4510,9 @@ Apple's design ensures that the most important information stands out while stil
 import tinycolor2 from 'tinycolor2'
 
 +const emphasisLevels = [
++ 'lightest',
++ 'lighter',
++ 'light',
 + 'subtlest',
 + 'subtler',
 + 'subtle',
