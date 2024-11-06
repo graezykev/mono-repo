@@ -4759,19 +4759,19 @@ export default {
   color: {
     background: {
       ...
-+     'discover-bold': {
++     'discover.bold': {
 +       value: '{color.semantic.new.default}',
 +       type: 'color'
 +     },
-+     'success-bold': {
++     'success.bold': {
 +       value: '{color.semantic.success.default}',
 +       type: 'color'
 +     },
-+     'warning-bold': {
++     'warning.bold': {
 +       value: '{color.semantic.warning.default}',
 +       type: 'color'
 +     },
-+     'error-bold': {
++     'error.bold': {
 +       value: '{color.semantic.error.default}',
 +       type: 'color'
 +     }
@@ -4788,19 +4788,19 @@ export default {
   color: {
     border: {
       ...
-+     'discover-bold': {
++     'discover.bold': {
 +       value: '{color.semantic.new.default}',
 +       type: 'color'
 +     },
-+     'success-bold': {
++     'success.bold': {
 +       value: '{color.semantic.success.default}',
 +       type: 'color'
 +     },
-+     'warning-bold': {
++     'warning.bold': {
 +       value: '{color.semantic.warning.default}',
 +       type: 'color'
 +     },
-+     'error-bold': {
++     'error.bold': {
 +       value: '{color.semantic.error.default}',
 +       type: 'color'
 +     }
@@ -4817,19 +4817,19 @@ export default {
   color: {
     text: {
       ...
-+     'discover-bold': {
++     'discover.bold': {
 +       value: '{color.accent.neutral.1}',
 +       type: 'color'
 +     },
-+     'success-bold': {
++     'success.bold': {
 +       value: '{color.accent.neutral.1}',
 +       type: 'color'
 +     },
-+     'warning-bold': {
++     'warning.bold': {
 +       value: '{color.accent.neutral.1}',
 +       type: 'color'
 +     },
-+     'error-bold': {
++     'error.bold': {
 +       value: '{color.accent.neutral.1}',
 +       type: 'color'
 +     }
@@ -4918,6 +4918,31 @@ export default {
 ```
 
 A simple rule is that when you choose text color based on dark saturated colors, like `{color.accent.blue.7}` or higher ones, you should use `{color.text.inverse}`.
+
+``:
+
+```diff
+      'discover.bold': {
+-       value: '{color.accent.neutral.1}',
++       value: '{color.text.inverse}',
+        type: 'color'
+      },
+      'success.bold': {
+-       value: '{color.accent.neutral.1}',
++       value: '{color.text.inverse}',
+        type: 'color'
+      },
+      'warning.bold': {
+-       value: '{color.accent.neutral.1}',
++       value: '{color.text.inverse}',
+        type: 'color'
+      },
+      'error.bold': {
+-       value: '{color.accent.neutral.1}',
++       value: '{color.text.inverse}',
+        type: 'color'
+      }
+```
 
 ### Theme Color Conversion
 
