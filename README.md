@@ -4733,19 +4733,49 @@ For those importand elements of your website (application), you need to use inve
 
 This usually happens on elements with bold backgrounds, like important buttons, error tips, warning toast etc.
 
-![red good](red-good.png)
-
-Using white text on a red background to emphasis error/fail informations is a best practise while black text is not.
+By far, our default text color is the grey color `{color.text.default}` (`{color.accent.neutral.11}`), if you use this text color to show a error message, it can be quite fuzzy because the text color `#172b4d` has a low contrast against the red background `#ae2e24`, which delivers a weak intention.
 
 ![red bad](red-bad.png)
 
-However, using black (grey) text on an orange background to emphasis warning information is a much better choice than white text.
+Instead, the best practise to emphasis error/fail informations is using white text (`color.accent.neutral.1`).
 
-![orange good](orange-good.png)
+![red good](red-good.png)
+
+Now, the white color is the inverse color of the red background.
+
+However, imagine we're using the subtle orange color (`{color.accent.orange.subtle}`, `#da5f00`) as the background to display a warning toast, using black (grey) text emphasis warning information is a much better choice than white text.
 
 ![orange bad](orange-bad.png)
 
-#### Create Inverse Colors for Backgrounds
+![orange good](orange-good.png)
+
+Generally speaking, we should be using white text, border, or graphical objects like icon, on darker backgrounds, and black (grey text) ones on light backgrounds.
+
+#### Create Inverse Text/Icon/Border Colors for Bold Backgrounds
+
+`tokens/color/shortcut/text.js`:
+
+```diff
+export default {
+  color: {
+    text: {
++     inverse: {
++       value: '{color.accent.neutral.1}',
++       type: 'color'
++     },
+```
+
+`tokens/color/shortcut/border.js`:
+
+```diff
+export default {
+  color: {
+    border: {
++     inverse: {
++       value: '{color.accent.neutral.1}',
++       type: 'color'
++     },
+```
 
 ### Theme Color Conversion
 
