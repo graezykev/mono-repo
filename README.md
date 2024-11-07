@@ -2466,7 +2466,7 @@ export default {
 export default {
   color: {
     base: {
-      "grey": { "value": "#172B4D", "type": "color" }
+      "grey": { "value": "#1d1d1f", "type": "color" }
     }
   }
 }
@@ -4942,7 +4942,7 @@ For those importand elements of your website (application), you need to use inve
 
 This usually happens on elements with bold backgrounds, like important buttons, error tips, warning toast etc.
 
-By far, our default text color is the grey color `{color.text.default}` (`{color.accent.neutral.11}`), if you use this text color to show a error message, it can be quite fuzzy because the text color `#172b4d` has a low contrast against the red background `#ae2e24`, which delivers a weak intention.
+By far, our default text color is the grey color `{color.text.default}` (`{color.accent.neutral.11}`), if you use this text color to show a error message, it can be quite fuzzy because the text color `#1d1d1f` has a low contrast against the red background `#ae2e24`, which delivers a weak intention.
 
 ![red bad](red-bad.png)
 
