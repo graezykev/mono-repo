@@ -4952,11 +4952,15 @@ Instead, the best practise to emphasis error/fail informations is using white te
 
 Now, the white color is the inverse color of the red background.
 
-However, imagine we're using the subtle orange color (`{color.accent.orange.subtle}`, `#da5f00`) as the background to display a warning toast, using black (grey) text emphasis warning information is a much better choice than white text.
+However, imagine we're using the subtle orange color (`{color.accent.orange.subtle}`, `#da5f00`) as the background to display a warning toast, using black (grey) text (`#1d1d1f`) emphasis warning information is a much better choice than white text.
 
 ![orange bad](orange-bad.png)
 
 ![orange good](orange-good.png)
+
+Otherwise, using the default orange (`{color.accent.orange.default}`, `#a54800`) and white text can also deliver a emphatic intention.
+
+![orange good](orange-good-2.png)
 
 Generally speaking, we should be using white text, border, or graphical objects like icon, on darker backgrounds, and black (grey text) ones on light backgrounds.
 
