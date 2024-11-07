@@ -3159,7 +3159,7 @@ import tinycolor2 from 'tinycolor2'
 import tokens from '../accent/neutral.js'
 
 // console.log(tokens.color.accent.neutral['11'].value)
-const neutral = tinycolor2(tokens.color.accent.neutral['11'].value)
+const neutral = tinycolor2(tokens.color.accent.neutral.default.value)
 
 export default {
   color: {
@@ -3842,7 +3842,7 @@ export default {
         },
         subtle: {
           default: {
-            value: "{color.accent.neutral.11}",
+            value: "{color.accent.neutral.default}",
             type: 'color'
           }
         },
@@ -3855,19 +3855,19 @@ export default {
       },
       select: {
         default: {
-          value: "{color.accent.neutral.11}",
+          value: "{color.accent.neutral.default}",
           type: 'color'
         }
       },
       option: {
         default: {
-          value: "{color.accent.neutral.11}",
+          value: "{color.accent.neutral.default}",
           type: 'color'
         }
       },
       input: {
         "default": {
-          value: "{color.accent.neutral.11}", // {color.accent.neutral.default}
+          value: "{color.accent.neutral.default}",
           type: 'color'
         },
         caret: {
@@ -4475,7 +4475,7 @@ Another example, when disigning colors for a button, different Shades of the blu
 
 ![different color shades](different-color-shades.png)
 
-Emphasis Level determines the amount of **contrast** a color has against the default surface. Based on the same background color, different shades show different emphasis, and emphasis can range from lightest to **subtle** to **boldest**.
+Emphasis Level determines the amount of **contrast** a color has against the default surface. Based on the same background color, different shades show different emphasis, and emphasis can range from **lightest** to **subtle** to **boldest**.
 
 - lightest
 - lighter
@@ -4671,6 +4671,56 @@ color.border.information.value tries to reference color.semantic.info.1, which i
 ```
 
 Do the same change to secondary colors, tertiary colors and quartus colors.
+
+#### Rename neutral color references
+
+`tokens/color/shortcut/input.js`:
+
+```diff
+      'label.below': {
+-       value: "{color.accent.neutral.10}",
++       value: "{color.accent.neutral.subtle}",
+        type: 'color'
+      },
+      ...
+      'placeholder': {
+        default: {
+-         value: "{color.accent.neutral.9}",
++         value: "{color.accent.neutral.subtler}",
+          type: 'color'
+        }
+      }
+```
+
+`tokens/color/text.js`:
+
+```diff
+      bold: {
+-       value: '{color.accent.neutral.12}',
++       value: '{color.accent.neutral.bold}',
+        type: 'color'
+      },
+      default: {
+-       value: '{color.accent.neutral.11}',
++       value: '{color.accent.neutral.default}',
+        type: 'color'
+      },
+      subtle: {
+-       value: '{color.accent.neutral.10}',
++       value: '{color.accent.neutral.subtle}',
+        type: 'color'
+      },
+      subtler: {
+-       value: '{color.accent.neutral.9}',
++       value: '{color.accent.neutral.subtler}',
+        type: 'color'
+      },
+      subtlest: {
+-       value: '{color.accent.neutral.8}',
++       value: '{color.accent.neutral.subtlest}',
+        type: 'color'
+      },
+```
 
 #### Use medium emphasis for discover/success/warning/error elements
 
