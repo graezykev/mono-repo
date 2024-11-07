@@ -5025,7 +5025,11 @@ Neutral colors should be set up in a way that makes it easy to convert a light t
 
 Saturated colors should also be easy to **convert** from a light theme to a dark theme using symmetry.
 
-For instance, if a button color is 700 in light theme, it will be 400 in dark theme. If a section message background is 100 in light theme, it will be 1000 in dark theme. Design tokens will handle these conversions for you.
+For instance, if a button color is 700 in light theme, it will be 400 in dark theme.
+
+If a section message background is 100 in light theme, it will be 1000 in dark theme.
+
+Design tokens will handle these conversions for you.
 
 <https://atlassian.design/foundations/color-new/color-palette-new#picking-colors-for-dark-mode>
 
