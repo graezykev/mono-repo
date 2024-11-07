@@ -4988,7 +4988,7 @@ export default {
 
 A simple rule is that when you choose text color based on dark saturated colors, like `{color.accent.blue.7}` or higher ones, you should use `{color.text.inverse}`.
 
-``:
+`tokens/color/shortcut/text.js`:
 
 ```diff
       'discover.bold': {
