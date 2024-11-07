@@ -4475,11 +4475,11 @@ Another example, when disigning colors for a button, different Shades of the blu
 
 ![different color shades](different-color-shades.png)
 
-Emphasis Level determines the amount of **contrast** a color has against the default surface. Based on the same background color, different shades show different emphasis, and emphasis can range from **lightest** to **subtle** to **boldest**.
+Emphasis Level determines the amount of **contrast** a color has against the default surface. Based on the same background color, different shades show different emphasis, and emphasis can range from **lowest** to **subtle** to **boldest**.
 
-- lightest
-- lighter
-- light
+- lowest
+- lower
+- low
 - subtlest
 - subtler
 - subtle
@@ -4510,9 +4510,9 @@ Apple's design ensures that the most important information stands out while stil
 import tinycolor2 from 'tinycolor2'
 
 +const emphasisLevels = [
-+ 'lightest',
-+ 'lighter',
-+ 'light',
++ 'lowest',
++ 'lower',
++ 'low',
 + 'subtlest',
 + 'subtler',
 + 'subtle',
@@ -4589,9 +4589,9 @@ export function generateColorShades(
 
 By this mapping, the accents actually have semantic names instead of `blue.1`, `blue.2`, ..., `blue.10`
 
-- `{color.accent.blue.1}` = `{color.accent.blue.lightest}`
-- `{color.accent.blue.2}` = `{color.accent.blue.lighter}`
-- `{color.accent.blue.3}` = `{color.accent.blue.light}`
+- `{color.accent.blue.1}` = `{color.accent.blue.lowest}`
+- `{color.accent.blue.2}` = `{color.accent.blue.lower}`
+- `{color.accent.blue.3}` = `{color.accent.blue.low}`
 - `{color.accent.blue.4}` = `{color.accent.blue.subtlest}`
 - `{color.accent.blue.5}` = `{color.accent.blue.subtler}`
 - `{color.accent.blue.6}` = `{color.accent.blue.subtle}`
@@ -4724,7 +4724,7 @@ Do the same change to secondary colors, tertiary colors and quartus colors.
 
 #### Use medium emphasis for discover/success/warning/error elements
 
-Use the lightest accent as background color and the default accent as text color.
+Use the lowest accent as background color and the default accent as text color.
 
 `tokens/color/shortcut/background.js`:
 
