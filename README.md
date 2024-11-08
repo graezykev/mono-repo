@@ -2650,11 +2650,11 @@ export default {
 
 ```sh
 rm tokens/color/accent/blue.js && \
-touch tokens/color/accent/base/saturated.js && \
-touch tokens/color/accent/base/grey.js
+touch tokens/color/accent/saturated.js && \
+touch tokens/color/accent/grey.js
 ```
 
-`tokens/color/accent/base/saturated.js`:
+`tokens/color/accent/saturated.js`:
 
 ```js
 import tokens from '../base/saturated.js'
@@ -2688,7 +2688,7 @@ export default {
 
 ```
 
-`tokens/color/accent/base/grey.js`:
+`tokens/color/accent/grey.js`:
 
 Slightly diffrent in `totalShades`, `defaultShade`, `darkestLightness` and `lightestLightness`.
 
@@ -3158,30 +3158,17 @@ export default {
 
 ###### Auto-Generate Neutral Alpha Colors
 
-```sh
-rm tokens/color/alpha/grey.js
-```
+Copy grey alpha colors to neutral.
 
 `tokens/color/alpha/neutral.js`:
 
 ```js
-import tinycolor2 from 'tinycolor2'
-
-import tokens from '../accent/neutral.js'
-
-// console.log(tokens.color.accent.neutral['11'].value)
-const neutral = tinycolor2(tokens.color.accent.neutral.default.value)
+import tokens from './grey.js'
 
 export default {
   color: {
     alpha: {
-      "neutral": {
-        "1": { "value": neutral.setAlpha(0.03).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.03 } "type": "color" }
-        "2": { "value": neutral.setAlpha(0.06).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.06 } "type": "color" }
-        "3": { "value": neutral.setAlpha(0.14).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.14 } "type": "color" }
-        "4": { "value": neutral.setAlpha(0.31).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.31 } "type": "color" }
-        "5": { "value": neutral.setAlpha(0.49).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.neutral.11}", "attributes": { "alpha": 0.49 } "type": "color" }
-      }
+      "neutral": { ...tokens.color.alpha.grey }
     }
   }
 }
