@@ -2561,10 +2561,10 @@ npm install tinycolor2
 ```
 
 ```sh
-mkdir utils && touch utils/index.js
+mkdir utils && touch utils/color-gradient.js
 ```
 
-`utils/index.js`:
+`utils/color-gradient.js`:
 
 ```js
 import tinycolor2 from 'tinycolor2'
@@ -2620,7 +2620,7 @@ export function generateColorShades(
 
 ```js
 import tokens from '../base/saturated.js'
-import { generateColorShades } from '../../../utils/index.js'
+import { generateColorShades } from '../../../utils/color-gradient.js'
 
 const name = 'blue'
 const colors = tokens.color.base
@@ -2658,7 +2658,7 @@ touch tokens/color/accent/grey.js
 
 ```js
 import tokens from '../base/saturated.js'
-import { generateColorShades } from '../../../utils/index.js'
+import { generateColorShades } from '../../../utils/color-gradient.js'
 
 const colors = tokens.color.base
 
@@ -2694,7 +2694,7 @@ Slightly diffrent in `totalShades`, `defaultShade`, `darkestLightness` and `ligh
 
 ```js
 import tokens from '../base/grey.js'
-import { generateColorShades } from '../../../utils/index.js'
+import { generateColorShades } from '../../../utils/color-gradient.js'
 
 const name = 'grey'
 
@@ -4502,7 +4502,7 @@ Apple's design ensures that the most important information stands out while stil
 
 ##### Generate Emphasis Level
 
-`utils/index.js`:
+`utils/color-gradient.js`:
 
 ```diff
 import tinycolor2 from 'tinycolor2'
@@ -5110,7 +5110,7 @@ export default {
 
 ```js
 import tokens from '../base/grey-dark.js'
-import { generateColorShades } from '../../../utils/index.js'
+import { generateColorShades } from '../../../utils/color-gradient.js'
 
 const name = 'grey'
 
