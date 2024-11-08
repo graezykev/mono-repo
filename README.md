@@ -3112,35 +3112,17 @@ export default {
 
 ##### Auto-Generate Neutral Colors from Grey Color
 
-```sh
-rm tokens/color/accent/grey.js
-```
+Copy grey accents to neutral.
 
 `tokens/color/accent/neutral.js`:
 
 ```js
-import tokens from '../base/grey.js'
-import { generateColorShades } from '../../../utils/index.js'
-
-const name = 'grey' // Auto-Generate Neutral Colors from Grey Color
-
-const colors = tokens.color.base
-
-const shades = generateColorShades(name, colors, 12, 11, 0.05, 1) // make the lightest color white
-// console.log(shades)
-const accents = Object.keys(shades).reduce((acc, level) => ({
-  ...acc,
-  [level]: {
-    value: shades[level],
-    type: 'color'
-  }
-}), {})
-// console.log(accents)
+import tokens from './grey.js'
 
 export default {
   color: {
     accent: {
-      neutral: accents
+      neutral: { ...tokens.color.accent.grey } // Copy grey accents to neutral
     }
   }
 }
