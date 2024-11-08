@@ -2188,7 +2188,7 @@ export default function getStyleDictionaryConfig() {
     "source": ["tokens/**/*.json"],
     "platforms": {
       "css": {
-        "transformGroup": "css",
+        "transforms": ['attribute/cti', 'name/kebab', 'time/seconds', 'html/icon', 'size/rem', 'color/css', 'asset/url', 'fontFamily/css', 'cubicBezier/css', 'strokeStyle/css/shorthand', 'border/css/shorthand', 'typography/css/shorthand', 'transition/css/shorthand', 'shadow/css/shorthand'],
         "buildPath": "css/",
         "prefix": "token",
         "files": [
