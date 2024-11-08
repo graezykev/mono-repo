@@ -2167,7 +2167,9 @@ npx style-dictionary@4.1.3 init complete
 Use js because it's more programmable and extensible.
 
 ```sh
-mv config.json sd.config.js # touch sd.config.js
+mkdir build && \
+touch build/index.js && \
+mv config.json build/sd.config.js # touch sd.config.js
 ```
 
 `package.json`:
@@ -2175,10 +2177,10 @@ mv config.json sd.config.js # touch sd.config.js
 ```diff
   "scripts": {
 -   "build": "style-dictionary build",
-+   "build": "node build.js",
++   "build": "node build/index.js",
 ```
 
-`sd.config.js`:
+`build/sd.config.js`:
 
 ```js
 export default function getStyleDictionaryConfig() {
@@ -2365,7 +2367,7 @@ export default function getStyleDictionaryConfig() {
 
 ```
 
-`build.js`:
+`build/index.js`:
 
 ```js
 import StyleDictionary from 'style-dictionary'
