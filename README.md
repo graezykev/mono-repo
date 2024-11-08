@@ -4616,7 +4616,7 @@ export default {
 -       type: 'color'
 -     },
 +     'default': {
-+       value: '{color.accent.blue.7}',
++       value: '{color.accent.blue.default}',
 +       type: 'color'
 +     },
 -     '2': { // a darker one for the [hover] state
