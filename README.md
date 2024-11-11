@@ -2588,8 +2588,6 @@ export function generateColorShades(
 
   const color = tinycolor2(value)
 
-  // console.warn('=============', name, value, color.toHsl(), color.toHslString(), color.getBrightness(), color.getAlpha())
-
   const hsl = color.toHsl()
   const lightness = hsl.l
   const lightGap = (lightestLightness - lightness) / lighterShades
@@ -2598,18 +2596,14 @@ export function generateColorShades(
   for (let from = 1; from <= darkerShades; from++) {
     const l = lightness - from * darkGap
     const newColor = tinycolor2(Object.assign({}, hsl, { l }))
-    // console.log(newColor.toHex())
     rst[defaultShade + from] = `#${newColor.toHex()}`
   }
 
   for (let from = 1; from <= lighterShades; from++) {
     const l = lightness + from * lightGap
     const newColor = tinycolor2(Object.assign({}, hsl, { l }))
-    // console.log(newColor.toHex())
     rst[defaultShade - from] = `#${newColor.toHex()}`
   }
-
-  // console.log(rst)
 
   return rst
 }
@@ -4541,8 +4535,6 @@ export function generateColorShades(
 
   const color = tinycolor2(value)
 
-  // console.warn('=============', name, value, color.toHsl(), color.toHslString(), color.getBrightness(), color.getAlpha())
-
   const hsl = color.toHsl()
   const lightness = hsl.l
   const lightGap = (lightestLightness - lightness) / lighterShades
@@ -4551,18 +4543,14 @@ export function generateColorShades(
   for (let from = 1; from <= darkerShades; from++) {
     const l = lightness - from * darkGap
     const newColor = tinycolor2(Object.assign({}, hsl, { l }))
-    // console.log(newColor.toHex())
     rst[defaultShade + from] = `#${newColor.toHex()}`
   }
 
   for (let from = 1; from <= lighterShades; from++) {
     const l = lightness + from * lightGap
     const newColor = tinycolor2(Object.assign({}, hsl, { l }))
-    // console.log(newColor.toHex())
     rst[defaultShade - from] = `#${newColor.toHex()}`
   }
-
-  // console.log(rst)
 
 + for (let l = defaultIndex + 1; l < emphasisLevels.length; l++) {
 +   const curLevel = emphasisLevels[l]
@@ -5108,70 +5096,9 @@ export default {
 
 `tokens/color/accent/neutral-dark.js`:
 
-```js
-import tokens from '../base/grey-dark.js'
-import { generateColorShades } from '../../../utils/color-gradient.js'
-
-const name = 'grey'
-
-const colors = tokens.color.base[name]
-
-const shades = generateColorShades('dark', colors, 12, 2)
-// console.log(shades)
-const accents = Object.keys(shades).reduce((acc, level) => ({
-  ...acc,
-  [
-    isNaN(level) ?
-      level : // default
-      (12 - level + 1) // revert color shade level: 1<->12, 2<->11, 3<->10, ...
-  ]: {
-    value: shades[level],
-    type: 'color'
-  }
-}), {})
-// console.log(accents)
-
-export default {
-  color: {
-    accent: {
-      neutral: {
-        dark: accents
-      }
-    }
-  }
-}
-
-```
-
 #### Auto-Generate Neutral Alpha Colors for Dark Mode
 
 `tokens/color/alpha/neutral-dark.js`:
-
-```js
-import tinycolor2 from 'tinycolor2'
-
-import tokens from '../accent/neutral-dark.js'
-
-// console.log(tokens.color.accent.neutral.dark['11'].value)
-const neutralDark = tinycolor2(tokens.color.accent.neutral.dark['11'].value)
-
-export default {
-  color: {
-    alpha: {
-      "neutral": {
-        "dark": {
-          "1": { "value": neutralDark.setAlpha(0.04).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.04 } "type": "color" }
-          "2": { "value": neutralDark.setAlpha(0.08).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.08 } "type": "color" }
-          "3": { "value": neutralDark.setAlpha(0.16).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.16 } "type": "color" }
-          "4": { "value": neutralDark.setAlpha(0.28).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.28 } "type": "color" }
-          "5": { "value": neutralDark.setAlpha(0.5).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.5 } "type": "color" }
-        }
-      }
-    }
-  }
-}
-
-```
 
 #### Use theme agnostic color descriptions
 
