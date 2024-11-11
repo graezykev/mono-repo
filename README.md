@@ -4720,19 +4720,19 @@ export default {
     background: {
       ...
 +     discover: {
-+       value: '{color.semantic.new.1}',
++       value: '{color.semantic.new.lowest}',
 +       type: 'color'
 +     },
 +     success: {
-+       value: '{color.semantic.success.1}',
++       value: '{color.semantic.success.lowest}',
 +       type: 'color'
 +     },
 +     warning: {
-+       value: '{color.semantic.warning.1}',
++       value: '{color.semantic.warning.lowest}',
 +       type: 'color'
 +     },
 +     error: {
-+       value: '{color.semantic.error.1}',
++       value: '{color.semantic.error.lowest}',
 +       type: 'color'
 +     }
     }
@@ -4749,19 +4749,19 @@ export default {
     border: {
       ...
 +     discover: {
-+       value: '{color.semantic.new.1}',
++       value: '{color.semantic.new.lowest}',
 +       type: 'color'
 +     },
 +     success: {
-+       value: '{color.semantic.success.1}',
++       value: '{color.semantic.success.lowest}',
 +       type: 'color'
 +     },
 +     warning: {
-+       value: '{color.semantic.warning.1}',
++       value: '{color.semantic.warning.lowest}',
 +       type: 'color'
 +     },
 +     error: {
-+       value: '{color.semantic.error.1}',
++       value: '{color.semantic.error.lowest}',
 +       type: 'color'
 +     }
     }
