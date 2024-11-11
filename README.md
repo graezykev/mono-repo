@@ -2210,7 +2210,7 @@ export default function getStyleDictionaryConfig() {
         "actions": ["copy_assets"]
       },
       "jsts": {
-        "transformGroup": "js",
+        "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'color/css'],
         "buildPath": "jsts/",
         "files": [
           {
@@ -2224,7 +2224,7 @@ export default function getStyleDictionaryConfig() {
         ]
       },
       "ios": {
-        "transformGroup": "ios",
+        "transforms": ['attribute/cti', 'name/pascal', 'color/UIColor', 'content/objC/literal', 'asset/objC/literal', 'size/remToPt'],
         "buildPath": "ios/Classes/Generated/",
         "prefix": "StyleDictionary",
         "files": [
@@ -2324,7 +2324,7 @@ export default function getStyleDictionaryConfig() {
       },
 
       "android": {
-        "transformGroup": "android",
+        "transforms": ['attribute/cti', 'name/snake', 'color/hex8android', 'size/remToSp', 'size/remToDp'],
         "buildPath": "android/styledictionary/src/main/res/values/",
         "files": [
           {
@@ -2351,7 +2351,7 @@ export default function getStyleDictionaryConfig() {
       },
 
       "android-asset": {
-        "transformGroup": "android",
+        "transforms": ['attribute/cti', 'name/snake', 'color/hex8android', 'size/remToSp', 'size/remToDp'],
         "buildPath": "android/styledictionary/src/main/",
         "files": [
           {
@@ -5018,6 +5018,59 @@ If a section message background is 100 in light theme, it will be 1000 in dark t
 Design tokens will handle these conversions for you.
 
 <https://atlassian.design/foundations/color-new/color-palette-new#picking-colors-for-dark-mode>
+
+#### Add Different Themes Build Entrance Scripts
+
+`build/index.js`:
+
+```diff
+-const sd = new StyleDictionary(getStyleDictionaryConfig())
+-sd.buildAllPlatforms()
++new Array('light', 'dark').forEach((theme) => {
++ const sd = new StyleDictionary(getStyleDictionaryConfig(theme))
++ sd.buildAllPlatforms()
++})
+```
+
+`sd.config.js`:
+
+```diff
+-export default function getStyleDictionaryConfig() {
++export default function getStyleDictionaryConfig(theme) {
+  return {
+    "source": ["tokens/**/*.json", "tokens/**/*.js"],
+    "platforms": {
+      "css": {
+        ...
+-       "buildPath": `css/`,
++       "buildPath": `css/${theme}/`,
+        ...
+      },
+      "jsts": {
+        ...
+-       "buildPath": `jsts/`,
++       "buildPath": `jsts/${theme}/`,
+        ...
+      },
+      "ios": {
+        ...
+-       "buildPath": `ios/Classes/Generated/`,
++       "buildPath": `ios/Classes/Generated/${theme}/`,
+        ...
+      },
+      "android": {
+        ...
+-       "buildPath": `android/styledictionary/src/main/res/values/`,
++       "buildPath": `android/styledictionary/src/main/res/values/${theme}/`,
+        ...
+      },
+      "android-asset": {
+        ...
+-       "buildPath": `android/styledictionary/src/main/`,
++       "buildPath": `android/styledictionary/src/main/${theme}/`,
+        ...
+      }
+```
 
 #### Neutral Accent/Alpha Colors for Dark Mode
 
