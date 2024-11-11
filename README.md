@@ -5264,6 +5264,8 @@ export function generateColorShades(
 
 ```
 
+See the difference: <https://www.diffchecker.com/h5IJRxuG/>
+
 #### Re-write Accent Declaration
 
 `tokens/color/accent/grey.js`:
