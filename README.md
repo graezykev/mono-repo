@@ -5072,22 +5072,234 @@ Design tokens will handle these conversions for you.
       }
 ```
 
-#### Neutral Accent/Alpha Colors for Dark Mode
+#### Add transformer hook
 
-```sh
-touch tokens/color/base/grey-dark.js && \
-touch tokens/color/accent/neutral-dark.js && \
-touch tokens/color/alpha/neutral-dark.js
+`sd.config.js`:
+
+```diff
++import { generateColorShades, ACCENT_MAP } from '../utils/color-gradient.js'
+...
+    "platforms": {
+      "css": {
+-       "transforms": ['attribute/cti', 'name/kebab', 'time/seconds', 'html/icon', 'size/rem', 'color/css', 'asset/url', 'fontFamily/css', 'cubicBezier/css', 'strokeStyle/css/shorthand', 'border/css/shorthand', 'typography/css/shorthand', 'transition/css/shorthand', 'shadow/css/shorthand'],
++       "transforms": ['attribute/cti', 'name/kebab', 'time/seconds', 'html/icon', 'size/rem', 'color/css', 'colorShadesMapping', 'asset/url', 'fontFamily/css', 'cubicBezier/css', 'strokeStyle/css/shorthand', 'border/css/shorthand', 'typography/css/shorthand', 'transition/css/shorthand', 'shadow/css/shorthand'],
+        ...
+      },
+      "jsts": {
+-       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'color/css'],
++       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css'],
+        ...
+      },
+      "ios": {
+-       "transforms": ['attribute/cti', 'name/pascal', 'color/UIColor', 'content/objC/literal', 'asset/objC/literal', 'size/remToPt'],
++       "transforms": ['attribute/cti', 'name/pascal', 'colorShadesMapping', 'color/UIColor', 'content/objC/literal', 'asset/objC/literal', 'size/remToPt'],
+        ...
+      },
+      "android": {
+-       "transforms": ['attribute/cti', 'name/snake', 'color/hex8android', 'size/remToSp', 'size/remToDp'],
++       "transforms": ['attribute/cti', 'name/snake', 'colorShadesMapping', 'color/hex8android', 'size/remToSp', 'size/remToDp'],
+        ..
+      },
+      "android-asset": {
+-       "transforms": ['attribute/cti', 'name/snake', 'color/hex8android', 'size/remToSp', 'size/remToDp'],
++       "transforms": ['attribute/cti', 'name/snake', 'colorShadesMapping', 'color/hex8android', 'size/remToSp', 'size/remToDp'],
+        ...
+      }
+    },
++   hooks: {
++     transforms: {
++       'colorShadesMapping': {
++         type: 'value',
++         // Normally, value transforms only transform non-referenced values
++         // https://styledictionary.com/reference/hooks/transforms/#transitive-transforms
++         transitive: true,
++         // name: 'colorShadesMapping',
++         // filter: (token) => { },
++         transform: (token) => {
++           if (token.gradientConfig) {
++             const colorName = token.path[token.path.length - 2]
++             const gradientLevel = token.path[token.path.length - 1]
++             let gradients
++             if (ACCENT_MAP[colorName]) {
++               gradients = ACCENT_MAP[colorName].gradients
++               return gradients[gradientLevel]
++             }
++             const {
++               totalShades = 10,
++               defaultShade = 7,
++               darkestLightness = 0.05,
++               lightestLightness = 0.95
++             } = token.gradientConfig
++             const rst = generateColorShades(colorName, token.value, totalShades, defaultShade, darkestLightness, lightestLightness)
++             gradients = rst.gradients
++             return gradients[gradientLevel]
++           }
++           if (token.isAlias) {
++             const colorName = token.path[token.path.length - 2]
++             const alias = token.path[token.path.length - 1]
++             if (ACCENT_MAP[colorName]) {
++               let gradients = ACCENT_MAP[colorName].gradients
++               const map = theme === 'dark' ? ACCENT_MAP[colorName].darkAliasMap : ACCENT_MAP[colorName].aliasMap
++               return gradients[map[alias]]
++             }
++           }
++           return token.value
++         }
++       }
++     }
++   },
++   log: {
++     warnings: 'warn', // 'warn' | 'error' | 'disabled'
++     verbosity: 'verbose', // 'default' | 'silent' | 'verbose'
++     errors: {
++       brokenReferences: 'throw', // 'throw' | 'console'
++     },
++   }
+  }
+}
+
 ```
 
-`tokens/color/base/grey-dark.js`:
+#### Refactor Gradient Generation
+
+`utils/color-gradient.js`:
 
 ```js
+import tinycolor2 from 'tinycolor2'
+
+const emphasisLevels = [
+  'lowest',
+  'lower',
+  'low',
+  'subtlest',
+  'subtler',
+  'subtle',
+  'default',
+  'bold',
+  'bolder',
+  'boldest'
+]
+
+const defaultIndex = emphasisLevels.indexOf('default')
+
+export const ACCENT_MAP = {}
+
+export function generateColorShades(
+  name,
+  baseColor,
+  totalShades = 10,
+  defaultShade = 7,
+  darkestLightness = 0.05,
+  lightestLightness = 0.95,
+) {
+  if (ACCENT_MAP[name]) {
+    // console.log('memo', name)
+    return ACCENT_MAP2[name]
+  }
+
+  const darkerShades = totalShades - defaultShade
+  const lighterShades = defaultShade - 1
+
+  const rst = {
+    gradients: {},
+    alias: {}
+  }
+
+  const value = baseColor
+  rst.gradients[defaultShade] = value
+
+  const color = tinycolor2(value)
+
+  const hsl = color.toHsl()
+  const lightness = hsl.l
+  const lightGap = (lightestLightness - lightness) / lighterShades
+  const darkGap = (lightness - darkestLightness) / darkerShades
+
+  for (let from = 1; from <= darkerShades; from++) {
+    const l = lightness - from * darkGap
+    const newColor = tinycolor2(Object.assign({}, hsl, { l }))
+    rst.gradients[defaultShade + from] = `#${newColor.toHex()}`
+  }
+
+  for (let from = 1; from <= lighterShades; from++) {
+    const l = lightness + from * lightGap
+    const newColor = tinycolor2(Object.assign({}, hsl, { l }))
+    rst.gradients[defaultShade - from] = `#${newColor.toHex()}`
+  }
+
+  const aliasMap = {}
+  const darkAliasMap = {}
+
+  rst.alias.default = rst.gradients[defaultShade]
+  aliasMap.default = defaultShade
+  darkAliasMap.default = totalShades - defaultShade + 1
+
+  for (let l = defaultIndex + 1; l < emphasisLevels.length; l++) {
+    const curLevel = emphasisLevels[l]
+    const reflectLevel = defaultShade + (l - defaultIndex)
+    const target = rst.gradients[reflectLevel]
+    if (!target) break
+    rst.alias[curLevel] = target
+    aliasMap[curLevel] = reflectLevel
+    darkAliasMap[curLevel] = totalShades - reflectLevel + 1
+  }
+
+  for (let l = defaultIndex - 1; l >= 0; l--) {
+    const curLevel = emphasisLevels[l]
+    const reflectLevel = defaultShade - (defaultIndex - l)
+    const target = rst.gradients[reflectLevel]
+    if (!target) break
+    rst.alias[curLevel] = target
+    aliasMap[curLevel] = reflectLevel
+    darkAliasMap[curLevel] = totalShades - reflectLevel + 1
+  }
+
+  rst.aliasMap = aliasMap
+  rst.darkAliasMap = darkAliasMap
+
+  ACCENT_MAP[name] = rst
+
+  return rst
+}
+
+```
+
+#### Re-write Accent Declaration
+
+`tokens/color/accent/grey.js`:
+
+```js
+const gradientConfig = {
+  totalShades: 12,
+  defaultShade: 11,
+  darkestLightness: 0.05,
+  lightestLightness: 1
+}
+
 export default {
   color: {
-    base: {
+    accent: {
       grey: {
-        dark: { "value": "#C7D1DB", "type": "color" }
+        1: { value: '{color.base.grey}', type: 'color', gradientConfig },
+        2: { value: '{color.base.grey}', type: 'color', gradientConfig },
+        3: { value: '{color.base.grey}', type: 'color', gradientConfig },
+        4: { value: '{color.base.grey}', type: 'color', gradientConfig },
+        5: { value: '{color.base.grey}', type: 'color', gradientConfig },
+        6: { value: '{color.base.grey}', type: 'color', gradientConfig },
+        7: { value: '{color.base.grey}', type: 'color', gradientConfig },
+        8: { value: '{color.base.grey}', type: 'color', gradientConfig },
+        9: { value: '{color.base.grey}', type: 'color', gradientConfig },
+        10: { value: '{color.base.grey}', type: 'color', gradientConfig },
+        11: { value: '{color.base.grey}', type: 'color' },
+        12: { value: '{color.base.grey}', type: 'color', gradientConfig },
+        bold: { value: '{color.base.grey}', type: 'color', isAlias: true },
+        default: { value: '{color.base.grey}', type: 'color', isAlias: true },
+        subtle: { value: '{color.base.grey}', type: 'color', isAlias: true },
+        subtler: { value: '{color.base.grey}', type: 'color', isAlias: true },
+        subtlest: { value: '{color.base.grey}', type: 'color', isAlias: true },
+        low: { value: '{color.base.grey}', type: 'color', isAlias: true },
+        lower: { value: '{color.base.grey}', type: 'color', isAlias: true },
+        lowest: { value: '{color.base.grey}', type: 'color', isAlias: true }
       }
     }
   }
@@ -5095,63 +5307,56 @@ export default {
 
 ```
 
-`tokens/color/accent/neutral-dark.js`:
+`tokens/color/accent/saturated.js`:
 
 ```js
+import tokens from '../base/saturated.js'
+
+const gradientConfig = {
+  totalShades: 10,
+  defaultShade: 7,
+  darkestLightness: 0.05,
+  lightestLightness: 0.95
+}
+const colors = tokens.color.base
+
+const accent = Object.keys(colors).reduce((accent, name) => ({
+  ...accent,
+  [name]: {
+    1: { value: `{color.base.${name}}`, type: 'color', gradientConfig },
+    2: { value: `{color.base.${name}}`, type: 'color', gradientConfig },
+    3: { value: `{color.base.${name}}`, type: 'color', gradientConfig },
+    4: { value: `{color.base.${name}}`, type: 'color', gradientConfig },
+    5: { value: `{color.base.${name}}`, type: 'color', gradientConfig },
+    6: { value: `{color.base.${name}}`, type: 'color', gradientConfig },
+    7: { value: `{color.base.${name}}`, type: 'color' },
+    8: { value: `{color.base.${name}}`, type: 'color', gradientConfig },
+    9: { value: `{color.base.${name}}`, type: 'color', gradientConfig },
+    10: { value: `{color.base.${name}}`, type: 'color', gradientConfig },
+    boldest: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
+    bolder: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
+    bold: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
+    default: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
+    subtle: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
+    subtler: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
+    subtlest: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
+    low: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
+    lower: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
+    lowest: { value: `{color.base.${name}}`, type: 'color', isAlias: true }
+  }
+}), {})
+
+// console.log(accent)
+
 export default {
   color: {
-    "accent": {
-      "neutral": {
-        "dark": {
-          "1": { "value": "#0a0d10", "type": "color" },
-          "2": { "value": "#192027", "type": "color" },
-          "3": { "value": "#29343f", "type": "color" },
-          "4": { "value": "#384857", "type": "color" },
-          "5": { "value": "#475b6f", "type": "color" },
-          "6": { "value": "#576f87", "type": "color" },
-          "7": { "value": "#67829e", "type": "color" },
-          "8": { "value": "#7f96ad", "type": "color" },
-          "9": { "value": "#97aabc", "type": "color" },
-          "10": { "value": "#afbdcc", "type": "color" },
-          "11": { "value": "{color.base.grey.dark}", "type": "color" }, // reference
-          "12": { "value": "#eff2f5", "type": "color" },
-          "default": { "value": "{color.accent.neutral.dark.11}", "type": "color" } // reference
-        }
-      }
-    }
+    accent
   }
 }
 
 ```
 
-`tokens/color/alpha/neutral-dark.js`:
-
-```js
-export default {
-  color: {
-    alpha: {
-      "neutral": {
-        "dark": {
-          "1": { "value": "#c7d1db0a", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.04 }, "type": "color" }
-          "2": { "value": "#c7d1db14", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.08 }, "type": "color" }
-          "3": { "value": "#c7d1db29", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.16 }, "type": "color" }
-          "4": { "value": "#c7d1db47", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.28 }, "type": "color" }
-          "5": { "value": "#c7d1db80", "type": "color" }, // "500": { "value": "{color.accent.neutral.dark.11}", "attributes": { "alpha": 0.5 }, "type": "color" }
-        }
-      }
-    }
-  }
-}
-
-```
-
-#### Auto-Generate Neutral Accent Colors for Dark Mode
-
-`tokens/color/accent/neutral-dark.js`:
-
-#### Auto-Generate Neutral Alpha Colors for Dark Mode
-
-`tokens/color/alpha/neutral-dark.js`:
+#### Alpha colors for Dark Mode
 
 #### Use theme agnostic color descriptions
 
