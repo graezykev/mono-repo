@@ -2583,8 +2583,8 @@ export function generateColorShades(
   const rst = {}
 
   const value = colors[name].value
-  rst[`${defaultShade}`] = value
-  rst.default = rst[`${defaultShade}`]
+  rst[defaultShade] = value
+  rst.default = rst[defaultShade]
 
   const color = tinycolor2(value)
 
@@ -2599,14 +2599,14 @@ export function generateColorShades(
     const l = lightness - from * darkGap
     const newColor = tinycolor2(Object.assign({}, hsl, { l }))
     // console.log(newColor.toHex())
-    rst[`${defaultShade + from}`] = `#${newColor.toHex()}`
+    rst[defaultShade + from] = `#${newColor.toHex()}`
   }
 
   for (let from = 1; from <= lighterShades; from++) {
     const l = lightness + from * lightGap
     const newColor = tinycolor2(Object.assign({}, hsl, { l }))
     // console.log(newColor.toHex())
-    rst[`${defaultShade - from}`] = `#${newColor.toHex()}`
+    rst[defaultShade - from] = `#${newColor.toHex()}`
   }
 
   // console.log(rst)
@@ -4536,8 +4536,8 @@ export function generateColorShades(
   const rst = {}
 
   const value = colors[name].value
-  rst[`${defaultShade}`] = value
-  rst.default = rst[`${defaultShade}`]
+  rst[defaultShade] = value
+  rst.default = rst[defaultShade]
 
   const color = tinycolor2(value)
 
@@ -4552,14 +4552,14 @@ export function generateColorShades(
     const l = lightness - from * darkGap
     const newColor = tinycolor2(Object.assign({}, hsl, { l }))
     // console.log(newColor.toHex())
-    rst[`${defaultShade + from}`] = `#${newColor.toHex()}`
+    rst[defaultShade + from] = `#${newColor.toHex()}`
   }
 
   for (let from = 1; from <= lighterShades; from++) {
     const l = lightness + from * lightGap
     const newColor = tinycolor2(Object.assign({}, hsl, { l }))
     // console.log(newColor.toHex())
-    rst[`${defaultShade - from}`] = `#${newColor.toHex()}`
+    rst[defaultShade - from] = `#${newColor.toHex()}`
   }
 
   // console.log(rst)
