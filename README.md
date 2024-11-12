@@ -5366,6 +5366,94 @@ export default {
 
 ```
 
+#### Inverse Text color for Dark Theme
+
+`tokens/color/shortcut/text.js`:
+
+```diff
+export default {
+  color: {
+    text: {
+      inverse: {
+-       value: '{color.accent.neutral.1}',
++       value: '{color.accent.neutral.silent}',
+        type: 'color'
+      },
+```
+
+`tokens/color/shortcut/border.js`:
+
+```diff
+export default {
+  color: {
+    border: {
+      inverse: {
+-       value: '{color.accent.neutral.1}',
++       value: '{color.accent.neutral.silent}',
+        type: 'color'
+      },
+```
+
+#### Other Neutral Color for Dark Theme
+
+`tokens/color/background.js`:
+
+```diff
+export default {
+  color: {
+    background: {
+      boldest: {
+-       value: '{color.accent.neutral.4}',
++       value: '{color.accent.neutral.dull}',
+        type: 'color'
+      },
+      bolder: {
+-       value: '{color.accent.neutral.3}',
++       value: '{color.accent.neutral.duller}',
+        type: 'color'
+      },
+      bold: {
+-       value: '{color.accent.neutral.2}',
++       value: '{color.accent.neutral.dullest}',
+        type: 'color'
+      },
+      default: {
+-       value: '{color.accent.neutral.1}',
++       value: '{color.accent.neutral.silent}',
+        type: 'color'
+      },
+```
+
+`tokens/color/shortcut/border.js`:
+
+```diff
+export default {
+  color: {
+    border: {
+      ...
+      bold: {
+-       value: '{color.accent.neutral.7}',
++       value: '{color.accent.neutral.subtler}',
+        type: 'color'
+      },
+      default: {
+-       value: '{color.alpha.neutral.5}',
++       value: '{color.alpha.neutral.lowest}',
+        type: 'color'
+      },
+      subtle: {
+-       value: '{color.alpha.neutral.4}',
++       value: '{color.alpha.neutral.dull}',
+        type: 'color'
+      },
+```
+
+...
+
+Replace ALL neutral color reference using `{color.accent.neutral.1}` with `{color.accent.neutral.silent}`.
+
+And do the same replacement to  `{color.accent.neutral.2}` through  `{color.accent.neutral.12}`.
+
 #### Alpha colors for Dark Mode
 
 #### Use theme agnostic color descriptions
