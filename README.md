@@ -5456,6 +5456,88 @@ And do the same replacement to  `{color.accent.neutral.2}` through  `{color.acce
 
 #### Alpha colors for Dark Mode
 
+`build/sd.config.js`:
+
+```diff
+import { generateColorShades, ACCENT_MAP } from '../utils/color-gradient.js'
++import tinycolor2 from 'tinycolor2'
++import { usesReferences } from 'style-dictionary/utils'
+
+...
+
+    hooks: {
+      transforms: {
+        'colorShadesMapping': {
+          type: 'value',
+          // Normally, value transforms only transform non-referenced values
+          // https://styledictionary.com/reference/hooks/transforms/#transitive-transforms
+          transitive: true,
+          // name: 'colorShadesMapping',
+          // filter: (token) => { },
+          transform: (token) => {
+
+            ...
+
++           if (token.attributes && typeof token.attributes.alpha !== 'undefined') {
++             // console.log('token.value', token.value, token.attributes.alpha, usesReferences(token.value))
++             if (usesReferences(token.value)) {
++               return undefined
++             }
++             return tinycolor2(token.value).setAlpha(parseFloat(token.attributes.alpha, 10)).toHex8String()
++           }
+            return token.value
+          }
+```
+
+`tokens/color/alpha/grey.js`:
+
+```diff
+-import tinycolor2 from 'tinycolor2'
+
+-import tokens from '../accent/grey.js'
+
+-const grey = tinycolor2(tokens.color.accent.grey.default.value)
+-console.log(tokens.color.accent.grey.default.value)
+
+export default {
+  color: {
+    alpha: {
+      grey: {
+-       "1": { "value": grey.setAlpha(0.03).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.03 } "type": "color" }
+-       "2": { "value": grey.setAlpha(0.06).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.06 } "type": "color" }
+-       "3": { "value": grey.setAlpha(0.14).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.14 } "type": "color" }
+-       "4": { "value": grey.setAlpha(0.31).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.31 } "type": "color" }
+-       "5": { "value": grey.setAlpha(0.49).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.49 } "type": "color" }
++       "1": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.03 }, "type": "color" },
++       "2": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.06 }, "type": "color" },
++       "3": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.14 }, "type": "color" },
++       "4": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.31 }, "type": "color" },
++       "5": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.49 }, "type": "color" }
+      }
+    }
+  }
+}
+
+```
+
+`tokens/primary.js`:
+
+```diff
++import tinycolor from 'tinycolor2'
++import tokens from './accent/saturated.js'
+
+...
+
+      'blur': { // a more lighter and more transparent one for the [disabled] state
+-       value: tinycolor(tokens.color.accent.blue['subtlest'].value).setAlpha(0.7).toHex8String(),
++       value: '{color.accent.blue.subtlest}',
++       attributes: { alpha: 0.7 }
+        type: 'color',
+      },
+```
+
+And, do the similar change to `secondary.js`, `tertiary.js` and `quartus.js`.
+
 #### Use theme agnostic color descriptions
 
 <https://atlassian.design/foundations/color-new/color-picker-swatches#use-theme-agnostic-color-descriptions>
