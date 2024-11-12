@@ -5538,6 +5538,38 @@ export default {
 
 And, do the similar change to `secondary.js`, `tertiary.js` and `quartus.js`.
 
+`tokens/color/shortcut/input-state.js`
+
+```diff
+-import tokens from '../accent/neutral.js'
+-import tokens2 from '../alpha/neutral.js'
+-import tinycolor from 'tinycolor2'
+
+-const white = tinycolor(tokens.color.accent.neutral['1'].value)
+
+export default {
+  color: {
+    text: {
+      button: {
+        state: {
+          disabled: {
+-           value: white.setAlpha(0.5).toHex8String(),
++           value: '{color.accent.neutral.silent}',
++           attributes: { alpha: 0.5 },
+            type: 'color'
+          }
+        },
+        subtle: {
+          state: {
+            disabled: {
+-             value: tokens2.color.alpha.neutral['5'].value,
++             value: '{color.alpha.neutral.5}'
+              type: 'color'
+            }
+          }
+        },
+```
+
 #### Use theme agnostic color descriptions
 
 <https://atlassian.design/foundations/color-new/color-picker-swatches#use-theme-agnostic-color-descriptions>
