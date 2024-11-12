@@ -4469,6 +4469,10 @@ Another example, when disigning colors for a button, different Shades of the blu
 
 Emphasis Level determines the amount of **contrast** a color has against the default surface. Based on the same background color, different shades show different emphasis, and emphasis can range from **lowest** to **subtle** to **boldest**.
 
+- silent
+- dullest
+- duller
+- dull
 - lowest
 - lower
 - low
