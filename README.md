@@ -5570,6 +5570,14 @@ export default {
         },
 ```
 
+#### Emphasis level for alpha color
+
+Change `{color.alpha.neutral.1}` to `{color.alpha.neutral.5}` to emphasis level alias ?
+
+Seems No need.
+
+1 - 5 here ranks from small alpha to large, no need to switch them between different themes.
+
 #### Use theme agnostic color descriptions
 
 <https://atlassian.design/foundations/color-new/color-picker-swatches#use-theme-agnostic-color-descriptions>
