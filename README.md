@@ -4506,6 +4506,10 @@ Apple's design ensures that the most important information stands out while stil
 import tinycolor2 from 'tinycolor2'
 
 +const emphasisLevels = [
++ 'silent',
++ 'dullest',
++ 'duller',
++ 'dull',
 + 'lowest',
 + 'lower',
 + 'low',
