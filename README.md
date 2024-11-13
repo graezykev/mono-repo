@@ -5622,6 +5622,61 @@ Semantic colors are used to convey specific meanings or statuses. For example, A
 
 Accents are used to highlight key elements without overwhelming the overall design. On Apple’s site, you might see **blue** used for links and interactive elements, subtly guiding users' attention without clashing with the primary and neutral colors.
 
+## Design Token - Integrate with TailwinCSS
+
+### Flatten Design Tokens
+
+`utils/traverse-flatten-tokens.js`:
+
+```js
+export default function traverseFlattenTokens(token, prefix = '') {
+  prefix = prefix ? (prefix + '-') : ''
+  return Object.keys(token).reduce((rst, key) => {
+    const path = `${prefix}${key.replace(/\./g, '-')}`
+    const value = token[key].value
+    if (value) {
+      rst[path] = value
+      return rst
+    } else {
+      return {
+        ...rst,
+        ...traverseTokens(token[key], path)
+      }
+    }
+  }, {})
+}
+
+/*
+const obj = {
+  a: {
+    b: {
+      c: {
+        value: 1
+      }
+    },
+    d: {
+      value: 2
+    }
+  },
+  e: {
+    value: 3
+  }
+}
+
+console.log(
+  JSON.stringify(
+    traverseTokens(obj)
+  ) ===
+  JSON.stringify({
+    'a-b-c': 1,
+    'a-d': 2,
+    'e': 3
+  })
+)
+*/
+
+```
+
 ## Testing
 
 ## CLI: create component
