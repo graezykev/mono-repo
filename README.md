@@ -5698,7 +5698,7 @@ See `dist/style.css` and `dist/style.dark.css`.
 
 ### Flatten Design Tokens
 
-`utils/traverse-flatten-tokens.js`:
+`style-dictionary/utils/traverse-flatten-tokens.js`:
 
 ```js
 export default function traverseFlattenTokens(token, prefix = '') {
