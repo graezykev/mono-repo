@@ -2151,7 +2151,7 @@ cd lib-web-ui
 ```
 
 ```sh
-# pnpm add -D style-dictionary@4.1.3
+# pnpm add -D style-dictionary@4.2.0
 ```
 
 ```sh
@@ -2159,7 +2159,7 @@ mkdir style-dictionary && cd style-dictionary
 ```
 
 ```sh
-npx style-dictionary@4.1.3 init complete
+npx style-dictionary@4.2.0 init complete
 ```
 
 <!-- rm -rf android ios README.md StyleDictionary.podspec LICENSE package.json -->
@@ -2215,7 +2215,7 @@ export default function getStyleDictionaryConfig() {
         "files": [
           {
             "destination": "variables.js",
-            "format": "javascript/module"
+            "format": "javascript/esm"
           },
           {
             "format": "typescript/module-declarations",
@@ -2384,7 +2384,7 @@ sd.buildAllPlatforms()
 
 ```sh
 npm run build
-# npx style-dictionary@4.1.3 build --config ./sd.config.js
+# npx style-dictionary@4.2.0 build --config ./sd.config.js
 ```
 
 ##### Create 1st Design Token
