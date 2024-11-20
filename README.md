@@ -2159,6 +2159,7 @@ packages:
 ```
 
 ```sh
+cd style-dictionary && \
 npx style-dictionary@4.2.0 init complete
 ```
 
@@ -2181,6 +2182,7 @@ npx style-dictionary@4.2.0 init complete
 ```
 
 ```sh
+cd .. && \
 pnpm install
 ```
 
