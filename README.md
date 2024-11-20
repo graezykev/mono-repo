@@ -5622,7 +5622,79 @@ Semantic colors are used to convey specific meanings or statuses. For example, A
 
 Accents are used to highlight key elements without overwhelming the overall design. On Apple’s site, you might see **blue** used for links and interactive elements, subtly guiding users' attention without clashing with the primary and neutral colors.
 
-## Design Token - Integrate with TailwinCSS
+## Design Token - Integrate with TailwindCSS
+
+### Build CSS for default(light) and dark Mode
+
+`lib-web-ui/package.json`:
+
+```diff
+-   "build": "vite build"
++   "build": "pnpm build:light && pnpm build:dark",
++   "build:light": "vite build --mode=light",
++   "build:dark": "vite build --mode=dark"
+```
+
+`lib-web-ui/vite.config.ts`:
+
+```diff
+-export default defineConfig({
++export default defineConfig(({ mode }) => {
++ mode = mode === 'dark' ? '.dark' : ''
++ return {
+  ...
+      rollupOptions: {
+      ...
+      output: {
+        ...
++       assetFileNames: `[name]${mode}.css`,
+      },
+```
+
+`lib-web-ui/tailwind.config.js`:
+
+```diff
+/** @type {import('tailwindcss').Config} */
+
++const mode = getArgValue('mode') || 'light'
+
+export default {
++ darkMode: ['variant', [
++   '@media (prefers-color-scheme: dark) { &:not(.light *) }',
++   '&:is(.dark *)'
++ ]],
+  ...
+  theme: {
++   colors: mode === 'light' ? {
++     primary: {
++       DEFAULT: '#0055cc',
++       bold: '#003c90',
++       subtle: '#0068fb'
++     }
++   } : {
++     primary: {
++       DEFAULT: '#599eff',
++       bold: '#88baff',
++       subtle: '#2a83ff'
++     }
++   }
+  },
+  ...
+}
+
++function getArgValue(name) {
++ const args = process.argv.slice(2)
++ const arg = args.find((arg) => arg.startsWith(`--${name}=`))
++ return arg ? arg.split('=')[1] : null
++}
+```
+
+```sh
+cd lib-web-ui && \
+pnpm build
+```
+
+See `dist/style.css` and `dist/style.dark.css`.
 
 ### Flatten Design Tokens
 
