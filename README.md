@@ -5176,6 +5176,10 @@ Design tokens will handle these conversions for you.
 import tinycolor2 from 'tinycolor2'
 
 const emphasisLevels = [
+  'silent',
+  'dullest',
+  'duller',
+  'dull',
   'lowest',
   'lower',
   'low',
@@ -5266,6 +5270,8 @@ export function generateColorShades(
   rst.darkAliasMap = darkAliasMap
 
   ACCENT_MAP[name] = rst
+
+  // console.log(rst)
 
   return rst
 }
