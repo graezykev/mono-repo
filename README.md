@@ -5718,7 +5718,7 @@ export default function traverseFlattenTokens(token, prefix = '') {
     } else {
       return {
         ...rst,
-        ...traverseTokens(token[key], path)
+        ...traverseFlattenTokens(token[key], path)
       }
     }
   }, {})
@@ -5743,7 +5743,7 @@ const obj = {
 
 console.log(
   JSON.stringify(
-    traverseTokens(obj)
+    traverseFlattenTokens(obj)
   ) ===
   JSON.stringify({
     'a-b-c': 1,
