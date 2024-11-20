@@ -2181,6 +2181,10 @@ npx style-dictionary@4.2.0 init complete
 ```
 
 ```sh
+pnpm install
+```
+
+```sh
 cd style-dictionary && \
 rm -rf node_modules && \
 pnpm add -D style-dictionary@^4.2.0 -w
