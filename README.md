@@ -5732,12 +5732,28 @@ pnpm build
 
 See `dist/style.css` and `dist/style.dark.css`.
 
-### Flatten Design Tokens
+### Export Design Tokens to TailwindCSS
 
-`style-dictionary/utils/traverse-flatten-tokens.js`:
+```sh
+touch style-dictionary/utils/process-tokens.js
+```
+
+`style-dictionary/utils/process-tokens.js`:
 
 ```js
-export default function traverseFlattenTokens(token, prefix = '') {
+export function extractTokenValue(tokens) {
+  return Object.keys(tokens).reduce((rst, key) => {
+    const value = tokens[key].value
+    if (typeof value !== 'undefined') {
+      rst[key.replace(/\./g, '-')] = value
+    } else {
+      rst[key.replace(/\./g, '-')] = extractTokenValue(tokens[key])
+    }
+    return rst
+  }, {})
+}
+
+export function traverseFlattenTokens(token, prefix = '') {
   prefix = prefix ? (prefix + '-') : ''
   return Object.keys(token).reduce((rst, key) => {
     const path = `${prefix}${key.replace(/\./g, '-')}`
@@ -5783,6 +5799,82 @@ console.log(
 )
 */
 
+```
+
+```sh
+touch style-dictionary/export.js
+```
+
+`style-dictionary/export.js`:
+
+```js
+import { extractTokenValue } from './utils/process-tokens.js'
+import lightTokens from './jsts/light/variables.js'
+import darkTokens from './jsts/dark/variables.js'
+import fs from 'fs'
+
+export const light = extractTokenValue(lightTokens)
+export const dark = extractTokenValue(darkTokens)
+
+const mainEntry = 'index.js'
+
+fs.existsSync(mainEntry) && fs.unlinkSync(mainEntry)
+
+fs.writeFileSync(mainEntry, `
+export const light = ${JSON.stringify(light, null, 2)}
+export const dark = ${JSON.stringify(dark, null, 2)}
+`)
+
+```
+
+`style-dictionary/package.json`:
+
+```diff
+- "main": "build.js",
++ "main": "index.js",
+  ...
+-   "build": "node build/index.js --verbose",
++   "build": "node build/index.js --verbose && node export.js",
+```
+
+```sh
+pnpm build
+```
+
+See `style-dictionary/index.js`.
+
+`lib-web-ui/tailwind.config.js`:
+
+```diff
+/** @type {import('tailwindcss').Config} */
++import { light, dark } from 'design-tokens'
+...
+export default {
+  ...
+  theme: {
+-   colors: mode === 'light' ? {
+-     primary: {
+-       DEFAULT: '#0055cc',
+-       bold: '#003c90',
+-       subtle: '#0068fb'
+-     }
+-   } : {
+-     primary: {
+-       DEFAULT: '#599eff',
+-       bold: '#88baff',
+-       subtle: '#2a83ff'
+-     }
+-   }
++   colors: mode === 'light' ? light.color : dark.color
+  },
+  ...
+}
+...
+```
+
+```sh
+cd lib-web-ui && \
+pnpm build
 ```
 
 ## Testing
