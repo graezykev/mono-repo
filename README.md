@@ -2147,19 +2147,43 @@ Create a separate Figma file for your design tokens <https://diez.org/getting-st
 #### Style Dictionary
 
 ```sh
-cd lib-web-ui
+mkdir style-dictionary
 ```
 
-```sh
-# pnpm add -D style-dictionary@4.2.0
-```
+`/pnpm-workspace.yaml`:
 
-```sh
-mkdir style-dictionary && cd style-dictionary
+```diff
+packages:
+  ...
++ - "style-dictionary"
 ```
 
 ```sh
 npx style-dictionary@4.2.0 init complete
+```
+
+`style-dictionary/package.json`:
+
+```diff
+- "name": "style-dictionary-example-complete",
+- "name": "design-tokens",
+  ...
+- "devDependencies": {
+-   "style-dictionary": "..."
+- }
+```
+
+`/package.json`:
+
+```diff
+"dependencies": {
++   "design-tokens": "workspace:*",
+```
+
+```sh
+cd style-dictionary && \
+rm -rf node_modules && \
+pnpm add -D style-dictionary@^4.2.0 -w
 ```
 
 <!-- rm -rf android ios README.md StyleDictionary.podspec LICENSE package.json -->
@@ -2557,7 +2581,7 @@ export default {
 ###### Auto-Generate Accent Colors / Color Shades
 
 ```sh
-npm install tinycolor2
+pnpm add tinycolor2
 ```
 
 ```sh
