@@ -2546,7 +2546,7 @@ export default {
         "8": { "value": "#003c90", "type": "color" },
         "9": { "value": "#002355", "type": "color" },
         "10":{ "value": "#000b19", "type": "color" },
-        "default": { "value": "{color.accent.blue.7}", "type": "color" }
+        "DEFAULT": { "value": "{color.accent.blue.7}", "type": "color" }
       }
     }
   }
@@ -2584,7 +2584,7 @@ export function generateColorShades(
 
   const value = colors[name].value
   rst[defaultShade] = value
-  rst.default = rst[defaultShade]
+  rst.DEFAULT = rst[defaultShade]
 
   const color = tinycolor2(value)
 
@@ -2729,17 +2729,17 @@ import tinycolor2 from 'tinycolor2'
 
 import tokens from '../accent/grey.js'
 
-const grey = tinycolor2(tokens.color.accent.grey.default.value)
+const grey = tinycolor2(tokens.color.accent.grey.DEFAULT.value)
 
 export default {
   color: {
     alpha: {
       grey: {
-        "1": { "value": grey.setAlpha(0.03).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.03 } "type": "color" }
-        "2": { "value": grey.setAlpha(0.06).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.06 } "type": "color" }
-        "3": { "value": grey.setAlpha(0.14).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.14 } "type": "color" }
-        "4": { "value": grey.setAlpha(0.31).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.31 } "type": "color" }
-        "5": { "value": grey.setAlpha(0.49).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.49 } "type": "color" }
+        "1": { "value": grey.setAlpha(0.03).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.03 } "type": "color" }
+        "2": { "value": grey.setAlpha(0.06).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.06 } "type": "color" }
+        "3": { "value": grey.setAlpha(0.14).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.14 } "type": "color" }
+        "4": { "value": grey.setAlpha(0.31).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.31 } "type": "color" }
+        "5": { "value": grey.setAlpha(0.49).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.49 } "type": "color" }
       }
     }
   }
@@ -2814,7 +2814,7 @@ touch tokens/color/primary.js
 export default {
   color: {
     primary: {
-      'default': {
+      'DEFAULT': {
         value: '{color.primary.1}',
         type: 'color'
       },
@@ -2943,7 +2943,7 @@ import tokens from './accent/saturated.js'
 export default {
   color: {
     secondary: {
-      'default': {
+      'DEFAULT': {
         value: '{color.secondary.1}',
         type: 'color'
       },
@@ -2996,7 +2996,7 @@ import tokens from './accent/saturated.js'
 export default {
   color: {
     tertiary: {
-      'default': {
+      'DEFAULT': {
         value: '{color.tertiary.1}',
         type: 'color'
       },
@@ -3035,7 +3035,7 @@ import tokens from './accent/saturated.js'
 export default {
   color: {
     quartus: {
-      'default': {
+      'DEFAULT': {
         value: '{color.quartus.1}',
         type: 'color'
       },
@@ -3096,7 +3096,7 @@ export default {
         "10": { "value": "{color.accent.grey.10}", "type": "color" },
         "11": { "value": "{color.accent.grey.11}", "type": "color" },
         "12": { "value": "{color.accent.grey.12}", "type": "color" },
-        "default": { "value": "{color.accent.neutral.11}", "type": "color" } // reference 11 as default
+        "DEFAULT": { "value": "{color.accent.neutral.11}", "type": "color" } // reference 11 as default
       }
     }
   }
@@ -3305,7 +3305,7 @@ export default {
         value: '{color.accent.neutral.12}',
         type: 'color'
       },
-      default: {
+      DEFAULT: {
         value: '{color.accent.neutral.11}',
         type: 'color'
       },
@@ -3322,31 +3322,31 @@ export default {
         type: 'color'
       },
       link: {
-        default: {
+        DEFAULT: {
           value: '{color.primary.1}',
           type: 'color'
         }
       },
       nav: {
-        default: {
-          value: '{color.text.default}',
+        DEFAULT: {
+          value: '{color.text.DEFAULT}',
           type: 'color'
         },
         'secondary': {
-          default: {
+          DEFAULT: {
             value: '{color.text.subtle}',
             type: 'color'
           }
         },
         'tertiary': {
-          default: {
+          DEFAULT: {
             value: '{color.text.subtler}',
             type: 'color'
           }
         }
       },
       information: {
-        value: '{color.semantic.info.default}',
+        value: '{color.semantic.info.DEFAULT}',
         type: 'color'
       }
     }
@@ -3392,12 +3392,12 @@ export default {
         value: '{color.accent.neutral.2}',
         type: 'color'
       },
-      default: {
+      DEFAULT: {
         value: '{color.accent.neutral.1}',
         type: 'color'
       },
       information: {
-        value: '{color.semantic.info.default}',
+        value: '{color.semantic.info.DEFAULT}',
         type: 'color'
       }
     }
@@ -3418,7 +3418,7 @@ export default {
         value: '{color.accent.neutral.7}',
         type: 'color'
       },
-      default: {
+      DEFAULT: {
         value: '{color.alpha.neutral.5}',
         type: 'color'
       },
@@ -3427,7 +3427,7 @@ export default {
         type: 'color'
       },
       information: {
-        value: '{color.semantic.info.default}',
+        value: '{color.semantic.info.DEFAULT}',
         type: 'color'
       }
     }
@@ -3444,7 +3444,7 @@ export default {
 export default {
   color: {
     shadow: {
-      default: {
+      DEFAULT: {
         value: '{color.alpha.neutral.4}',
         type: 'color'
       }
@@ -3466,19 +3466,19 @@ export default {
     primary: {
       ...
 +     visited: {
-+       default: {
++       DEFAULT: {
 +         value: '{color.primary.1}',
 +         type: 'color'
 +       }
 +     },
 +     hover: {
-+       default: {
++       DEFAULT: {
 +         value: '{color.primary.2}',
 +         type: 'color'
 +       }
 +     },
 +     focus: {
-+       default: {
++       DEFAULT: {
 +         value: '{color.primary.1}',
 +         type: 'color'
 +       },
@@ -3488,19 +3488,19 @@ export default {
 +       }
 +     },
 +     active: {
-+       default: {
++       DEFAULT: {
 +         value: '{color.primary.3}',
 +         type: 'color'
 +       }
 +     },
 +     disabled: {
-+       default: {
++       DEFAULT: {
 +         value: '{color.primary.4}',
 +         type: 'color'
 +       }
 +     },
 +     activated: {
-+       default: {
++       DEFAULT: {
 +         value: '{color.primary.1}',
 +         type: 'color'
 +       },
@@ -3510,7 +3510,7 @@ export default {
 +       }
 +     },
 +     opened: {
-+       default: {
++       DEFAULT: {
 +         value: '{color.primary.1}',
 +         type: 'color'
 +       },
@@ -3520,7 +3520,7 @@ export default {
 +       }
 +     },
 +     checked: {
-+       default: {
++       DEFAULT: {
 +         value: '{color.primary.1}',
 +         type: 'color'
 +       }
@@ -3541,7 +3541,7 @@ export default {
         'secondary': {
           state: {
             activated: {
-              value: '{color.primary.activated.default}',
+              value: '{color.primary.activated.DEFAULT}',
               type: 'color'
             }
           }
@@ -3549,7 +3549,7 @@ export default {
         'tertiary': {
           state: {
             activated: {
-              value: '{color.primary.activated.default}',
+              value: '{color.primary.activated.DEFAULT}',
               type: 'color'
             }
           }
@@ -3558,7 +3558,7 @@ export default {
     },
     background: {
       nav: {
-        default: {
+        DEFAULT: {
           state: {
             activated: {
               value: '{color.primary.activated.bg}',
@@ -3584,23 +3584,23 @@ export default {
       "link": {
         "interaction": {
           "visited": {
-            value: '{color.primary.visited.default}',
+            value: '{color.primary.visited.DEFAULT}',
             type: 'color'
           },
           "hover": {
-            value: '{color.primary.hover.default}',
+            value: '{color.primary.hover.DEFAULT}',
             type: 'color'
           },
           "focus": {
-            value: '{color.primary.focus.default}',
+            value: '{color.primary.focus.DEFAULT}',
             type: 'color'
           },
           "focus-visible": {
-            value: '{color.primary.focus.default}',
+            value: '{color.primary.focus.DEFAULT}',
             type: 'color'
           },
           "active": {
-            value: '{color.primary.active.default}',
+            value: '{color.primary.active.DEFAULT}',
             type: 'color'
           }
         }
@@ -3624,7 +3624,7 @@ export default {
         }
       },
       nav: {
-        default: {
+        DEFAULT: {
           interaction: {
             hover: {
               value: '{color.background.bold}',
@@ -3749,44 +3749,44 @@ export default {
     },
     border: {
       input: {
-        default: {
-          value: "{color.border.default}",
+        DEFAULT: {
+          value: "{color.border.DEFAULT}",
           type: 'color'
         }
       },
       checkbox: {
-        default: {
-          value: "{color.border.default}",
+        DEFAULT: {
+          value: "{color.border.DEFAULT}",
           type: 'color'
         }
       },
       radio: {
-        default: {
-          value: "{color.border.default}",
+        DEFAULT: {
+          value: "{color.border.DEFAULT}",
           type: 'color'
         }
       },
       select: {
-        default: {
-          value: "{color.border.default}",
+        DEFAULT: {
+          value: "{color.border.DEFAULT}",
           type: 'color'
         }
       },
       option: {},
       button: { // same to background
-        "default": {
-          value: '{color.background.button.default}',
+        "DEFAULT": {
+          value: '{color.background.button.DEFAULT}',
           type: 'color'
         },
         subtle: {
-          default: {
-            value: "{color.background.button.subtle.default}",
+          DEFAULT: {
+            value: "{color.background.button.subtle.DEFAULT}",
             type: 'color'
           }
         },
         wireframe: {
-          default: {
-            value: "{color.primary.default}",
+          DEFAULT: {
+            value: "{color.primary.DEFAULT}",
             type: 'color'
           }
         }
@@ -3814,12 +3814,12 @@ export default {
       },
       option: {},
       button: {
-        "default": {
+        "DEFAULT": {
           value: '{color.primary.1}',
           type: 'color'
         },
         subtle: {
-          default: {
+          DEFAULT: {
             value: "{color.alpha.neutral.4}",
             type: 'color'
           }
@@ -3828,65 +3828,65 @@ export default {
     },
     text: {
       button: {
-        default: {
+        DEFAULT: {
           value: "{color.accent.neutral.1}", // `white`
           type: 'color'
         },
         subtle: {
-          default: {
-            value: "{color.accent.neutral.default}",
+          DEFAULT: {
+            value: "{color.accent.neutral.DEFAULT}",
             type: 'color'
           }
         },
         wireframe: {
-          default: {
-            value: "{color.border.button.wireframe.default}",
+          DEFAULT: {
+            value: "{color.border.button.wireframe.DEFAULT}",
             type: 'color'
           }
         }
       },
       select: {
-        default: {
-          value: "{color.accent.neutral.default}",
+        DEFAULT: {
+          value: "{color.accent.neutral.DEFAULT}",
           type: 'color'
         }
       },
       option: {
-        default: {
-          value: "{color.accent.neutral.default}",
+        DEFAULT: {
+          value: "{color.accent.neutral.DEFAULT}",
           type: 'color'
         }
       },
       input: {
-        "default": {
-          value: "{color.accent.neutral.default}",
+        "DEFAULT": {
+          value: "{color.accent.neutral.DEFAULT}",
           type: 'color'
         },
         caret: {
-          value: "{color.text.input.default}",
+          value: "{color.text.input.DEFAULT}",
           type: 'color'
         }
       },
       label: {
-        default: {
-          value: "{color.text.input.default}", // same to input text
+        DEFAULT: {
+          value: "{color.text.input.DEFAULT}", // same to input text
           type: 'color'
         }
       },
       'label.left': {
-        value: "{color.text.label.default}",
+        value: "{color.text.label.DEFAULT}",
         type: 'color'
       },
       'label.above': {
-        value: "{color.text.label.default}",
+        value: "{color.text.label.DEFAULT}",
         type: 'color'
       },
       'label.inside.border': {
-        value: "{color.text.label.default}",
+        value: "{color.text.label.DEFAULT}",
         type: 'color'
       },
       'label.checkbox.radio': {
-        value: "{color.text.label.default}",
+        value: "{color.text.label.DEFAULT}",
         type: 'color'
       },
       'label.below': {
@@ -3894,11 +3894,11 @@ export default {
         type: 'color'
       },
       'label.inside.input': { // same to placeholder
-        value: "{color.text.placeholder.default}",
+        value: "{color.text.placeholder.DEFAULT}",
         type: 'color'
       },
       'placeholder': {
-        default: {
+        DEFAULT: {
           value: "{color.accent.neutral.9}",
           type: 'color'
         }
@@ -3949,7 +3949,7 @@ export default {
       input: {
         state: {
           invalid: {
-            value: "{color.semantic.error.default}",
+            value: "{color.semantic.error.DEFAULT}",
             type: 'color'
           }
         }
@@ -3957,7 +3957,7 @@ export default {
       label: {
         state: {
           invalid: {
-            value: "{color.semantic.error.default}",
+            value: "{color.semantic.error.DEFAULT}",
             type: 'color'
           }
         }
@@ -3989,7 +3989,7 @@ export default {
       select: {
         state: {
           opened: {
-            value: "{color.primary.opened.default}",
+            value: "{color.primary.opened.DEFAULT}",
             type: 'color'
           }
         }
@@ -3997,13 +3997,13 @@ export default {
       'placeholder': {
         state: {
           invalid: {
-            value: "{color.semantic.error.default}",
+            value: "{color.semantic.error.DEFAULT}",
             type: 'color'
           }
         }
       },
       'tip-error': {
-        value: "{color.semantic.error.default}",
+        value: "{color.semantic.error.DEFAULT}",
         type: 'color'
       }
     },
@@ -4035,7 +4035,7 @@ export default {
       input: {
         state: {
           invalid: {
-            value: "{color.semantic.error.default}",
+            value: "{color.semantic.error.DEFAULT}",
             type: 'color'
           },
           disabled: {
@@ -4047,7 +4047,7 @@ export default {
       checkbox: {
         state: {
           checked: {
-            value: '{color.primary.checked.default}',
+            value: '{color.primary.checked.DEFAULT}',
             type: 'color'
           },
           disabled: {
@@ -4059,7 +4059,7 @@ export default {
       radio: {
         state: {
           checked: {
-            value: '{color.primary.checked.default}',
+            value: '{color.primary.checked.DEFAULT}',
             type: 'color'
           },
           disabled: {
@@ -4081,7 +4081,7 @@ export default {
       button: {
         state: {
           disabled: {
-            value: '{color.primary.disabled.default}',
+            value: '{color.primary.disabled.DEFAULT}',
             type: 'color'
           }
         },
@@ -4097,7 +4097,7 @@ export default {
       checkbox: {
         state: {
           checked: {
-            value: '{color.primary.checked.default}',
+            value: '{color.primary.checked.DEFAULT}',
             type: 'color'
           }
         }
@@ -4199,19 +4199,19 @@ export default {
       "button": {
         "interaction": {
           "hover": {
-            value: '{color.primary.hover.default}',
+            value: '{color.primary.hover.DEFAULT}',
             type: 'color'
           },
           "focus": {
-            value: '{color.primary.focus.default}',
+            value: '{color.primary.focus.DEFAULT}',
             type: 'color'
           },
           "focus-visible": {
-            value: '{color.primary.focus.default}',
+            value: '{color.primary.focus.DEFAULT}',
             type: 'color'
           },
           "active": {
-            value: '{color.primary.active.default}',
+            value: '{color.primary.active.DEFAULT}',
             type: 'color'
           }
         },
@@ -4238,19 +4238,19 @@ export default {
         wireframe: {
           "interaction": {
             "hover": {
-              value: '{color.primary.hover.default}',
+              value: '{color.primary.hover.DEFAULT}',
               type: 'color'
             },
             "focus": {
-              value: '{color.primary.focus.default}',
+              value: '{color.primary.focus.DEFAULT}',
               type: 'color'
             },
             "focus-visible": {
-              value: '{color.primary.focus.default}',
+              value: '{color.primary.focus.DEFAULT}',
               type: 'color'
             },
             "active": {
-              value: '{color.primary.active.default}',
+              value: '{color.primary.active.DEFAULT}',
               type: 'color'
             }
           }
@@ -4403,7 +4403,7 @@ export default {
       "input": {
         "interaction": {
           "focus": {
-            value: '{color.primary.focus.default}',
+            value: '{color.primary.focus.DEFAULT}',
             type: 'color'
           }
         }
@@ -4411,7 +4411,7 @@ export default {
       "checkbox": {
         "interaction": {
           "focus": {
-            value: '{color.primary.focus.default}',
+            value: '{color.primary.focus.DEFAULT}',
             type: 'color'
           }
         }
@@ -4419,7 +4419,7 @@ export default {
       "radio": {
         "interaction": {
           "focus": {
-            value: '{color.primary.focus.default}',
+            value: '{color.primary.focus.DEFAULT}',
             type: 'color'
           }
         }
@@ -4427,7 +4427,7 @@ export default {
       "select": {
         "interaction": {
           "focus": {
-            value: '{color.primary.focus.default}',
+            value: '{color.primary.focus.DEFAULT}',
             type: 'color'
           }
         }
@@ -4479,7 +4479,7 @@ Emphasis Level determines the amount of **contrast** a color has against the def
 - subtlest
 - subtler
 - subtle
-- **default**
+- **DEFAULT**
 - bold
 - bolder
 - boldest
@@ -4516,13 +4516,13 @@ import tinycolor2 from 'tinycolor2'
 + 'subtlest',
 + 'subtler',
 + 'subtle',
-+ 'default',
++ 'DEFAULT',
 + 'bold',
 + 'bolder',
 + 'boldest'
 +]
 
-+const defaultIndex = emphasisLevels.indexOf('default')
++const defaultIndex = emphasisLevels.indexOf('DEFAULT')
 
 export function generateColorShades(
   name,
@@ -4539,7 +4539,7 @@ export function generateColorShades(
 
   const value = colors[name].value
   rst[defaultShade] = value
-  rst.default = rst[defaultShade]
+  rst.DEFAULT = rst[defaultShade]
 
   const color = tinycolor2(value)
 
@@ -4589,7 +4589,7 @@ By this mapping, the accents actually have semantic names instead of `blue.1`, `
 - `{color.accent.blue.4}` = `{color.accent.blue.subtlest}`
 - `{color.accent.blue.5}` = `{color.accent.blue.subtler}`
 - `{color.accent.blue.6}` = `{color.accent.blue.subtle}`
-- `{color.accent.blue.7}` = `{color.accent.blue.default}`
+- `{color.accent.blue.7}` = `{color.accent.blue.DEFAULT}`
 - `{color.accent.blue.8}` = `{color.accent.blue.bold}`
 - `{color.accent.blue.9}` = `{color.accent.blue.bolder}`
 - `{color.accent.blue.10}` = `{color.accent.blue.boldest}`
@@ -4603,7 +4603,7 @@ By this mapping, the accents actually have semantic names instead of `blue.1`, `
 export default {
   color: {
     primary: {
--     'default': {
+-     'DEFAULT': {
 -       value: '{color.primary.1}',
 -       type: 'color'
 -     },
@@ -4611,8 +4611,8 @@ export default {
 -       value: '{color.accent.blue.7}',
 -       type: 'color'
 -     },
-+     'default': {
-+       value: '{color.accent.blue.default}',
++     'DEFAULT': {
++       value: '{color.accent.blue.DEFAULT}',
 +       type: 'color'
 +     },
 -     '2': { // a darker one for the [hover] state
@@ -4649,7 +4649,7 @@ export default {
 }
 ```
 
-Then, replace all `{color.primary.1}` with `{color.primary.default}`
+Then, replace all `{color.primary.1}` with `{color.primary.DEFAULT}`
 
 ![replace primary](replace-primary.png)
 
@@ -4678,7 +4678,7 @@ Do the same change to secondary colors, tertiary colors and quartus colors.
       },
       ...
       'placeholder': {
-        default: {
+        DEFAULT: {
 -         value: "{color.accent.neutral.9}",
 +         value: "{color.accent.neutral.subtler}",
           type: 'color'
@@ -4694,9 +4694,9 @@ Do the same change to secondary colors, tertiary colors and quartus colors.
 +       value: '{color.accent.neutral.bold}',
         type: 'color'
       },
-      default: {
+      DEFAULT: {
 -       value: '{color.accent.neutral.11}',
-+       value: '{color.accent.neutral.default}',
++       value: '{color.accent.neutral.DEFAULT}',
         type: 'color'
       },
       subtle: {
@@ -4786,19 +4786,19 @@ export default {
     text: {
       ...
 +     discover: {
-+       value: '{color.semantic.new.default}',
++       value: '{color.semantic.new.DEFAULT}',
 +       type: 'color'
 +     },
 +     success: {
-+       value: '{color.semantic.success.default}',
++       value: '{color.semantic.success.DEFAULT}',
 +       type: 'color'
 +     },
 +     warning: {
-+       value: '{color.semantic.warning.default}',
++       value: '{color.semantic.warning.DEFAULT}',
 +       type: 'color'
 +     },
 +     error: {
-+       value: '{color.semantic.error.default}',
++       value: '{color.semantic.error.DEFAULT}',
 +       type: 'color'
 +     }
     }
@@ -4823,19 +4823,19 @@ export default {
     background: {
       ...
 +     'discover.bold': {
-+       value: '{color.semantic.new.default}',
++       value: '{color.semantic.new.DEFAULT}',
 +       type: 'color'
 +     },
 +     'success.bold': {
-+       value: '{color.semantic.success.default}',
++       value: '{color.semantic.success.DEFAULT}',
 +       type: 'color'
 +     },
 +     'warning.bold': {
-+       value: '{color.semantic.warning.default}',
++       value: '{color.semantic.warning.DEFAULT}',
 +       type: 'color'
 +     },
 +     'error.bold': {
-+       value: '{color.semantic.error.default}',
++       value: '{color.semantic.error.DEFAULT}',
 +       type: 'color'
 +     }
     }
@@ -4852,19 +4852,19 @@ export default {
     border: {
       ...
 +     'discover.bold': {
-+       value: '{color.semantic.new.default}',
++       value: '{color.semantic.new.DEFAULT}',
 +       type: 'color'
 +     },
 +     'success.bold': {
-+       value: '{color.semantic.success.default}',
++       value: '{color.semantic.success.DEFAULT}',
 +       type: 'color'
 +     },
 +     'warning.bold': {
-+       value: '{color.semantic.warning.default}',
++       value: '{color.semantic.warning.DEFAULT}',
 +       type: 'color'
 +     },
 +     'error.bold': {
-+       value: '{color.semantic.error.default}',
++       value: '{color.semantic.error.DEFAULT}',
 +       type: 'color'
 +     }
     }
@@ -4936,7 +4936,7 @@ For those importand elements of your website (application), you need to use inve
 
 This usually happens on elements with bold backgrounds, like important buttons, error tips, warning toast etc.
 
-By far, our default text color is the grey color `{color.text.default}` (`{color.accent.neutral.11}`), if you use this text color to show a error message, it can be quite fuzzy because the text color `#1d1d1f` has a low contrast against the red background `#ae2e24`, which delivers a weak intention.
+By far, our default text color is the grey color `{color.text.DEFAULT}` (`{color.accent.neutral.11}`), if you use this text color to show a error message, it can be quite fuzzy because the text color `#1d1d1f` has a low contrast against the red background `#ae2e24`, which delivers a weak intention.
 
 ![red bad](red-bad.png)
 
@@ -4952,7 +4952,7 @@ However, imagine we're using the subtle orange color (`{color.accent.orange.subt
 
 ![orange good](orange-good.png)
 
-Otherwise, using the default orange (`{color.accent.orange.default}`, `#a54800`) and white text can also deliver a emphatic intention.
+Otherwise, using the default orange (`{color.accent.orange.DEFAULT}`, `#a54800`) and white text can also deliver a emphatic intention.
 
 ![orange good](orange-good-2.png)
 
@@ -5182,13 +5182,13 @@ const emphasisLevels = [
   'subtlest',
   'subtler',
   'subtle',
-  'default',
+  'DEFAULT',
   'bold',
   'bolder',
   'boldest'
 ]
 
-const defaultIndex = emphasisLevels.indexOf('default')
+const defaultIndex = emphasisLevels.indexOf('DEFAULT')
 
 export const ACCENT_MAP = {}
 
@@ -5238,9 +5238,9 @@ export function generateColorShades(
   const aliasMap = {}
   const darkAliasMap = {}
 
-  rst.alias.default = rst.gradients[defaultShade]
-  aliasMap.default = defaultShade
-  darkAliasMap.default = totalShades - defaultShade + 1
+  rst.alias.DEFAULT = rst.gradients[defaultShade]
+  aliasMap.DEFAULT = defaultShade
+  darkAliasMap.DEFAULT = totalShades - defaultShade + 1
 
   for (let l = defaultIndex + 1; l < emphasisLevels.length; l++) {
     const curLevel = emphasisLevels[l]
@@ -5303,7 +5303,7 @@ export default {
         11: { value: '{color.base.grey}', type: 'color' },
         12: { value: '{color.base.grey}', type: 'color', gradientConfig },
         bold: { value: '{color.base.grey}', type: 'color', isAlias: true },
-        default: { value: '{color.base.grey}', type: 'color', isAlias: true },
+        DEFAULT: { value: '{color.base.grey}', type: 'color', isAlias: true },
         subtle: { value: '{color.base.grey}', type: 'color', isAlias: true },
         subtler: { value: '{color.base.grey}', type: 'color', isAlias: true },
         subtlest: { value: '{color.base.grey}', type: 'color', isAlias: true },
@@ -5346,7 +5346,7 @@ const accent = Object.keys(colors).reduce((accent, name) => ({
     boldest: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
     bolder: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
     bold: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
-    default: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
+    DEFAULT: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
     subtle: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
     subtler: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
     subtlest: { value: `{color.base.${name}}`, type: 'color', isAlias: true },
@@ -5417,7 +5417,7 @@ export default {
 +       value: '{color.accent.neutral.dullest}',
         type: 'color'
       },
-      default: {
+      DEFAULT: {
 -       value: '{color.accent.neutral.1}',
 +       value: '{color.accent.neutral.silent}',
         type: 'color'
@@ -5436,7 +5436,7 @@ export default {
 +       value: '{color.accent.neutral.subtler}',
         type: 'color'
       },
-      default: {
+      DEFAULT: {
 -       value: '{color.alpha.neutral.5}',
 +       value: '{color.alpha.neutral.lowest}',
         type: 'color'
@@ -5496,23 +5496,23 @@ import { generateColorShades, ACCENT_MAP } from '../utils/color-gradient.js'
 
 -import tokens from '../accent/grey.js'
 
--const grey = tinycolor2(tokens.color.accent.grey.default.value)
--console.log(tokens.color.accent.grey.default.value)
+-const grey = tinycolor2(tokens.color.accent.grey.DEFAULT.value)
+-console.log(tokens.color.accent.grey.DEFAULT.value)
 
 export default {
   color: {
     alpha: {
       grey: {
--       "1": { "value": grey.setAlpha(0.03).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.03 } "type": "color" }
--       "2": { "value": grey.setAlpha(0.06).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.06 } "type": "color" }
--       "3": { "value": grey.setAlpha(0.14).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.14 } "type": "color" }
--       "4": { "value": grey.setAlpha(0.31).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.31 } "type": "color" }
--       "5": { "value": grey.setAlpha(0.49).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.49 } "type": "color" }
-+       "1": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.03 }, "type": "color" },
-+       "2": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.06 }, "type": "color" },
-+       "3": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.14 }, "type": "color" },
-+       "4": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.31 }, "type": "color" },
-+       "5": { "value": "{color.accent.grey.default}", "attributes": { "alpha": 0.49 }, "type": "color" }
+-       "1": { "value": grey.setAlpha(0.03).toHex8String(), "type": "color" }, // "1": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.03 } "type": "color" }
+-       "2": { "value": grey.setAlpha(0.06).toHex8String(), "type": "color" }, // "2": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.06 } "type": "color" }
+-       "3": { "value": grey.setAlpha(0.14).toHex8String(), "type": "color" }, // "3": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.14 } "type": "color" }
+-       "4": { "value": grey.setAlpha(0.31).toHex8String(), "type": "color" }, // "4": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.31 } "type": "color" }
+-       "5": { "value": grey.setAlpha(0.49).toHex8String(), "type": "color" } // "5": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.49 } "type": "color" }
++       "1": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.03 }, "type": "color" },
++       "2": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.06 }, "type": "color" },
++       "3": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.14 }, "type": "color" },
++       "4": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.31 }, "type": "color" },
++       "5": { "value": "{color.accent.grey.DEFAULT}", "attributes": { "alpha": 0.49 }, "type": "color" }
       }
     }
   }
