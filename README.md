@@ -2147,7 +2147,7 @@ Create a separate Figma file for your design tokens <https://diez.org/getting-st
 #### Style Dictionary
 
 ```sh
-mkdir style-dictionary
+mkdir design-tokens
 ```
 
 `/pnpm-workspace.yaml`:
@@ -2155,15 +2155,15 @@ mkdir style-dictionary
 ```diff
 packages:
   ...
-+ - "style-dictionary"
++ - "design-tokens"
 ```
 
 ```sh
-cd style-dictionary && \
+cd design-tokens && \
 npx style-dictionary@4.2.0 init complete
 ```
 
-`style-dictionary/package.json`:
+`design-tokens/package.json`:
 
 ```diff
 - "name": "style-dictionary-example-complete",
@@ -2187,7 +2187,7 @@ pnpm install
 ```
 
 ```sh
-cd style-dictionary && \
+cd design-tokens && \
 rm -rf node_modules && \
 pnpm add -D style-dictionary@^4.2.0 -w
 ```
@@ -5735,10 +5735,10 @@ See `dist/style.css` and `dist/style.dark.css`.
 ### Export Design Tokens to TailwindCSS
 
 ```sh
-touch style-dictionary/utils/process-tokens.js
+touch design-tokens/utils/process-tokens.js
 ```
 
-`style-dictionary/utils/process-tokens.js`:
+`design-tokens/utils/process-tokens.js`:
 
 ```js
 export function extractTokenValue(tokens) {
@@ -5802,10 +5802,10 @@ console.log(
 ```
 
 ```sh
-touch style-dictionary/export.js
+touch design-tokens/export.js
 ```
 
-`style-dictionary/export.js`:
+`design-tokens/export.js`:
 
 ```js
 import { extractTokenValue } from './utils/process-tokens.js'
@@ -5827,7 +5827,7 @@ export const dark = ${JSON.stringify(dark, null, 2)}
 
 ```
 
-`style-dictionary/package.json`:
+`design-tokens/package.json`:
 
 ```diff
 - "main": "build.js",
@@ -5841,7 +5841,7 @@ export const dark = ${JSON.stringify(dark, null, 2)}
 pnpm build
 ```
 
-See `style-dictionary/index.js`.
+See `design-tokens/index.js`.
 
 `lib-web-ui/tailwind.config.js`:
 
