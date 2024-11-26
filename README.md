@@ -5693,7 +5693,16 @@ Results after build:
 }
 ```
 
-`design-tokens/jsts/lignt/variables.js`:
+`design-tokens/build/sd.config.js`:
+
+```diff
+      "jsts": {
+-       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css'],
++       "transforms": ['attribute/cti', 'name/pascal', 'time/seconds', 'size/rem', 'colorShadesMapping', 'color/css'],
+
+```
+
+`design-tokens/jsts/light/variables.js`:
 
 Take notice of `type` and `category`.
 
