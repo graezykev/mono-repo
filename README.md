@@ -5698,7 +5698,7 @@ Results after build:
 ```diff
       "jsts": {
 -       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css'],
-+       "transforms": ['attribute/cti', 'name/pascal', 'time/seconds', 'size/rem', 'colorShadesMapping', 'color/css'],
++       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css', 'time/seconds'],
 
 ```
 
