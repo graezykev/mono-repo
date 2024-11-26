@@ -5660,94 +5660,6 @@ Accents are used to highlight key elements without overwhelming the overall desi
 
 ## Design Token - Integrate with TailwindCSS
 
-## Design Token - Duration
-
-```sh
-cd design-tokens && \
-touch tokens/duration.js
-```
-
-`tokens/duration.js`:
-
-```js
-export default {
-  duration: {
-    'a-random-duration-of-time': {
-      type: 'time',
-      value: 1001
-    }
-  }
-}
-
-```
-
-`type: 'time'` doesn't work here.
-
-Results after build:
-
-`design-tokens/css/lignt/variables.css`:
-
-```css
-:root{
-  --token-duration-a-random-duration-of-time: 1.00s;
-}
-```
-
-`design-tokens/build/sd.config.js`:
-
-```diff
-      "jsts": {
--       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css'],
-+       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css', 'time/seconds'],
-
-```
-
-`design-tokens/jsts/light/variables.js`:
-
-Take notice of `type` and `category`.
-
-```js
-  duration: {
-    "a-random-duration-of-time": {
-      type: "time",
-      value: 1001,
-      filePath: "tokens/time.js",
-      isSource: true,
-      original: {
-        type: "time",
-        value: 1001,
-      },
-      name: "DurationARandomDurationOfTime",
-      attributes: {
-        category: "duration",
-        type: "a-random-duration-of-time",
-      },
-      path: ["duration", "a-random-duration-of-time"],
-    },
-  },
-```
-
-`design-tokens/android/styledictionary/src/main/res/values/light/style_dictionary_integers.xml`:
-
-```xml
-<resources>
-  <integer name="duration_a_random_duration_of_time">1001</integer>
-</resources>
-```
-
-`design-tokens/ios/Classes/Generated/light/StyleDictionaryProperties.m`:
-
-```c
-  @"duration": @{
-    @"a-random-duration-of-time": @{
-      @"value": @1001,
-      @"name": @"StyleDictionaryDurationARandomDurationOfTime",
-      @"category": @"duration",
-      @"type": @"a-random-duration-of-time"
-      }
-    },
-```
-
 ### Build CSS for default(light) and dark Mode
 
 `lib-web-ui/package.json`:
@@ -5964,6 +5876,96 @@ export default {
 cd lib-web-ui && \
 pnpm build
 ```
+
+## Design Token - Duration
+
+```sh
+cd design-tokens && \
+touch tokens/duration.js
+```
+
+`tokens/duration.js`:
+
+```js
+export default {
+  duration: {
+    'a-random-duration-of-time': {
+      type: 'time',
+      value: 1001
+    }
+  }
+}
+
+```
+
+`type: 'time'` doesn't work here.
+
+Results after build:
+
+`design-tokens/css/lignt/variables.css`:
+
+```css
+:root{
+  --token-duration-a-random-duration-of-time: 1.00s;
+}
+```
+
+`design-tokens/build/sd.config.js`:
+
+```diff
+      "jsts": {
+-       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css'],
++       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css', 'time/seconds'],
+
+```
+
+`design-tokens/jsts/light/variables.js`:
+
+Take notice of `type` and `category`.
+
+```js
+  duration: {
+    "a-random-duration-of-time": {
+      type: "time",
+      value: 1001,
+      filePath: "tokens/time.js",
+      isSource: true,
+      original: {
+        type: "time",
+        value: 1001,
+      },
+      name: "DurationARandomDurationOfTime",
+      attributes: {
+        category: "duration",
+        type: "a-random-duration-of-time",
+      },
+      path: ["duration", "a-random-duration-of-time"],
+    },
+  },
+```
+
+`design-tokens/android/styledictionary/src/main/res/values/light/style_dictionary_integers.xml`:
+
+```xml
+<resources>
+  <integer name="duration_a_random_duration_of_time">1001</integer>
+</resources>
+```
+
+`design-tokens/ios/Classes/Generated/light/StyleDictionaryProperties.m`:
+
+```c
+  @"duration": @{
+    @"a-random-duration-of-time": @{
+      @"value": @1001,
+      @"name": @"StyleDictionaryDurationARandomDurationOfTime",
+      @"category": @"duration",
+      @"type": @"a-random-duration-of-time"
+      }
+    },
+```
+
+## Design Token - Size
 
 ## Testing
 
