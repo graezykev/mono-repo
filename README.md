@@ -5877,11 +5877,88 @@ cd lib-web-ui && \
 pnpm build
 ```
 
+## Design Token - Font Size
+
+```sh
+cd design-tokens && \
+mkdir tokens/size && \
+touch tokens/size/font.js && \
+mkdir tokens/typography && \
+touch tokens/typography/font-size.js
+```
+
+`tokens/size/font.js`:
+
+```js
+export default {
+  size: {
+    font: {
+      base: {
+        value: 1,
+        type: 'fontSize'
+      },
+      xsmall: {
+        value: 0.75,
+        type: 'fontSize'
+      },
+      small: {
+        value: 0.875,
+        type: 'fontSize'
+      },
+      medium: {
+        value: '{size.font.base}',
+        type: 'fontSize'
+      },
+      large: {
+        value: 1.25,
+        type: 'fontSize'
+      },
+      xlarge: {
+        value: 1.5,
+        type: 'fontSize'
+      },
+      xxlarge: {
+        value: 2,
+        type: 'fontSize'
+      },
+      xxxlarge: {
+        value: 3,
+        type: 'fontSize'
+      }
+    }
+  }
+}
+
+```
+
+`tokens/typography/font-size.js`:
+
+```js
+export default {
+  size: {
+    font: {
+      content: {
+        value: '{size.font.small}',
+        type: 'fontSize'
+      },
+      title: {
+        value: '{size.font.large}',
+        type: 'fontSize'
+      },
+      heading: {
+        value: '{size.font.xlarge}',
+        type: 'fontSize'
+      }
+    }
+  }
+}
+
+```
+
 ## Design Token - Font Weight
 
 ```sh
 cd design-tokens && \
-mkdir tokens/typography && \
 touch tokens/typography/font-weight.js
 ```
 
