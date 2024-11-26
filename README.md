@@ -5877,6 +5877,113 @@ cd lib-web-ui && \
 pnpm build
 ```
 
+## Design Token - Font Weight
+
+```sh
+cd design-tokens && \
+mkdir tokens/typography && \
+touch tokens/typography/font-weight.js
+```
+
+`tokens/typography/font-weight.js`:
+
+```js
+export default {
+  'font-weight': {
+    thin: {
+      value: 100,
+      type: 'fontWeight'
+    },
+    xlight: {
+      value: 200,
+      type: 'fontWeight'
+    },
+    light: {
+      value: 300,
+      type: 'fontWeight'
+    },
+    normal: {
+      value: 400,
+      type: 'fontWeight'
+    },
+    medium: {
+      value: 500,
+      type: 'fontWeight'
+    },
+    'semi-bold': {
+      value: 600,
+      type: 'fontWeight'
+    },
+    bold: {
+      value: 700,
+      type: 'fontWeight'
+    },
+    xbold: {
+      value: 800,
+      type: 'fontWeight'
+    },
+    black: {
+      value: 900,
+      type: 'fontWeight'
+    },
+    xblack: {
+      value: 950,
+      type: 'fontWeight'
+    }
+  }
+}
+
+```
+
+### Write a Custom format for Android
+
+`build/sd.config.js`:
+
+```diff
++import StyleDictionary from 'style-dictionary'
+
+...
+
+export default function getStyleDictionaryConfig(theme) {
+  return {
+    ...
+    "platforms": {
+      ...
+      "android": {
+        ...
+        "files": [
++         {
++           "destination": 'style_dictionary_font_weights.xml',
++           "format": 'android/font-weight'
++         },
+          ...
+      }
+    }
+  }
+}
+
+
++StyleDictionary.registerFormat({
++  name: `android/font-weight`,
++  format: ({ dictionary }) => {
++    let xml = `<?xml version="1.0" encoding="UTF-8"?>
++<!--
++  Do not edit directly, this file was auto-generated.
++-->
++<resources>\n`
++    xml = xml.concat(dictionary.allTokens
++      .filter(token => token.type === 'fontWeight')
++      .map(token => {
++        return `  <item name="${token.name}">${token.value}</item>`
++      }).join('\n'))
++
++    return xml.concat(`\n</resources>`)
++  }
++})
+```
+
+See `android/styledictionary/src/main/res/values/dark/style_dictionary_font_weights.xml` after build.
+
 ## Design Token - Duration
 
 ```sh
