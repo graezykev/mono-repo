@@ -6178,6 +6178,42 @@ export default function getStyleDictionaryConfig(theme) {
 
 ```
 
+### Custom Transformer to transform Line Spacing (for Android)
+
+`build/sd.config.js`:
+
+```diff
+export default function getStyleDictionaryConfig(theme) {
+  return {
+    "source": ["tokens/**/*.json", "tokens/**/*.js"],
+    "platforms": {
+      ...
+      "android": {
+-       "transforms": ['attribute/cti', 'name/snake', 'colorShadesMapping', 'color/hex8android', 'size/remToSp', 'size/remToDp'],
++       "transforms": ['attribute/cti', 'name/snake', 'colorShadesMapping', 'color/hex8android', 'size/remToSp', 'size/remToDp', 'line-spacing'],
+        ...
+      },
+      ...
+    },
+    ...
+  }
+}
+
++StyleDictionary.registerTransform({
++ name: 'line-spacing',
++ type: 'value',
++ transitive: true,
++ filter: (token) => token.type == 'lineHeight' && token?.attributes?.targetHeight,
++ transform: (token) => {
++   if (usesReferences(token.value)) {
++     return undefined
++   }
++   const lineSpacing = token.attributes.targetHeight - (parseFloat(token.value))
++   return lineSpacing.toFixed(2)
++ }
++})
+```
+
 ## Design Token - Duration
 
 ```sh
