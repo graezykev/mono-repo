@@ -5894,16 +5894,16 @@ export default {
   size: {
     font: {
       base: {
-        value: 1,
+        value: 16 / 16,
         type: 'fontSize',
         comment: '16px by default'
       },
       xsmall: {
-        value: 0.75,
+        value: 12 / 16,
         type: 'fontSize'
       },
       small: {
-        value: 0.875,
+        value: 14 / 16,
         type: 'fontSize'
       },
       medium: {
@@ -5911,19 +5911,19 @@ export default {
         type: 'fontSize'
       },
       large: {
-        value: 1.25,
+        value: 20 / 16,
         type: 'fontSize'
       },
       xlarge: {
-        value: 1.5,
+        value: 24 / 16,
         type: 'fontSize'
       },
       xxlarge: {
-        value: 2,
+        value: 32 / 16,
         type: 'fontSize'
       },
       xxxlarge: {
-        value: 3,
+        value: 40 / 16,
         type: 'fontSize'
       }
     }
