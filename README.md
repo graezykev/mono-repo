@@ -6074,6 +6074,110 @@ export default function getStyleDictionaryConfig(theme) {
 
 See `android/styledictionary/src/main/res/values/dark/style_dictionary_font_weights.xml` after build.
 
+## Design Token - Line Height / Line Spacing
+
+### Define Line Height Based on Its Font Size
+
+```sh
+touch tokens/typography/line-height.js
+```
+
+`tokens/typography/line-height.js`:
+
+```js
+export default {
+  number: {
+    'line-height': {
+      content: {
+        value: '{size.font.content}',
+        attributes: {
+          targetHeight: 20
+        },
+        type: 'lineHeight'
+      },
+      title: {
+        value: '{size.font.title}',
+        attributes: {
+          targetHeight: 20
+        },
+        type: 'lineHeight'
+      },
+      sub: {
+        value: '{size.font.sub}',
+        attributes: {
+          targetHeight: 24
+        },
+        type: 'lineHeight'
+      },
+      heading3: {
+        value: '{size.font.heading3}',
+        attributes: {
+          targetHeight: 24
+        },
+        type: 'lineHeight'
+      },
+      heading2: {
+        value: '{size.font.heading2}',
+        attributes: {
+          targetHeight: 28
+        },
+        type: 'lineHeight'
+      },
+      heading1: {
+        value: '{size.font.heading1}',
+        attributes: {
+          targetHeight: 56
+        },
+        type: 'lineHeight'
+      }
+    }
+  }
+}
+
+```
+
+### Custom Transformer to transform Line Height (for CSS and JS)
+
+`build/sd.config.js`:
+
+```diff
+export default function getStyleDictionaryConfig(theme) {
+  return {
+    "source": ["tokens/**/*.json", "tokens/**/*.js"],
+    "platforms": {
+      "css": {
+-       "transforms": ['attribute/cti', 'name/kebab', 'time/seconds', 'html/icon', 'size/rem', 'color/css', 'colorShadesMapping', 'asset/url', 'fontFamily/css', 'cubicBezier/css', 'strokeStyle/css/shorthand', 'border/css/shorthand', 'typography/css/shorthand', 'transition/css/shorthand', 'shadow/css/shorthand'],
++       "transforms": ['attribute/cti', 'name/kebab', 'time/seconds', 'html/icon', 'size/rem', 'color/css', 'colorShadesMapping', 'asset/url', 'fontFamily/css', 'cubicBezier/css', 'strokeStyle/css/shorthand', 'border/css/shorthand', 'typography/css/shorthand', 'transition/css/shorthand', 'shadow/css/shorthand', 'line-height'],
+        ...
+      },
+      "jsts": {
+-       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css', 'time/seconds'],
++       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css', 'time/seconds', 'line-height'],
+        ...
+      },
+      ...
+    },
+    ...
+  }
+}
+
++const BasePixelFontSize = 16
+
++StyleDictionary.registerTransform({
++ name: 'line-height',
++ type: 'value',
++ transitive: true,
++ filter: (token) => token.type == 'lineHeight' && token?.attributes?.targetHeight,
++ transform: (token) => {
++   if (usesReferences(token.value)) {
++     return undefined
++   }
++   return token.attributes.targetHeight / (parseFloat(token.value) * BasePixelFontSize)
++ }
++})
+
+```
+
 ## Design Token - Duration
 
 ```sh
