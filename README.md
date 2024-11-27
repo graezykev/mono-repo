@@ -5895,7 +5895,8 @@ export default {
     font: {
       base: {
         value: 1,
-        type: 'fontSize'
+        type: 'fontSize',
+        comment: '16px by default'
       },
       xsmall: {
         value: 0.75,
