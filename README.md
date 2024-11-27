@@ -6214,6 +6214,47 @@ export default function getStyleDictionaryConfig(theme) {
 +})
 ```
 
+### Custom Format(er) to format Line Spacing (for Android)
+
+`build/sd.config.js`:
+
+```diff
+export default function getStyleDictionaryConfig(theme) {
+  return {
+    ...
+    "platforms": {
+      ...
+      "android": {
+        ...
+        "files": [
++         {
++           "destination": 'style_dictionary_line_spacings.xml',
++           "format": 'android/line-spacing'
++         },
+          ...
+      }
+    }
+  }
+}
+
++StyleDictionary.registerFormat({
++ name: `android/line-spacing`,
++ format: ({ dictionary }) => {
++   let xml = `<?xml version="1.0" encoding="UTF-8"?>
++<!--
++ Do not edit directly, this file was auto-generated.
++-->
++<resources>\n`
++   xml = xml.concat(dictionary.allTokens
++     .filter(token => token.type === 'lineHeight')
++     .map(token => {
++       return `  <dimen name="line_spacing_${token.path[token.path.length - 1]}">${token.value}sp</dimen>`
++     }).join('\n'))
++   return xml.concat(`\n</resources>`)
++ }
++})
+```
+
 ## Design Token - Duration
 
 ```sh
