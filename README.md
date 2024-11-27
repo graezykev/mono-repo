@@ -5943,11 +5943,23 @@ export default {
         type: 'fontSize'
       },
       title: {
+        value: '{size.font.medium}',
+        type: 'fontSize'
+      },
+      sub: {
+        value: '{size.font.medium}',
+        type: 'fontSize'
+      },
+      heading3: {
         value: '{size.font.large}',
         type: 'fontSize'
       },
-      heading: {
+      heading2: {
         value: '{size.font.xlarge}',
+        type: 'fontSize'
+      },
+      heading1: {
+        value: '{size.font.xxxlarge}',
         type: 'fontSize'
       }
     }
