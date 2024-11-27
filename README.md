@@ -6052,7 +6052,7 @@ export default function getStyleDictionaryConfig(theme) {
 +    xml = xml.concat(dictionary.allTokens
 +      .filter(token => token.type === 'fontWeight')
 +      .map(token => {
-+        return `  <item name="${token.name}">${token.value}</item>`
++        return `  <integer name="${token.name}">${token.value}</integer>`
 +      }).join('\n'))
 +
 +    return xml.concat(`\n</resources>`)
