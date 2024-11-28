@@ -5992,7 +5992,7 @@ export default {
       value: 300,
       type: 'fontWeight'
     },
-    normal: {
+    regular: {
       value: 400,
       type: 'fontWeight'
     },
