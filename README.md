@@ -5802,21 +5802,22 @@ console.log(
 ```
 
 ```sh
-touch design-tokens/export.js
+touch design-tokens/build/post-build-export.js
 ```
 
-`design-tokens/export.js`:
+`design-tokens/build/post-build-export.js`:
 
 ```js
 import { extractTokenValue } from './utils/process-tokens.js'
 import lightTokens from './jsts/light/variables.js'
 import darkTokens from './jsts/dark/variables.js'
 import fs from 'fs'
+import path from 'path'
 
 export const light = extractTokenValue(lightTokens)
 export const dark = extractTokenValue(darkTokens)
 
-const mainEntry = 'index.js'
+const mainEntry = path.resolve(path.resolve(), 'index.js')
 
 fs.existsSync(mainEntry) && fs.unlinkSync(mainEntry)
 
@@ -5834,7 +5835,7 @@ export const dark = ${JSON.stringify(dark, null, 2)}
 + "main": "index.js",
   ...
 -   "build": "node build/index.js --verbose",
-+   "build": "node build/index.js --verbose && node export.js",
++   "build": "node build/index.js --verbose && node build/post-build-export.js",
 ```
 
 ```sh
