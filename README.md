@@ -5813,11 +5813,13 @@ import lightTokens from './jsts/light/variables.js'
 import darkTokens from './jsts/dark/variables.js'
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 export const light = extractTokenValue(lightTokens)
 export const dark = extractTokenValue(darkTokens)
 
-const mainEntry = path.resolve(path.resolve(), 'index.js')
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const mainEntry = path.resolve(__dirname, '../index.js')
 
 fs.existsSync(mainEntry) && fs.unlinkSync(mainEntry)
 
@@ -6255,6 +6257,10 @@ export default function getStyleDictionaryConfig(theme) {
 + }
 +})
 ```
+
+## Design Token - Font Family & Font Face
+
+### TODO: Upload Assets
 
 ## Design Token - Duration
 
