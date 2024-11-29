@@ -6261,6 +6261,104 @@ export default function getStyleDictionaryConfig(theme) {
 
 ## Design Token - Font Family & Font Face
 
+### Easiest way to use custom font: All in One
+
+Lest's say our designer created a font, and put all languages, all styles, all font weights, into a single one font file `Roboto.woff2` or `Roboto.ttf` so we can use it in our CSS:
+
+```html
+<style>
+  @font-face {
+    font-family: 'Roboto';
+    src: url('/assets/fonts/Roboto.woff2') format('woff2'),
+        url('/assets/fonts/Roboto.ttf') format('truetype');
+  }
+</style>
+```
+
+If our web page is providing English content, it's straightforward to use the `Roboto` as the `font-family`:
+
+```html
+<style>
+  #english {
+    font-family: 'Roboto';
+  }
+</style>
+
+<div id="english">
+  <div>
+    Whereas disregard and contempt for human rights have resulted
+  </div>
+  <div style="font-style: italic">
+    Whereas disregard and contempt for human rights have resulted
+  </div>
+  <div style="font-weight: 100">
+    Whereas disregard and contempt for human rights have resulted
+  </div>
+  <div style="font-style: italic; font-weight: 500">
+    Whereas disregard and contempt for human rights have resulted
+  </div>
+</div>
+```
+
+All English content, whatever the `font-style` or `font-weight` are, all should be using the same font file to display.
+
+For example, there is an `A` in this font file, and it's a normal `font-style` and regular (400) `font-weight` version.
+
+![alt text](font-one-regular-normal.png)
+
+When it is needed to display an italic `A` on the page, **the browser will slant the normal version to imitate an italic style**.
+
+![alt text](font-one-regular-italic.png)
+
+Similarly, when a bold (700) `A` is needed, **the browser will adjust the rendering of the font to make it appear bolder**, approximating `font-weight: 700`.
+
+![alt text](font-one-bold-normal.png)
+
+The browser may slant and expand the rendering of the font to adjust the requirements.
+
+![alt text](font-one-bold-italic.png)
+
+### Different Langueges, Styles, Weights
+
+```html
+<style>
+  #greek,
+  #ukrainian {
+    font-family: 'Roboto';
+  }
+</style>
+
+<div id="greek">
+  <div>
+    Όλοι οι άνθρωποι γεννιούνται ελεύθεροι και ίσοι στην αξιοπρέπεια
+  </div>
+  <div style="font-style: italic">
+    Όλοι οι άνθρωποι γεννιούνται ελεύθεροι και ίσοι στην αξιοπρέπεια
+  </div>
+  <div style="font-weight: 100">
+    Όλοι οι άνθρωποι γεννιούνται ελεύθεροι και ίσοι στην αξιοπρέπεια
+  </div>
+  <div style="font-style: italic; font-weight: 500">
+    Όλοι οι άνθρωποι γεννιούνται ελεύθεροι και ίσοι στην αξιοπρέπεια
+  </div>
+</div>
+
+<div id="ukrainian">
+  <div>
+    беручи до уваги, що зневажання і нехтування правами людини призвели
+  </div>
+  <div style="font-style: italic">
+    беручи до уваги, що зневажання і нехтування правами людини призвели
+  </div>
+  <div style="font-weight: 100">
+    беручи до уваги, що зневажання і нехтування правами людини призвели
+  </div>
+  <div style="font-style: italic; font-weight: 500">
+    беручи до уваги, що зневажання і нехтування правами людини призвели
+  </div>
+</div>
+```
+
 ### TODO: Upload Assets
 
 ## Design Token - Duration
