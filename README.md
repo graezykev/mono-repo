@@ -5818,7 +5818,8 @@ import { fileURLToPath } from 'url'
 export const light = extractTokenValue(lightTokens)
 export const dark = extractTokenValue(darkTokens)
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 const mainEntry = path.resolve(__dirname, '../index.js')
 
 fs.existsSync(mainEntry) && fs.unlinkSync(mainEntry)
