@@ -6318,6 +6318,8 @@ The browser may slant and expand the rendering of the font to adjust the require
 
 ![alt text](font-one-bold-italic.png)
 
+The slanting and expanding of the original design can be unexpected.
+
 ### Different Langueges, Styles, Weights
 
 ```html
