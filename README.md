@@ -6318,7 +6318,9 @@ The browser may slant and expand the rendering of the font to adjust the require
 
 ![alt text](font-one-bold-italic.png)
 
-Here is the problem: **the slanting and expanding of the original design can be unexpected**.
+Here is the problem: **the slanting and expanding of the original `A`'s design can be unexpected**.
+
+Instead, designed a **bold** version and an **italic** version of the original `A` by the designer, and put them into different font files, to display on demand, is an appropriate tatic.
 
 ### Different Langueges, Styles, Weights
 
