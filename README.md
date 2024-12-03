@@ -6433,7 +6433,202 @@ Refining the fonts, separating a same font face into varias files according to t
 
 If we're designing a custom font for an international website, we should be practising the same principle.
 
-### Define font face
+### Define Font Face
+
+Take `Roboto` as an example.
+
+<https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap>
+
+Visit the CSS file above and you'll find 84 `@font-face` definitions with the same `font-family: 'Roboto'`, and 84 font files (`.woff2`) specified within each definition.
+
+Dive deep into the definitions, we can find some rules:
+
+It supports 7 writing systems:
+
+- **Latin**. For English, French, German, etc.
+- **Latin Extended**. For Czech, Hungarian, Maltese etc.
+- **Vietnamese**.
+- **Greek**.
+- **Greek Extended**. for Greek accented vowels.
+- **Cyrillic**. For Russian, Bulgarian, and Serbian etc.
+- **Cyrillic Extended**. For Old Church Slavonic texts etc.
+
+2 font styles for each writing system:
+
+- normal
+- italic
+
+And multiple font weights for writing system and each font style:
+
+- Thin (100)
+- Light (300)
+- Regular (equivalent to `font-family: 400`)
+- Medium (500)
+- Bold (700)
+- Black (900)
+
+So, based on the 7 writing systems, and various font weights and font styles designed (pre-defined), `Roboto` comprises 84 variants:
+
+**84** = 7 writing systems **X** 2 font styles **X** 6 font weghts.
+
+Here is the Node.js script to batch-download all the files, and name them by a rule of `Roboto-{lang}-{style}-{weight}.woff2`:
+
+```sh
+touch build/post-build-download-roboto.js
+```
+
+`build/post-build-download-roboto.js`:
+
+```js
+import tokens from '../tokens/typography/font-weight.js'
+import https from 'https'
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const RobotoSource = 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'
+
+// traverse and down load every font file
+https.get(RobotoSource, {
+  headers: {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0',
+  }
+}, res => {
+  let cssText = ''
+  res.on('data', chunk => {
+    cssText += chunk
+  })
+  res.on('end', () => {
+    // console.log(cssText)
+    processAndDownload(cssText)
+  })
+})
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const relativeAssetPath = '../assets/fontss'
+const fontFileDir = path.resolve(__dirname, relativeAssetPath)
+!fs.existsSync(fontFileDir) && fs.mkdirSync(fontFileDir)
+
+const weights = tokens['font-weight']
+const weightMap = Object.keys(weights).reduce((map, weight) => {
+  map[weights[weight].value] = weight
+  return map
+}, {})
+
+async function processAndDownload(cssText) {
+  const regExp = /\/\*\s*([^\s]+)\s*\*\/\s+.+\s+font-family:\s*'(.+)';\s+font-style:\s*(\w+);\s+font-weight:\s*(\d+);\s+.+\s+src:\s*url\(([^\)]+)\)/
+  const regExpGlobal = new RegExp(regExp, 'g')
+
+  // console.log(cssText)
+
+  const allFaces = cssText.match(regExpGlobal)
+  // console.log(allFaces)
+  await Promise.all(
+    allFaces.map(async face => {
+      const match = face.match(regExp)
+      // console.log(match)
+      const lang = match[1]
+      const name = match[2]
+      const style = match[3]
+      const weight = weightMap[match[4]]
+      const url = match[5]
+      const fontName = `${name}-${lang}-${weight}-${style}`
+      // console.log(`${fontName}: ${url}`)
+      await downloadFromURL(url, path.resolve(fontFileDir, fontName))
+    })
+  )
+  console.log('Downloaded fonts success')
+}
+
+function downloadFromURL(url, path) {
+  const ext = url.match(/\.\w+$/)
+  path = path + ext
+
+  fs.existsSync(path) && fs.unlinkSync(path)
+
+  https.get(url, res => {
+    const writeStream = fs.createWriteStream(path)
+    res.pipe(writeStream)
+
+    writeStream.on('finish', () => {
+      writeStream.close()
+      // console.log('Downloaded success from: ', url)
+    })
+    writeStream.on('error', () => {
+      console.warn('Downloaded fail from: ', url)
+    })
+  })
+}
+
+```
+
+### Define font face in design token
+
+Now imagine we have downloaded 84 font files with the names of `Roboto-{lang}-{style}-{weight}.woff2`.
+
+Next, we're going to create a design token for `Roboto`, which generates `@font-face` definitions and its variants:
+
+```sh
+touch tokens/typography/font-face.js
+```
+
+`tokens/typography/font-face.js`:
+
+```js
+import tokens from './font-weight.js'
+
+const { thin, light, regular, medium, bold, black } = tokens['font-weight']
+
+export default {
+  'font-face': {
+    roboto: {
+      value: 'Roboto',
+      type: 'fontFace',
+      attributes: {
+        fonts: {
+          latin: {
+            'unicode-range': 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+            'font-style': ['normal', 'italic'],
+            'font-weight': { thin: thin.value, light: light.value, regular: regular.value, medium: medium.value, bold: bold.value, black: black.value }
+          },
+          'latin-ext': {
+            'unicode-range': 'U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF',
+            'font-style': ['normal', 'italic'],
+            'font-weight': { thin: thin.value, light: light.value, regular: regular.value, medium: medium.value, bold: bold.value, black: black.value }
+          },
+          greek: {
+            'unicode-range': 'U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF',
+            'font-style': ['normal', 'italic'],
+            'font-weight': { thin: thin.value, light: light.value, regular: regular.value, medium: medium.value, bold: bold.value, black: black.value }
+          },
+          'greek-ext': {
+            'unicode-range': 'U+1F00-1FFF',
+            'font-style': ['normal', 'italic'],
+            'font-weight': { thin: thin.value, light: light.value, regular: regular.value, medium: medium.value, bold: bold.value, black: black.value }
+          },
+          cyrillic: {
+            'unicode-range': 'U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116',
+            'font-style': ['normal', 'italic'],
+            'font-weight': { thin: thin.value, light: light.value, regular: regular.value, medium: medium.value, bold: bold.value, black: black.value }
+          },
+          'cyrillic-ext': {
+            'unicode-range': 'U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F',
+            'font-style': ['normal', 'italic'],
+            'font-weight': { thin: thin.value, light: light.value, regular: regular.value, medium: medium.value, bold: bold.value, black: black.value }
+          },
+          vietnamese: {
+            'unicode-range': 'U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB',
+            'font-style': ['normal', 'italic'],
+            'font-weight': { thin: thin.value, light: light.value, regular: regular.value, medium: medium.value, bold: bold.value, black: black.value }
+          }
+        }
+      }
+    }
+  }
+}
+
+```
 
 ### TODO: Upload Assets
 
