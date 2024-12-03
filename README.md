@@ -6263,19 +6263,18 @@ export default function getStyleDictionaryConfig(theme) {
 
 ### Easiest way to use custom font: All in One
 
-Lest's say our designer created a font, and put all languages, all styles, all font weights, into a single one font file `Roboto.woff2` or `Roboto.ttf` so we can use it in our CSS:
+Lest's say our designers created a font `Roboto`, into a single one font file `Roboto.woff2` (or `Roboto.ttf`) so we can use it to specify a font face in our CSS:
 
 ```html
 <style>
   @font-face {
     font-family: 'Roboto';
-    src: url('/assets/fonts/Roboto.woff2') format('woff2'),
-        url('/assets/fonts/Roboto.ttf') format('truetype');
+    src: url('/assets/fonts/Roboto.woff2') format('woff2');
   }
 </style>
 ```
 
-If our web page is providing English content, it's straightforward to use the `Roboto` as the `font-family`:
+And, we use `Roboto` as the `font-family` on the page:
 
 ```html
 <style>
@@ -6300,9 +6299,9 @@ If our web page is providing English content, it's straightforward to use the `R
 </div>
 ```
 
-All English content, whatever the `font-style` or `font-weight` are, all should be using the same font file to display.
+The browser automatically looks for the matched glyphs to display text content.
 
-For example, there is an `A` in this font file, and it's a normal `font-style` and regular (400) `font-weight` version.
+For example, we have an `A` (unicode 65) on the page, and there is an `A`'s glyph (an image showing the shape of `A`) embed in this `Roboto` font file, so the image will be displayed on where `A` should be.
 
 ![alt text](font-one-regular-normal.png)
 
@@ -6310,19 +6309,27 @@ When it is needed to display an italic `A` on the page, **the browser will slant
 
 ![alt text](font-one-regular-italic.png)
 
-Similarly, when a bold (700) `A` is needed, **the browser will adjust the rendering of the font to make it appear bolder**, approximating `font-weight: 700`.
+That is to say the image would be twisted to a italic shape in order to display an italic `A`.
+
+Similarly, when a bold (font weight of 700) `A` is needed, **the browser will adjust the rendering of the font to make it appear bolder**, approximating `font-weight: 700`.
 
 ![alt text](font-one-bold-normal.png)
 
-The browser may slant and expand the rendering of the font to adjust the requirements.
+Whatever the `font-style` or `font-weight` is, all `A` should be using the same font file to display. The browser may slant and expand the rendering of the font to adjust the requirements.
 
 ![alt text](font-one-bold-italic.png)
 
-Here is the problem: **the slanting and expanding of the original `A`'s design can be unexpected**.
+Here is the problem: **the slanting and expanding of the original `A`'s design can be unexpected**, you may be facing weird metamorphosis of the original design of the font.
 
-Instead, designed a **bold** version and an **italic** version of the original `A` by the designer, and put them into different font files, to display on demand, is an appropriate tatic.
+Instead, designed a **bold** version and an **italic** version of the original `A` by the designer, and put them into different font files, to display **on demand**, is an appropriate tatic.
 
-### Different Langueges, Styles, Weights
+### Different Langueges and writing systems
+
+Lest's say we're developing a international website, or a website providing multiple writing systems in accordance with the viewer's native languages.
+
+So our designers created a `Roboto` font file, and put all languages in it, including [Latin](https://en.wikipedia.org/wiki/Latin_alphabet) alphabet for English, French, German, Indonesian, Spanish etc., [Cyrillic](https://en.wikipedia.org/wiki/Cyrillic_alphabets) alphabet for Russian, Serbian, Bulgarian etc., and [Greek](https://en.wikipedia.org/wiki/Greek_alphabet) alphabet ...
+
+And using `Roboto` as the `font-family` to display all text is straitforward. In this way, both glyphs of `λ`(Greek) and `ж`(Ukrainian) are embeded in the same font file.
 
 ```html
 <style>
@@ -6362,6 +6369,63 @@ Instead, designed a **bold** version and an **italic** version of the original `
   </div>
 </div>
 ```
+
+You must find the drawback here, there're som many writing systems, so many alphabets for variable languages, it must be enormous and expansive to include every glyph in a single font file.
+
+Unless you're really displaying multiple languages within a single page, but this is quite rare.
+
+To optimise the loading performance, it's crucial to separate the font into multiple files, put the glyphs of Latin alphabet and Greek alphabet into different font file (different version of `Roboto`). Download the Latin version of `Roboto` on an English (or French etc.) webpage and the Greek version on a Greek webpage.
+
+Imagine we have to diffrent pages, the HTML of page 1 is:
+
+```html
+<div id="greek">
+  <div>
+    Όλοι οι άνθρωποι γεννιούνται ελεύθεροι και ίσοι στην αξιοπρέπεια
+  </div>
+</div>
+```
+
+And page 2 is:
+
+```html
+<div id="english">
+  <div>
+    Whereas disregard and contempt for human rights have resulted
+  </div>
+</div>
+```
+
+They all have the same CSS, all of them are using the same `font-family: 'Roboto'`:
+
+```html
+<style>
+  @font-face {
+    font-family: 'Roboto';
+    src: url('/assets/fonts/Roboto-Latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    src: url('/assets/fonts/Roboto-Greek.woff2') format('woff2');
+    unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+  }
+</style>
+
+<style>
+  #greek,
+  #english {
+    font-family: 'Roboto';
+  }
+</style>
+```
+
+Here we can use `unicode-range` in the CSS to load the font files as needed.
+
+On page 1 (Greek), only  the font file `Roboto-Greek.woff2` would be downloaded because the Greek alphabets only match the specified `unicode-range`.
+
+On page 2, only `Roboto-Latin.woff2` would be downloaded likewise.
 
 ### TODO: Upload Assets
 
