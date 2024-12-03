@@ -6427,6 +6427,14 @@ On page 1 (Greek), only  the font file `Roboto-Greek.woff2` would be downloaded 
 
 On page 2, only `Roboto-Latin.woff2` would be downloaded likewise.
 
+Actually, using a single `Roboto` font file can be including 1004 glyphs, while a `Roboto` font file for Latin writing system onlu contains 364 glyphs, whose size is reduced by a large percentage.
+
+Refining the fonts, separating a same font face into varias files according to the on demand writing system, language, font style and font weight is one of the best practise in [Google Fonts](https://fonts.google.com/specimen/Roboto).
+
+If we're designing a custom font for an international website, we should be practising the same principle.
+
+### Define font face
+
 ### TODO: Upload Assets
 
 ## Design Token - Duration
