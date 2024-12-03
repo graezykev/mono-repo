@@ -6630,6 +6630,40 @@ export default {
 
 ```
 
+If you have your own custom font, and separate them into various writing systems, font styles and font weights, you can also separate the font to different font files by the rule of `{font name}-{lang}-{style}-{weight}`.
+
+For example we have a font for simplified Chinese and traditional Chinese `custom_chinese_font`:
+
+```js
+import tokens from './font-weight.js'
+
+const { thin, light, regular, medium, bold, black } = tokens['font-weight']
+
+export default {
+  'font-face': {
+    zh: {
+      value: 'custom_chinese_font',
+      type: 'fontFace',
+      attributes: {
+        fonts: {
+          zhs: {
+            'unicode-range': '',
+            'font-style': ['normal', 'italic'],
+            'font-weight': { thin: thin.value, light: light.value, regular: regular.value, medium: medium.value, bold: bold.value, black: black.value }
+          },
+          zht: {
+            'unicode-range': '',
+            'font-style': ['normal', 'italic'],
+            'font-weight': { thin: thin.value, light: light.value, regular: regular.value, medium: medium.value, bold: bold.value, black: black.value }
+          }
+        }
+      }
+    }
+  }
+}
+
+```
+
 ### Formating the font face design token
 
 ### TODO: Upload Assets
