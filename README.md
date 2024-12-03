@@ -6630,6 +6630,8 @@ export default {
 
 ```
 
+### Formating the font face design token
+
 ### TODO: Upload Assets
 
 ## Design Token - Duration
