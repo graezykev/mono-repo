@@ -6921,7 +6921,7 @@ export default {
       value: '{font-face.roboto}',
       type: 'fontFamily'
     },
-    CN: {
+    zh: {
       value: '{font-face.zh}',
       type: 'fontFamily'
     }
@@ -6937,7 +6937,35 @@ The CSS variables after build:
   --token-font-family-cn: custom_chinese_font;
 ```
 
+And the ES module to export in `design-tokens/index.js`:
+
+```js
+export const light = {
+  ...
+  "font-family": {
+    "primary": "Roboto",
+    "zh": "custom_chinese_font"
+  },
+  ...
+```
+
 ### Integrate font face & font family with TailwindCSS
+
+`lib-web-ui/tailwind.config.js`:
+
+```diff
+...
+  theme: {
+    colors: tokens.color,
++   fontFamily: {
++     ...tokens['font-family']
++   }
+  },
+```
+
+Your fonts will appear as Tailwind utility classes:
+
+![font family in lib](font-family-in-lib.png)
 
 ### TODO: Upload Assets
 
