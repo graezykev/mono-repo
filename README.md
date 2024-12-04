@@ -6769,17 +6769,63 @@ After run `pnpm build`, you should find the result in `design-tokens/css/light/f
 Also, we can define a format in `build/sd.config.js` to generate `@font-face` derectives as CSS text in JavaScript:
 
 ```js
+function generateFontFaceJS(token) {
+  const fonts = token?.attributes?.fonts
+  const faces = Object.keys(fonts).reduce((langList, lang) => {
+    const font = fonts[lang]
+    const weightMap = font['font-weight'] || { '': null }
+    const weightArr = Object.keys(weightMap)
+    langList.push(
+      ...weightArr.reduce((weightList, weight) => {
+        const styles = font['font-style'] || ['']
+        weightList.push(
+          ...styles.reduce((styleList, style) => {
+            // const name = `${token.value}-${lang}-${weight}-${style}`
+            const name = [token.value, lang, weight, style].reduce(
+              (acc, item) => {
+                item && acc.push(item)
+                return acc
+              },
+              []
+            ).join('-')
+            const range = font['unicode-range']
+            const obj = {}
+            obj['fontFamily'] = token.value
+            obj['src'] = `url('${FontAssetPath}/${name}.woff2') format('woff2'),
+                  url('${FontAssetPath}/${name}.woff') format('woff'),
+                  url('${FontAssetPath}/${name}.ttf') format('truetype'),
+                  url('${FontAssetPath}/${name}.otf') format('opentype');`
+            weight && (obj['fontWeight'] = `${weightMap[weight]}`)
+            style && (obj['fontStyle'] = `${style}`)
+            range && (obj['unicodeRange'] = `${range}`)
+
+            styleList.push(obj)
+            return styleList
+          }, [])
+        )
+
+        return weightList
+      }, [])
+    )
+
+    return langList
+  }, [])
+  console.log(faces)
+  return faces
+}
+
 StyleDictionary.registerFormat({
   name: `js/font-face`,
   format: ({ dictionary }) => {
     const allFonts = dictionary.allTokens
     const faces = allFonts
-      .map(generateFontFace)
-      .map((v, i) => `'${allFonts[i].path.join('-')}': \`${v}\``)
+      .map(generateFontFaceJS)
+      .map((v, i) => `'${allFonts[i].path.join('-')}': ${JSON.stringify(v, null, 2)}`)
       .join(',\n')
     return `export default {\n${faces}\n}`
   }
 })
+
 ```
 
 ```diff
@@ -6803,28 +6849,38 @@ The JS result in `design-token/jsts/light/font-face.js` should look like this:
 
 ```js
 export default {
-'font-face-roboto': `@font-face {
-          font-family: 'Roboto';
-          src: url('/assets/fonts/Roboto-latin-thin-normal.woff2') format('woff2'),
-              url('/assets/fonts/Roboto-latin-thin-normal.woff') format('woff'),
-              url('/assets/fonts/Roboto-latin-thin-normal.ttf') format('truetype'),
-              url('/assets/fonts/Roboto-latin-thin-normal.otf') format('opentype');
-          font-weight: 100;
-          font-style: normal;
-          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-        }
-@font-face {
-          font-family: 'Roboto';
-          src: url('/assets/fonts/Roboto-latin-thin-italic.woff2') format('woff2'),
-              url('/assets/fonts/Roboto-latin-thin-italic.woff') format('woff'),
-              url('/assets/fonts/Roboto-latin-thin-italic.ttf') format('truetype'),
-              url('/assets/fonts/Roboto-latin-thin-italic.otf') format('opentype');
-          font-weight: 100;
-          font-style: italic;
-          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-        }
-@font-face {
-...
+  'font-face-roboto': [
+    {
+      "fontFamily": "Roboto",
+      "src": "url('/assets/fonts/Roboto-latin-thin-normal.woff2') format('woff2'),\n                  url('/assets/fonts/Roboto-latin-thin-normal.woff') format('woff'),\n                  url('/assets/fonts/Roboto-latin-thin-normal.ttf') format('truetype'),\n                  url('/assets/fonts/Roboto-latin-thin-normal.otf') format('opentype');",
+      "fontWeight": "100",
+      "fontStyle": "normal",
+      "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+    },
+    {
+      "fontFamily": "Roboto",
+      "src": "url('/assets/fonts/Roboto-latin-thin-italic.woff2') format('woff2'),\n                  url('/assets/fonts/Roboto-latin-thin-italic.woff') format('woff'),\n                  url('/assets/fonts/Roboto-latin-thin-italic.ttf') format('truetype'),\n                  url('/assets/fonts/Roboto-latin-thin-italic.otf') format('opentype');",
+      "fontWeight": "100",
+      "fontStyle": "italic",
+      "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+    },
+    ...
+  ],
+  'font-face-zh': [
+    {
+      "fontFamily": "custom_chinese_font",
+      "src": "url('/assets/fonts/custom_chinese_font-zhs-normal.woff2') format('woff2'),\n                  url('/assets/fonts/custom_chinese_font-zhs-normal.woff') format('woff'),\n                  url('/assets/fonts/custom_chinese_font-zhs-normal.ttf') format('truetype'),\n                  url('/assets/fonts/custom_chinese_font-zhs-normal.otf') format('opentype');",
+      "fontStyle": "normal"
+    },
+    {
+      "fontFamily": "custom_chinese_font",
+      "src": "url('/assets/fonts/custom_chinese_font-zhs-italic.woff2') format('woff2'),\n                  url('/assets/fonts/custom_chinese_font-zhs-italic.woff') format('woff'),\n                  url('/assets/fonts/custom_chinese_font-zhs-italic.ttf') format('truetype'),\n                  url('/assets/fonts/custom_chinese_font-zhs-italic.otf') format('opentype');",
+      "fontStyle": "italic"
+    },
+    ...
+  ]
+}
+
 ```
 
 Next, export the result to the ES module by modifying `build/post-build-export.js`:
@@ -6861,8 +6917,19 @@ After the build, the CSS text in `design-tokens/index.js` should be like this:
 ```js
 export const light = {
   ...
-  "font-face-roboto": "@font-face {\n          font-family: 'Roboto';\n          src: url('/assets/fonts/Roboto-latin-thin-normal.woff2') format('woff2'),\n              url('/assets/fonts/Roboto-latin-thin-normal.woff') format('woff'),\n              url('/assets/fonts/Roboto-latin-thin-normal.ttf') format('truetype'),\n              url('/assets/fonts/Roboto-latin-thin-normal.otf') format('opentype');\n          font-weight: 100;\n          font-style: normal;\n          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;\n        }\n@font-face {\n          font-family: 'Roboto';\n          src: url('/assets/fonts/Roboto-latin-thin-italic.woff2') format('woff2'),\n              url('/assets/fonts/Roboto-latin-thin-italic.woff') format('woff'),\n              url('/assets/fonts/Roboto-latin-thin-italic.ttf') format('truetype'),\n              url('/assets/fonts/Roboto-latin-thin-italic.otf') format('opentype');\n          font-weight: 100;\n          font-style: italic;\n          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;\n        }\n@font-face {\n          font-family: 'Roboto';\n          src: url('/assets/fonts/Roboto-latin-light-normal.woff2') format('woff2'),\n              url('/assets/fonts/Roboto-latin-light-normal.woff') format('woff'),\n              url('/assets/fonts/Roboto-latin-light-normal.ttf') format('truetype'),\n              url('/assets/fonts/Roboto-latin-light-normal.otf') format('opentype');\n          font-weight: 300;\n          font-style: normal;\n          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;\n        }\n@font-face {\n          font-family: 'Roboto';\n          src: url('/assets/fonts/Roboto-latin-light-italic.woff2') format('woff2'),\n              url('/assets/fonts/Roboto-latin-light-italic.woff') format('woff'),\n              url('/assets/fonts/Roboto-latin-light-italic.ttf') format('truetype'),\n              url('/assets/fonts/Roboto-latin-light-italic.otf') format('opentype');\n          font-weight: 300;\n          font-style: italic;\n          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;\n        }\n@font-face {..."
+  "font-face-roboto": [
+    {
+      "fontFamily": "Roboto",
+      "src": "url('/assets/fonts/Roboto-latin-thin-normal.woff2') format('woff2'),\n                  url('/assets/fonts/Roboto-latin-thin-normal.woff') format('woff'),\n                  url('/assets/fonts/Roboto-latin-thin-normal.ttf') format('truetype'),\n                  url('/assets/fonts/Roboto-latin-thin-normal.otf') format('opentype');",
+      "fontWeight": "100",
+      "fontStyle": "normal",
+      "unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+    },
+    ...
+  ]
+  ...
 }
+
 export const dark = {
   ...
   "font-face-roboto": "..."
