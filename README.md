@@ -6565,9 +6565,9 @@ function downloadFromURL(url, path) {
 
 ### Define font face in design token
 
-Now imagine we have downloaded 84 font files with the names of `Roboto-{lang}-{style}-{weight}.woff2`.
+Now imagine we have prepared 84 font files with the names of `Roboto-{lang}-{style}-{weight}.woff2`.
 
-Next, we're going to create a design token for `Roboto`, which generates `@font-face` definitions and its variants:
+Next, we're going to create a design token for `Roboto`, which generates `@font-face` definitions and its variants like the CSS `@font-face` I mentioned above <https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap>:
 
 ```sh
 touch tokens/typography/font-face.js
