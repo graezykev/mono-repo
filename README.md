@@ -5853,6 +5853,8 @@ See `design-tokens/index.js`.
 /** @type {import('tailwindcss').Config} */
 +import { light, dark } from 'design-tokens'
 ...
++const tokens = mode === 'light' ? light : dark
+...
 export default {
   ...
   theme: {
@@ -5869,7 +5871,7 @@ export default {
 -       subtle: '#2a83ff'
 -     }
 -   }
-+   colors: mode === 'light' ? light.color : dark.color
++   colors: tokens.color
   },
   ...
 }
