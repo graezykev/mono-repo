@@ -6471,7 +6471,7 @@ So, based on the 7 writing systems, and various font weights and font styles des
 
 **84** = 7 writing systems **X** 2 font styles **X** 6 font weghts.
 
-Here is the Node.js script to batch-download all the files, and name them by a rule of `Roboto-{lang}-{style}-{weight}.woff2`:
+Here is the Node.js script to batch-download all the files, and re-sname them by a rule of `Roboto-{lang}-{style}-{weight}.woff2`:
 
 ```sh
 touch build/post-build-download-roboto.js
@@ -6630,9 +6630,11 @@ export default {
 
 ```
 
-If you have your own custom font, and separate them into various writing systems, font styles and font weights, you can also separate the font to different font files by the rule of `{font name}-{lang}-{style}-{weight}`.
+### Use your own font
 
-For example we have a font for simplified Chinese and traditional Chinese `custom_chinese_font`:
+If you have your own custom font, you can also separate them into various writing systems, font styles and font weights, and name different font files by the rule of `{font name}-{lang}-{style}-{weight}`.
+
+For example we have a font for simplified Chinese and traditional Chinese `custom_chinese_font`, in this way we need 2 X 2 X 6 = 24 font files (such as `custom_chinese_font-italic-bold.woff2`) to define the CSS directive `@font-face`.
 
 ```js
 import tokens from './font-weight.js'
