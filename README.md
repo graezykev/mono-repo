@@ -6872,7 +6872,7 @@ export const dark = {
 
 If you have your own custom font, you can also separate them into various writing systems, font styles and font weights, and name different font files by the rule of `{font name}-{lang}-{style}-{weight}`.
 
-For example we have a font for simplified Chinese and traditional Chinese `custom_chinese_font`, in this way we need 2 X 2 X 6 = 24 font files (such as `custom_chinese_font-italic-bold.woff2`) to define the CSS directive `@font-face`.
+For example we have a font for simplified Chinese and traditional Chinese `custom_chinese_font`, in this way we need `2 X 2 X 6 = 24` font files (such as `custom_chinese_font-italic-bold.woff2`) to define the CSS directive `@font-face`.
 
 ```js
 import tokens from './font-weight.js'
@@ -6903,6 +6903,8 @@ export default {
 }
 
 ```
+
+### Integrate font face & font family with TailwindCSS
 
 ### TODO: Upload Assets
 
