@@ -6798,6 +6798,7 @@ function generateFontFaceJS(token) {
             weight && (obj['fontWeight'] = `${weightMap[weight]}`)
             style && (obj['fontStyle'] = `${style}`)
             range && (obj['unicodeRange'] = `${range}`)
+            obj['fontDisplay'] = 'swap'
 
             styleList.push(obj)
             return styleList
