@@ -7034,6 +7034,70 @@ Your fonts will appear as Tailwind utility classes:
 
 ![font family in lib](font-family-in-lib.png)
 
+Last, we need to add our custom font face to the base CSS.
+
+`lib-ui-web/tailwind.config.js`:
+
+```diff
+/** @type {import('tailwindcss').Config} */
++import plugin from 'tailwindcss/plugin'
+...
+export default {
+  ...
++ plugins: [
++   plugin(function ({ addBase }) {
++     addBase({
++       '@font-face': [
++         ...tokens['font-face-roboto'],
++         ...tokens['font-face-zh']
++       ]
++     });
++   })
++ ]
+}
+
+```
+
+Go back to lib and build.
+
+```sh
+cd ui-lib-web && pnpm build
+```
+
+The result in `ui-lib-web/dist/style.css` will be like:
+
+```css
+
+...
+
+@font-face {
+    font-family: Roboto;
+    src: url(/assets/fonts/Roboto-vietnamese-black-normal.woff2) format("woff2"), url(/assets/fonts/Roboto-vietnamese-black-normal.woff) format("woff"), url(/assets/fonts/Roboto-vietnamese-black-normal.ttf) format("truetype"), url(/assets/fonts/Roboto-vietnamese-black-normal.otf) format("opentype");
+    font-weight: 900;
+    font-style: normal;
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(/assets/fonts/Roboto-vietnamese-black-italic.woff2) format("woff2"), url(/assets/fonts/Roboto-vietnamese-black-italic.woff) format("woff"), url(/assets/fonts/Roboto-vietnamese-black-italic.ttf) format("truetype"), url(/assets/fonts/Roboto-vietnamese-black-italic.otf) format("opentype");
+    font-weight: 900;
+    font-style: italic;
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB
+}
+
+...
+
+@font-face {
+    font-family: custom_chinese_font;
+    src: url(/assets/fonts/custom_chinese_font-zhs-normal.woff2) format("woff2"), url(/assets/fonts/custom_chinese_font-zhs-normal.woff) format("woff"), url(/assets/fonts/custom_chinese_font-zhs-normal.ttf) format("truetype"), url(/assets/fonts/custom_chinese_font-zhs-normal.otf) format("opentype");
+    font-style: normal
+}
+...
+```
+
+Now, your custom fonts are ready to use by `font-family`!
+
 ### TODO: Upload Assets
 
 ## Design Token - Duration
