@@ -6473,6 +6473,8 @@ So, based on the 7 writing systems, and various font weights and font styles des
 
 Here is the Node.js script to batch-download all the files, and re-sname them by a rule of `Roboto-{lang}-{style}-{weight}.woff2`:
 
+![name font files](name-font-file.png)
+
 ```sh
 touch build/post-build-download-roboto.js
 ```
