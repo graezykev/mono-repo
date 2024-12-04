@@ -7101,7 +7101,7 @@ Now, your custom fonts are ready to use by `font-family`!
 
 ### Upload Assets
 
-Last, we need to upload `lib-ui-web/dist/style.css` (as well as `style.dark.css`) and `design-tokens/assets/fonts` to the same CDN domain.
+Finally, we need to upload `lib-ui-web/dist/style.css` (as well as `style.dark.css`) and `design-tokens/assets/fonts` to the same CDN domain.
 
 TODO: upload by CI/CD
 
