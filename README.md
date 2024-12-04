@@ -6790,11 +6790,11 @@ function generateFontFaceJS(token) {
             ).join('-')
             const range = font['unicode-range']
             const obj = {}
-            obj['fontFamily'] = token.value
+            obj['fontFamily'] = `'${token.value}'`
             obj['src'] = `url('${FontAssetPath}/${name}.woff2') format('woff2'),
-                  url('${FontAssetPath}/${name}.woff') format('woff'),
-                  url('${FontAssetPath}/${name}.ttf') format('truetype'),
-                  url('${FontAssetPath}/${name}.otf') format('opentype');`
+url('${FontAssetPath}/${name}.woff') format('woff'),
+url('${FontAssetPath}/${name}.ttf') format('truetype'),
+url('${FontAssetPath}/${name}.otf') format('opentype');`
             weight && (obj['fontWeight'] = `${weightMap[weight]}`)
             style && (obj['fontStyle'] = `${style}`)
             range && (obj['unicodeRange'] = `${range}`)
