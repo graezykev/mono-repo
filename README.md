@@ -7034,7 +7034,7 @@ Your fonts will appear as Tailwind utility classes:
 
 ![font family in lib](font-family-in-lib.png)
 
-Last, we need to add our custom font face to the base CSS.
+One more thing is missed, we need to add our custom font face to the base CSS.
 
 `lib-ui-web/tailwind.config.js`:
 
@@ -7098,7 +7098,11 @@ The result in `ui-lib-web/dist/style.css` will be like:
 
 Now, your custom fonts are ready to use by `font-family`!
 
-### TODO: Upload Assets
+### Upload Assets
+
+Last, we need to upload `lib-ui-web/dist/style.css` (as well as `style.dark.css`) and `design-tokens/assets/fonts` to the same CDN domain.
+
+TODO: upload by CI/CD
 
 ## Design Token - Duration
 
