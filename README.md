@@ -6904,6 +6904,37 @@ export default {
 
 ```
 
+### Font Family
+
+```sh
+touch tokens/typography/font-family.js
+```
+
+`tokens/typography/font-family.js`:
+
+```js
+export default {
+  'font-family': {
+    primary: {
+      value: '{font-face.roboto}',
+      type: 'fontFamily'
+    },
+    CN: {
+      value: '{font-face.zh}',
+      type: 'fontFamily'
+    }
+  }
+}
+
+```
+
+The CSS variables after build:
+
+```css
+  --token-font-family-primary: Roboto;
+  --token-font-family-cn: custom_chinese_font;
+```
+
 ### Integrate font face & font family with TailwindCSS
 
 ### TODO: Upload Assets
