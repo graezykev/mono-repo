@@ -7105,7 +7105,7 @@ Finally, we need to upload `lib-ui-web/dist/style.css` (as well as `style.dark.c
 
 TODO: upload by CI/CD
 
-## Design Token - Other Typography
+## Design Token - Other Typography Tokens
 
 ## Design Token - Duration
 
