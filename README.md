@@ -7211,6 +7211,115 @@ export default {
 
 ![tailwind letter spacing](tailwind-letter-spacing.png)
 
+### Text Decoration
+
+`design-tokens/tokens/typography/text-decoration.js`:
+
+```js
+export default {
+  'text-decoration': {
+    color: {
+      DEFAULT: {
+        value: 'currentcolor',
+        type: 'textDecorationColor'
+      },
+      red: {
+        value: 'red',
+        type: 'color'
+      }
+    },
+    thickness: {
+      DEFAULT: {
+        value: 'auto',
+        type: 'textDecorationThickness'
+      },
+      'from-font': {
+        value: 'from-font', // defined from font or fall back to auto
+        type: 'textDecorationThickness'
+      },
+      '1px': {
+        value: 1 / 16,
+        type: 'dimension'
+      },
+      '100-percent': {
+        value: '100%', // relative to font-size
+        type: 'textDecorationThickness'
+      }
+    },
+    style: {
+      solid: {
+        value: 'solid',
+        type: 'textDecorationStyle'
+      },
+      double: {
+        value: 'double',
+        type: 'textDecorationStyle'
+      },
+      dotted: {
+        value: 'dotted',
+        type: 'textDecorationStyle'
+      },
+      dashed: {
+        value: 'dashed',
+        type: 'textDecorationStyle'
+      },
+      wavy: {
+        value: 'wavy',
+        type: 'textDecorationStyle'
+      }
+    },
+    line: {
+      none: {
+        value: 'none',
+        type: 'textDecorationLine'
+      },
+      underline: {
+        value: 'underline',
+        type: 'textDecorationLine'
+      },
+      overline: {
+        value: 'overline',
+        type: 'textDecorationLine'
+      },
+      'line-through': {
+        value: 'line-through',
+        type: 'textDecorationLine'
+      },
+      multiple: {
+        value: 'line-through underline overline',
+        type: 'textDecorationLine'
+      }
+    }
+  }
+}
+
+```
+
+`lib-ui-web/tailwind.config.js`:
+
+```diff
+...
+  theme: {
+    colors: tokens.color,
+    fontFamily: {
+      ...tokens['font-family']
+    },
+    extend: {
+      fontSize: tokens.size.font,
+      fontWeight: tokens['font-weight'],
+      lineHeight: tokens.number['line-height'],
+      letterSpacing: tokens['letter-spacing'],
++     textDecorationColor: tokens['text-decoration']['color'],
++     textDecorationThickness: tokens['text-decoration']['thickness']
+    }
+  },
+...
+``
+
+![tailwind text decoration color](tailwind-text-decoration-color.png)
+
+![tailwind text decoration thickness](tailwind-text-decoration-thickness.png)
+
 ## Design Token - Duration
 
 ```sh
