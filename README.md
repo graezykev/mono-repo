@@ -6887,7 +6887,7 @@ export const light = {
 
 Your fonts will appear as Tailwind utility classes:
 
-![font family in lib](font-family-in-lib.png)
+![tailwind font family](tailwind-font-family.png)
 
 One more thing is missed, we need to add our custom font face to the base CSS.
 
