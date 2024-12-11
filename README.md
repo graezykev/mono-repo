@@ -5974,6 +5974,21 @@ export default {
 
 ```
 
+`lib-ui-web/tailwind.config.js`:
+
+```diff
+...
+  theme: {
+    ...
++   extend: {
++     fontSize: tokens.size.font
++   }
+  },
+...
+```
+
+![tailwind font size](tailwind-font-size.png)
+
 ## Design Token - Font Weight
 
 ```sh
