@@ -7163,7 +7163,7 @@ export default function getStyleDictionaryConfig(theme) {
 
 ### Letter Spacing
 
-`design-tokens/tokens/letter-spacing.js`:
+`design-tokens/tokens/typography/letter-spacing.js`:
 
 ```js
 export default {
