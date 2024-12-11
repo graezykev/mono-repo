@@ -7314,11 +7314,48 @@ export default {
     }
   },
 ...
-``
+```
 
 ![tailwind text decoration color](tailwind-text-decoration-color.png)
 
 ![tailwind text decoration thickness](tailwind-text-decoration-thickness.png)
+
+#### Define Tailwind Utility Class for Text Decoration Style & Text Decoration Line
+
+`lib-ui-web/tailwind.config.js`:
+
+```diff
+...
+  plugins: [
++   plugin(function ({ addUtilities }) {
++     const utilities = {}
+
++     const decorationStyles = tokens['text-decoration']['style']
++     Object.keys(decorationStyles).map(style => {
++       const suffix = style === 'DEFAULT' ? '' : ('-' + style)
++       utilities[`.decoration-style${suffix}`] = {
++         'text-decoration-style': decorationStyles[style]
++       }
++     })
+
++     const textDecorationLine = tokens['text-decoration']['line']
++     Object.keys(textDecorationLine).map(line => {
++       const suffix = line === 'DEFAULT' ? '' : ('-' + line)
++       utilities[`.decoration-line${suffix}`] = {
++         'text-decoration-line': textDecorationLine[line]
++       }
++     })
+
++     addUtilities(utilities)
++   }),
+    ...
+  ]
+...
+```
+
+![tailwind text decoration line](tailwind-text-decoration-line.png)
+
+![tailwind text decoration style](tailwind-text-decoration-style.png)
 
 ## Design Token - Duration
 
