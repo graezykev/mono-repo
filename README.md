@@ -5974,6 +5974,8 @@ export default {
 
 ```
 
+### Integrate Font Size tokens with TailwindCSS
+
 `lib-ui-web/tailwind.config.js`:
 
 ```diff
@@ -6045,6 +6047,8 @@ export default {
 }
 
 ```
+
+### Integrate Font Weight tokens with TailwindCSS
 
 `lib-ui-web/tailwind.config.js`:
 
@@ -6172,6 +6176,25 @@ export default {
 }
 
 ```
+
+### Integrate Line Height tokens with TailwindCSS
+
+`lib-ui-web/tailwind.config.js`:
+
+```diff
+...
+  theme: {
+    ...
+    extend: {
+     fontSize: tokens.size.font,
+     fontWeight: tokens['font-weight'],
++    lineHeight: tokens.number['line-height']
+    }
+  },
+...
+```
+
+![tailwind line height](tailwind-line-height.png)
 
 ### Custom Transformer to transform Line Height (for CSS and JS)
 
