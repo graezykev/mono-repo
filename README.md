@@ -7161,6 +7161,56 @@ export default function getStyleDictionaryConfig(theme) {
 
 ## Design Token - Typography - Other Tokens
 
+### Letter Spacing
+
+`design-tokens/tokens/letter-spacing.js`:
+
+```js
+export default {
+  'letter-spacing': {
+    large: {
+      value: 0.8 / 16,
+      type: 'dimension'
+    },
+    medium: {
+      value: 0.4 / 16,
+      type: 'dimension'
+    },
+    DEFAULT: {
+      value: 0 / 16,
+      type: 'dimension'
+    },
+    compact: {
+      value: `${- 0.4 / 16}rem`,
+      type: 'dimension'
+    },
+    tiny: {
+      value: `${- 0.8 / 16}rem`,
+      type: 'dimension'
+    }
+  }
+}
+
+```
+
+`lib-ui-web/tailwind.config.js`:
+
+```diff
+...
+  theme: {
+    ...
+    extend: {
+      fontSize: tokens.size.font,
+      fontWeight: tokens['font-weight'],
+      lineHeight: tokens.number['line-height'],
++     letterSpacing: tokens['letter-spacing']
+    }
+  },
+...
+```
+
+![tailwind letter spacing](tailwind-letter-spacing.png)
+
 ## Design Token - Duration
 
 ```sh
