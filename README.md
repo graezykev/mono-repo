@@ -5883,7 +5883,7 @@ cd lib-web-ui && \
 pnpm build
 ```
 
-## Design Token - Font Size
+## Design Token - Typography - Font Size
 
 ```sh
 cd design-tokens && \
@@ -5991,7 +5991,7 @@ export default {
 
 ![tailwind font size](tailwind-font-size.png)
 
-## Design Token - Font Weight
+## Design Token - Typography - Font Weight
 
 ```sh
 cd design-tokens && \
@@ -6115,7 +6115,7 @@ export default function getStyleDictionaryConfig(theme) {
 
 See `android/styledictionary/src/main/res/values/dark/style_dictionary_font_weights.xml` after build.
 
-## Design Token - Line Height / Line Spacing
+## Design Token - Typography - Line Height / Line Spacing
 
 ### Define Line Height Based on Its Font Size
 
@@ -6315,7 +6315,7 @@ export default function getStyleDictionaryConfig(theme) {
 +})
 ```
 
-## Design Token - Font Family & Font Face
+## Design Token - Typography - Font Family & Font Face
 
 ### Easiest way to use custom font: All in One
 
@@ -7159,7 +7159,7 @@ Finally, we need to upload `lib-ui-web/dist/style.css` (as well as `style.dark.c
 
 TODO: upload by CI/CD
 
-## Design Token - Other Typography Tokens
+## Design Token - Typography - Other Tokens
 
 ## Design Token - Duration
 
