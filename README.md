@@ -6046,6 +6046,22 @@ export default {
 
 ```
 
+`lib-ui-web/tailwind.config.js`:
+
+```diff
+...
+  theme: {
+    ...
+    extend: {
+     fontSize: tokens.size.font,
++    fontWeight: tokens['font-weight']
+    }
+  },
+...
+```
+
+![tailwind font weight](tailwind-font-weight.png)
+
 ### Write a Custom format for Android
 
 `build/sd.config.js`:
