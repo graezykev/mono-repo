@@ -7403,20 +7403,6 @@ export default {
 
 ```
 
-`tokens/typography/text-indent.js`:
-
-```js
-export default {
-  'text-indent': {
-    normal: {
-      value: 0 / 16,
-      type: 'dimension'
-    }
-  }
-}
-
-```
-
 `tokens/typography/vertical-align.js`:
 
 ```js
@@ -7556,18 +7542,14 @@ export default {
 
 ```
 
-`tokens/typography/direction.js`:
+`tokens/typography/text-indent.js`:
 
 ```js
 export default {
-  direction: {
-    ltr: {
-      value: 'ltr',
-      type: 'direction'
-    },
-    rtl: {
-      value: 'rtl',
-      type: 'direction'
+  'text-indent': {
+    normal: {
+      value: 0 / 16,
+      type: 'dimension'
     }
   }
 }
@@ -7588,13 +7570,168 @@ export default {
       type: 'dimension'
     },
     tight: {
-      value: - 8 / 16,
+      value: `${- 8 / 16}rem`,
       type: 'dimension'
     }
   }
 }
 
 ```
+
+`tokens/typography/direction.js`:
+
+```js
+export default {
+  direction: {
+    ltr: {
+      value: 'ltr',
+      type: 'direction'
+    },
+    rtl: {
+      value: 'rtl',
+      type: 'direction'
+    }
+  }
+}
+
+```
+
+### Define Tailwind Utility Class for Other Tokens
+
+`lib-ui-web/tailwind.config.js`:
+
+```js
+...
+    plugin(function ({ addUtilities }) {
+      const utilities = {}
+      const styles = tokens['font-style']
+      Object.keys(styles).map(style => {
+        const suffix = style === 'DEFAULT' ? '' : ('-' + style)
+        utilities[`.font-style${suffix}`] = {
+          'font-style': styles[style]
+        }
+      })
+      addUtilities(utilities)
+    }),
+
+    plugin(function ({ addUtilities }) {
+      const utilities = {}
+      const aligns = tokens['text-align']
+      Object.keys(aligns).map(align => {
+        const suffix = align === 'DEFAULT' ? '' : ('-' + align)
+        utilities[`.t-align${suffix}`] = {
+          'text-align': aligns[align]
+        }
+      })
+      addUtilities(utilities)
+    }),
+
+    plugin(function ({ addUtilities }) {
+      const utilities = {}
+      const aligns = tokens['vertical-align']
+      Object.keys(aligns).map(align => {
+        const suffix = align === 'DEFAULT' ? '' : ('-' + align)
+        utilities[`.v-align${suffix}`] = {
+          'vertical-align': aligns[align]
+        }
+      })
+      addUtilities(utilities)
+    }),
+
+    plugin(function ({ addUtilities }) {
+      const utilities = {}
+      const spaces = tokens['white-space']
+      Object.keys(spaces).map(space => {
+        const suffix = space === 'DEFAULT' ? '' : ('-' + space)
+        utilities[`.wspace${suffix}`] = {
+          'white-space': spaces[space]
+        }
+      })
+      addUtilities(utilities)
+    }),
+
+    plugin(function ({ addUtilities }) {
+      const utilities = {}
+      const overflows = tokens['text-overflow']
+      Object.keys(overflows).map(overflow => {
+        const suffix = overflow === 'DEFAULT' ? '' : ('-' + overflow)
+        utilities[`.t-overflow${suffix}`] = {
+          'text-overflow': overflows[overflow]
+        }
+      })
+      addUtilities(utilities)
+    }),
+
+    plugin(function ({ addUtilities }) {
+      const utilities = {}
+      const clamps = tokens['line-clamp']
+      Object.keys(clamps).map(clamp => {
+        const suffix = clamp === 'DEFAULT' ? '' : ('-' + clamp)
+        utilities[`.l-clamp${suffix}`] = {
+          overflow: 'hidden', // add other necessary CSS properties to make `line-clamp` work
+          display: '-webkit-box',
+          '-webkit-box-orient': 'vertical',
+          'line-clamp': clamps[clamp]
+        }
+      })
+      addUtilities(utilities)
+    }),
+
+    plugin(function ({ addUtilities }) {
+      const utilities = {}
+      const indents = tokens['text-indent']
+      Object.keys(indents).map(indent => {
+        const suffix = indent === 'DEFAULT' ? '' : ('-' + indent)
+        utilities[`.t-indent${suffix}`] = {
+          'text-indent': indents[indent]
+        }
+      })
+      addUtilities(utilities)
+    }),
+
+    plugin(function ({ addUtilities }) {
+      const utilities = {}
+      const spacings = tokens['word-spacing']
+      Object.keys(spacings).map(spacing => {
+        const suffix = spacing === 'DEFAULT' ? '' : ('-' + spacing)
+        utilities[`.w-spacing${suffix}`] = {
+          'word-spacing': spacings[spacing]
+        }
+      })
+      addUtilities(utilities)
+    }),
+
+    plugin(function ({ addUtilities }) {
+      const utilities = {}
+      const directions = tokens['direction']
+      Object.keys(directions).map(direction => {
+        const suffix = direction === 'DEFAULT' ? '' : ('-' + direction)
+        utilities[`.direction${suffix}`] = {
+          'direction': directions[direction]
+        }
+      })
+      addUtilities(utilities)
+    }),
+...
+```
+
+![tailwind font style](tailwind-font-style.png)
+
+![tailwind text align](tailwind-text-align.png)
+
+![tailwind vertical align](tailwind-vertical-align.png)
+
+![tailwind white space](tailwind-white-space.png)
+
+![tailwind text overflow](tailwind-text-overflow.png)
+
+![tailwind line clamp](tailwind-line-clamp.png)
+
+![tailwind text indent](tailwind-text-indent.png)
+
+![tailwind word spacing](tailwind-word-spacing.png)
+
+![tailwind direction](tailwind-direction.png)
 
 ## Design Token - Duration
 
