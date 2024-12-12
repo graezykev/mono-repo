@@ -7357,6 +7357,245 @@ export default {
 
 ![tailwind text decoration style](tailwind-text-decoration-style.png)
 
+### Other Typography
+
+`tokens/typography/font-style.js`:
+
+```js
+export default {
+  'font-style': {
+    normal: {
+      value: 'normal',
+      type: 'fontStyle'
+    },
+    italic: {
+      value: 'italic',
+      type: 'fontStyle'
+    }
+  }
+}
+
+```
+
+`tokens/typography/text-align.js`:
+
+```js
+export default {
+  'text-align': {
+    center: {
+      value: 'center',
+      type: 'textAlign'
+    },
+    start: {
+      value: 'start', // depends on direction
+      type: 'textAlign'
+    },
+    end: {
+      value: 'end', // depends on direction
+      type: 'textAlign'
+    },
+    justify: {
+      value: 'justify',
+      type: 'textAlign'
+    }
+  }
+}
+
+```
+
+`tokens/typography/text-indent.js`:
+
+```js
+export default {
+  'text-indent': {
+    normal: {
+      value: 0 / 16,
+      type: 'dimension'
+    }
+  }
+}
+
+```
+
+`tokens/typography/vertical-align.js`:
+
+```js
+export default {
+  'vertical-align': {
+    '100-percent': {
+      value: '100%', // align the [baseline] of the element to **above** the [baseline] of its parent, relative to `line-height`
+      type: 'verticalAlign'
+    },
+    '10px': {
+      value: 10 / 16, // align the [baseline] of the element to **above** the [baseline] of its parent
+      type: 'dimension'
+    },
+    DEFAULT: {
+      value: 'baseline',
+      type: 'verticalAlign'
+    },
+    sub: {
+      value: 'sub',
+      type: 'verticalAlign'
+    },
+    super: {
+      value: 'super',
+      type: 'verticalAlign'
+    },
+    'text-top': {
+      value: 'text-top',
+      type: 'verticalAlign'
+    },
+    'text-bottom': {
+      value: 'text-bottom',
+      type: 'verticalAlign'
+    },
+    'top': {
+      value: 'top',
+      type: 'verticalAlign'
+    },
+    'bottom': {
+      value: 'bottom',
+      type: 'verticalAlign'
+    }
+  }
+}
+
+```
+
+`tokens/typography/white-space.js`:
+
+```js
+export default {
+  'white-space': {
+    DEFAULT: {
+      // 1. Sequences of white space are **collapsed**
+      // 2. Newline characters = white spaces
+      // 3. Lines are broken as necessary
+      value: 'normal',
+      type: 'whiteSpace'
+    },
+    nowrap: {
+      // 1. Collapsed
+      // 2. No line breaks
+      value: 'nowrap',
+      type: 'whiteSpace'
+    },
+    preserved: {
+      // 1. preserve white spaces & newline characters
+      // 2. line break when: 2.1 newline characters 2.2 <br>
+      value: 'pre',
+      type: 'whiteSpace'
+    },
+    'preserved-wrap': {
+      // 1. preserve white spaces & newline characters
+      // 2. line break when: 2.1 newline characters 2.2 <br> 2.3 end of the box
+      value: 'pre-wrap',
+      type: 'whiteSpace'
+    },
+    'preserved-line': {
+      // 1.1 preserve newline characters
+      // 1.1 collapse Sequences of white spaces
+      // 2. line break when: 2.1 newline characters 2.2 <br> 2.3 end of the box
+      value: 'pre-line',
+      type: 'whiteSpace'
+    },
+    'break-spaces': {
+      value: 'break-spaces',
+      type: 'whiteSpace'
+    }
+  }
+}
+
+```
+
+`tokens/typography/text-overflow.js`:
+
+```js
+export default {
+  /**
+   * Set First:
+   * white-space: nowrap; // or set line-clamp > 1
+   * overflow: hidden;
+   */
+  'text-overflow': {
+    clip: {
+      value: 'clip',
+      type: 'textOverflow'
+    },
+    ellipsis: {
+      value: 'ellipsis',
+      type: 'textOverflow'
+    }
+  }
+}
+
+```
+
+`tokens/typography/line-clamp.js`:
+
+```js
+export default {
+  /**
+   * Set First:
+   * display: -webkit-box; // or -webkit-inline-box;
+   * -webkit-box-orient: vertical;
+   * overflow: hidden;
+   */
+  'line-clamp': {
+    'single-line': {
+      value: 1,
+      type: 'number'
+    },
+    '2-line': {
+      value: 2,
+      type: 'number'
+    }
+  }
+}
+
+```
+
+`tokens/typography/direction.js`:
+
+```js
+export default {
+  direction: {
+    ltr: {
+      value: 'ltr',
+      type: 'direction'
+    },
+    rtl: {
+      value: 'rtl',
+      type: 'direction'
+    }
+  }
+}
+
+```
+
+`tokens/typography/word-spacing.js`:
+
+```js
+export default {
+  'word-spacing': {
+    normal: {
+      value: 0 / 16, // or 'normal'. defined by the current font
+      type: 'dimension'
+    },
+    wide: {
+      value: 16 / 16, // **extra** spacing in addition to the intrinsic inter-word spacing defined by the font
+      type: 'dimension'
+    },
+    tight: {
+      value: - 8 / 16,
+      type: 'dimension'
+    }
+  }
+}
+
+```
+
 ## Design Token - Duration
 
 ```sh
