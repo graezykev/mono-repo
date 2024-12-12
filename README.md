@@ -7733,6 +7733,8 @@ export default {
 
 ![tailwind direction](tailwind-direction.png)
 
+## Design Token - Typography - Composite
+
 ## Design Token - Duration
 
 ```sh
