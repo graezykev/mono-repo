@@ -7885,7 +7885,7 @@ And use them in your code:
 
 ![tailwind typo](tailwind-typo.png)
 
-Our CSS output would be like this:
+Our CSS output would be something like this:
 
 ```css
 ...
