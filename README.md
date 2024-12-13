@@ -7814,11 +7814,86 @@ Use the utility `typography-paragraph` class in you code, then see the CSS outpu
 }
 ```
 
-### Composite
+### Typo Composite
 
 Here, only `font-style` `font-variant` `font-weight` `font-stretch` `font-size` `line-height` `font-family` are transformed.
 
 What about other typography-relevant properties?
+
+```js
+const paragraphFont = {
+  // Only these can be transformed to CSS `font:`
+  // font-style font-variant font-weight font-stretch font-size line-height font-family
+  fontFamily: '{font-family.primary}',
+  fontSize: '{size.font.content}',
+  fontWeight: '{font-weight.regular}',
+  fontStyle: '{font-style.normal}',
+  lineHeight: '{number.line-height.content}'
+}
+
+export default {
+  typography: {
+    paragraph: {
+      value: {
+        ...paragraphFont
+      },
+      type: 'typography'
+    },
+    link: {
+      value: {
+        ...paragraphFont,
+        color: '{color.text.link.DEFAULT}'
+      },
+      type: 'composite'
+    },
+    'link-hover': {
+      value: {
+        ...paragraphFont,
+        color: '{color.text.link.DEFAULT}',
+        textDecoration: '{text-decoration.line.underline}'
+      },
+      type: 'composite'
+    }
+  }
+}
+
+```
+
+You don't need to do anything if you just want to Integrate with TailwindCSS, but just add them to the utility class.
+
+`lib-ui-web/tailwind.config.js`:
+
+```js
+...
+  plugins: [
+
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        // both camelcase (lineHight) and kebab are OK here
+        '.typography-paragraph': tokens.typography.paragraph,
+        '.typography-link': tokens.typography.link,
+        '.typography-link-hover': tokens.typography['link-hover']
+      })
+    }),
+
+    ...
+  ]
+...
+```
+
+And use them in your code:
+
+![tailwind typo](tailwind-typo.png)
+
+Our CSS output would be like this:
+
+```css
+...
+.typography-link{font-family:Roboto;font-size:.875rem;font-weight:400;font-style:normal;line-height:1.4285714285714286;color:#f05c}
+...
+.hover\:typography-link-hover:hover{font-family:Roboto;font-size:.875rem;font-weight:400;font-style:normal;line-height:1.4285714285714286;color:#f05c;text-decoration:underline}
+...
+```
 
 ## Design Token - Duration
 
