@@ -7889,9 +7889,9 @@ Our CSS output would be like this:
 
 ```css
 ...
-.typography-link{font-family:Roboto;font-size:.875rem;font-weight:400;font-style:normal;line-height:1.4285714285714286;color:#f05c}
+.typography-link{font-family:Roboto;font-size:.875rem;font-weight:400;font-style:normal;line-height:1.4285714285714286;color:#f05c;}
 ...
-.hover\:typography-link-hover:hover{font-family:Roboto;font-size:.875rem;font-weight:400;font-style:normal;line-height:1.4285714285714286;color:#f05c;text-decoration:underline}
+.hover\:typography-link-hover:hover{font-family:Roboto;font-size:.875rem;font-weight:400;font-style:normal;line-height:1.4285714285714286;color:#f05c;text-decoration:underline;}
 ...
 ```
 
