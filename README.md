@@ -7757,7 +7757,7 @@ export default {
 
 ```
 
-Output after build:
+Thanks to the Built-in Transform [`typography/css/shorthand`](https://styledictionary.com/reference/hooks/transforms/predefined/#typographycssshorthand), we can see the CSS output after build:
 
 `css/[light|dark]/variables.css`:
 
