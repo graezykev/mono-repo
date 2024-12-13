@@ -7735,6 +7735,91 @@ export default {
 
 ## Design Token - Typography - Composite
 
+`design-tokens/tokens/typograpy/index.js`:
+
+```js
+export default {
+  typography: {
+    paragraph: {
+      value: {
+        // Only these can be transformed to CSS `font:`
+        // font-style font-variant font-weight font-stretch font-size line-height font-family
+        fontFamily: '{font-family.primary}',
+        fontSize: '{size.font.content}',
+        fontWeight: '{font-weight.regular}',
+        fontStyle: '{font-style.italic}',
+        lineHeight: '{number.line-height.content}'
+      },
+      type: 'typography'
+    }
+  }
+}
+
+```
+
+Output after build:
+
+`css/[light|dark]/variables.css`:
+
+```css
+  --token-typography-paragraph: normal 400 0.875rem/1.4285714285714286 Roboto;
+```
+
+And JS output:
+
+```js
+...
+  "typography": {
+    "paragraph": {
+      "fontFamily": "Roboto",
+      "fontSize": "0.875rem",
+      "fontWeight": 400,
+      "fontStyle": "normal",
+      "lineHeight": 1.4285714285714286
+    },
+...
+```
+
+### Integrate with TailwindCSS
+
+`lib-ui-web/tailwind.config.js`:
+
+```js
+...
+  plugins: [
+
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        // both camelcase (lineHight) and kebab are OK here
+        '.typography-paragraph': tokens.typography.paragraph
+      })
+    }),
+
+    ...
+  ]
+...
+```
+
+Use the utility `typography-paragraph` class in you code, then see the CSS output after build.
+
+`lib-ui-web/dist/style.css`:
+
+```css
+.typography-paragraph{
+  font-family:Roboto;
+  font-size:.875rem;
+  font-weight:400;
+  font-style:normal;
+  line-height:1.4285714285714286
+}
+```
+
+### Composite
+
+Here, only `font-style` `font-variant` `font-weight` `font-stretch` `font-size` `line-height` `font-family` are transformed.
+
+What about other typography-relevant properties?
+
 ## Design Token - Duration
 
 ```sh
