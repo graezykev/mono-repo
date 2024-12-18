@@ -7596,6 +7596,39 @@ export default {
 
 ```
 
+`tokens/typography/list-style.js`:
+
+```js
+export default {
+  'list-style': {
+    type: {
+      DEFAULT: {
+        value: 'none',
+        type: 'listStyleType'
+      }
+    },
+    position: {
+      DEFAULT: {
+        value: '{list-style.position.outside}',
+        type: 'listStylePosition'
+      },
+      inside: {},
+      outside: {
+        value: 'outside',
+        type: 'listStylePosition'
+      }
+    },
+    image: {
+      DEFAULT: {
+        value: 'none',
+        type: 'listStyleImage'
+      }
+    }
+  }
+}
+
+```
+
 ### Define Tailwind Utility Class for Other Tokens
 
 `lib-ui-web/tailwind.config.js`:
@@ -7790,7 +7823,7 @@ And JS output:
 
     plugin(function ({ addUtilities }) {
       addUtilities({
-        // both camelcase (lineHight) and kebab are OK here
+        // both camelcase (e.g. lineHight) and kebab case (e.g. line-height) are OK here
         '.typography-paragraph': tokens.typography.paragraph
       })
     }),
@@ -7853,6 +7886,14 @@ export default {
         textDecoration: '{text-decoration.line.underline}'
       },
       type: 'composition'
+    },
+    list: {
+      value: {
+        listStyleType: '{list-style.type.DEFAULT}',
+        listStylePosition: '{list-style.position.DEFAULT}',
+        listStyleImage: '{list-style.image.DEFAULT}'
+      },
+      type: 'composition'
     }
   }
 }
@@ -7872,7 +7913,8 @@ You don't need to do anything if you just want to Integrate with TailwindCSS, bu
         // both camelcase (e.g. lineHight) and kebab case (e.g. line-height) are OK here
         '.typography-paragraph': tokens.typography.paragraph,
         '.typography-link': tokens.typography.link,
-        '.typography-link-hover': tokens.typography['link-hover']
+        '.typography-link-hover': tokens.typography['link-hover'],
+        '.typography-list': tokens.typography['list']
       })
     }),
 
@@ -7892,6 +7934,8 @@ Our CSS output would be something like this:
 .typography-link{font-family:Roboto;font-size:.875rem;font-weight:400;font-style:normal;line-height:1.4285714285714286;color:#f05c;}
 ...
 .hover\:typography-link-hover:hover{font-family:Roboto;font-size:.875rem;font-weight:400;font-style:normal;line-height:1.4285714285714286;color:#f05c;text-decoration:underline;}
+...
+.typography-list{list-style-type:none;list-style-position:outside;list-style-image:none}
 ...
 ```
 
@@ -8142,7 +8186,6 @@ Built-in transforms:
 
 Others:
 
-- list-style
 - Text shadow
 - transform
 - animation
