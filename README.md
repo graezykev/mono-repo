@@ -8058,6 +8058,8 @@ Take notice of `type` and `category`.
 
 ## Design Token - Cubic Bezier
 
+A Cubic Bezier is the timing function of a transition, an array containing four numbers. These numbers represent two points (P1, P2) with one x coordinate and one y coordinate each [P1x, P1y, P2x, P2y].
+
 ## Design Token - Other Compositions
 
 Built-in transforms:
