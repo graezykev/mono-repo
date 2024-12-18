@@ -7844,7 +7844,7 @@ export default {
         ...paragraphFont,
         color: '{color.text.link.DEFAULT}'
       },
-      type: 'composite'
+      type: 'composition'
     },
     'link-hover': {
       value: {
@@ -7852,7 +7852,7 @@ export default {
         color: '{color.text.link.DEFAULT}',
         textDecoration: '{text-decoration.line.underline}'
       },
-      type: 'composite'
+      type: 'composition'
     }
   }
 }
