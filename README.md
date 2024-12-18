@@ -8127,7 +8127,7 @@ Select your custom cubic beziers:
 Build Output in `dist/style.css`:
 
 ```css
-.ease-custom-curve{
+.ease-custom-curve {
   transition-timing-function: cubic-bezier(.69,-.76,.52,1.49);
 }
 ```
