@@ -8060,6 +8060,78 @@ Take notice of `type` and `category`.
 
 A Cubic Bezier is the timing function of a transition, an array containing four numbers. These numbers represent two points (P1, P2) with one x coordinate and one y coordinate each [P1x, P1y, P2x, P2y].
 
+`design-tokens/tokens/cubic-bezier.js`:
+
+```js
+export default {
+  'cubic-bezier': {
+    linear: {
+      value: [0, 0, 1, 1],
+      type: 'cubicBezier'
+    },
+    ease: {
+      value: [.25, .1, .25, 1],
+      type: 'cubicBezier'
+    },
+    'ease-in': {
+      value: [.42, 0, 1, 1],
+      type: 'cubicBezier'
+    },
+    'ease-out': {
+      value: [0, 0, .58, 1],
+      type: 'cubicBezier'
+    },
+    'ease-in-out': {
+      value: [.42, 0, .58, 1],
+      type: 'cubicBezier'
+    },
+    'custom-curve': { // define & preview your own here https://cubic-bezier.com/#.17,.67,.83,.67
+      value: [.69, -0.76, .52, 1.49],
+      type: 'cubicBezier'
+    }
+  }
+}
+
+```
+
+Out put
+
+```css
+  --token-cubic-bezier-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --token-cubic-bezier-ease-in: cubic-bezier(0.42, 0, 1, 1);
+  --token-cubic-bezier-ease-out: cubic-bezier(0, 0, 0.58, 1);
+  --token-cubic-bezier-ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --token-cubic-bezier-custom-curve: cubic-bezier(0.69, -0.76, 0.52, 1.49);
+```
+
+Integrate tokens with TailwindCSS in `lib-ui-web/tailwind.config.js`:
+
+```diff
+...
++const cubicBeziers = tokens['cubic-bezier']
+...
+  theme: {
+    ...
+    extend: {
++     transitionTimingFunction: Object.keys(cubicBeziers).reduce((rst, name) => {
++       rst[name] = `cubic-bezier(${cubicBeziers[name].toString()})`
++       return rst
++     }, {}),
+...
+```
+
+Select your custom cubic beziers:
+
+![tailwind cubic bezier](tailwind-cubic-bezier.png)
+
+Build Output in `dist/style.css`:
+
+```css
+.ease-custom-curve{
+  transition-timing-function: cubic-bezier(.69,-.76,.52,1.49);
+}
+```
+
 ## Design Token - Other Compositions
 
 Built-in transforms:
