@@ -7814,7 +7814,7 @@ Use the utility `typography-paragraph` class in you code, then see the CSS outpu
 }
 ```
 
-### Typo Composite
+### Typo Composition
 
 Here, only `font-style` `font-variant` `font-weight` `font-stretch` `font-size` `line-height` `font-family` are transformed.
 
@@ -7869,7 +7869,7 @@ You don't need to do anything if you just want to Integrate with TailwindCSS, bu
 
     plugin(function ({ addUtilities }) {
       addUtilities({
-        // both camelcase (lineHight) and kebab are OK here
+        // both camelcase (e.g. lineHight) and kebab case (e.g. line-height) are OK here
         '.typography-paragraph': tokens.typography.paragraph,
         '.typography-link': tokens.typography.link,
         '.typography-link-hover': tokens.typography['link-hover']
@@ -7893,6 +7893,77 @@ Our CSS output would be something like this:
 ...
 .hover\:typography-link-hover:hover{font-family:Roboto;font-size:.875rem;font-weight:400;font-style:normal;line-height:1.4285714285714286;color:#f05c;text-decoration:underline;}
 ...
+```
+
+However, if you do want to use the tokens as CSS variables in `design-tokens/css/[light|dark]/variables.css`, but they look like this:
+
+```css
+  --token-typography-link: [object Object];
+  --token-typography-link-hover: [object Object];
+```
+
+Therefore, we need to write a custom transformer, to transform the composite tokens into CSS variables.
+
+`build/sd.config.js`:
+
+```js
+StyleDictionary.registerTransform({
+  // Thanks to https://github.com/amzn/style-dictionary/issues/848#issuecomment-1217796455
+  type: 'value',
+  transitive: true,
+  name: 'css/flatten-composition-properties',
+  filter: ({ type }) => ['composition'].includes(type),
+  transform: ({ value, name, type }, config) => {
+    if (!value) return
+    const entries = Object.entries(value)
+    // config.transforms[1] => 'name/kebab'
+    const transform = config.transforms[1].transform
+    const flattendedValue = entries.reduce(
+      (acc, [key, v], index) =>
+        `${acc ? `${acc}\n\t` : ''}--${name}-${transform(
+          { path: [key] },
+          { prefix: '' },
+        )}: ${v}${index + 1 === entries.length ? '' : ';'}`,
+      `${name.includes(type) ? '' : `${name}-${type}`};`,
+    )
+
+    return flattendedValue
+  }
+})
+```
+
+```diff
+...
+export default function getStyleDictionaryConfig(theme) {
+  return {
+    ...
+    "platforms": {
+      "css": {
+-       "transforms": ['attribute/cti', 'name/kebab', 'time/seconds', 'html/icon', 'size/rem', 'color/css', 'colorShadesMapping', 'asset/url', 'fontFamily/css', 'cubicBezier/css', 'strokeStyle/css/shorthand', 'border/css/shorthand', 'typography/css/shorthand', 'transition/css/shorthand', 'shadow/css/shorthand', 'line-height'],
++       "transforms": ['attribute/cti', 'name/kebab', 'css/flatten-composition-properties', 'time/seconds', 'html/icon', 'size/rem', 'color/css', 'colorShadesMapping', 'asset/url', 'fontFamily/css', 'cubicBezier/css', 'strokeStyle/css/shorthand', 'border/css/shorthand', 'typography/css/shorthand', 'transition/css/shorthand', 'shadow/css/shorthand', 'line-height'],
+```
+
+Here are the CSS variables in `design-tokens/css/[light|dark]/variables.css` generated fronm the composite tokens:
+
+```css
+  --token-typography-link: token-typography-link-composition;
+
+ --token-typography-link-font-family: Roboto;
+ --token-typography-link-font-size: 0.875rem;
+ --token-typography-link-font-weight: 400;
+ --token-typography-link-font-style: normal;
+ --token-typography-link-line-height: 1.4285714285714286;
+ --token-typography-link-color: #ff0055cc;
+
+  --token-typography-link-hover: token-typography-link-hover-composition;
+
+ --token-typography-link-hover-font-family: Roboto;
+ --token-typography-link-hover-font-size: 0.875rem;
+ --token-typography-link-hover-font-weight: 400;
+ --token-typography-link-hover-font-style: normal;
+ --token-typography-link-hover-line-height: 1.4285714285714286;
+ --token-typography-link-hover-color: #ff0055cc;
+ --token-typography-link-hover-text-decoration: underline;
 ```
 
 ## Design Token - Duration
