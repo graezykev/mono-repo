@@ -7966,6 +7966,8 @@ Here are the CSS variables in `design-tokens/css/[light|dark]/variables.css` gen
  --token-typography-link-hover-text-decoration: underline;
 ```
 
+## Design Token - Size
+
 ## Design Token - Duration
 
 ```sh
@@ -8054,7 +8056,25 @@ Take notice of `type` and `category`.
     },
 ```
 
-## Design Token - Size
+## Design Token - Cubic Bezier
+
+## Design Token - Other Compositions
+
+Built-in transforms:
+
+- border
+- transition
+- shadow
+
+Others:
+
+- list-style
+- Text shadow
+- transform
+- animation
+- Outline
+- background
+- gradient
 
 ## Testing
 
