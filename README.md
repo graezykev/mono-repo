@@ -8114,6 +8114,147 @@ export default {
 
 ![tailwind box shadow](tailwind-box-shadow.png)
 
+## Design Token - Text Shadow
+
+Define our text shadows first:
+
+`design-tokens/tokens/shadow.js`:
+
+```js
+export default {
+  shadow: {
+    box: {
+      ...
+    },
+    text: {
+      dizzy: {
+        type: 'textShadow',
+        value: [{
+          offsetX: '{size.shadow.text.dizzy.offset-x}',
+          offsetY: '{size.shadow.text.dizzy.offset-y}',
+          blur: '{size.shadow.text.dizzy.blur}'
+        }, {
+          color: '{color.base.blue}',
+          offsetX: '{size.shadow.text.dizzy.offset-x}',
+          offsetY: '{size.shadow.text.dizzy.offset-y}',
+          blur: '{size.shadow.text.dizzy.blur}'
+        }]
+      }
+    }
+  }
+}
+
+```
+
+We also need to Define the shadow size(s) so they can be referenced:
+
+`design-tokens/tokens/size/shadow.js`:
+
+```js
+export default {
+  size: {
+    shadow: {
+      box: {
+        ...
+      },
+      text: {
+        dizzy: {
+          'offset-x': {
+            value: 1 / 16,
+            type: 'dimension'
+          },
+          'offset-y': {
+            value: 1 / 16,
+            type: 'dimension'
+          },
+          blur: {
+            value: 3 / 16,
+            type: 'dimension'
+          },
+        }
+      }
+    }
+  }
+}
+
+```
+
+There's no built-in transforms to transform text shadows, so let's write one named `text-shadow/css/shorthand`.
+
+`design-tokens/buid/sd.config.js`:
+
+```js
+...
+StyleDictionary.registerTransform({
+  type: 'value',
+  transitive: true,
+  name: 'text-shadow/css/shorthand',
+  filter: ({ type }) => ['textShadow'].includes(type),
+  transform: ({ value, name, type }, config) => {
+    if (!value) return
+    if (typeof value !== 'object') {
+      return value
+    }
+    const stringifyShadow = (val) => {
+      // check if the shadows are objects, they might already be transformed to strings if they were refs
+      if (typeof val !== 'object') {
+        return val
+      }
+      const { color, offsetX, offsetY, blur } = val;
+      return `${offsetX ?? 0} ${offsetY ?? 0} ${blur ?? 0} ${color ?? ''}`;
+    }
+
+    if (Array.isArray(value)) {
+      return value.map(stringifyShadow).join(', ')
+    }
+    return stringifyShadow(value)
+  }
+})
+```
+
+```diff
+...
+export default function getStyleDictionaryConfig(theme) {
+  return {
+    "source": ["tokens/**/*.json", "tokens/**/*.js"],
+    "platforms": {
+      "css": {
+-       "transforms": ['attribute/cti', 'name/kebab', 'css/flatten-composition-properties', 'time/seconds', 'html/icon', 'size/rem', 'color/css', 'colorShadesMapping', 'asset/url', 'fontFamily/css', 'cubicBezier/css', 'strokeStyle/css/shorthand', 'border/css/shorthand', 'typography/css/shorthand', 'transition/css/shorthand', 'shadow/css/shorthand', 'line-height'],
++       "transforms": ['attribute/cti', 'name/kebab', 'css/flatten-composition-properties', 'time/seconds', 'html/icon', 'size/rem', 'color/css', 'colorShadesMapping', 'asset/url', 'fontFamily/css', 'cubicBezier/css', 'strokeStyle/css/shorthand', 'border/css/shorthand', 'typography/css/shorthand', 'transition/css/shorthand', 'shadow/css/shorthand', 'line-height', 'text-shadow/css/shorthand'],
+...
+```
+
+The CSS output after build in `css/light/variables.css`:
+
+```css
+  --token-shadow-text-dizzy: 0.0625rem 0.0625rem 0.1875rem , 0.0625rem 0.0625rem 0.1875rem #0055cc;
+```
+
+Integrate our text shadow tokens with TailwindCSS.
+
+`lib-ui-web/tailwind.config.js`:
+
+```js
+...
+  plugins: [
+    ...
+    plugin(function ({ addUtilities }) {
+      const textShadows = tokens.shadow.text
+      const utilities = Object.keys(textShadows).reduce((rst, key) => {
+        const shadow = textShadows[key]
+        rst[`.t-shadow-${key}`] = {
+          'text-shadow': shadow.map(({ color, offsetX, offsetY, blur }) => `${offsetX ?? 0} ${offsetY ?? 0} ${blur ?? 0} ${color ?? ''}`).join(', ')
+        }
+        return rst
+      }, {})
+      addUtilities(utilities)
+    })
+  ]
+...
+```
+
+![tailwind text shadow](tailwind-text-shadow.png)
+
 ## Design Token - Duration
 
 ```sh
