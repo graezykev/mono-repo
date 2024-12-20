@@ -8012,6 +8012,108 @@ Here are the CSS variables in `design-tokens/css/[light|dark]/variables.css` gen
 
 ## Design Token - Size
 
+## Design Token - Box Shadow
+
+Box shadows can be transformed by the built-in transform `shadow/css/shorthand`.
+
+`design-tokens/tokens/shadow.js`:
+
+```js
+export default {
+  shadow: {
+    box: {
+      highlight: {
+        type: 'shadow',
+        value: [{
+          color: '{color.shadow.DEFAULT}',
+          offsetX: '{size.shadow.box.highlight.offset-x}',
+          offsetY: '{size.shadow.box.highlight.offset-y}',
+          blur: '{size.shadow.box.highlight.blur}',
+          spread: '{size.shadow.box.highlight.spread}'
+        },
+        { // 2nd shadow for test
+          color: '{color.base.blue}',
+          offsetX: '{size.shadow.box.highlight.offset-x}',
+          offsetY: '{size.shadow.box.highlight.offset-y}',
+          blur: '{size.shadow.box.highlight.blur}',
+          spread: '{size.shadow.box.highlight.spread}',
+          type: 'inset'
+        }]
+      }
+    },
+    text: {}
+  }
+}
+
+```
+
+We also need to Define the shadow size(s) so they can be referenced:
+
+`design-tokens/tokens/size/shadow.js`:
+
+```js
+export default {
+  size: {
+    shadow: {
+      box: {
+        'highlight': {
+          'offset-x': {
+            value: 2 / 16,
+            type: 'dimension'
+          },
+          'offset-y': {
+            value: 2 / 16,
+            type: 'dimension'
+          },
+          blur: {
+            value: 6 / 16,
+            type: 'dimension'
+          },
+          spread: {
+            value: 0 / 16,
+            type: 'dimension'
+          }
+        }
+      },
+      text: {}
+    }
+  }
+}
+
+```
+
+After build, the result in `css/light/variables.css` looks like:
+
+```css
+  --token-shadow-box-highlight: 0.125rem 0.125rem 0.375rem #ff1d1d4f, inset 0.125rem 0.125rem 0.375rem #0055cc;
+```
+
+Integrate our shadow tokens with TailwindCSS.
+
+`li-ui-web/tailwind.config.js`:
+
+```js
+...
+const boxShadows = tokens.shadow.box
+...
+export default {
+  ...
+  theme: {
+    ...
+        extend: {
+          ...
+          boxShadow: {
+            ...Object.keys(boxShadows).reduce((rst, key) => {
+              const shadow = boxShadows[key]
+              rst[key] = shadow.map(({ color, offsetX, offsetY, blur, spread, type }) => `${type ? `${type} ` : ''}${offsetX ?? 0} ${offsetY ?? 0} ${blur ?? 0} ${spread ? `${spread} ` : ''}${color ?? ''}`).join(', ')
+              return rst
+            }, {})
+          }
+...
+```
+
+![tailwind box shadow](tailwind-box-shadow.png)
+
 ## Design Token - Duration
 
 ```sh
