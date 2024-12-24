@@ -5938,6 +5938,8 @@ export default {
 
 And the result would be `0.5rem`, `8.00dp` and `8.00f`.
 
+## Design Token - Size - Custom our size (shortcuts)
+
 ## Design Token - Typography - Font Size
 
 ```sh
