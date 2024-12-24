@@ -8529,7 +8529,6 @@ Built-in transforms:
 
 Others:
 
-- Text shadow
 - transform
 - animation
 - Outline
