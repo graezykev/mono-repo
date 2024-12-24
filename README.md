@@ -8269,7 +8269,21 @@ export default {
   duration: {
     'a-random-duration-of-time': {
       type: 'time',
-      value: 1001
+      value: 2101
+    },
+    transition: {
+      duration: {
+        'fade-in-out': {
+          type: 'time',
+          value: 1000
+        }
+      },
+      delay: {
+        'fade-in-out': {
+          type: 'time',
+          value: 900
+        }
+      }
     }
   }
 }
@@ -8416,6 +8430,94 @@ Build Output in `dist/style.css`:
 ```css
 .ease-custom-curve {
   transition-timing-function: cubic-bezier(.69,-.76,.52,1.49);
+}
+```
+
+## Design Token - Transition
+
+A CSS Transition consist of some properties.
+
+- property name
+- duration
+- easing function / Cubic Bezier
+- delay
+
+Transitions can be transformed by the built-in transform `transition/css/shorthand`.
+
+Define a transition token by combining the properties in `tokens/transition.js`:
+
+```js
+export default {
+  transition: {
+    'fade-in-out': {
+      type: 'transition',
+      value: {
+        property: 'all',
+        duration: '{duration.transition.duration.fade-in-out}',
+        timingFunction: '{cubic-bezier.ease-in-out}',
+        delay: '{duration.transition.delay.fade-in-out}'
+      }
+    }
+  }
+}
+
+```
+
+CSS result, the `property` is not transformed.
+
+```css
+  --token-transition-fade-in-out: 1.00s cubic-bezier(0.42, 0, 0.58, 1) 0.05s;
+```
+
+And the JS result:
+
+```js
+...
+  transition: {
+    "fade-in-out": {
+      type: "transition",
+      value: {
+        property: "all",
+        duration: "1.00s",
+        timingFunction: [0.42, 0, 0.58, 1],
+        delay: "0.05s",
+      },
+...
+```
+
+Integrte the token with TailwindCSS in `lib-ui-web/tailwind.config.js`:
+
+```js
+...
+    plugin(function ({ addUtilities }) {
+      const transitions = tokens.transition
+      const utilities = Object.keys(transitions).reduce((rst, key) => {
+        const transition = transitions[key]
+        rst[`.transition-${key}`] = {
+          transitionProperty: transition.property,
+          transitionDuration: transition.duration,
+          transitionTimingFunction: `cubic-bezier(${transition.timingFunction.toString()})`,
+          transitionDelay: transition.delay
+        }
+        return rst
+      }, {})
+      addUtilities(utilities)
+    })
+...
+```
+
+Select the transition token via TailwindCSS:
+
+![tailwind transition](tailwind-transition.png)
+
+After build, the css result in `lib-ui-web/dist/style.css`:
+
+```css
+.transition-fade-in-out{
+  transition-property:all;
+  transition-duration:1s;
+  transition-timing-function:cubic-bezier(.42,0,.58,1);
+  transition-delay:.05s
 }
 ```
 
