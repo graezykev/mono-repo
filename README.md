@@ -8521,13 +8521,103 @@ After build, the css result in `lib-ui-web/dist/style.css`:
 }
 ```
 
+## Design Token - Border
+
+Borders can be transformed by the built-in transform `border/css/shorthand`.
+
+Pre-define the border width in `tokens/size/index.js`
+
+```js
+export default {
+  size: {
+    border: {
+      input: {
+        value: 1 / 16,
+        type: 'dimension'
+      }
+    }
+  }
+}
+
+```
+
+And Define the border width, style and color in `tokens/border.js`:
+
+```js
+export default {
+  border: {
+    input: {
+      DEFAULT: {
+        type: 'border',
+        value: {
+          width: '{size.border.input}',
+          style: 'solid',
+          color: '{color.border.input.DEFAULT}'
+        }
+      },
+      focus: {
+        type: 'border',
+        value: {
+          width: '{size.border.input}',
+          style: 'solid',
+          color: '{color.border.input.interaction.focus}'
+        }
+      }
+    }
+  }
+}
+
+```
+
+The CSS output after build:
+
+```css
+  --token-border-input-default: 0.0625rem solid #ff1d1d7d;
+  --token-border-input-focus: 0.0625rem solid #ff0055cc;
+```
+
+Integrate border tokens with TailwindCSS in `lib-ui-web/tailwind.config.js`:
+
+```js
+...
+    plugin(function ({ addUtilities }) {
+      const utilities = {}
+
+      function deepTraverseObjToFindBorder(tokens, paths) {
+        const property = paths[paths.length - 1]
+        const obj = tokens[property]
+        if (obj.width || obj.style || obj.color) {
+          utilities[`.${paths.join('-')}`] = {
+            borderWidth: obj.width,
+            borderStyle: obj.style,
+            borderColor: obj.color
+          }
+        } else {
+          Object.keys(obj).map(key => deepTraverseObjToFindBorder(obj, paths.concat(key)))
+        }
+      }
+
+      deepTraverseObjToFindBorder(tokens, ['border'])
+
+      addUtilities(utilities)
+    })
+...
+```
+
+And select the tokens:
+
+![tailwind-border](tailwind-border.png)
+
+![tailwind-border-focus.png](tailwind-border-focus.png)
+
+Our css after build:
+
+```css
+.border-input-DEFAULT{border-width:.0625rem;border-style:solid;border-color:#ff1d1d7d}
+.focus\:border-input-focus:focus{border-width:.0625rem;border-style:solid;border-color:#f05c}
+```
+
 ## Design Token - Other Compositions
-
-Built-in transforms:
-
-- border
-
-Others:
 
 - transform
 - animation
