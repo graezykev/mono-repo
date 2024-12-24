@@ -5883,6 +5883,61 @@ cd lib-web-ui && \
 pnpm build
 ```
 
+## Design Token - Size
+
+Define a size token in `tokens/size/index.js`:
+
+```js
+export default {
+  size: {
+    'a-random-size': {
+      type: 'dimension',
+      value: 1
+    }
+  }
+}
+
+```
+
+After build, checkout the CSS variable result in `design-tokens/css/[light|dark]/variables.css`:
+
+```css
+  --token-size-a-random-size: 1rem;
+```
+
+The unit of the token is `rem` because it's by default transformed by the built-in transform `size/rem`.
+
+For a CSS developer, it's straightforward to understand that `1rem` is equivalent to `16px`. But Android or iOS developers are usaully not familiar with the term `rem`.
+
+If you check the result for Android in `design-tokens/android/styledictionary/src/main/res/values/light/style_dictionary_dimens.xml` it would be like:
+
+```xml
+  <dimen name="size_a_random_size">16.00dp</dimen>
+```
+
+And the result for iOS in `design-tokens/ios/Classes/Generated/light/StyleDictionarySize.m` looks like:
+
+```m
+float const StyleDictionarySizeARandomSize = 16.00f;
+```
+
+Both Andoird and iOS would be using the absolute value.
+
+So, if your designer gives you a size token of `8px`, it should be define in this way:
+
+```js
+export default {
+  size: {
+    'a-random-size': {
+      type: 'dimension',
+      value: 8 / 16
+    }
+  }
+}
+```
+
+And the result would be `0.5rem`, `8.00dp` and `8.00f`.
+
 ## Design Token - Typography - Font Size
 
 ```sh
@@ -8009,8 +8064,6 @@ Here are the CSS variables in `design-tokens/css/[light|dark]/variables.css` gen
  --token-typography-link-hover-color: #ff0055cc;
  --token-typography-link-hover-text-decoration: underline;
 ```
-
-## Design Token - Size
 
 ## Design Token - Box Shadow
 
