@@ -8526,8 +8526,6 @@ After build, the css result in `lib-ui-web/dist/style.css`:
 Built-in transforms:
 
 - border
-- transition
-- shadow
 
 Others:
 
