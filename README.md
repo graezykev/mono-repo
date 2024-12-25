@@ -8715,6 +8715,7 @@ We can integrate it with TailwindCSS.
 `lib-ui-web/tailwind.config.js`:
 
 ```js
+...
     plugin(function ({ addUtilities }) {
       const images = tokens.image
       const utilities = Object.keys(images).reduce((rst, key) => {
@@ -8726,6 +8727,7 @@ We can integrate it with TailwindCSS.
       }, {})
       addUtilities(utilities)
     })
+...
 ```
 
 And select the pre-defined utility class:
