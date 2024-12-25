@@ -8679,6 +8679,331 @@ Our css after build:
 - Outline
 - background
 - gradient
+- ...
+
+### Gradient
+
+`design-tokens/tokens/gradient.js`:
+
+```js
+// gradient generation: https://www.css-gradient.com/
+
+export default {
+  gradient: {
+    'colourful-button': {
+
+      // https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient#formal_syntax
+      type: 'linear-gradient',
+
+      value: [
+        {
+          // 0deg === bottom to top, 180deg === top to bottom
+          angle: 134,
+
+          // https://developer.mozilla.org/en-US/docs/Web/CSS/color-interpolation-method#formal_syntax
+          interpolation: '',
+
+          colors: [
+            {
+              color: 'cyan',
+              // length: '1rem',
+              percentage: 0 // >= 0 && <=100
+            },
+            {
+              color: 'red',
+              percentage: 50
+            },
+            {
+              color: 'transparent',
+              percentage: 70
+            },
+            {
+              color: 'blue',
+              percentage: 100
+            }
+          ]
+        },
+        {
+          colors: [
+            {
+              color: 'cyan'
+
+            },
+            {
+              color: 'red'
+            }]
+        }
+      ]
+    },
+
+    'radial-bg': {
+
+      //https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/radial-gradient#formal_syntax
+      type: 'radial-gradient',
+
+      value: [
+        {
+          // ellipse(default) / circle
+          endingShape: 'circle',
+
+          // farthest-corner(default) / farthest-side / closest-corner / closest-size
+          // 100px / N%
+          // xpx ypx / x% y%
+          size: 'farthest-side',
+
+          position: {
+            x: 'left', // left / center(default) / right / n% / 10px
+            y: 'bottom' // top / center(default) / bottom / n% / 10px
+          },
+
+          interpolation: '',
+
+          colors: [
+            {
+              color: 'salmon',
+              percentage: 0
+            },
+            {
+              color: 'red',
+              percentage: 50
+            },
+            {
+              color: 'blue',
+              percentage: 100
+            }
+          ]
+        },
+        {
+          colors: [
+            {
+              color: 'black'
+            },
+            {
+              color: 'white'
+            }
+          ]
+        }
+      ]
+    },
+
+    'conic-bg': {
+
+      // https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/conic-gradient#formal_syntax
+      type: 'conic-gradient',
+
+      value: [
+        {
+          angle: 123, // same to linear-gradient
+          position: { // same to radial-gradient
+            x: 'left',
+            y: 'bottom'
+          },
+          interpolation: '',
+          colors: [
+            {
+              color: 'salmon',
+              percentage: 0
+            },
+            {
+              color: 'teal',
+              percentage: 100
+            }
+          ]
+        },
+        {
+          colors: [
+            {
+              color: 'black'
+            },
+            {
+              color: 'white'
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+
+```
+
+> For those `color` fields here, you can refer our color tokens.
+
+Next, Let's Write custom transforms in `design-tokens/build/sd.config.js` for 3 types of gradients respectively.
+
+- Tansform for `linear-gradient`:
+
+```js
+StyleDictionary.registerTransform({
+  type: 'value',
+  transitive: true,
+  name: 'linear-gradient/shorthand',
+  filter: ({ type }) => ['linear-gradient'].includes(type),
+  transform: ({ value, name, type }, config) => {
+    if (!value) return
+    if (typeof value !== 'object') {
+      return value
+    }
+    const stringifyGradient = (val) => {
+      if (typeof val !== 'object') {
+        return val
+      }
+      const { angle, interpolation, colors } = val
+      return `linear-gradient(${typeof angle === 'number' ?
+        `${angle}deg`
+        : (angle ?? '0deg')
+        }${interpolation ?
+          ` in ${interpolation}`
+          : ''
+        }${colors ?
+          colors.reduce((str, { color, length, percentage }) => {
+            return str.concat(`, ${color}${percentage > 0 && percentage < 100 ? (' ' + percentage + '%') : (length ? (' ' + length) : '')}`)
+          }, '')
+          : ''
+        })`
+    }
+
+    if (Array.isArray(value)) {
+      return value.map(stringifyGradient).join(', ')
+    }
+    return stringifyGradient(value)
+  }
+})
+```
+
+- Tansform for `radial-gradient`:
+
+```js
+StyleDictionary.registerTransform({
+  type: 'value',
+  transitive: true,
+  name: 'radial-gradient/shorthand',
+  filter: ({ type }) => ['radial-gradient'].includes(type),
+  transform: ({ value, name, type }, config) => {
+    if (!value) return
+    if (typeof value !== 'object') {
+      return value
+    }
+    const stringifyGradient = (val) => {
+      if (typeof val !== 'object') {
+        return val
+      }
+      const { endingShape, size, position = {}, interpolation, colors } = val
+      return `radial-gradient(${endingShape ?? 'ellipse'
+        } ${size ?? 'farthest-corner'
+        } at ${position.x ?? 'center'} ${position.y ?? 'center'}${interpolation ?
+          ` in ${interpolation}`
+          : ''
+        }${colors ?
+          colors.reduce((str, { color, length, percentage }) => {
+            return str.concat(`, ${color}${percentage > 0 && percentage < 100 ? (' ' + percentage + '%') : (length ? (' ' + length) : '')}`)
+          }, '')
+          : ''
+        })`
+    }
+
+    if (Array.isArray(value)) {
+      return value.map(stringifyGradient).join(', ')
+    }
+    return stringifyGradient(value)
+  }
+})
+
+```
+
+- Tansform for `conic-gradient`:
+
+```js
+StyleDictionary.registerTransform({
+  type: 'value',
+  transitive: true,
+  name: 'conic-gradient/shorthand',
+  filter: ({ type }) => ['conic-gradient'].includes(type),
+  transform: ({ value, name, type }, config) => {
+    if (!value) return
+    if (typeof value !== 'object') {
+      return value
+    }
+    const stringifyGradient = (val) => {
+      if (typeof val !== 'object') {
+        return val
+      }
+      const { angle, position = {}, interpolation, colors } = val
+      return `conic-gradient(from ${typeof angle === 'number' ?
+        `${angle}deg`
+        : (angle ?? '0deg')
+        } at ${position.x ?? 'center'} ${position.y ?? 'center'}${interpolation ?
+          ` in ${interpolation}`
+          : ''
+        }${colors ?
+          colors.reduce((str, { color, length, percentage }) => {
+            return str.concat(`, ${color}${percentage > 0 && percentage < 100 ? (' ' + percentage + '%') : (length ? (' ' + length) : '')}`)
+          }, '')
+          : ''
+        })`
+    }
+
+    if (Array.isArray(value)) {
+      return value.map(stringifyGradient).join(', ')
+    }
+    return stringifyGradient(value)
+  }
+})
+
+```
+
+Add Custom Tansforms to configuration in `design-tokens/build/sd.config.js`:
+
+```diff
+...
+    "platforms": {
+      "css": {
+-       "transforms": ['attribute/cti', 'name/kebab', 'css/flatten-composition-properties', 'time/seconds', 'html/icon', 'size/rem', 'color/css', 'colorShadesMapping', 'asset/url', 'fontFamily/css', 'cubicBezier/css', 'strokeStyle/css/shorthand', 'border/css/shorthand', 'typography/css/shorthand', 'transition/css/shorthand', 'shadow/css/shorthand', 'line-height', 'text-shadow/css/shorthand'],
++       "transforms": ['attribute/cti', 'name/kebab', 'css/flatten-composition-properties', 'time/seconds', 'html/icon', 'size/rem', 'color/css', 'colorShadesMapping', 'asset/url', 'fontFamily/css', 'cubicBezier/css', 'strokeStyle/css/shorthand', 'border/css/shorthand', 'typography/css/shorthand', 'transition/css/shorthand', 'shadow/css/shorthand', 'line-height', 'text-shadow/css/shorthand', 'linear-gradient/shorthand', 'radial-gradient/shorthand', 'conic-gradient/shorthand'],
+      ...
+      "jsts": {
+-       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css', 'time/seconds', 'line-height'],
++       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css', 'time/seconds', 'line-height', 'linear-gradient/shorthand', 'radial-gradient/shorthand', 'conic-gradient/shorthand'],
+...
+```
+
+See token results after build in `css/light/variables.js`:
+
+```css
+  --token-gradient-colourful-button: linear-gradient(134deg, cyan, red 50%, transparent 70%, blue), linear-gradient(0deg, cyan, red);
+  --token-gradient-radial-bg: radial-gradient(circle farthest-side at left bottom, salmon, red 50%, blue), radial-gradient(ellipse farthest-corner at center center, black, white);
+  --token-gradient-conic-bg: conic-gradient(from 123deg at left bottom, salmon, teal), conic-gradient(from 0deg at center center, black, white);
+```
+
+Integrate these tokens with TailwindCSS by creating utility classes in `lib-ui-web/tailwind.config.js`:
+
+```js
+    plugin(function ({ addUtilities }) {
+      const gradients = tokens.gradient
+      const utilities = Object.keys(gradients).reduce((rst, key) => {
+        const gradient = gradients[key]
+        rst[`.gradient-${key}`] = {
+          backgroundImage: gradient
+        }
+        return rst
+      }, {})
+      addUtilities(utilities)
+    })
+```
+
+And choose the utility classes in code:
+
+![tailwind gradient](tailwind-gradient.png)
+
+Finally, after build, checkout our CSS results in `dist/style.css`:
+
+```css
+.gradient-colourful-button{background-image:linear-gradient(134deg,cyan,red 50%,transparent 70%,blue),linear-gradient(0deg,#0ff,red)}
+
+.gradient-radial-bg{background-image:radial-gradient(circle farthest-side at left bottom,salmon,red 50%,#00f),radial-gradient(ellipse farthest-corner at center center,#000,#fff)}
+
+.gradient-conic-bg{background-image:conic-gradient(from 123deg at left bottom,salmon,teal),conic-gradient(from 0deg at center center,#000,#fff)}
+```
 
 ## Testing
 
