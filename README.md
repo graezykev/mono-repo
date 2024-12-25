@@ -8672,6 +8672,8 @@ Our css after build:
 .focus\:border-input-focus:focus{border-width:.0625rem;border-style:solid;border-color:#f05c}
 ```
 
+## Design Token - Assets
+
 ## Design Token - Other Compositions
 
 - transform
