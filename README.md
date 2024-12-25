@@ -8674,6 +8674,70 @@ Our css after build:
 
 ## Design Token - Assets
 
+Static file assets such as images can be transformed by built-in transform `'asset/url'` into values with the format `url(xxx)` so that we can use them as background-image, list-style-image, border-image, content, cursor etc.
+
+> See <https://developer.mozilla.org/en-US/docs/Web/CSS/url_function>
+
+Say we have an logo image `logo.png` under the `assets` directory, let's define it as a ready-to-use background image in `design-tokens/image.js`:
+
+```js
+export default {
+  image: {
+    logo: {
+      type: 'asset',
+      value: '/assets/logo.png'
+    }
+  }
+}
+
+```
+
+Add built-in transform to JS transforms:
+
+```diff
+...
+    "platforms": {
+      ...
+      "jsts": {
+-       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css', 'time/seconds'],
++       "transforms": ['attribute/cti', 'name/pascal', 'size/rem', 'colorShadesMapping', 'color/css', 'time/seconds', 'asset/url'],
+...
+```
+
+We can find out the result as CSS variables in `css/light/variables.css` After build:
+
+```css
+  --token-image-logo: url("/assets/logo.png");
+```
+
+We can integrate it with TailwindCSS.
+
+`lib-ui-web/tailwind.config.js`:
+
+```js
+    plugin(function ({ addUtilities }) {
+      const images = tokens.image
+      const utilities = Object.keys(images).reduce((rst, key) => {
+        const image = images[key]
+        rst[`.bg-img-${key}`] = {
+          backgroundImage: image
+        }
+        return rst
+      }, {})
+      addUtilities(utilities)
+    })
+```
+
+And select the pre-defined utility class:
+
+![tailwind bg img](tailwind-bg-img.png)
+
+After you build, you'll find the CSS result in `lib-ui-web/dist/style.css` like this:
+
+```css
+.bg-img-logo{background-image:url(/assets/logo.png)}
+```
+
 ## Design Token - Other Compositions
 
 - transform
