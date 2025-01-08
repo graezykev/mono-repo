@@ -5946,9 +5946,12 @@ And the result would be `0.5rem`, `8.00dp` and `8.00f`.
 
 Space by its nature is the gap between contents. It’s the **gap** between characters, words, lines, and paragraphs that you are reading. It’s the gutters on the sides of this page. Once we see it, we realize that more than 80% of the canvas is filled with empty space.
 
+Size is simply size, yeah, it doesn’t need any explanation.
+
 There are **multiple theories** around picking grid size.
 
-Size is simply size, yeah, it doesn’t need any explanation.
+- Base Unit: 8 pixel (most used)
+- Scale: Nonlinearly. Consider a geometric progression or something similarly nonlinear.
 
 ### Custom Space / Size (shortcuts)
 
