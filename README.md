@@ -5952,6 +5952,8 @@ There are **multiple theories** around picking grid size.
 
 - Base Unit: 8 pixel (most used)
 - Scale: Nonlinearly. Consider a geometric progression or something similarly nonlinear.
+  - [TailwindCSS](https://tailwindcss.com/docs/customizing-spacing)
+  - [Atlassian](https://atlassian.design/foundations/spacing)
 
 ### Custom Space / Size (shortcuts)
 
