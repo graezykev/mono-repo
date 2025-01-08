@@ -5885,7 +5885,7 @@ pnpm build
 
 ## Design Token - Dimension
 
-Dimension represents an amount of distance in a single dimension in the UI, such as a position, width, height, space, radius, or thickness.
+Dimension represents an amount of distance in a single dimension in the UI, such as a position, width, height, space, gap, radius, or thickness.
 
 ### Basic Unit - REM
 
