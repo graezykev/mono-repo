@@ -5883,7 +5883,9 @@ cd lib-web-ui && \
 pnpm build
 ```
 
-## Design Token - Size
+## Design Token - Dimension
+
+Dimension represents an amount of distance in a single dimension in the UI, such as a position, width, height, space, radius, or thickness.
 
 ### Basic Unit - REM
 
