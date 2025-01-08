@@ -5942,7 +5942,15 @@ export default {
 
 And the result would be `0.5rem`, `8.00dp` and `8.00f`.
 
-## Design Token - Size - Custom our size (shortcuts)
+## Design Token - Space / Size
+
+Space by its nature is the gap between contents. It’s the **gap** between characters, words, lines, and paragraphs that you are reading. It’s the gutters on the sides of this page. Once we see it, we realize that more than 80% of the canvas is filled with empty space.
+
+There are **multiple theories** around picking grid size.
+
+Size is simply size, yeah, it doesn’t need any explanation.
+
+### Custom Space / Size (shortcuts)
 
 ## Design Token - Typography - Font Size
 
