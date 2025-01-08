@@ -5885,6 +5885,8 @@ pnpm build
 
 ## Design Token - Size
 
+### Basic Unit - REM
+
 Define a size token in `tokens/size/index.js`:
 
 ```js
