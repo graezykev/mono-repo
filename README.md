@@ -6000,13 +6000,13 @@ Using [modular scale calculator](https://www.modularscale.com/?16&px&2), given a
 
 Starting from the base, we’ll go in both directions to stops smaller (16, 8, 4, 2, ...) and larger (16, 32, 64, ...) on the scale.
 
-![alt text](image.png)
+![modular scale](modular-scale-1.png)
 
 Nevertheless, This scale is fairly extreme. for example, the 16px and 32px scales have a large gap, on a web page it’s pretty unforgiving, as dimensions between 16px to 32px are quite commonly used.
 
 To Fill the Gaps, add more flexibility, we can supplement the scales with another ratio, or another basis, to generate another scale series.
 
-![alt text](image-1.png)
+![modular scale](modular-scale-2.png)
 
 Finally, merge the 2 sets of numbers.
 
@@ -6133,6 +6133,20 @@ export default {
 }
 
 ```
+
+##### Integrate the Spatial system with TailwindCSS
+
+`lib-ui-web/tailwind.config.js`:
+
+```js
+  theme: {
+    ...
+    extend: {
+      spacing: tokens.spacing,
+...
+```
+
+![tailwind spacing.png](tailwind-spacing.png)
 
 ### Custom Size / Space (shortcuts)
 
