@@ -5887,13 +5887,13 @@ pnpm build
 
 Dimension represents an amount of distance in a single dimension in the UI, such as a position, width, height, space, gap, radius, or thickness.
 
-### Basic Unit - REM
+### Unit - REM
 
 Define a size token in `tokens/size/index.js`:
 
 ```js
 export default {
-  size: {
+  spacing: {
     'a-random-size': {
       type: 'dimension',
       value: 1
@@ -5916,13 +5916,13 @@ For a CSS developer, it's straightforward to understand that `1rem` is equivalen
 If you check the result for Android in `design-tokens/android/styledictionary/src/main/res/values/light/style_dictionary_dimens.xml` it would be like:
 
 ```xml
-  <dimen name="size_a_random_size">16.00dp</dimen>
+  <dimen name="spacing_a_random_size">16.00dp</dimen>
 ```
 
 And the result for iOS in `design-tokens/ios/Classes/Generated/light/StyleDictionarySize.m` looks like:
 
 ```m
-float const StyleDictionarySizeARandomSize = 16.00f;
+float const StyleDictionarySpacingARandomSize = 16.00f;
 ```
 
 Both Andoird and iOS would be using the absolute value.
@@ -5931,7 +5931,7 @@ So, if your designer gives you a size token of `8px`, it should be define in thi
 
 ```js
 export default {
-  size: {
+  spacing: {
     'a-random-size': {
       type: 'dimension',
       value: 8 / 16
@@ -5942,20 +5942,199 @@ export default {
 
 And the result would be `0.5rem`, `8.00dp` and `8.00f`.
 
-## Design Token - Space / Size
+## Design Token - Size / Space
 
-Space by its nature is the gap between contents. It’s the **gap** between characters, words, lines, and paragraphs that you are reading. It’s the gutters on the sides of this page. Once we see it, we realize that more than 80% of the canvas is filled with empty space.
+Dimension can be divided into 2 categories: Size / Space.
 
-Size is simply size, yeah, it doesn’t need any explanation.
+Consider the [CSS Box Model](https://www.w3schools.com/Css/css_boxmodel.asp), which consists of size and space.
 
-There are **multiple theories** around picking grid size.
+**Size** is simply size, it's mostly about the lenth, width and height of the characters, or any other **boxes** in the page.
 
-- Base Unit: 8 pixel (most used)
-- Scale: Nonlinearly. Consider a geometric progression or something similarly nonlinear.
-  - [TailwindCSS](https://tailwindcss.com/docs/customizing-spacing)
-  - [Atlassian](https://atlassian.design/foundations/spacing)
+**Space** by its nature is the gap between contents. It’s the **gap** between characters, words, lines, paragraphs etc., it’s the **gutters** on the sides of any independent box.
 
-### Custom Space / Size (shortcuts)
+### Spatial System
+
+To create a harmonious experience for our user, one website should not be using arbitrary sizes / spaces on its pages, instead, we need some consistent and intentional spatial system, which defines persistent dimension values for specific purpose.
+
+For example, we don't put buttons with arbitrary heights on our applications, instead, we usually define some limited options like normal, medium, small, large buttons, every button option has its fixed height, can every button option has its own use cases or intentions.
+
+Moreover, the gutter between a button and its surounding elements shoud be consistent as well, we can not have a 10px gap between a larget button and the input box on page A while a 15px gap on page B.
+
+Defining some limited and fixed heights or gaps for buttons and any other elements on the screen, we need a spatial system. It encompasses several fixed options, wherever we need to display an element (a charactor, a paragraph, an icon, an input box, a drop down menue, a composition of them etc.), the size or space should be picked from the limited options.
+
+To define the spatial system, we first need a **basis**. The basis is a **base unit** of dimension, an atomic dimension of pixels (or points etc.) of the screen, each dimension value is a multiple of the base unit.
+
+Then, we need a **scale** of the basis. It's the multiple series or steps of the basis.
+
+For example, if we have a basis of 2px, multiples of it constitute a scale of 0px, 2px, 4px, 6px, 8px ... (2 multiplied by 0, 1, 2, 3, 4 ...)
+
+> There are **multiple theories** around picking grid size, We won’t worry about that right now. Once we build the system, we’ll have complete control over it and we can easily tweak these numbers as we desire.
+
+#### Basis
+
+A `8 or 16 pixel` basis is widely used in design systems, like [TailwindCSS](https://tailwindcss.com/docs/customizing-spacing) and [Atlassian](https://atlassian.design/foundations/spacing).
+
+Some pick 16 as it’s a good default font size. It's the default size of browsers. It’s a factor of all screen resolutions (320, 768, 1024). And it provides memorable multiples greater (32, 64, …) and factors less (8, 4, 2) than where it starts.
+
+Define the basis spatial token in `tokens/size/index.js`:
+
+```js
+export default {
+  spacing: {
+    'base': {
+      type: 'dimension',
+      value: 1
+    }
+  }
+}
+
+```
+
+#### Scales
+
+With an established base, let say 2, we can still slip into random steps (12, 14, 18, 22, 24, 28, 30, 32, …). To prevent that, some use a linear scale (4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, …) where each step is a fixed increment. However, this is unpredictably used, offering too many choices too close together, probably you only be using less than 20% of them.
+
+The better alternative is non-linear. A geometric progression or something similar, such as golden ratio or modular scale.
+
+Using [modular scale calculator](https://www.modularscale.com/?16&px&2), given a basis of 16px and a ratio of 2, we can generate scales.
+
+Starting from the base, we’ll go in both directions to stops smaller (16, 8, 4, 2, ...) and larger (16, 32, 64, ...) on the scale.
+
+![alt text](image.png)
+
+Nevertheless, This scale is fairly extreme. for example, the 16px and 32px scales have a large gap, on a web page it’s pretty unforgiving, as dimensions between 16px to 32px are quite commonly used.
+
+To Fill the Gaps, add more flexibility, we can supplement the scales with another ratio, or another basis, to generate another scale series.
+
+![alt text](image-1.png)
+
+Finally, merge the 2 sets of numbers.
+
+One more thing we need to take notice, using a modular scale for design can result in ***decimal pixel values***, which can be tricky to handle, especially in web design.
+
+Modern browsers can handle subpixel rendering, which allows for fractional pixels. While it may not align perfectly on every device.
+
+We can Round them to Whole Pixels, or Use relative units like REM or EM. These units scale more naturally with font size and can handle fractional values better. For example, font-size: 1.25rem might be more flexible than font-size: 20px.
+
+Define the scale tokens in `tokens/size/index.js`:
+
+```js
+// combine them:
+// https://www.modularscale.com/?16&px&1.125
+// https://www.modularscale.com/?16&px&2
+// https://www.modularscale.com/?95&px&2
+export default {
+  spacing: {
+    'base': {
+      type: 'dimension',
+      value: 1
+    },
+    'px0': {
+      type: 'dimension',
+      value: 0 / 16 // 0px
+    },
+    'px1': {
+      type: 'dimension',
+      value: 1 / 16 // 1px
+    },
+    'px2': {
+      type: 'dimension',
+      value: 2 / 16 // 2px
+    },
+    'px4': {
+      type: 'dimension',
+      value: 4 / 16 // 4px
+    },
+    'px8': {
+      type: 'dimension',
+      value: 8 / 16 // 8px
+    },
+    'px10': {
+      type: 'dimension',
+      value: 10 / 16 // 10px
+    },
+    'px12': {
+      type: 'dimension',
+      value: 12 / 16 // 12px
+    },
+    'px14': {
+      type: 'dimension',
+      value: 14 / 16 // 14px
+    },
+    'px16': {
+      type: 'dimension',
+      value: 16 / 16 // 16px
+    },
+    DEFAULT: {
+      type: 'dimension',
+      value: '{spacing.px16}'
+    },
+    'px18': {
+      type: 'dimension',
+      value: 18 / 16 // 18px
+    },
+    'px20': {
+      type: 'dimension',
+      value: 20 / 16 // 20px
+    },
+    'px24': {
+      type: 'dimension',
+      value: 24 / 16 // 24px
+    },
+    'px28': {
+      type: 'dimension',
+      value: 28 / 16 // 28px
+    },
+    'px32': {
+      type: 'dimension',
+      value: 32 / 16 // 32px
+    },
+    'px48': {
+      type: 'dimension',
+      value: 48 / 16 // 48px
+    },
+    'px64': {
+      type: 'dimension',
+      value: 64 / 16 // 64px
+    },
+    'px95': {
+      type: 'dimension',
+      value: 95 / 16 // 95px
+    },
+    'px128': {
+      type: 'dimension',
+      value: 128 / 16 // 128px
+    },
+    'px256': {
+      type: 'dimension',
+      value: 256 / 16 // 256px
+    },
+    'px380': {
+      type: 'dimension',
+      value: 380 / 16 // 380px ≈ legacy small devices 375px
+    },
+    'px512': {
+      type: 'dimension',
+      value: 512 / 16 // 512px
+    },
+    'px760': {
+      type: 'dimension',
+      value: 760 / 760 // 760px ≈ medium PC screen 768px
+    },
+    'px1024': {
+      type: 'dimension',
+      value: 1024 / 16 // 1024px ≈ large PC screen 1024px
+    },
+    'px2048': {
+      type: 'dimension',
+      value: 2048 / 16 // 2048px
+    }
+  }
+}
+
+```
+
+### Custom Size / Space (shortcuts)
 
 ## Design Token - Typography - Font Size
 
@@ -6432,7 +6611,12 @@ https.get(RobotoSource, {
   })
   res.on('end', () => {
     // console.log(cssText)
-    processAndDownload(cssText)
+    try {
+      await processAndDownload(cssText)
+    } catch (e) {
+      const data = fs.readFileSync(path.resolve(__dirname, './roboto-font-face-v32.css'), { encoding: 'utf8' })
+      await processAndDownload(data)
+    }
   })
 })
 
