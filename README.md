@@ -6136,6 +6136,10 @@ export default {
 
 ### Custom Size / Space (shortcuts)
 
+### Responsive Breakpoints
+
+### Grid system
+
 ## Design Token - Typography - Font Size
 
 ```sh
