@@ -6373,7 +6373,7 @@ export default {
 
 #### Name Spaces
 
-If we can classify sizes, so can we classify spaces.
+If we can classify sizes, so can spaces.
 
 ### Responsive Breakpoints
 
