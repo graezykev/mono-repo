@@ -6389,6 +6389,8 @@ mkdir tokens/typography && \
 touch tokens/typography/font-size.js
 ```
 
+The font size are primarily copied from our size naming we created before.
+
 `tokens/size/font.js`:
 
 ```js
@@ -6396,36 +6398,41 @@ export default {
   size: {
     font: {
       base: {
-        value: 16 / 16,
+        value: '{spacing.atomic.DEFAULT}',
         type: 'fontSize',
         comment: '16px by default'
       },
-      xsmall: {
-        value: 12 / 16,
+      DEFAULT: {
+        value: '{spacing.atomic.DEFAULT}',
+        type: 'fontSize',
+        comment: '16px by default'
+      },
+      xs: {
+        value: '{spacing.atomic.xs}',
         type: 'fontSize'
       },
-      small: {
-        value: 14 / 16,
+      s: {
+        value: '{spacing.atomic.s}',
         type: 'fontSize'
       },
-      medium: {
-        value: '{size.font.base}',
+      m: {
+        value: '{spacing.atomic.m}',
         type: 'fontSize'
       },
-      large: {
-        value: 20 / 16,
+      l: {
+        value: '{spacing.atomic.l}',
         type: 'fontSize'
       },
-      xlarge: {
-        value: 24 / 16,
+      xl: {
+        value: '{spacing.atomic.xl}',
         type: 'fontSize'
       },
-      xxlarge: {
-        value: 32 / 16,
+      xxl: {
+        value: '{spacing.atomic.xxl}',
         type: 'fontSize'
       },
-      xxxlarge: {
-        value: 40 / 16,
+      xxxl: {
+        value: '{spacing.atomic.xxxl}',
         type: 'fontSize'
       }
     }
@@ -6434,35 +6441,45 @@ export default {
 
 ```
 
+And we can move the font size parts of our size naming to a specific file.
+
 `tokens/typography/font-size.js`:
 
 ```js
 export default {
   size: {
     font: {
-      content: {
-        value: '{size.font.small}',
-        type: 'fontSize'
-      },
       title: {
-        value: '{size.font.medium}',
-        type: 'fontSize'
+        type: 'fontSize',
+        value: '{spacing.atomic.xxxxl}'
+      },
+      h1: {
+        type: 'fontSize',
+        value: '{spacing.atomic.xxxl}'
+      },
+      h2: {
+        type: 'fontSize',
+        value: '{spacing.atomic.xl}'
+      },
+      h3h4: {
+        type: 'fontSize',
+        value: '{spacing.atomic.l}'
+      },
+      h5: {
+        type: 'fontSize',
+        value: '{spacing.atomic.m}'
+      },
+      body: {
+        type: 'fontSize',
+        value: '{spacing.atomic.m}'
+      },
+      h6: {
+        type: 'fontSize',
+        value: '{spacing.atomic.s}'
       },
       sub: {
-        value: '{size.font.medium}',
-        type: 'fontSize'
-      },
-      heading3: {
-        value: '{size.font.large}',
-        type: 'fontSize'
-      },
-      heading2: {
-        value: '{size.font.xlarge}',
-        type: 'fontSize'
-      },
-      heading1: {
-        value: '{size.font.xxxlarge}',
-        type: 'fontSize'
+        type: 'fontSize',
+        value: '{spacing.atomic.xs}'
       }
     }
   }
@@ -7474,8 +7491,8 @@ touch tokens/typography/line-height.js
 export default {
   number: {
     'line-height': {
-      content: {
-        value: '{size.font.content}',
+      body: {
+        value: '{size.font.body}',
         attributes: {
           targetHeight: 20
         },
@@ -7496,21 +7513,21 @@ export default {
         type: 'lineHeight'
       },
       heading3: {
-        value: '{size.font.heading3}',
+        value: '{size.font.h3h4}',
         attributes: {
           targetHeight: 24
         },
         type: 'lineHeight'
       },
       heading2: {
-        value: '{size.font.heading2}',
+        value: '{size.font.h2}',
         attributes: {
           targetHeight: 28
         },
         type: 'lineHeight'
       },
       heading1: {
-        value: '{size.font.heading1}',
+        value: '{size.font.h1}',
         attributes: {
           targetHeight: 56
         },
@@ -8279,10 +8296,10 @@ export default {
         // Only these can be transformed to CSS `font:`
         // font-style font-variant font-weight font-stretch font-size line-height font-family
         fontFamily: '{font-family.primary}',
-        fontSize: '{size.font.content}',
+        fontSize: '{size.font.body}',
         fontWeight: '{font-weight.regular}',
         fontStyle: '{font-style.italic}',
-        lineHeight: '{number.line-height.content}'
+        lineHeight: '{number.line-height.body}'
       },
       type: 'typography'
     }
@@ -8359,10 +8376,10 @@ const paragraphFont = {
   // Only these can be transformed to CSS `font:`
   // font-style font-variant font-weight font-stretch font-size line-height font-family
   fontFamily: '{font-family.primary}',
-  fontSize: '{size.font.content}',
+  fontSize: '{size.font.body}',
   fontWeight: '{font-weight.regular}',
   fontStyle: '{font-style.normal}',
-  lineHeight: '{number.line-height.content}'
+  lineHeight: '{number.line-height.body}'
 }
 
 export default {
