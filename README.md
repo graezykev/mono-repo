@@ -6375,6 +6375,16 @@ export default {
 
 If we can classify sizes, so can spaces.
 
+Take a blog post page as an example.
+
+A small letter spacing can be 2px, while a large one is 4px.
+
+A small line spacing can be 12px, while a large one is 24px.
+
+...
+
+When we talk about **"small"** gaps between charactors, lines, paragraphs, the blog post and the side bar, we're talking about different spaces.
+
 ### Responsive Breakpoints
 
 ### Grid system
