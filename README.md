@@ -5944,17 +5944,19 @@ And the result would be `0.5rem`, `8.00dp` and `8.00f`.
 
 ## Design Token - Size / Space
 
-Dimension can be divided into 2 categories: Size / Space.
+Under the context of UI design, dimension can be divided into 2 categories: **Size** and **Space**.
 
 Consider the [CSS Box Model](https://www.w3schools.com/Css/css_boxmodel.asp), which consists of size and space.
 
-**Size** is simply size, it's mostly about the lenth, width and height of the characters, or any other **boxes** in the page.
+**Size** is simply size, it's mostly about the width, height, border, shadow, or border radius of the characters, icons, images, or any other **boxes** in the page.
 
-**Space** by its nature is the gap between contents. It’s the **gap** between characters, words, lines, paragraphs etc., it’s the **gutters** on the sides of any independent box.
+**Space** by its nature is the distance between contents. It’s the **gap** between characters, words, lines, paragraphs etc., it’s the **gutters** on the sides of any independent box. Something like `line-height`, `margin`, `padding` (they are primary CSS / web concepts) are categorised to space.
 
 ### Spatial System
 
 To create a harmonious experience for our user, one website should not be using arbitrary sizes / spaces on its pages, instead, we need some consistent and intentional spatial system, which defines persistent dimension values for specific purpose.
+
+There is a saying, that we need **Less choice and less cognitive load while deciding size and spacing**.
 
 For example, we don't put buttons with arbitrary heights on our applications, instead, we usually define some limited options like normal, medium, small, large buttons, every button option has its fixed height, can every button option has its own use cases or intentions.
 
@@ -6134,7 +6136,7 @@ export default {
 
 ```
 
-##### Integrate the Spatial system with TailwindCSS
+#### Integrate the Spatial system with TailwindCSS
 
 `lib-ui-web/tailwind.config.js`:
 
