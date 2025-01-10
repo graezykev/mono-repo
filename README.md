@@ -6381,6 +6381,8 @@ A small letter spacing can be 2px, while a large one is 4px.
 
 A small line spacing can be 12px, while a large one is 24px.
 
+A small gutter between the blog post and the side bar can be 100px, while a large one is 150px.
+
 ...
 
 When we talk about **"small"** gaps between charactors, lines, paragraphs, the blog post and the side bar, we're talking about different spaces.
