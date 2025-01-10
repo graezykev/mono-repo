@@ -6371,11 +6371,9 @@ export default {
 }
 ```
 
-##### Font Sizes Shortcut
-
-The topic of font size will be expanded later on.
-
 #### Name Spaces
+
+If we can classify sizes, so can we classify spaces.
 
 ### Responsive Breakpoints
 
