@@ -6375,6 +6375,8 @@ export default {
 
 The topic of font size will be expanded later on.
 
+#### Name Spaces
+
 ### Responsive Breakpoints
 
 ### Grid system
