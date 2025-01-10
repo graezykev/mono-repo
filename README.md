@@ -5948,13 +5948,21 @@ Under the context of UI design, dimension can be divided into 2 categories: **Si
 
 Consider the [CSS Box Model](https://www.w3schools.com/Css/css_boxmodel.asp), which consists of size and space.
 
-**Size** is simply size, it's mostly about the width, height, border, shadow, or border radius of the characters, icons, images, or any other **boxes** in the page.
+**Size** is simply size, describing how large an element is.
 
-**Space** by its nature is the distance between contents. It’s the **gap** between characters, words, lines, paragraphs etc., it’s the **gutters** on the sides of any independent box. Something like `line-height`, `margin`, `padding` (they are primary CSS / web concepts) are categorised to space.
+Elements, are characters, icons, images, solid or dotted lines, or any **boxes** in the page.
+
+Size is mostly about the width, height, border thickness, shadow thickness, or border radius, of the elements.
+
+**Space**, by its nature is the distance between contents.
+
+Simply put, spaces decide the **density** of the UI.
+
+It’s the **gap** between characters, words, lines, paragraphs etc., it’s the **gutters** on the sides of any independent box. Something like letter spacing, line spacing, margin, padding are categorised to space.
 
 ### Spatial System
 
-To create a harmonious experience for our user, one website should not be using arbitrary sizes / spaces on its pages, instead, we need some consistent and intentional spatial system, which defines persistent dimension values for specific purpose.
+To create a harmonious experience for our user, one website should not be using arbitrary sizes or spaces on its pages, instead, we need some consistent and intentional spatial system, which defines persistent dimension values for specific purpose.
 
 There is a saying, that we need **Less choice and less cognitive load while deciding size and spacing**.
 
@@ -6016,7 +6024,7 @@ One more thing we need to take notice, using a modular scale for design can resu
 
 Modern browsers can handle subpixel rendering, which allows for fractional pixels. While it may not align perfectly on every device.
 
-We can Round them to Whole Pixels, or Use relative units like REM or EM. These units scale more naturally with font size and can handle fractional values better. For example, font-size: 1.25rem might be more flexible than font-size: 20px.
+We can Round them to Whole Pixels, or Use relative units like REM or EM. These units scale more naturally with font size and can handle fractional values better. For example, `font-size: 1.25rem` might be more flexible than font-size: 20px.
 
 Define the scale tokens in `tokens/size/index.js`:
 
@@ -6091,6 +6099,10 @@ export default {
       type: 'dimension',
       value: 32 / 16 // 32px
     },
+    'px40': {
+      type: 'dimension',
+      value: 40 / 16 // 40px
+    },
     'px48': {
       type: 'dimension',
       value: 48 / 16 // 48px
@@ -6150,7 +6162,218 @@ export default {
 
 ![tailwind spacing.png](tailwind-spacing.png)
 
-### Custom Size / Space (shortcuts)
+### Name Our Size / Space
+
+The scale choices in this spatial system still offer too many options, developers and designers can end up overwhelmed.
+
+Let's Take a further step on how to leverage these numbers more efficiently.
+
+As the example I mentioned before, we need to define some limited height options for our website, for buttons, we usually use T-shirt size jargons, `large`, `medium`, `small` etc. to unify our convention between developers and designers.
+
+When a designer tells a developer he wants a medium button, they should have a consensus on how high the button is, as long as they are working on the same application, the "small button" can't be either 20px height or 21px height.
+
+Can we just rename the scales we created before to T-shirt size jargons? Not so simple.
+
+Let presume we have pre-define size option for text, icons, input boxes and buttons - `medium`, `small`, and `large`.
+
+When we‘re talking about a medium charactor and a medium icon, we're usually talking about 2 elements with the same height, let's say, `16px`.
+
+When we're talking about a medium input box and a medium clickable button, we're also talking about 2 elements with the same height. However, with medium text inside, a medium input box is not `16px` height, instead, it may be `24px`. So is the medium button.
+
+So a medium text isn't as high as a small button, neither a large text and a large button.
+
+On decideing how large an element is, let's differentiate elements into 2 types: **Atomic** and **Composite**.
+
+Atomic elements are raw UI elements such as A charactor, an icon, an image, a radio button, a checkbox, a toggle button, a list symbol, any squeare, rectangle or circle box, etc.
+
+An input box, with the combination of the rectangle box and the text in it as well as its shadows or even more complex compositions of Atomic elements, is a Composite element. Other Composite elements vary from a sentence, a paragraph, a table cell, to a Dropdown menu, a button, a pop-up tip box, and so far.
+
+#### Name Sizes
+
+We can map our atomic sizes to text sizes, using the T-shirt size naming convention.
+
+| Example (Text, icon ...) | Name | Size | |
+|---|---|---|---|
+| Title | xxxxl | 40px | |
+| H1 | xxxl | 32px | |
+| H2 | xl | 24px | |
+| H3 / H4 | l | 20px | |
+| H5 / Body | m | 16px | Default (**1rem**) |
+| H6 | s | 14px | |
+| Subscript | xs | 12px | |
+
+`design-tokens/tokens/size/index.js`:
+
+```js
+export default {
+  spacing: {
+    ...
+    atomic: {
+      xs: {
+        type: 'dimension',
+        value: '{spacing.px12}'
+      },
+      s: {
+        type: 'dimension',
+        value: '{spacing.px14}'
+      },
+      m: {
+        type: 'dimension',
+        value: '{spacing.px16}'
+      },
+      DEFAULT: {
+        type: 'dimension',
+        value: '{spacing.DEFAULT}'
+      },
+      l: {
+        type: 'dimension',
+        value: '{spacing.px20}'
+      },
+      xl: {
+        type: 'dimension',
+        value: '{spacing.px24}'
+      },
+      xxl: {
+        type: 'dimension',
+        value: '{spacing.px28}'
+      },
+      xxxl: {
+        type: 'dimension',
+        value: '{spacing.px32}'
+      },
+      xxxxl: {
+        type: 'dimension',
+        value: '{spacing.px40}'
+      },
+      title: {
+        type: 'dimension',
+        value: '{spacing.atomic.xxxxl}'
+      },
+      h1: {
+        type: 'dimension',
+        value: '{spacing.atomic.xxxl}'
+      },
+      h2: {
+        type: 'dimension',
+        value: '{spacing.atomic.xl}'
+      },
+      h3h4: {
+        type: 'dimension',
+        value: '{spacing.atomic.l}'
+      },
+      h5body: {
+        type: 'dimension',
+        value: '{spacing.atomic.m}'
+      },
+      h6: {
+        type: 'dimension',
+        value: '{spacing.atomic.s}'
+      },
+      sub: {
+        type: 'dimension',
+        value: '{spacing.atomic.xs}'
+      }
+    }
+  }
+}
+
+```
+
+The sizes are all referenced from the spatial system we created before.
+
+Similarly, we can map our composite sizes to T-shirt size naming convention.
+
+| Example | Name | Size | |
+|---|---|---|---|
+| Tag | xs | 24px | |
+| Small Button | s | 32px | |
+| Medium Button / Input Box | m | 40px | Default |
+| Large Button | l | 48px | |
+| Multi-Line Text Area | xl | 64px | |
+
+```js
+export default {
+  spacing: {
+    ...
+    atomic: {
+      ...
+    },
+    composite: {
+      xs: {
+        type: 'dimension',
+        value: '{spacing.px24}'
+      },
+      s: {
+        type: 'dimension',
+        value: '{spacing.px32}'
+      },
+      m: {
+        type: 'dimension',
+        value: '{spacing.px40}'
+      },
+      DEFAULT: {
+        type: 'dimension',
+        value: '{spacing.composite.m}'
+      },
+      l: {
+        type: 'dimension',
+        value: '{spacing.px48}'
+      },
+      xl: {
+        type: 'dimension',
+        value: '{spacing.px64}'
+      }
+    }
+  }
+}
+
+```
+
+##### Other Sizes
+
+There are some sizes we havn't mentioned is sizes, like border thickness, separation line thickness or border radius.
+
+These are always small pixels (you're not likely to have a 10px border for an input box) so we can pick the small sizes less than 10px from the scale.
+
+```js
+export default {
+  spacing: {
+    ...
+    atomic: {
+      ...
+      micro: {
+        none: {
+          type: 'dimension',
+          value: '{spacing.px0}'
+        },
+        DEFAULT: {
+          type: 'dimension',
+          value: '{spacing.px1}'
+        },
+        thick: {
+          type: 'dimension',
+          value: '{spacing.px2}'
+        },
+        heavy: {
+          type: 'dimension',
+          value: '{spacing.px4}'
+        },
+        massive: {
+          type: 'dimension',
+          value: '{spacing.px8}'
+        }
+      }
+    },
+    composite: {
+      ...
+    }
+  }
+}
+```
+
+##### Font Sizes Shortcut
+
+The topic of font size will be expanded later on.
 
 ### Responsive Breakpoints
 
