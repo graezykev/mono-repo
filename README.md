@@ -6184,7 +6184,7 @@ So a medium text isn't as high as a small button, neither a large text and a lar
 
 On decideing how large an element is, let's differentiate elements into 2 types: **Atomic** and **Composite**.
 
-Atomic elements are raw UI elements such as A charactor, an icon, an image, a radio button, a checkbox, a toggle button, a list symbol, a gap line, or any squeare, rectangle or circle box, etc.
+Atomic elements are raw UI elements such as A charactor, an icon, an image, a radio button, a checkbox, a toggle button, a list symbol, a gap line, or any squeare, rectangle or circle shape, etc.
 
 An input box, with the combination of the rectangle box and the text in it as well as its shadows or even more complex compositions of Atomic elements, is a Composite element. Other Composite elements vary from a sentence, a paragraph, a table cell, to a Dropdown menu, a button, a pop-up tip box, and so far.
 
