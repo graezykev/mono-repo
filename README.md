@@ -6417,9 +6417,9 @@ Now we're able to establish 3 space naming conventions, each represents visual d
 | Groups | 0 | 16px | **20px** | 24px |
 | Layouts | 0 | 20px | **40px** | 80px |
 
-### Responsive Breakpoints
-
 ### Grid system
+
+### Responsive Breakpoints
 
 ## Design Token - Typography - Font Size
 
