@@ -6029,7 +6029,7 @@ We can Round them to Whole Pixels, or Use relative units like REM or EM. These u
 Define the scale tokens in `tokens/size/index.js`:
 
 ```js
-// combine them:
+// combine & fine tune from:
 // https://www.modularscale.com/?16&px&1.125
 // https://www.modularscale.com/?16&px&2
 // https://www.modularscale.com/?95&px&2
@@ -6111,6 +6111,10 @@ export default {
       type: 'dimension',
       value: 64 / 16 // 64px
     },
+    'px80': {
+      type: 'dimension',
+      value: 80 / 16 // 80px
+    },
     'px95': {
       type: 'dimension',
       value: 95 / 16 // 95px
@@ -6142,7 +6146,7 @@ export default {
     'px2048': {
       type: 'dimension',
       value: 2048 / 16 // 2048px
-    }
+    },
   }
 }
 
@@ -6386,6 +6390,32 @@ A small gutter between the blog post and the side bar can be 100px, while a larg
 ...
 
 When we talk about **"small"** gaps between charactors, lines, paragraphs, the blog post and the side bar, we're talking about different spaces.
+
+To separate different elements, we can categorise them into 3 types: **Widgets**, **Groups**, **Layouts**.
+
+- **Widgets** are a simple composition of Primitives and Component. Like Form Field, Navigation Bar, etc.
+
+- **Groups** are a composition of widgets such as Form, List, etc. This category also includes Boxes and Separator Lines used to group & separate Widgets in UI.
+
+- **Layout** means the page layout, columns, gutters and spacing between page sections, etc. It is the highest level of composition.
+
+Let's say we're developing a page like [Apple Account](https://account.apple.com/account).
+
+An input field or an input line is a **widget**.
+
+A input line or several collective similar input fields / lines is a **group** (It depends on how you struturalise you form).
+
+The whole form, or a independent page section like the header, footer etc. are **layouts**.
+
+![spacing](spacing.png)
+
+Now we're able to establish 3 space naming conventions, each represents visual density difference for various informative elements or element collections.
+
+| | None | Small | Medium (Default) | Large |
+|---|---|---|---|---|
+| Widgets | 0 | 4px | **8px** | 12px |
+| Groups | 0 | 16px | **20px** | 24px |
+| Layouts | 0 | 20px | **40px** | 80px |
 
 ### Responsive Breakpoints
 
