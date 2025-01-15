@@ -6532,7 +6532,7 @@ The problem here is, this naming convention is quite rigid.
 
 Let's say we have use all these tokens in our application, `spacing.atomic.l` (large size) for the font size of the title of the page, `spacing.group.m` (medium group space) for the gap size between the two form sections, and `spacing.layout.s` (small layout space) for the spacing between the form and page header.
 
-![alt text](image.png)
+![spacing neutral](spacing-neutral.png)
 
 Some day in the future, our designer believe the page is too dense, because the title font size, the form gap and the layout spacing, are all two small, and he wants to slightly increase all of them from `20px` to `23px`, which reduce the density of our page by making the elements larger, and the spaces sparser.
 
